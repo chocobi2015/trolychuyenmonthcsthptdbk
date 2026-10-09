@@ -33,6 +33,11 @@ interface DocumentBuilderTabProps {
 
 const QUICK_TITLE_SUGGESTIONS = [
   {
+    title: 'Kế hoạch giáo dục hòa nhập học sinh khuyết tật năm học 2026 - 2027 (CV 3326/SGDĐT)',
+    type: 'plan' as DocumentType,
+    tag: 'Giáo dục hòa nhập (25 HSKT)',
+  },
+  {
     title: 'Kế hoạch tổ chức dạy học 2 buổi/ngày năm học 2026 - 2027',
     type: 'plan' as DocumentType,
     tag: 'Dạy học 2 buổi/ngày',

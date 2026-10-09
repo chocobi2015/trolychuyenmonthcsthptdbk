@@ -100,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({
       shortName: '6. Giáo Dục Hòa Nhập',
       icon: <HeartHandshake className="w-4 h-4 text-rose-300" />,
       desc: 'Công văn 3326/SGDĐT, Kế hoạch số 35/KH & hồ sơ 25 học sinh khuyết tật học hòa nhập',
-      badge: '25 HSKT',
+      badge: 'MỚI • 25 HSKT',
       accentColor: 'from-rose-500/20 to-red-500/20',
     },
   ];
@@ -244,18 +244,31 @@ export const Header: React.FC<HeaderProps> = ({
           >
             {TABS.map((tab) => {
               const isActive = activeTab === tab.id;
+              const isInclusive = tab.id === 'inclusive_education';
               return (
                 <button
                   key={tab.id}
                   onClick={() => handleSelectTab(tab.id)}
-                  className={`px-3.5 py-2 rounded-lg flex items-center gap-2 whitespace-nowrap transition text-xs font-semibold shrink-0 group ${
+                  className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg flex items-center gap-1.5 sm:gap-2 whitespace-nowrap transition text-xs font-semibold shrink-0 group ${
                     isActive
-                      ? 'bg-blue-600 text-white shadow-md ring-1 ring-blue-400/40'
+                      ? isInclusive
+                        ? 'bg-rose-600 text-white shadow-md ring-2 ring-rose-400'
+                        : 'bg-blue-600 text-white shadow-md ring-1 ring-blue-400/40'
+                      : isInclusive
+                      ? 'text-rose-200 bg-rose-950/50 hover:bg-rose-900/70 hover:text-white border border-rose-500/50 shadow-sm'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/90'
                   }`}
+                  title={tab.desc}
                 >
                   <span className="shrink-0">{tab.icon}</span>
-                  <span>{tab.name}</span>
+                  {/* Hiển thị tiêu đề gọn gàng để cả 6 tab hiển thị trọn vẹn trên thanh tiêu đề */}
+                  <span className="hidden 2xl:inline">{tab.name}</span>
+                  <span className="2xl:hidden">{tab.shortName}</span>
+                  {isInclusive && (
+                    <span className="px-1.5 py-0.2 text-[10px] font-bold rounded bg-rose-500 text-white tracking-wider shadow-xs animate-pulse">
+                      MỚI
+                    </span>
+                  )}
                   {tab.id === 'editor' && hasActiveDocument && (
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Đang có văn bản đang mở"></span>
                   )}
@@ -305,21 +318,26 @@ export const Header: React.FC<HeaderProps> = ({
                     <Layers className="w-3.5 h-3.5" />
                     Chuyển nhanh danh mục tab
                   </span>
-                  <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">
-                    5 phân hệ chính
+                  <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 font-medium">
+                    6 phân hệ quản lý
                   </span>
                 </div>
 
                 <div className="py-1 space-y-1">
                   {TABS.map((tab, idx) => {
                     const isActive = activeTab === tab.id;
+                    const isInclusive = tab.id === 'inclusive_education';
                     return (
                       <button
                         key={tab.id}
                         onClick={() => handleSelectTab(tab.id)}
                         className={`w-full text-left px-3 py-2.5 rounded-lg flex items-start gap-3 transition group ${
                           isActive
-                            ? 'bg-blue-600/90 text-white shadow-sm'
+                            ? isInclusive
+                              ? 'bg-rose-700/90 text-white shadow-sm'
+                              : 'bg-blue-600/90 text-white shadow-sm'
+                            : isInclusive
+                            ? 'bg-rose-950/30 hover:bg-rose-900/50 text-rose-100 border border-rose-500/30'
                             : 'hover:bg-slate-800/80 text-slate-200'
                         }`}
                       >
@@ -328,8 +346,13 @@ export const Header: React.FC<HeaderProps> = ({
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-1">
-                            <span className="text-xs font-bold truncate">
+                            <span className="text-xs font-bold truncate flex items-center gap-1.5">
                               {tab.name}
+                              {isInclusive && (
+                                <span className="px-1.5 py-0.2 text-[9px] font-bold rounded bg-rose-500 text-white uppercase">
+                                  Mới
+                                </span>
+                              )}
                             </span>
                             {isActive && (
                               <Check className="w-3.5 h-3.5 text-amber-300 shrink-0" />

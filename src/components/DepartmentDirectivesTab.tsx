@@ -23,7 +23,8 @@ import {
   FolderPlus,
   FolderX,
   Layers,
-  Tag
+  Tag,
+  HeartHandshake
 } from 'lucide-react';
 import { DepartmentDirective, SchoolDocument } from '../types/document';
 import { DirectiveCategory, DEFAULT_DIRECTIVE_CATEGORIES } from '../data/categories';
@@ -41,6 +42,7 @@ interface DepartmentDirectivesTabProps {
   categories?: DirectiveCategory[];
   onAddCategory?: (name: string, desc?: string) => Promise<DirectiveCategory | null>;
   onDeleteCategory?: (id: string) => void;
+  onOpenInclusiveTab?: () => void;
 }
 
 export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = ({
@@ -54,6 +56,7 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
   categories = DEFAULT_DIRECTIVE_CATEGORIES,
   onAddCategory,
   onDeleteCategory,
+  onOpenInclusiveTab,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
@@ -530,6 +533,17 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
+                  {directive.id === 'directive-3326-gdhn' && onOpenInclusiveTab && (
+                    <button
+                      onClick={onOpenInclusiveTab}
+                      className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
+                      title="Mở phân hệ Giáo dục hòa nhập chuyên sâu"
+                    >
+                      <HeartHandshake className="w-3.5 h-3.5 text-white" />
+                      <span>Xem Tab Giáo Dục Hòa Nhập (Tab 6)</span>
+                    </button>
+                  )}
+
                   <button
                     onClick={() => setSelectedDirectiveForView(directive)}
                     className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"

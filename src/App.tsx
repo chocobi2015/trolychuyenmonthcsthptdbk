@@ -13,14 +13,15 @@ import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
 import { INITIAL_DEPARTMENT_DIRECTIVES } from './data/mockDirectives';
 import { DirectiveCategory, DEFAULT_DIRECTIVE_CATEGORIES } from './data/categories';
 import { UploadDirectiveModal } from './components/UploadDirectiveModal';
+import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN } from './data/inclusiveEducationData';
 
-const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS), 25 học sinh khuyết tật học hòa nhập.
+const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS), 25 học sinh khuyết tật học hòa nhập (03 HS THPT Điểm chính, 10 HS THCS Điểm Đốc Binh Kiều, 12 HS THCS Điểm Tân Kiều cách 11km).
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
 - Cơ cấu 07 Tổ trong trường: 06 Tổ chuyên môn (Toán, Ngữ văn - TV - TB, KHTN-CN, KHXH, Ngoại ngữ - Tin học, GDTC - QPAN - Nghệ thuật) và 01 Tổ Văn phòng (14 NV).
 - Lãnh đạo ký văn bản: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung; Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn toàn trường.
 - Định hướng chuyển đổi số: 100% hồ sơ, học bạ số, sổ điểm điện tử; khai thác AI an toàn, liêm chính trong dạy và học.`;
 
-const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v9';
+const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v10';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('editor');
@@ -86,6 +87,13 @@ export default function App() {
         }
         if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
           updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
+        }
+        if (updated.id === 'doc-kh-gdhn-35') {
+          return {
+            ...OFFICIAL_INCLUSIVE_EDUCATION_PLAN,
+            signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
+            signerName: 'Nguyễn Minh Trí'
+          };
         }
 
         // Đảm bảo người ký mặc định cho toàn trường là Thầy Phó Hiệu trưởng Nguyễn Minh Trí
@@ -157,12 +165,25 @@ export default function App() {
     try {
       const saved = localStorage.getItem('dbk_directive_categories');
       if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        const parsed: DirectiveCategory[] = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const map = new Map<string, DirectiveCategory>();
+          // Đảm bảo tất cả danh mục mặc định (đặc biệt là 'Giáo dục hòa nhập') luôn luôn hiện diện
+          DEFAULT_DIRECTIVE_CATEGORIES.forEach((cat) => map.set(cat.id, cat));
+          parsed.forEach((cat) => {
+            if (!map.has(cat.id)) {
+              map.set(cat.id, cat);
+            }
+          });
+          const merged = Array.from(map.values());
+          localStorage.setItem('dbk_directive_categories', JSON.stringify(merged));
+          return merged;
+        }
       }
     } catch {
       // fallback
     }
+    localStorage.setItem('dbk_directive_categories', JSON.stringify(DEFAULT_DIRECTIVE_CATEGORIES));
     return DEFAULT_DIRECTIVE_CATEGORIES;
   });
 
@@ -548,6 +569,7 @@ export default function App() {
               setActiveTab('editor');
             }}
             onOpenUploadModal={() => setIsUploadDirectiveModalOpen(true)}
+            onOpenInclusiveTab={() => setActiveTab('inclusive_education')}
           />
         )}
 
