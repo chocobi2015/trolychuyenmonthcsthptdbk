@@ -71,6 +71,13 @@ export default function App() {
       if (saved) {
         const parsed: SchoolDocument[] = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
+          const officialHsss = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hsss-55');
+          const existingHsss = parsed.find(d => d.id === 'doc-kh-hsss-55');
+          if (officialHsss && existingHsss && (existingHsss.documentNumber !== officialHsss.documentNumber || !existingHsss.sections.some(s => s.heading.includes('PHỤ LỤC 1')) || (existingHsss.legalBases?.length ?? 0) < 3)) {
+            const upgraded = parsed.map(d => d.id === 'doc-kh-hsss-55' ? officialHsss : d);
+            localStorage.setItem('dbk_school_documents_archive', JSON.stringify(upgraded));
+            return upgraded;
+          }
           return parsed;
         }
       }

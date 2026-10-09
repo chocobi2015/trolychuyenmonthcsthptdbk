@@ -277,8 +277,8 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
     );
   }
 
-  // Sections
-  doc.sections.forEach((sec) => {
+  // Helper function to render a section's heading and content/tables
+  const renderSection = (sec: { heading: string; content: string }) => {
     const isAppendix = sec.heading.toUpperCase().startsWith('PHỤ LỤC');
     if (isAppendix) {
       docChildren.push(
@@ -427,7 +427,21 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
         })
       );
     });
-  });
+  };
+
+  const regularSections = doc.sections.filter(
+    (sec) => !sec.heading.toUpperCase().startsWith('PHỤ LỤC')
+  );
+  const appendixSections = doc.sections.filter((sec) =>
+    sec.heading.toUpperCase().startsWith('PHỤ LỤC')
+  );
+
+  // Render regular sections first
+  if (regularSections.length > 0) {
+    regularSections.forEach(renderSection);
+  } else {
+    appendixSections.forEach(renderSection);
+  }
 
   // Footer: Recipients (Left 11-12pt) & Signer (Right 13-14pt bold)
   const signerLines = (doc.signerRole || 'HIỆU TRƯỞNG').split('\n');
@@ -534,6 +548,11 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
     new Paragraph({ spacing: { before: 200, after: 100 } }),
     footerTable
   );
+
+  // If there were regular sections, render appendix sections after the main document's signature block
+  if (regularSections.length > 0 && appendixSections.length > 0) {
+    appendixSections.forEach(renderSection);
+  }
 
   // Document setup: Standard A4 margins according to Nghị định 30/2020/NĐ-CP
   // Lề trên: 20mm (1134 twips)
