@@ -13,13 +13,13 @@ import { INITIAL_DEPARTMENT_DIRECTIVES } from './data/mockDirectives';
 import { DirectiveCategory, DEFAULT_DIRECTIVE_CATEGORIES } from './data/categories';
 import { UploadDirectiveModal } from './components/UploadDirectiveModal';
 
-const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.143 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều cách 11km; 14 lớp THPT).
+const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS).
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
 - 08 Tổ chuyên môn: BGH (04), Toán (15 GV), Ngữ văn - Thư viện - Thiết bị (17), KHTN-CN (26 GV), KHXH (16 GV), Tiếng Anh-Tin học (16 GV), GDTC-QPAN-NT (12 GV), Tổ Văn phòng (14).
 - Lãnh đạo ký văn bản: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung; Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn toàn trường.
 - Định hướng chuyển đổi số: 100% hồ sơ, học bạ số, sổ điểm điện tử; khai thác AI an toàn, liêm chính trong dạy và học.`;
 
-const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v5';
+const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v9';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('editor');
@@ -68,44 +68,59 @@ export default function App() {
 
   // School Documents Archive (Kho văn bản của trường)
   const [documentsList, setDocumentsList] = useState<SchoolDocument[]>(() => {
-    const officialHbs43 = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-43');
-    const officialHsss = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hsss-55');
     try {
-      const version = localStorage.getItem('dbk_hsss_sync_version');
+      const deletedIds: string[] = JSON.parse(localStorage.getItem('dbk_deleted_document_ids') || '[]');
       const saved = localStorage.getItem('dbk_school_documents_archive');
-      if (saved && version === OFFICIAL_HSSS_VERSION) {
-        const parsed: SchoolDocument[] = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          // Check if doc-kh-hbs-43 is included
-          if (officialHbs43 && !parsed.some(d => d.id === 'doc-kh-hbs-43')) {
-            const merged = [officialHbs43, ...parsed];
-            localStorage.setItem('dbk_school_documents_archive', JSON.stringify(merged));
-            return merged;
-          }
-          return parsed;
+
+      const cleanDoc = (d: SchoolDocument): SchoolDocument => {
+        let updated = { ...d };
+        if (updated.id === 'doc-kh-hsss-55' && (!updated.documentNumber || updated.documentNumber.includes('   '))) {
+          updated.documentNumber = 'Số: 21/KH-THCS&THPTĐBK';
         }
-      }
+        if (updated.id === 'doc-kh-ktdg-52' && (!updated.documentNumber || updated.documentNumber.includes('__') || updated.documentNumber.includes('52'))) {
+          updated.documentNumber = 'Số: 39/KH-THCS&THPTĐBK';
+        }
+        if (updated.id === 'doc-kh-hbs-43' && !updated.documentNumber) {
+          updated.documentNumber = 'Số: 43/KH-THCS&THPTĐBK';
+        }
+
+        // Đảm bảo người ký mặc định cho toàn trường là Thầy Phó Hiệu trưởng Nguyễn Minh Trí
+        if (!updated.signerName || updated.signerName === 'Lê Thanh Cường') {
+          updated.signerRole = 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG';
+          updated.signerName = 'Nguyễn Minh Trí';
+        }
+
+        // Nơi nhận kết thúc bằng - Lưu: VT, Tr.
+        if (Array.isArray(updated.recipients)) {
+          updated.recipients = updated.recipients.map(r => r.includes('Lưu:') ? 'Lưu: VT, Tr.' : r);
+        }
+
+        return updated;
+      };
+
       if (saved) {
         const parsed: SchoolDocument[] = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          let upgraded = [...parsed];
-          if (officialHsss) {
-            upgraded = upgraded.map(d => d.id === 'doc-kh-hsss-55' ? officialHsss : d);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const valid = parsed
+            .filter((d) => !deletedIds.includes(d.id) && d.id !== 'draft-ktdg-52-high-school-sessions' && d.id !== 'draft-ktdg-adjustment')
+            .map(cleanDoc);
+          if (valid.length > 0) {
+            return valid;
           }
-          if (officialHbs43) {
-            upgraded = upgraded.filter(d => d.id !== 'doc-kh-hbs-43');
-            upgraded.unshift(officialHbs43);
-          }
-          localStorage.setItem('dbk_school_documents_archive', JSON.stringify(upgraded));
-          localStorage.setItem('dbk_hsss_sync_version', OFFICIAL_HSSS_VERSION);
-          return upgraded;
         }
       }
-      localStorage.setItem('dbk_school_documents_archive', JSON.stringify(INITIAL_SCHOOL_DOCUMENTS));
+
+      // Initial load: Lấy từ INITIAL_SCHOOL_DOCUMENTS đã được chuẩn hóa
+      const initialBase = [...INITIAL_SCHOOL_DOCUMENTS]
+        .filter((d) => !deletedIds.includes(d.id) && d.id !== 'draft-ktdg-52-high-school-sessions' && d.id !== 'draft-ktdg-adjustment')
+        .map(cleanDoc);
+
+      localStorage.setItem('dbk_school_documents_archive', JSON.stringify(initialBase));
       localStorage.setItem('dbk_hsss_sync_version', OFFICIAL_HSSS_VERSION);
-      return INITIAL_SCHOOL_DOCUMENTS;
+      return initialBase;
     } catch {
-      return INITIAL_SCHOOL_DOCUMENTS;
+      return INITIAL_SCHOOL_DOCUMENTS
+        .filter((d) => d.id !== 'draft-ktdg-52-high-school-sessions' && d.id !== 'draft-ktdg-adjustment');
     }
   });
 
@@ -145,28 +160,50 @@ export default function App() {
       .then((res) => res.json())
       .then((res) => {
         if (res.success && Array.isArray(res.data) && res.data.length > 0) {
-          const officialHbs43 = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-43');
-          const officialHsss = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hsss-55');
-          let syncedDocs = res.data.map((d: SchoolDocument) => {
-            if (d.id === 'doc-kh-hbs-43' && officialHbs43) return officialHbs43;
-            if (d.id === 'doc-kh-hsss-55' && officialHsss) return officialHsss;
-            return d;
-          });
-          if (officialHbs43 && !syncedDocs.some((d: SchoolDocument) => d.id === 'doc-kh-hbs-43')) {
-            syncedDocs = [officialHbs43, ...syncedDocs];
-          }
-          setDocumentsList(syncedDocs);
-          try {
-            localStorage.setItem('dbk_school_documents_archive', JSON.stringify(syncedDocs));
-            localStorage.setItem('dbk_hsss_sync_version', OFFICIAL_HSSS_VERSION);
-          } catch (e) {
-            console.error('Failed to save to localStorage', e);
-          }
-          setCurrentDocument((prev) => {
-            if (prev?.id === 'doc-kh-hbs-43' && officialHbs43) return officialHbs43;
-            if (prev?.id === 'doc-kh-hsss-55' && officialHsss) return officialHsss;
-            const match = syncedDocs.find((d: SchoolDocument) => d.id === prev?.id);
-            return match || officialHbs43 || officialHsss || syncedDocs[0];
+          const deletedIds: string[] = JSON.parse(localStorage.getItem('dbk_deleted_document_ids') || '[]');
+          const serverDocs: SchoolDocument[] = res.data.filter(
+            (d: SchoolDocument) => !deletedIds.includes(d.id) && d.id !== 'draft-ktdg-52-high-school-sessions' && d.id !== 'draft-ktdg-adjustment'
+          );
+
+          setDocumentsList((prev) => {
+            // Keep client documents, but add any server docs not in client
+            const merged = [...prev];
+            serverDocs.forEach((sDoc) => {
+              const existingIdx = merged.findIndex((m) => m.id === sDoc.id);
+              if (existingIdx === -1 && !deletedIds.includes(sDoc.id)) {
+                merged.push(sDoc);
+              }
+            });
+            const filtered = merged
+              .filter((d) => !deletedIds.includes(d.id) && d.id !== 'draft-ktdg-52-high-school-sessions' && d.id !== 'draft-ktdg-adjustment')
+              .map((d) => {
+                let updated = { ...d };
+                if (updated.id === 'doc-kh-hsss-55' && (!updated.documentNumber || updated.documentNumber.includes('   '))) {
+                  updated.documentNumber = 'Số: 21/KH-THCS&THPTĐBK';
+                }
+                if (updated.id === 'doc-kh-ktdg-52' && (!updated.documentNumber || updated.documentNumber.includes('__') || updated.documentNumber.includes('52'))) {
+                  updated.documentNumber = 'Số: 39/KH-THCS&THPTĐBK';
+                }
+                if (updated.id === 'doc-kh-hbs-43' && !updated.documentNumber) {
+                  updated.documentNumber = 'Số: 43/KH-THCS&THPTĐBK';
+                }
+                if (!updated.signerName || updated.signerName === 'Lê Thanh Cường') {
+                  updated.signerRole = 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG';
+                  updated.signerName = 'Nguyễn Minh Trí';
+                }
+                if (Array.isArray(updated.recipients)) {
+                  updated.recipients = updated.recipients.map(r => r.includes('Lưu:') ? 'Lưu: VT, Tr.' : r);
+                }
+                return updated;
+              });
+
+            try {
+              localStorage.setItem('dbk_school_documents_archive', JSON.stringify(filtered));
+              localStorage.setItem('dbk_hsss_sync_version', OFFICIAL_HSSS_VERSION);
+            } catch (e) {
+              console.error('Failed to save to localStorage', e);
+            }
+            return filtered;
           });
         }
       })
@@ -340,9 +377,15 @@ export default function App() {
   // Handler: Update document from editor
   const handleUpdateDocument = (updatedDoc: SchoolDocument) => {
     setCurrentDocument(updatedDoc);
-    setDocumentsList((prev) =>
-      prev.map((d) => (d.id === updatedDoc.id ? updatedDoc : d))
-    );
+    setDocumentsList((prev) => {
+      const updated = prev.map((d) => (d.id === updatedDoc.id ? updatedDoc : d));
+      try {
+        localStorage.setItem('dbk_school_documents_archive', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+      return updated;
+    });
     // Persist permanently to server disk file
     fetch('/api/documents', {
       method: 'POST',
@@ -356,12 +399,19 @@ export default function App() {
     const officialDoc = { ...doc, status: 'official' as const };
     setDocumentsList((prev) => {
       const existingIdx = prev.findIndex((d) => d.id === doc.id);
+      let updated: SchoolDocument[];
       if (existingIdx !== -1) {
-        const updated = [...prev];
+        updated = [...prev];
         updated[existingIdx] = officialDoc;
-        return updated;
+      } else {
+        updated = [officialDoc, ...prev];
       }
-      return [officialDoc, ...prev];
+      try {
+        localStorage.setItem('dbk_school_documents_archive', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+      return updated;
     });
     // Persist permanently to server disk file
     fetch('/api/documents', {
@@ -403,10 +453,30 @@ export default function App() {
 
   // Handler: Delete document from Archive
   const handleDeleteDocument = (id: string) => {
-    setDocumentsList((prev) => prev.filter((d) => d.id !== id));
-    if (currentDocument?.id === id && documentsList.length > 1) {
-      setCurrentDocument(documentsList.find((d) => d.id !== id) || INITIAL_SCHOOL_DOCUMENTS[0]);
+    // Record in deleted blacklist in localStorage to permanently prevent resurrecting
+    try {
+      const deletedIds: string[] = JSON.parse(localStorage.getItem('dbk_deleted_document_ids') || '[]');
+      if (!deletedIds.includes(id)) {
+        deletedIds.push(id);
+        localStorage.setItem('dbk_deleted_document_ids', JSON.stringify(deletedIds));
+      }
+    } catch (e) {
+      console.error(e);
     }
+
+    setDocumentsList((prev) => {
+      const updated = prev.filter((d) => d.id !== id);
+      try {
+        localStorage.setItem('dbk_school_documents_archive', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+      if (currentDocument?.id === id && updated.length > 0) {
+        setCurrentDocument(updated[0]);
+      }
+      return updated;
+    });
+
     // Delete from server disk
     fetch(`/api/documents/${id}`, { method: 'DELETE' }).catch((e) => console.error(e));
   };

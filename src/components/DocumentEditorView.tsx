@@ -93,6 +93,19 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
     setDoc(initialDoc);
   }, [initialDoc]);
 
+  // Debounced auto-save to parent (and thus localStorage + server) whenever doc is modified
+  const isInitialMount = React.useRef(true);
+  React.useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    const timer = setTimeout(() => {
+      onUpdateDocument(doc);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [doc]);
+
   // Handle Save
   const handleSave = () => {
     onUpdateDocument(doc);
@@ -139,6 +152,7 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
   const handleExportWord = async () => {
     try {
       setIsDownloading(true);
+      onUpdateDocument(doc);
       if (doc.sourceFileUrl) {
         window.location.assign(doc.sourceFileUrl);
         return;
@@ -849,16 +863,42 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
             {/* Right: Chức vụ & Họ tên người ký */}
             <div className="col-span-6 text-center flex flex-col items-center justify-between min-h-[170px]">
               {isEditing ? (
-                <div className="w-full space-y-1">
-                  <input
-                    type="text"
+                <div className="w-full space-y-2">
+                  <div className="flex items-center justify-center gap-1.5 flex-wrap mb-1">
+                    <button
+                      type="button"
+                      onClick={() => setDoc({
+                        ...doc,
+                        signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
+                        signerName: 'Nguyễn Minh Trí',
+                      })}
+                      className="px-2 py-0.5 rounded text-[10.5px] font-bold bg-blue-50 text-blue-900 hover:bg-blue-100 border border-blue-200 transition"
+                      title="Chọn người ký: Phó Hiệu trưởng Nguyễn Minh Trí"
+                    >
+                      PHT. Nguyễn Minh Trí
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDoc({
+                        ...doc,
+                        signerRole: 'HIỆU TRƯỞNG',
+                        signerName: 'Lê Thanh Cường',
+                      })}
+                      className="px-2 py-0.5 rounded text-[10.5px] font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition"
+                      title="Chọn người ký: Hiệu trưởng Lê Thanh Cường"
+                    >
+                      HT. Lê Thanh Cường
+                    </button>
+                  </div>
+                  <textarea
+                    rows={2}
                     value={doc.signerRole}
                     onChange={(e) => setDoc({ ...doc, signerRole: e.target.value })}
                     style={{ fontFamily: '"Times New Roman", Times, serif' }}
-                    className="text-[13pt] font-bold uppercase text-center w-full bg-transparent border-0 border-b border-dashed border-slate-300 focus:border-blue-500 focus:bg-blue-50/20 outline-none py-0.5 transition"
-                    placeholder="KT. HIỆU TRƯỞNG / PHÓ HIỆU TRƯỞNG"
+                    className="text-[13pt] font-bold uppercase text-center w-full bg-transparent border-0 border-b border-dashed border-slate-300 focus:border-blue-500 focus:bg-blue-50/20 outline-none py-0.5 transition resize-none leading-snug"
+                    placeholder="KT. HIỆU TRƯỞNG&#10;PHÓ HIỆU TRƯỞNG"
                   />
-                  <div className="h-24" />
+                  <div className="h-16" />
                   <input
                     type="text"
                     value={doc.signerName}

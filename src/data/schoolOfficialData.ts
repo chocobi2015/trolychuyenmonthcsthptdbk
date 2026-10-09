@@ -14,20 +14,58 @@ export const SCHOOL_OFFICIAL_PROFILE = {
   vicePrincipalAcademics: 'Nguyễn Minh Trí',
   mergeDecision: 'Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp về việc sáp nhập Trường THCS Đốc Binh Kiều, Trường THCS Tân Kiều và Trường THPT Đốc Binh Kiều thành Trường THCS và THPT Đốc Binh Kiều.',
   
-  // 1. Quy mô học sinh năm học 2026 - 2027 (53 lớp, 2.143 HS, 25 HS khuyết tật)
+  // 1. Quy mô học sinh năm học 2026 - 2027 (Chuẩn thống kê ngày 25/9/2026: 53 lớp, 2.111 HS, 25 HS khuyết tật)
   studentsByGrade: [
-    { grade: 6, classes: 10, students: 417, avgPerClass: 41.7, disabled: 6 },
-    { grade: 7, classes: 9, students: 377, avgPerClass: 41.9, disabled: 6 },
-    { grade: 8, classes: 10, students: 409, avgPerClass: 40.9, disabled: 7 },
-    { grade: 9, classes: 10, students: 410, avgPerClass: 41.0, disabled: 3 },
-    { grade: 10, classes: 5, students: 203, avgPerClass: 40.6, disabled: 1 },
-    { grade: 11, classes: 4, students: 142, avgPerClass: 35.0, disabled: 2 },
-    { grade: 12, classes: 5, students: 185, avgPerClass: 37.0, disabled: 0 },
+    { grade: 6, classes: 10, students: 410, avgPerClass: 41.0, disabled: 6, female: 198, campusDbk: { classes: 6, students: 245 }, campusTanKieu: { classes: 4, students: 165 } },
+    { grade: 7, classes: 9, students: 368, avgPerClass: 40.89, disabled: 6, female: 180, campusDbk: { classes: 6, students: 235 }, campusTanKieu: { classes: 3, students: 133 } },
+    { grade: 8, classes: 10, students: 401, avgPerClass: 40.1, disabled: 7, female: 194, campusDbk: { classes: 6, students: 251 }, campusTanKieu: { classes: 4, students: 150 } },
+    { grade: 9, classes: 10, students: 402, avgPerClass: 40.2, disabled: 3, female: 198, campusDbk: { classes: 6, students: 249 }, campusTanKieu: { classes: 4, students: 153 } },
+    { grade: 10, classes: 5, students: 203, avgPerClass: 40.6, disabled: 1, female: 103, campusMain: { classes: 5, students: 203 } },
+    { grade: 11, classes: 4, students: 142, avgPerClass: 35.5, disabled: 2, female: 72, campusMain: { classes: 4, students: 142 } },
+    { grade: 12, classes: 5, students: 185, avgPerClass: 37.0, disabled: 0, female: 93, campusMain: { classes: 5, students: 185 } },
   ],
   totalClasses: 53,
-  totalStudents: 2143,
+  totalStudents: 2111,
+  totalTHCSClasses: 39,
+  totalTHCSStudents: 1581,
+  totalTHPTClasses: 14,
+  totalTHPTStudents: 530,
   disabledStudents: 25,
-  avgStudentsPerClass: 40.5,
+  avgStudentsPerClass: 39.83,
+
+  // Phân bố học sinh theo 3 điểm trường (Cập nhật chuẩn ngày 25/9/2026: 2.111 HS)
+  campusStats: [
+    {
+      id: 'main',
+      name: 'Điểm chính (THPT Đốc Binh Kiều)',
+      level: 'THPT',
+      classes: 14,
+      students: 530,
+      disabled: 3,
+      grades: 'Khối 10, 11, 12',
+      details: 'Khối 10 (5 lớp, 203 HS); Khối 11 (4 lớp, 142 HS); Khối 12 (5 lớp, 185 HS)'
+    },
+    {
+      id: 'dbk',
+      name: 'Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ)',
+      level: 'THCS',
+      classes: 24,
+      students: 980,
+      disabled: 16,
+      grades: 'Khối 6, 7, 8, 9',
+      details: 'Khối 6 (6 lớp, 245 HS); Khối 7 (6 lớp, 235 HS); Khối 8 (6 lớp, 251 HS); Khối 9 (6 lớp, 249 HS)'
+    },
+    {
+      id: 'tankieu',
+      name: 'Điểm Tân Kiều (THCS Tân Kiều cũ - cách 11 km)',
+      level: 'THCS',
+      classes: 15,
+      students: 601,
+      disabled: 6,
+      grades: 'Khối 6, 7, 8, 9',
+      details: 'Khối 6 (4 lớp, 165 HS); Khối 7 (3 lớp, 133 HS); Khối 8 (4 lớp, 150 HS); Khối 9 (4 lớp, 153 HS)'
+    }
+  ],
 
   // 2. Đội ngũ cán bộ, giáo viên, nhân viên (Tổng: 120 người, 65 nữ, 85 Đảng viên, 9 Thạc sĩ)
   totalStaff: 120,
@@ -38,17 +76,37 @@ export const SCHOOL_OFFICIAL_PROFILE = {
   partyMembers: 85,
   masterDegreeCount: 9,
 
-  // 08 Tổ chuyên môn và văn phòng
+  // Ban Giám hiệu (04 cán bộ quản lý: Hiệu trưởng Lê Thanh Cường phụ trách chung, Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn, và 02 Phó Hiệu trưởng phụ trách các điểm trường)
+  leadership: {
+    id: 'bgh',
+    name: 'Ban Giám hiệu',
+    count: 4,
+    female: 0,
+    partyMembers: 4,
+    masters: 1,
+    leader: 'Lê Thanh Cường (Hiệu trưởng phụ trách chung), Nguyễn Minh Trí (Phó Hiệu trưởng trực tiếp phụ trách chuyên môn)',
+  },
+
+  // Cơ cấu 07 tổ trong nhà trường (chuẩn quy định: 06 tổ chuyên môn và 01 tổ văn phòng)
+  totalUnits: 7,
+  totalAcademicUnits: 6,
+  totalOfficeUnits: 1,
   departments: [
-    { id: 'bgh', name: 'Ban Giám hiệu', count: 4, female: 0, partyMembers: 4, masters: 1, leader: 'Lê Thanh Cường (HT), Nguyễn Minh Trí (PHT-CM)' },
-    { id: 'toan', name: 'Tổ Toán', count: 15, female: 4, partyMembers: 11, masters: 0 },
-    { id: 'van_tv_tb', name: 'Tổ Ngữ văn - Thư viện - Thiết bị', count: 17, female: 12, partyMembers: 16, masters: 2 },
-    { id: 'khxh', name: 'Tổ Lịch sử - Địa lý - GDCD - GDKTPL', count: 16, female: 11, partyMembers: 10, masters: 2 },
-    { id: 'khtn_cn', name: 'Tổ Vật lý - Hóa học - Sinh học - Công nghệ', count: 26, female: 17, partyMembers: 19, masters: 3 },
-    { id: 'nn_tin', name: 'Tổ Ngoại ngữ - Tin học', count: 16, female: 9, partyMembers: 10, masters: 1 },
-    { id: 'gdtc_qpan_nt', name: 'Tổ GDTC - QPAN - Nghệ thuật', count: 12, female: 4, partyMembers: 11, masters: 0 },
-    { id: 'vanphong', name: 'Tổ Văn phòng', count: 14, female: 8, partyMembers: 4, masters: 0 }
+    { id: 'toan', name: 'Tổ Toán', type: 'academic', count: 15, female: 4, partyMembers: 11, masters: 0 },
+    { id: 'van_tv_tb', name: 'Tổ Ngữ văn - Thư viện - Thiết bị', type: 'academic', count: 17, female: 12, partyMembers: 16, masters: 2 },
+    { id: 'khxh', name: 'Tổ Lịch sử - Địa lý - GDCD - GDKTPL', type: 'academic', count: 16, female: 11, partyMembers: 10, masters: 2 },
+    { id: 'khtn_cn', name: 'Tổ Vật lý - Hóa học - Sinh học - Công nghệ', type: 'academic', count: 26, female: 17, partyMembers: 19, masters: 3 },
+    { id: 'nn_tin', name: 'Tổ Ngoại ngữ - Tin học', type: 'academic', count: 16, female: 9, partyMembers: 10, masters: 1 },
+    { id: 'gdtc_qpan_nt', name: 'Tổ GDTC - QPAN - Nghệ thuật', type: 'academic', count: 12, female: 4, partyMembers: 11, masters: 0 },
+    { id: 'vanphong', name: 'Tổ Văn phòng', type: 'office', count: 14, female: 8, partyMembers: 4, masters: 0 }
   ],
+
+  // Thông tin người ký mặc định cho toàn bộ văn bản của trường
+  defaultSigner: {
+    role: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
+    name: 'Nguyễn Minh Trí',
+    recipientsSignerRef: 'Lưu: VT, Tr.',
+  },
 
   // Thống kê chi tiết theo chuyên môn (96 GV giảng dạy bộ môn)
   subjectTeachersCount: [
@@ -85,7 +143,7 @@ export const SCHOOL_OFFICIAL_PROFILE = {
       name: 'Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ)',
       grades: 'Khối 6, 7, 8, 9',
       classes: 24,
-      students: 983,
+      students: 980,
       area: '11.126,7 m²',
       facilities: 'Khu làm việc BGH, Văn phòng, phòng Họp, Y tế, Đoàn - Đội; 22 phòng học; 05 phòng chức năng; 01 nhà công vụ, 02 khu vệ sinh; sân bóng đá mini, sân bóng chuyền, khu vực tập luyện GDTC.'
     },
@@ -94,7 +152,7 @@ export const SCHOOL_OFFICIAL_PROFILE = {
       name: 'Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km)',
       grades: 'Khối 6, 7, 8, 9',
       classes: 15,
-      students: 557,
+      students: 601,
       area: '8.570,8 m²',
       facilities: '09 phòng học; 10 phòng bộ môn (thiết bị dùng chung: 1, tiếng Anh: 1, đa năng: 1, Mỹ thuật: 1, Âm nhạc: 1, tin học: 1, KHTN: 2, KHXH: 1, công nghệ: 1); 10 phòng làm việc và sinh hoạt (Phòng HT: 1, PHT: 2, Đoàn thể: 1, Truyền thống: 1, sinh hoạt CM: 2, họp: 1, văn phòng: 1, YTHĐ: 1), 1 kho và 1 nhà bảo vệ; 2 WC học sinh, 2 WC giáo viên.'
     }
@@ -201,3 +259,76 @@ export const SCHOOL_OFFICIAL_PROFILE = {
     schoolAccreditationGoal: 'Đạt chuẩn Quốc gia mức độ 1 vào năm 2029'
   }
 };
+
+/**
+ * Số liệu học sinh chuẩn xác nhất, cập nhật ngày 25/9/2026
+ * Quy định: Từ nay về sau toàn bộ hệ thống sử dụng bộ số liệu này.
+ */
+export const OFFICIAL_STUDENT_DETAILED_STATS = {
+  updateDate: '25/9/2026',
+  title: 'BẢNG THỐNG KÊ SỐ LỚP, SỐ HỌC SINH NĂM HỌC 2026 - 2027',
+  summary: {
+    totalClasses: 53,
+    totalStudents: 2111,
+    totalDisabled: 25,
+    avgPerClass: 39.83,
+    thcs: { classes: 39, students: 1581, disabled: 22 },
+    thpt: { classes: 14, students: 530, disabled: 3 }
+  },
+  grades: [
+    { grade: 6, classes: 10, students: 410, female: 198, ethnic: 1, ethnicFemale: 0, disabled: 6, note: 'ĐBK: 6 lớp (245 HS); Tân Kiều: 4 lớp (165 HS)' },
+    { grade: 7, classes: 9, students: 368, female: 180, ethnic: 0, ethnicFemale: 0, disabled: 6, note: 'ĐBK: 6 lớp (235 HS); Tân Kiều: 3 lớp (133 HS)' },
+    { grade: 8, classes: 10, students: 401, female: 194, ethnic: 2, ethnicFemale: 1, disabled: 7, note: 'ĐBK: 6 lớp (251 HS); Tân Kiều: 4 lớp (150 HS)' },
+    { grade: 9, classes: 10, students: 402, female: 198, ethnic: 1, ethnicFemale: 1, disabled: 3, note: 'ĐBK: 6 lớp (249 HS); Tân Kiều: 4 lớp (153 HS)' },
+    { grade: 10, classes: 5, students: 203, female: 103, ethnic: 0, ethnicFemale: 0, disabled: 1, note: 'Điểm chính: 10CB1 (37), 10CB2 (29), 10CB3 (44), 10CB4 (48), 10CB5 (45)' },
+    { grade: 11, classes: 4, students: 142, female: 72, ethnic: 1, ethnicFemale: 0, disabled: 2, note: 'Điểm chính: 11CB1 (40), 11CB2 (35), 11CB3 (34), 11CB4 (33)' },
+    { grade: 12, classes: 5, students: 185, female: 93, ethnic: 0, ethnicFemale: 0, disabled: 0, note: 'Điểm chính: 12CB1 (28), 12CB2 (23), 12CB3 (46), 12CB4 (47), 12CB5 (41)' }
+  ],
+  campuses: [
+    {
+      id: 'main',
+      name: 'Điểm chính (THPT)',
+      address: 'Khuôn viên THPT Đốc Binh Kiều cũ',
+      classes: 14,
+      students: 530,
+      disabled: 3,
+      grades: 'Khối 10, 11, 12',
+      gradeDetails: [
+        { grade: 'Khối 10', classes: 5, students: 203, disabled: 1 },
+        { grade: 'Khối 11', classes: 4, students: 142, disabled: 2 },
+        { grade: 'Khối 12', classes: 5, students: 185, disabled: 0 }
+      ]
+    },
+    {
+      id: 'dbk',
+      name: 'Điểm Đốc Binh Kiều (THCS)',
+      address: 'Xã Đốc Binh Kiều (Khuôn viên THCS Đốc Binh Kiều cũ)',
+      classes: 24,
+      students: 980,
+      disabled: 16,
+      grades: 'Khối 6, 7, 8, 9',
+      gradeDetails: [
+        { grade: 'Khối 6', classes: 6, students: 245, disabled: 4 },
+        { grade: 'Khối 7', classes: 6, students: 235, disabled: 4 },
+        { grade: 'Khối 8', classes: 6, students: 251, disabled: 5 },
+        { grade: 'Khối 9', classes: 6, students: 249, disabled: 3 }
+      ]
+    },
+    {
+      id: 'tankieu',
+      name: 'Điểm Tân Kiều (THCS)',
+      address: 'Xã Tân Kiều (Cách điểm chính 11 km)',
+      classes: 15,
+      students: 601,
+      disabled: 6,
+      grades: 'Khối 6, 7, 8, 9',
+      gradeDetails: [
+        { grade: 'Khối 6', classes: 4, students: 165, disabled: 2 },
+        { grade: 'Khối 7', classes: 3, students: 133, disabled: 2 },
+        { grade: 'Khối 8', classes: 4, students: 150, disabled: 2 },
+        { grade: 'Khối 9', classes: 4, students: 153, disabled: 0 }
+      ]
+    }
+  ]
+};
+

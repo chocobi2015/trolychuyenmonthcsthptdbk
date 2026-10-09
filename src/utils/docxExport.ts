@@ -457,7 +457,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
   }
 
   // Footer: Recipients (Left 11-12pt) & Signer (Right 13-14pt bold)
-  const signerLines = (doc.signerRole || 'HIỆU TRƯỞNG').split('\n');
+  const signerLines = (doc.signerRole || 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG').split('\n');
   const footerColLeft = 4500;
   const footerColRight = 4969;
   const footerTable = new Table({

@@ -112,7 +112,7 @@ async function syncAssessmentPlanFromWord(docs: any[]) {
 
     const sourcePlan = {
       ...existing,
-      documentNumber: 'Số: __/KH-THCS&THPTĐBK',
+      documentNumber: existing.documentNumber && !existing.documentNumber.includes('__') ? existing.documentNumber : 'Số: 39/KH-THCS&THPTĐBK',
       title: 'KẾ HOẠCH',
       subTitle: 'Tổ chức thực hiện kiểm tra, đánh giá học sinh năm học 2026 - 2027',
       signDate: 'Đồng Tháp, ngày 05 tháng 10 năm 2026',
@@ -188,17 +188,17 @@ HỒ SƠ VÀ DỮ LIỆU THỰC TẾ CHUẨN XÁC CỦA TRƯỜNG (Từ Kế ho�
 1. Cơ sở pháp lý sáp nhập:
    Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp về việc sáp nhập THCS Đốc Binh Kiều, THCS Tân Kiều và THPT Đốc Binh Kiều thành Trường THCS và THPT Đốc Binh Kiều.
 2. Quy mô mạng lưới:
-   - 53 lớp với 2.143 học sinh (bình quân 40,5 HS/lớp), 25 học sinh khuyết tật.
-   - Cấp THCS: 39 lớp (1.613 HS) gồm Khối 6 (10 lớp, 417 HS); Khối 7 (9 lớp, 377 HS); Khối 8 (10 lớp, 409 HS); Khối 9 (10 lớp, 410 HS).
+   - 53 lớp với 2.111 học sinh (bình quân 39,8 HS/lớp), 25 học sinh khuyết tật.
+   - Cấp THCS: 39 lớp (1.581 HS) gồm Khối 6 (10 lớp, 410 HS); Khối 7 (9 lớp, 368 HS); Khối 8 (10 lớp, 401 HS); Khối 9 (10 lớp, 402 HS).
    - Cấp THPT: 14 lớp (530 HS) gồm Khối 10 (5 lớp, 203 HS); Khối 11 (4 lớp, 142 HS); Khối 12 (5 lớp, 185 HS).
 3. Đội ngũ cán bộ, giáo viên, nhân viên:
    - Tổng cộng: 120 người (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên). 65 nữ, 85 Đảng viên, 09 Thạc sĩ.
    - 96 giáo viên giảng dạy bộ môn đạt chuẩn 100% (88 ĐH, 8 ThS).
-   - Cơ cấu 08 Tổ: Ban Giám hiệu (04), Tổ Toán (15), Tổ Ngữ văn - Thư viện - Thiết bị (17), Tổ Lịch sử - Địa lý - GDCD - GDKTPL (16), Tổ Vật lý - Hóa học - Sinh học - Công nghệ (26), Tổ Ngoại ngữ - Tin học (16), Tổ GDTC - QPAN - Nghệ thuật (12), Tổ Văn phòng (14).
+   - Cơ cấu tổ chức: Ban Giám hiệu (04 cán bộ quản lý: Hiệu trưởng Lê Thanh Cường, Phó Hiệu trưởng Nguyễn Minh Trí...) và 07 Tổ trong trường (06 tổ chuyên môn: Tổ Toán 15, Tổ Ngữ văn - TV - TB 17, Tổ Lịch sử - Địa lý - GDCD - GDKTPL 16, Tổ Vật lý - Hóa học - Sinh học - Công nghệ 26, Tổ Ngoại ngữ - Tin học 16, Tổ GDTC - QPAN - Nghệ thuật 12; và 01 Tổ Văn phòng 14).
 4. Phân bổ cơ sở vật chất tại 03 điểm trường (Tổng diện tích: 35.380,5 m²):
    - Điểm chính (THPT Đốc Binh Kiều cũ): 15.683 m², khối 10-12 (14 lớp, 530 HS), 14 phòng học (9 kiên cố, 3 lắp ghép), 09 phòng bộ môn, PCCC 2 máy bơm, 11 tủ chữa cháy.
-   - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp, 983 HS), 22 phòng học, 05 phòng chức năng, sân bóng mini.
-   - Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km): 8.570,8 m², khối 6-9 (15 lớp, 557 HS), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
+   - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp, 980 HS), 22 phòng học, 05 phòng chức năng, sân bóng mini.
+   - Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km): 8.570,8 m², khối 6-9 (15 lớp, 601 HS), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
 5. KHUNG THỜI GIAN HOẠT ĐỘNG TRONG NGÀY (ÁP DỤNG THỐNG NHẤT 3 ĐIỂM TRƯỜNG - MỖI BUỔI ĐỦ 5 TIẾT):
    - BUỔI SÁNG (6h30 - 11h30): Khối 8, 9, 10, 11, 12 học chính khóa & 2 buổi/ngày; Khối 6, 7 học trải nghiệm, bồi dưỡng HSG, phụ đạo yếu, sinh hoạt CLB:
      * 6h30 - 6h45 (15 phút): Vệ sinh trường, lớp
@@ -1202,13 +1202,13 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
           {
             heading: 'II. ĐẶC ĐIỂM TÌNH HÌNH NHÀ TRƯỜNG',
             content: `1. Quy mô trường lớp và học sinh:
-- Tổng số: 53 lớp với 2.128 học sinh, bố trí tại 3 điểm trường:
-  + Cấp THCS: 39 lớp (gồm Khối 6: 10 lớp; Khối 7: 9 lớp; Khối 8: 10 lớp; Khối 9: 10 lớp). Trong đó: Điểm chính Đốc Binh Kiều có 24 lớp; Điểm Tân Kiều có 15 lớp (cách điểm chính 11 km).
-  + Cấp THPT: 14 lớp học tại Điểm chính (Khối 10: 5 lớp; Khối 11: 4 lớp; Khối 12: 5 lớp).
+- Tổng số: 53 lớp với 2.111 học sinh, bố trí tại 3 điểm trường:
+  + Cấp THCS: 39 lớp với 1.581 học sinh (gồm Khối 6: 10 lớp, 410 HS; Khối 7: 9 lớp, 368 HS; Khối 8: 10 lớp, 401 HS; Khối 9: 10 lớp, 402 HS). Trong đó: Điểm Đốc Binh Kiều có 24 lớp (980 HS); Điểm Tân Kiều có 15 lớp (601 HS, cách điểm chính 11 km).
+  + Cấp THPT: 14 lớp với 530 học sinh học tại Điểm chính (Khối 10: 5 lớp, 203 HS; Khối 11: 4 lớp, 142 HS; Khối 12: 5 lớp, 185 HS).
 
 2. Đội ngũ cán bộ, giáo viên, nhân viên:
-- Tổng số: 101 người (04 Ban Giám hiệu; 93 Giáo viên; 04 Nhân viên).
-- Cơ cấu tổ chức gồm 07 Tổ chuyên môn: Tổ Toán (15 GV), Tổ Ngữ văn (12 GV), Tổ KHTN-CN (26 GV), Tổ Lịch sử-Địa lý-GDCD (16 GV), Tổ Tiếng Anh-Tin học (16 GV), Tổ GDTC-QPAN-Nghệ thuật (12 GV) và Ban Giám hiệu.
+- Tổng số: 120 người (04 Ban Giám hiệu; 102 Giáo viên giảng dạy; 14 Nhân viên).
+- Cơ cấu tổ chức gồm: Ban Giám hiệu (04 cán bộ quản lý) và 07 Tổ trong trường (06 tổ chuyên môn: Tổ Toán 15, Tổ Ngữ văn - TV - TB 17, Tổ KHTN - Công nghệ 26, Tổ Lịch sử - Địa lý - GDCD 16, Tổ Ngoại ngữ - Tin học 16, Tổ GDTC - QPAN - Nghệ thuật 12; và 01 Tổ Văn phòng 14).
 
 3. Thuận lợi và khó khăn:
 - Thuận lợi: Được sự lãnh đạo sâu sát của Sở GDĐT Đồng Tháp và Huyện ủy, UBND Huyện Tháp Mười; tập thể sư phạm đoàn kết, có tinh thần trách nhiệm và tích cực đổi mới phương pháp.
@@ -1232,20 +1232,20 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
             heading: 'IV. TỔ CHỨC THỰC HIỆN',
             content: `1. Ban Giám hiệu:
 - Thầy Hiệu trưởng Lê Thanh Cường chỉ đạo toàn diện công tác tổ chức, nhân sự và tài chính.
-- Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách công tác chuyên môn; chỉ đạo xây dựng và thẩm định kế hoạch của 07 tổ chuyên môn; kiểm tra việc thực hiện phân phối chương trình và kế hoạch bài dạy.
+- Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách công tác chuyên môn; chỉ đạo xây dựng và thẩm định kế hoạch của 06 tổ chuyên môn; kiểm tra việc thực hiện phân phối chương trình và kế hoạch bài dạy.
 - Phân công cán bộ phụ trách điểm Tân Kiều phối hợp chặt chẽ với BGH trong quản lý nền nếp dạy và học hàng ngày.
 
-2. Các Tổ chuyên môn và Giáo viên:
-- 07 Tổ chuyên môn cụ thể hóa kế hoạch này vào Kế hoạch giáo dục của tổ, hoàn thành và trình Phó Hiệu trưởng phê duyệt đúng thời hạn.
+2. Các Tổ chuyên môn, Tổ Văn phòng và Giáo viên:
+- 06 Tổ chuyên môn và Tổ Văn phòng cụ thể hóa kế hoạch này vào Kế hoạch của tổ, hoàn thành và trình Phó Hiệu trưởng phê duyệt đúng thời hạn.
 - Tất cả giáo viên nghiêm túc thực hiện nhiệm vụ được phân công; tích cực đổi mới phương pháp giảng dạy và kiểm tra đánh giá học sinh./.`,
           },
         ],
         recipients: [
           'Sở GDĐT Đồng Tháp (để báo cáo);',
           'Ban Giám hiệu (để chỉ đạo);',
-          '07 Tổ chuyên môn (để thực hiện);',
+          'Các tổ chuyên môn, tổ văn phòng (để thực hiện);',
           'Bộ phận phụ trách Điểm Tân Kiều;',
-          'Lưu: VT, CM.',
+          'Lưu: VT, Tr.',
         ],
       };
     };
@@ -1316,11 +1316,11 @@ Ghi chú bổ sung: ${specificNotes || 'Không có'}
 QUY ĐỊNH BẮT BUỘC VỀ ĐỘ DÀI VÀ TÍNH CỤ THỂ (TUYỆT ĐỐI KHÔNG VIẾT TẮT, KHÔNG VIẾT CHUNG CHUNG):
 1. Thầy Phó Hiệu trưởng yêu cầu văn bản PHẢI RẤT DÀI, CHI TIẾT, CỤ THỂ TỪNG MỤC, KHÔNG ĐƯỢC VIẾT TÓM TẮT HAY CHUNG CHUNG.
 2. Số liệu thực tế của Trường THCS và THPT Đốc Binh Kiều (năm học 2026 - 2027):
-   - Mạng lưới: 53 lớp với 2.143 học sinh tại 3 điểm trường:
+   - Mạng lưới: 53 lớp với 2.111 học sinh tại 3 điểm trường:
      + Điểm chính (THPT): Khối 10, 11, 12 (14 lớp, 530 học sinh).
-     + Điểm Đốc Binh Kiều (THCS): Khối 6, 7, 8, 9 (24 lớp, 983 học sinh).
-     + Điểm Tân Kiều (THCS): Khối 6, 7, 8, 9 (15 lớp, 557 học sinh, cách điểm chính 11 km).
-   - Đội ngũ: 120 CB-GV-NV (102 giáo viên trực tiếp giảng dạy), cơ cấu 08 tổ chuyên môn.
+     + Điểm Đốc Binh Kiều (THCS): Khối 6, 7, 8, 9 (24 lớp, 980 học sinh).
+     + Điểm Tân Kiều (THCS): Khối 6, 7, 8, 9 (15 lớp, 601 học sinh, cách điểm chính 11 km).
+   - Đội ngũ: 120 CB-GV-NV (102 giáo viên trực tiếp giảng dạy), cơ cấu 07 tổ (06 tổ chuyên môn và 01 tổ văn phòng).
    - Ban Giám hiệu: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung, Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn.
 ${is2BuoiPlan ? `
 3. QUY ĐỊNH BẮT BUỘC KHI CỤ THỂ HÓA KẾ HOẠCH DẠY HỌC 2 BUỔI/NGÀY (BÁM SÁT KẾ HOẠCH CỦA SỞ GDĐT ĐỒNG THÁP):
@@ -1333,7 +1333,7 @@ ${is2BuoiPlan ? `
      * III. KINH PHÍ VÀ ĐIỀU KIỆN THỰC HIỆN: Kinh phí ngân sách chi thường xuyên theo định mức và Công văn 9179/BTC-NSNN; chủ trương xã hội hóa giáo dục đúng quy định, nguyên tắc tự nguyện, công khai, tuyệt đối không thu tiền sai quy định; khai thác 19 phòng bộ môn và các phòng máy tính.
      * IV. TỔ CHỨC THỰC HIỆN: Phân công nhiệm vụ có 'hồn' gắn liền hệ thống phân công chuyên môn phancongchuyenmonthcsthptdbk.vercel.app:
        + Ban Giám hiệu: Thầy Hiệu trưởng Lê Thanh Cường chỉ đạo chung; Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn 2 buổi/ngày toàn trường, duyệt kế hoạch buổi 2, xếp TKB, giám sát kê khai thừa thiếu tiết trên webapp phân công chuyên môn; Cán bộ phụ trách Điểm Tân Kiều.
-       + 07 Tổ chuyên môn: Xây dựng kế hoạch dạy buổi 2, phân công giáo viên theo định mức, theo dõi kê khai thừa thiếu tiết.
+       + 06 Tổ chuyên môn và Tổ Văn phòng: Xây dựng kế hoạch dạy buổi 2, phân công giáo viên theo định mức, theo dõi kê khai thừa thiếu tiết.
        + Giáo viên bộ môn, Giáo viên chủ nhiệm, Ban đại diện CMHS.
      * V. CHẾ ĐỘ THÔNG TIN, BÁO CÁO: Báo cáo định kỳ học kỳ 1 và cuối năm học về Sở GDĐT Đồng Tháp (qua Phòng GDPT).
    - Quy tắc 2 (Căn cứ pháp lý - BẮT BUỘC RẤT NGẮN GỌN):
@@ -1441,15 +1441,15 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
             {
               heading: 'II. ĐẶC ĐIỂM TÌNH HÌNH VÀ CƠ CẤU ĐIỀU KIỆN TỔ CHỨC',
               content: `1. Quy mô học sinh và lớp học:
-- Toàn trường: 53 lớp với 2.143 học sinh (Cấp THCS: 39 lớp với 1.613 HS; Cấp THPT: 14 lớp với 530 HS).
+- Toàn trường: 53 lớp với 2.111 học sinh (Cấp THCS: 39 lớp với 1.581 HS; Cấp THPT: 14 lớp với 530 HS).
 - Phân bổ theo 3 điểm trường:
   + Điểm chính (Khối 10, 11, 12): 14 lớp, 530 học sinh. Cơ sở vật chất có 14 phòng học, 09 phòng bộ môn kiên cố, 03 phòng lắp ghép, phòng máy vi tính.
-  + Điểm Đốc Binh Kiều (Khối 6, 7, 8, 9): 24 lớp, 983 học sinh. Cơ sở vật chất có 22 phòng học, 05 phòng chức năng, sân bóng đá mini, sân bóng chuyền.
-  + Điểm Tân Kiều (Khối 6, 7, 8, 9 - cách điểm chính 11 km): 15 lớp, 557 học sinh. Cơ sở vật chất có 09 phòng học, 10 phòng bộ môn.
+  + Điểm Đốc Binh Kiều (Khối 6, 7, 8, 9): 24 lớp, 980 học sinh. Cơ sở vật chất có 22 phòng học, 05 phòng chức năng, sân bóng đá mini, sân bóng chuyền.
+  + Điểm Tân Kiều (Khối 6, 7, 8, 9 - cách điểm chính 11 km): 15 lớp, 601 học sinh. Cơ sở vật chất có 09 phòng học, 10 phòng bộ môn.
 
 2. Đội ngũ cán bộ quản lý và giáo viên:
 - Tổng số: 120 người (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên). Có 85 Đảng viên, 09 Thạc sĩ.
-- 08 Tổ chuyên môn: Ban Giám hiệu (04), Tổ Toán (15), Tổ Ngữ văn - Thư viện - Thiết bị (17), Tổ Lịch sử - Địa lý - GDCD - GDKTPL (16), Tổ Vật lý - Hóa học - Sinh học - Công nghệ (26), Tổ Ngoại ngữ - Tin học (16), Tổ GDTC - QPAN - Nghệ thuật (12), Tổ Văn phòng (14).
+- Cơ cấu tổ chức gồm: Ban Giám hiệu (04 cán bộ quản lý) và 07 Tổ trong trường (06 tổ chuyên môn: Tổ Toán 15, Tổ Ngữ văn - TV - TB 17, Tổ Lịch sử - Địa lý - GDCD - GDKTPL 16, Tổ Vật lý - Hóa học - Sinh học - Công nghệ 26, Tổ Ngoại ngữ - Tin học 16, Tổ GDTC - QPAN - Nghệ thuật 12; và 01 Tổ Văn phòng 14).
 
 3. Thuận lợi và khó khăn:
 - Thuận lợi: Được sự quan tâm sâu sát của Sở GDĐT Đồng Tháp, chính quyền địa phương và sự đồng thuận cao của Ban đại diện CMHS. Đội ngũ giáo viên trẻ, nhiệt huyết, 100% đạt chuẩn và trên chuẩn đào tạo.
@@ -1521,7 +1521,7 @@ b) Buổi chiều (Chính khóa khối 6, 7 và tăng cường khối 8, 9, 10, 
         };
       }
 
-      let contentII = `Quy mô áp dụng: Toàn trường với 53 lớp và 2.143 học sinh; 120 cán bộ giáo viên nhân viên (102 giáo viên trực tiếp giảng dạy). Trong đó: 39 lớp cấp THCS (24 lớp điểm chính Đốc Binh Kiều với 983 HS, 15 lớp điểm Tân Kiều cách 11km với 557 HS) và 14 lớp cấp THPT với 530 HS.`;
+      let contentII = `Quy mô áp dụng: Toàn trường với 53 lớp và 2.111 học sinh; 120 cán bộ giáo viên nhân viên (102 giáo viên trực tiếp giảng dạy). Trong đó: 39 lớp cấp THCS (24 lớp điểm Đốc Binh Kiều với 980 HS, 15 lớp điểm Tân Kiều cách 11km với 601 HS) và 14 lớp cấp THPT với 530 HS.`;
       let contentIII = `Thời gian thực hiện theo khung năm học 2026 - 2027 (đủ 35 tuần thực học, HK1: 18 tuần, HK2: 17 tuần). Khung giờ hoạt động buổi sáng từ 7h00 đến 11h30 (5 tiết), buổi chiều từ 12h30 đến 17h00 (5 tiết).`;
 
       if (topic.toLowerCase().includes('giáo viên dạy giỏi') || topic.toLowerCase().includes('gvdg')) {
@@ -1534,7 +1534,7 @@ b) Buổi chiều (Chính khóa khối 6, 7 và tăng cường khối 8, 9, 10, 
         contentIII = `Triển khai liên tục trong suốt 35 tuần năm học. Đợt 1 từ tuần 3 đến tuần 17; Đợt 2 từ tuần 20 đến tuần 34.`;
       } else if (topic.toLowerCase().includes('chuyển đổi số') || topic.toLowerCase().includes('ai') || topic.toLowerCase().includes('trí tuệ nhân tạo')) {
         specificLegal.push('Quyết định số 131/QĐ-TTg của Thủ tướng Chính phủ phê duyệt Đề án Tăng cường ứng dụng công nghệ thông tin và chuyển đổi số trong giáo dục');
-        contentII = `1. Nâng cấp hạ tầng mạng internet và phòng máy vi tính tại cả 2 điểm trường.\n2. Sử dụng 100% hồ sơ, học bạ, sổ điểm điện tử.\n3. Tổ chức tập huấn cho 101 giáo viên về khai thác AI an toàn, liêm chính học thuật và bảo vệ dữ liệu học sinh.`;
+        contentII = `1. Nâng cấp hạ tầng mạng internet và phòng máy vi tính tại cả 3 điểm trường.\n2. Sử dụng 100% hồ sơ, học bạ, sổ điểm điện tử.\n3. Tổ chức tập huấn cho đội ngũ giáo viên về khai thác AI an toàn, liêm chính học thuật và bảo vệ dữ liệu học sinh.`;
         contentIII = `Tập huấn trong tháng 9/2026; triển khai diện rộng từ tháng 10/2026 đến hết năm học.`;
       } else if (topic.toLowerCase().includes('kiểm tra nội bộ')) {
         specificLegal.push('Nghị định số 42/2013/NĐ-CP về thanh tra giáo dục và hướng dẫn công tác kiểm tra nội bộ trường học của Sở GDĐT Đồng Tháp');
@@ -1570,14 +1570,14 @@ b) Buổi chiều (Chính khóa khối 6, 7 và tăng cường khối 8, 9, 10, 
           },
           {
             heading: 'IV. TỔ CHỨC THỰC HIỆN',
-            content: `1. Ban Giám hiệu:\n- Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung và phê duyệt kinh phí.\n- Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp chỉ đạo chuyên môn, kiểm tra đôn đốc tiến độ thực hiện tại các điểm trường.\n\n2. Các Tổ chuyên môn và Điểm trường:\n- 07 Tổ chuyên môn quán triệt đến 101 giáo viên trong tổ; cử giáo viên tham gia đúng quy định.\n- Bộ phận phụ trách Điểm Tân Kiều bảo đảm cơ sở vật chất, phòng bộ môn và nền nếp học tập.\n\n3. Giáo viên và Nhân viên:\n- Nghiêm túc chấp hành kế hoạch, báo cáo kịp thời những khó khăn vướng mắc để BGH xem xét giải quyết./.`
+            content: `1. Ban Giám hiệu:\n- Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung và phê duyệt kinh phí.\n- Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp chỉ đạo chuyên môn, kiểm tra đôn đốc tiến độ thực hiện tại các điểm trường.\n\n2. Các Tổ chuyên môn và Điểm trường:\n- 06 Tổ chuyên môn và Tổ Văn phòng quán triệt đến 102 giáo viên và nhân viên; thực hiện nhiệm vụ đúng quy định.\n- Bộ phận phụ trách Điểm Tân Kiều bảo đảm cơ sở vật chất, phòng bộ môn và nền nếp học tập.\n\n3. Giáo viên và Nhân viên:\n- Nghiêm túc chấp hành kế hoạch, báo cáo kịp thời những khó khăn vướng mắc để BGH xem xét giải quyết./.`
           }
         ],
         recipients: [
           'Sở GDĐT Đồng Tháp (để báo cáo);',
           'Ban Giám hiệu (để chỉ đạo);',
-          'Các tổ chuyên môn, văn phòng (để thực hiện);',
-          'Lưu: VT, CM.'
+          'Các tổ chuyên môn, tổ văn phòng (để thực hiện);',
+          'Lưu: VT, Tr.'
         ]
       };
     };

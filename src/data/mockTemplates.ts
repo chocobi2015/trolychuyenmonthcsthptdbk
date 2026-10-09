@@ -35,26 +35,29 @@ export const OFFICIAL_DOCUMENTS_INFO = {
 export const SCHOOL_CAMPUSES = [
   {
     id: "dbk-main",
-    name: "Điểm chính Đốc Binh Kiều (THCS)",
+    name: "Điểm Đốc Binh Kiều (THCS)",
     classCount: 24,
+    studentCount: 980,
     grades: "Khối 6, 7, 8, 9",
-    locationNote: "Khu vực trung tâm Đốc Binh Kiều, điều kiện phòng máy và TV tương đối đầy đủ",
+    locationNote: "Khu vực trung tâm Đốc Binh Kiều, 24 lớp THCS (980 học sinh)",
     distanceFromMainCampus: "0 km (Điểm trung tâm)"
   },
   {
     id: "tan-kieu",
     name: "Điểm trường Tân Kiều (THCS)",
     classCount: 15,
+    studentCount: 601,
     grades: "Khối 6, 7, 8, 9",
-    locationNote: "Khu vực Tân Kiều, cơ sở vật chất phòng bộ môn còn cần tối ưu, kết nối mạng cần đồng bộ",
+    locationNote: "15 lớp THCS (601 học sinh), kết nối mạng và quản lý dữ liệu số tập trung",
     distanceFromMainCampus: "Cách điểm chính 11 km"
   },
   {
     id: "dbk-highschool",
-    name: "Điểm THPT Đốc Binh Kiều",
+    name: "Điểm chính THPT Đốc Binh Kiều",
     classCount: 14,
+    studentCount: 530,
     grades: "Khối 10, 11, 12",
-    locationNote: "14 lớp cấp THPT học chương trình GDPT 2018 với các tổ hợp môn lựa chọn và chuyên đề",
+    locationNote: "14 lớp cấp THPT (530 học sinh) học chương trình GDPT 2018 với tổ hợp môn lựa chọn và chuyên đề",
     distanceFromMainCampus: "Khuôn viên trung tâm THPT"
   }
 ];

@@ -94,7 +94,7 @@ async function syncAssessmentPlanFromWord(docs) {
     if (!existing) return docs;
     const sourcePlan = {
       ...existing,
-      documentNumber: "S\u1ED1: __/KH-THCS&THPT\u0110BK",
+      documentNumber: existing.documentNumber && !existing.documentNumber.includes("__") ? existing.documentNumber : "S\u1ED1: 39/KH-THCS&THPT\u0110BK",
       title: "K\u1EBE HO\u1EA0CH",
       subTitle: "T\u1ED5 ch\u1EE9c th\u1EF1c hi\u1EC7n ki\u1EC3m tra, \u0111\xE1nh gi\xE1 h\u1ECDc sinh n\u0103m h\u1ECDc 2026 - 2027",
       signDate: "\u0110\u1ED3ng Th\xE1p, ng\xE0y 05 th\xE1ng 10 n\u0103m 2026",
@@ -159,17 +159,17 @@ H\u1ED2 S\u01A0 V\xC0 D\u1EEE LI\u1EC6U TH\u1EF0C T\u1EBE CHU\u1EA8N X\xC1C C\u1
 1. C\u01A1 s\u1EDF ph\xE1p l\xFD s\xE1p nh\u1EADp:
    Quy\u1EBFt \u0111\u1ECBnh s\u1ED1 2606/Q\u0110-UBND ng\xE0y 13/8/2026 c\u1EE7a UBND t\u1EC9nh \u0110\u1ED3ng Th\xE1p v\u1EC1 vi\u1EC7c s\xE1p nh\u1EADp THCS \u0110\u1ED1c Binh Ki\u1EC1u, THCS T\xE2n Ki\u1EC1u v\xE0 THPT \u0110\u1ED1c Binh Ki\u1EC1u th\xE0nh Tr\u01B0\u1EDDng THCS v\xE0 THPT \u0110\u1ED1c Binh Ki\u1EC1u.
 2. Quy m\xF4 m\u1EA1ng l\u01B0\u1EDBi:
-   - 53 l\u1EDBp v\u1EDBi 2.143 h\u1ECDc sinh (b\xECnh qu\xE2n 40,5 HS/l\u1EDBp), 25 h\u1ECDc sinh khuy\u1EBFt t\u1EADt.
-   - C\u1EA5p THCS: 39 l\u1EDBp (1.613 HS) g\u1ED3m Kh\u1ED1i 6 (10 l\u1EDBp, 417 HS); Kh\u1ED1i 7 (9 l\u1EDBp, 377 HS); Kh\u1ED1i 8 (10 l\u1EDBp, 409 HS); Kh\u1ED1i 9 (10 l\u1EDBp, 410 HS).
+   - 53 l\u1EDBp v\u1EDBi 2.111 h\u1ECDc sinh (b\xECnh qu\xE2n 39,8 HS/l\u1EDBp), 25 h\u1ECDc sinh khuy\u1EBFt t\u1EADt.
+   - C\u1EA5p THCS: 39 l\u1EDBp (1.581 HS) g\u1ED3m Kh\u1ED1i 6 (10 l\u1EDBp, 410 HS); Kh\u1ED1i 7 (9 l\u1EDBp, 368 HS); Kh\u1ED1i 8 (10 l\u1EDBp, 401 HS); Kh\u1ED1i 9 (10 l\u1EDBp, 402 HS).
    - C\u1EA5p THPT: 14 l\u1EDBp (530 HS) g\u1ED3m Kh\u1ED1i 10 (5 l\u1EDBp, 203 HS); Kh\u1ED1i 11 (4 l\u1EDBp, 142 HS); Kh\u1ED1i 12 (5 l\u1EDBp, 185 HS).
 3. \u0110\u1ED9i ng\u0169 c\xE1n b\u1ED9, gi\xE1o vi\xEAn, nh\xE2n vi\xEAn:
    - T\u1ED5ng c\u1ED9ng: 120 ng\u01B0\u1EDDi (04 Ban Gi\xE1m hi\u1EC7u, 102 Gi\xE1o vi\xEAn, 14 Nh\xE2n vi\xEAn). 65 n\u1EEF, 85 \u0110\u1EA3ng vi\xEAn, 09 Th\u1EA1c s\u0129.
    - 96 gi\xE1o vi\xEAn gi\u1EA3ng d\u1EA1y b\u1ED9 m\xF4n \u0111\u1EA1t chu\u1EA9n 100% (88 \u0110H, 8 ThS).
-   - C\u01A1 c\u1EA5u 08 T\u1ED5: Ban Gi\xE1m hi\u1EC7u (04), T\u1ED5 To\xE1n (15), T\u1ED5 Ng\u1EEF v\u0103n - Th\u01B0 vi\u1EC7n - Thi\u1EBFt b\u1ECB (17), T\u1ED5 L\u1ECBch s\u1EED - \u0110\u1ECBa l\xFD - GDCD - GDKTPL (16), T\u1ED5 V\u1EADt l\xFD - H\xF3a h\u1ECDc - Sinh h\u1ECDc - C\xF4ng ngh\u1EC7 (26), T\u1ED5 Ngo\u1EA1i ng\u1EEF - Tin h\u1ECDc (16), T\u1ED5 GDTC - QPAN - Ngh\u1EC7 thu\u1EADt (12), T\u1ED5 V\u0103n ph\xF2ng (14).
+   - C\u01A1 c\u1EA5u t\u1ED5 ch\u1EE9c: Ban Gi\xE1m hi\u1EC7u (04 c\xE1n b\u1ED9 qu\u1EA3n l\xFD: Hi\u1EC7u tr\u01B0\u1EDFng L\xEA Thanh C\u01B0\u1EDDng, Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng Nguy\u1EC5n Minh Tr\xED...) v\xE0 07 T\u1ED5 trong tr\u01B0\u1EDDng (06 t\u1ED5 chuy\xEAn m\xF4n: T\u1ED5 To\xE1n 15, T\u1ED5 Ng\u1EEF v\u0103n - TV - TB 17, T\u1ED5 L\u1ECBch s\u1EED - \u0110\u1ECBa l\xFD - GDCD - GDKTPL 16, T\u1ED5 V\u1EADt l\xFD - H\xF3a h\u1ECDc - Sinh h\u1ECDc - C\xF4ng ngh\u1EC7 26, T\u1ED5 Ngo\u1EA1i ng\u1EEF - Tin h\u1ECDc 16, T\u1ED5 GDTC - QPAN - Ngh\u1EC7 thu\u1EADt 12; v\xE0 01 T\u1ED5 V\u0103n ph\xF2ng 14).
 4. Ph\xE2n b\u1ED5 c\u01A1 s\u1EDF v\u1EADt ch\u1EA5t t\u1EA1i 03 \u0111i\u1EC3m tr\u01B0\u1EDDng (T\u1ED5ng di\u1EC7n t\xEDch: 35.380,5 m\xB2):
    - \u0110i\u1EC3m ch\xEDnh (THPT \u0110\u1ED1c Binh Ki\u1EC1u c\u0169): 15.683 m\xB2, kh\u1ED1i 10-12 (14 l\u1EDBp, 530 HS), 14 ph\xF2ng h\u1ECDc (9 ki\xEAn c\u1ED1, 3 l\u1EAFp gh\xE9p), 09 ph\xF2ng b\u1ED9 m\xF4n, PCCC 2 m\xE1y b\u01A1m, 11 t\u1EE7 ch\u1EEFa ch\xE1y.
-   - \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u (THCS \u0110\u1ED1c Binh Ki\u1EC1u c\u0169): 11.126,7 m\xB2, kh\u1ED1i 6-9 (24 l\u1EDBp, 983 HS), 22 ph\xF2ng h\u1ECDc, 05 ph\xF2ng ch\u1EE9c n\u0103ng, s\xE2n b\xF3ng mini.
-   - \u0110i\u1EC3m T\xE2n Ki\u1EC1u (THCS T\xE2n Ki\u1EC1u c\u0169 - c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km): 8.570,8 m\xB2, kh\u1ED1i 6-9 (15 l\u1EDBp, 557 HS), 09 ph\xF2ng h\u1ECDc, 10 ph\xF2ng b\u1ED9 m\xF4n, ph\xF2ng PHT th\u01B0\u1EDDng tr\u1EF1c.
+   - \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u (THCS \u0110\u1ED1c Binh Ki\u1EC1u c\u0169): 11.126,7 m\xB2, kh\u1ED1i 6-9 (24 l\u1EDBp, 980 HS), 22 ph\xF2ng h\u1ECDc, 05 ph\xF2ng ch\u1EE9c n\u0103ng, s\xE2n b\xF3ng mini.
+   - \u0110i\u1EC3m T\xE2n Ki\u1EC1u (THCS T\xE2n Ki\u1EC1u c\u0169 - c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km): 8.570,8 m\xB2, kh\u1ED1i 6-9 (15 l\u1EDBp, 601 HS), 09 ph\xF2ng h\u1ECDc, 10 ph\xF2ng b\u1ED9 m\xF4n, ph\xF2ng PHT th\u01B0\u1EDDng tr\u1EF1c.
 5. KHUNG TH\u1EDCI GIAN HO\u1EA0T \u0110\u1ED8NG TRONG NG\xC0Y (\xC1P D\u1EE4NG TH\u1ED0NG NH\u1EA4T 3 \u0110I\u1EC2M TR\u01AF\u1EDCNG - M\u1ED6I BU\u1ED4I \u0110\u1EE6 5 TI\u1EBET):
    - BU\u1ED4I S\xC1NG (6h30 - 11h30): Kh\u1ED1i 8, 9, 10, 11, 12 h\u1ECDc ch\xEDnh kh\xF3a & 2 bu\u1ED5i/ng\xE0y; Kh\u1ED1i 6, 7 h\u1ECDc tr\u1EA3i nghi\u1EC7m, b\u1ED3i d\u01B0\u1EE1ng HSG, ph\u1EE5 \u0111\u1EA1o y\u1EBFu, sinh ho\u1EA1t CLB:
      * 6h30 - 6h45 (15 ph\xFAt): V\u1EC7 sinh tr\u01B0\u1EDDng, l\u1EDBp
@@ -1072,13 +1072,13 @@ H\xC3Y XU\u1EA4T RA D\u1EEE LI\u1EC6U JSON \u0110\xDANG CHU\u1EA8N TH\u1EC2 TH\u
           {
             heading: "II. \u0110\u1EB6C \u0110I\u1EC2M T\xCCNH H\xCCNH NH\xC0 TR\u01AF\u1EDCNG",
             content: `1. Quy m\xF4 tr\u01B0\u1EDDng l\u1EDBp v\xE0 h\u1ECDc sinh:
-- T\u1ED5ng s\u1ED1: 53 l\u1EDBp v\u1EDBi 2.128 h\u1ECDc sinh, b\u1ED1 tr\xED t\u1EA1i 3 \u0111i\u1EC3m tr\u01B0\u1EDDng:
-  + C\u1EA5p THCS: 39 l\u1EDBp (g\u1ED3m Kh\u1ED1i 6: 10 l\u1EDBp; Kh\u1ED1i 7: 9 l\u1EDBp; Kh\u1ED1i 8: 10 l\u1EDBp; Kh\u1ED1i 9: 10 l\u1EDBp). Trong \u0111\xF3: \u0110i\u1EC3m ch\xEDnh \u0110\u1ED1c Binh Ki\u1EC1u c\xF3 24 l\u1EDBp; \u0110i\u1EC3m T\xE2n Ki\u1EC1u c\xF3 15 l\u1EDBp (c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km).
-  + C\u1EA5p THPT: 14 l\u1EDBp h\u1ECDc t\u1EA1i \u0110i\u1EC3m ch\xEDnh (Kh\u1ED1i 10: 5 l\u1EDBp; Kh\u1ED1i 11: 4 l\u1EDBp; Kh\u1ED1i 12: 5 l\u1EDBp).
+- T\u1ED5ng s\u1ED1: 53 l\u1EDBp v\u1EDBi 2.111 h\u1ECDc sinh, b\u1ED1 tr\xED t\u1EA1i 3 \u0111i\u1EC3m tr\u01B0\u1EDDng:
+  + C\u1EA5p THCS: 39 l\u1EDBp v\u1EDBi 1.581 h\u1ECDc sinh (g\u1ED3m Kh\u1ED1i 6: 10 l\u1EDBp, 410 HS; Kh\u1ED1i 7: 9 l\u1EDBp, 368 HS; Kh\u1ED1i 8: 10 l\u1EDBp, 401 HS; Kh\u1ED1i 9: 10 l\u1EDBp, 402 HS). Trong \u0111\xF3: \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u c\xF3 24 l\u1EDBp (980 HS); \u0110i\u1EC3m T\xE2n Ki\u1EC1u c\xF3 15 l\u1EDBp (601 HS, c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km).
+  + C\u1EA5p THPT: 14 l\u1EDBp v\u1EDBi 530 h\u1ECDc sinh h\u1ECDc t\u1EA1i \u0110i\u1EC3m ch\xEDnh (Kh\u1ED1i 10: 5 l\u1EDBp, 203 HS; Kh\u1ED1i 11: 4 l\u1EDBp, 142 HS; Kh\u1ED1i 12: 5 l\u1EDBp, 185 HS).
 
 2. \u0110\u1ED9i ng\u0169 c\xE1n b\u1ED9, gi\xE1o vi\xEAn, nh\xE2n vi\xEAn:
-- T\u1ED5ng s\u1ED1: 101 ng\u01B0\u1EDDi (04 Ban Gi\xE1m hi\u1EC7u; 93 Gi\xE1o vi\xEAn; 04 Nh\xE2n vi\xEAn).
-- C\u01A1 c\u1EA5u t\u1ED5 ch\u1EE9c g\u1ED3m 07 T\u1ED5 chuy\xEAn m\xF4n: T\u1ED5 To\xE1n (15 GV), T\u1ED5 Ng\u1EEF v\u0103n (12 GV), T\u1ED5 KHTN-CN (26 GV), T\u1ED5 L\u1ECBch s\u1EED-\u0110\u1ECBa l\xFD-GDCD (16 GV), T\u1ED5 Ti\u1EBFng Anh-Tin h\u1ECDc (16 GV), T\u1ED5 GDTC-QPAN-Ngh\u1EC7 thu\u1EADt (12 GV) v\xE0 Ban Gi\xE1m hi\u1EC7u.
+- T\u1ED5ng s\u1ED1: 120 ng\u01B0\u1EDDi (04 Ban Gi\xE1m hi\u1EC7u; 102 Gi\xE1o vi\xEAn gi\u1EA3ng d\u1EA1y; 14 Nh\xE2n vi\xEAn).
+- C\u01A1 c\u1EA5u t\u1ED5 ch\u1EE9c g\u1ED3m: Ban Gi\xE1m hi\u1EC7u (04 c\xE1n b\u1ED9 qu\u1EA3n l\xFD) v\xE0 07 T\u1ED5 trong tr\u01B0\u1EDDng (06 t\u1ED5 chuy\xEAn m\xF4n: T\u1ED5 To\xE1n 15, T\u1ED5 Ng\u1EEF v\u0103n - TV - TB 17, T\u1ED5 KHTN - C\xF4ng ngh\u1EC7 26, T\u1ED5 L\u1ECBch s\u1EED - \u0110\u1ECBa l\xFD - GDCD 16, T\u1ED5 Ngo\u1EA1i ng\u1EEF - Tin h\u1ECDc 16, T\u1ED5 GDTC - QPAN - Ngh\u1EC7 thu\u1EADt 12; v\xE0 01 T\u1ED5 V\u0103n ph\xF2ng 14).
 
 3. Thu\u1EADn l\u1EE3i v\xE0 kh\xF3 kh\u0103n:
 - Thu\u1EADn l\u1EE3i: \u0110\u01B0\u1EE3c s\u1EF1 l\xE3nh \u0111\u1EA1o s\xE2u s\xE1t c\u1EE7a S\u1EDF GD\u0110T \u0110\u1ED3ng Th\xE1p v\xE0 Huy\u1EC7n \u1EE7y, UBND Huy\u1EC7n Th\xE1p M\u01B0\u1EDDi; t\u1EADp th\u1EC3 s\u01B0 ph\u1EA1m \u0111o\xE0n k\u1EBFt, c\xF3 tinh th\u1EA7n tr\xE1ch nhi\u1EC7m v\xE0 t\xEDch c\u1EF1c \u0111\u1ED5i m\u1EDBi ph\u01B0\u01A1ng ph\xE1p.
@@ -1102,20 +1102,20 @@ H\xC3Y XU\u1EA4T RA D\u1EEE LI\u1EC6U JSON \u0110\xDANG CHU\u1EA8N TH\u1EC2 TH\u
             heading: "IV. T\u1ED4 CH\u1EE8C TH\u1EF0C HI\u1EC6N",
             content: `1. Ban Gi\xE1m hi\u1EC7u:
 - Th\u1EA7y Hi\u1EC7u tr\u01B0\u1EDFng L\xEA Thanh C\u01B0\u1EDDng ch\u1EC9 \u0111\u1EA1o to\xE0n di\u1EC7n c\xF4ng t\xE1c t\u1ED5 ch\u1EE9c, nh\xE2n s\u1EF1 v\xE0 t\xE0i ch\xEDnh.
-- Th\u1EA7y Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng Nguy\u1EC5n Minh Tr\xED tr\u1EF1c ti\u1EBFp ph\u1EE5 tr\xE1ch c\xF4ng t\xE1c chuy\xEAn m\xF4n; ch\u1EC9 \u0111\u1EA1o x\xE2y d\u1EF1ng v\xE0 th\u1EA9m \u0111\u1ECBnh k\u1EBF ho\u1EA1ch c\u1EE7a 07 t\u1ED5 chuy\xEAn m\xF4n; ki\u1EC3m tra vi\u1EC7c th\u1EF1c hi\u1EC7n ph\xE2n ph\u1ED1i ch\u01B0\u01A1ng tr\xECnh v\xE0 k\u1EBF ho\u1EA1ch b\xE0i d\u1EA1y.
+- Th\u1EA7y Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng Nguy\u1EC5n Minh Tr\xED tr\u1EF1c ti\u1EBFp ph\u1EE5 tr\xE1ch c\xF4ng t\xE1c chuy\xEAn m\xF4n; ch\u1EC9 \u0111\u1EA1o x\xE2y d\u1EF1ng v\xE0 th\u1EA9m \u0111\u1ECBnh k\u1EBF ho\u1EA1ch c\u1EE7a 06 t\u1ED5 chuy\xEAn m\xF4n; ki\u1EC3m tra vi\u1EC7c th\u1EF1c hi\u1EC7n ph\xE2n ph\u1ED1i ch\u01B0\u01A1ng tr\xECnh v\xE0 k\u1EBF ho\u1EA1ch b\xE0i d\u1EA1y.
 - Ph\xE2n c\xF4ng c\xE1n b\u1ED9 ph\u1EE5 tr\xE1ch \u0111i\u1EC3m T\xE2n Ki\u1EC1u ph\u1ED1i h\u1EE3p ch\u1EB7t ch\u1EBD v\u1EDBi BGH trong qu\u1EA3n l\xFD n\u1EC1n n\u1EBFp d\u1EA1y v\xE0 h\u1ECDc h\xE0ng ng\xE0y.
 
-2. C\xE1c T\u1ED5 chuy\xEAn m\xF4n v\xE0 Gi\xE1o vi\xEAn:
-- 07 T\u1ED5 chuy\xEAn m\xF4n c\u1EE5 th\u1EC3 h\xF3a k\u1EBF ho\u1EA1ch n\xE0y v\xE0o K\u1EBF ho\u1EA1ch gi\xE1o d\u1EE5c c\u1EE7a t\u1ED5, ho\xE0n th\xE0nh v\xE0 tr\xECnh Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng ph\xEA duy\u1EC7t \u0111\xFAng th\u1EDDi h\u1EA1n.
+2. C\xE1c T\u1ED5 chuy\xEAn m\xF4n, T\u1ED5 V\u0103n ph\xF2ng v\xE0 Gi\xE1o vi\xEAn:
+- 06 T\u1ED5 chuy\xEAn m\xF4n v\xE0 T\u1ED5 V\u0103n ph\xF2ng c\u1EE5 th\u1EC3 h\xF3a k\u1EBF ho\u1EA1ch n\xE0y v\xE0o K\u1EBF ho\u1EA1ch c\u1EE7a t\u1ED5, ho\xE0n th\xE0nh v\xE0 tr\xECnh Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng ph\xEA duy\u1EC7t \u0111\xFAng th\u1EDDi h\u1EA1n.
 - T\u1EA5t c\u1EA3 gi\xE1o vi\xEAn nghi\xEAm t\xFAc th\u1EF1c hi\u1EC7n nhi\u1EC7m v\u1EE5 \u0111\u01B0\u1EE3c ph\xE2n c\xF4ng; t\xEDch c\u1EF1c \u0111\u1ED5i m\u1EDBi ph\u01B0\u01A1ng ph\xE1p gi\u1EA3ng d\u1EA1y v\xE0 ki\u1EC3m tra \u0111\xE1nh gi\xE1 h\u1ECDc sinh./.`
           }
         ],
         recipients: [
           "S\u1EDF GD\u0110T \u0110\u1ED3ng Th\xE1p (\u0111\u1EC3 b\xE1o c\xE1o);",
           "Ban Gi\xE1m hi\u1EC7u (\u0111\u1EC3 ch\u1EC9 \u0111\u1EA1o);",
-          "07 T\u1ED5 chuy\xEAn m\xF4n (\u0111\u1EC3 th\u1EF1c hi\u1EC7n);",
+          "C\xE1c t\u1ED5 chuy\xEAn m\xF4n, t\u1ED5 v\u0103n ph\xF2ng (\u0111\u1EC3 th\u1EF1c hi\u1EC7n);",
           "B\u1ED9 ph\u1EADn ph\u1EE5 tr\xE1ch \u0110i\u1EC3m T\xE2n Ki\u1EC1u;",
-          "L\u01B0u: VT, CM."
+          "L\u01B0u: VT, Tr."
         ]
       };
     };
@@ -1176,11 +1176,11 @@ Ghi ch\xFA b\u1ED5 sung: ${specificNotes || "Kh\xF4ng c\xF3"}
 QUY \u0110\u1ECANH B\u1EAET BU\u1ED8C V\u1EC0 \u0110\u1ED8 D\xC0I V\xC0 T\xCDNH C\u1EE4 TH\u1EC2 (TUY\u1EC6T \u0110\u1ED0I KH\xD4NG VI\u1EBET T\u1EAET, KH\xD4NG VI\u1EBET CHUNG CHUNG):
 1. Th\u1EA7y Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng y\xEAu c\u1EA7u v\u0103n b\u1EA3n PH\u1EA2I R\u1EA4T D\xC0I, CHI TI\u1EBET, C\u1EE4 TH\u1EC2 T\u1EEANG M\u1EE4C, KH\xD4NG \u0110\u01AF\u1EE2C VI\u1EBET T\xD3M T\u1EAET HAY CHUNG CHUNG.
 2. S\u1ED1 li\u1EC7u th\u1EF1c t\u1EBF c\u1EE7a Tr\u01B0\u1EDDng THCS v\xE0 THPT \u0110\u1ED1c Binh Ki\u1EC1u (n\u0103m h\u1ECDc 2026 - 2027):
-   - M\u1EA1ng l\u01B0\u1EDBi: 53 l\u1EDBp v\u1EDBi 2.143 h\u1ECDc sinh t\u1EA1i 3 \u0111i\u1EC3m tr\u01B0\u1EDDng:
+   - M\u1EA1ng l\u01B0\u1EDBi: 53 l\u1EDBp v\u1EDBi 2.111 h\u1ECDc sinh t\u1EA1i 3 \u0111i\u1EC3m tr\u01B0\u1EDDng:
      + \u0110i\u1EC3m ch\xEDnh (THPT): Kh\u1ED1i 10, 11, 12 (14 l\u1EDBp, 530 h\u1ECDc sinh).
-     + \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u (THCS): Kh\u1ED1i 6, 7, 8, 9 (24 l\u1EDBp, 983 h\u1ECDc sinh).
-     + \u0110i\u1EC3m T\xE2n Ki\u1EC1u (THCS): Kh\u1ED1i 6, 7, 8, 9 (15 l\u1EDBp, 557 h\u1ECDc sinh, c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km).
-   - \u0110\u1ED9i ng\u0169: 120 CB-GV-NV (102 gi\xE1o vi\xEAn tr\u1EF1c ti\u1EBFp gi\u1EA3ng d\u1EA1y), c\u01A1 c\u1EA5u 08 t\u1ED5 chuy\xEAn m\xF4n.
+     + \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u (THCS): Kh\u1ED1i 6, 7, 8, 9 (24 l\u1EDBp, 980 h\u1ECDc sinh).
+     + \u0110i\u1EC3m T\xE2n Ki\u1EC1u (THCS): Kh\u1ED1i 6, 7, 8, 9 (15 l\u1EDBp, 601 h\u1ECDc sinh, c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km).
+   - \u0110\u1ED9i ng\u0169: 120 CB-GV-NV (102 gi\xE1o vi\xEAn tr\u1EF1c ti\u1EBFp gi\u1EA3ng d\u1EA1y), c\u01A1 c\u1EA5u 07 t\u1ED5 (06 t\u1ED5 chuy\xEAn m\xF4n v\xE0 01 t\u1ED5 v\u0103n ph\xF2ng).
    - Ban Gi\xE1m hi\u1EC7u: Th\u1EA7y Hi\u1EC7u tr\u01B0\u1EDFng L\xEA Thanh C\u01B0\u1EDDng ph\u1EE5 tr\xE1ch chung, Th\u1EA7y Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng Nguy\u1EC5n Minh Tr\xED tr\u1EF1c ti\u1EBFp ph\u1EE5 tr\xE1ch chuy\xEAn m\xF4n.
 ${is2BuoiPlan ? `
 3. QUY \u0110\u1ECANH B\u1EAET BU\u1ED8C KHI C\u1EE4 TH\u1EC2 H\xD3A K\u1EBE HO\u1EA0CH D\u1EA0Y H\u1ECCC 2 BU\u1ED4I/NG\xC0Y (B\xC1M S\xC1T K\u1EBE HO\u1EA0CH C\u1EE6A S\u1EDE GD\u0110T \u0110\u1ED2NG TH\xC1P):
@@ -1193,7 +1193,7 @@ ${is2BuoiPlan ? `
      * III. KINH PH\xCD V\xC0 \u0110I\u1EC0U KI\u1EC6N TH\u1EF0C HI\u1EC6N: Kinh ph\xED ng\xE2n s\xE1ch chi th\u01B0\u1EDDng xuy\xEAn theo \u0111\u1ECBnh m\u1EE9c v\xE0 C\xF4ng v\u0103n 9179/BTC-NSNN; ch\u1EE7 tr\u01B0\u01A1ng x\xE3 h\u1ED9i h\xF3a gi\xE1o d\u1EE5c \u0111\xFAng quy \u0111\u1ECBnh, nguy\xEAn t\u1EAFc t\u1EF1 nguy\u1EC7n, c\xF4ng khai, tuy\u1EC7t \u0111\u1ED1i kh\xF4ng thu ti\u1EC1n sai quy \u0111\u1ECBnh; khai th\xE1c 19 ph\xF2ng b\u1ED9 m\xF4n v\xE0 c\xE1c ph\xF2ng m\xE1y t\xEDnh.
      * IV. T\u1ED4 CH\u1EE8C TH\u1EF0C HI\u1EC6N: Ph\xE2n c\xF4ng nhi\u1EC7m v\u1EE5 c\xF3 'h\u1ED3n' g\u1EAFn li\u1EC1n h\u1EC7 th\u1ED1ng ph\xE2n c\xF4ng chuy\xEAn m\xF4n phancongchuyenmonthcsthptdbk.vercel.app:
        + Ban Gi\xE1m hi\u1EC7u: Th\u1EA7y Hi\u1EC7u tr\u01B0\u1EDFng L\xEA Thanh C\u01B0\u1EDDng ch\u1EC9 \u0111\u1EA1o chung; Th\u1EA7y Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng Nguy\u1EC5n Minh Tr\xED tr\u1EF1c ti\u1EBFp ph\u1EE5 tr\xE1ch chuy\xEAn m\xF4n 2 bu\u1ED5i/ng\xE0y to\xE0n tr\u01B0\u1EDDng, duy\u1EC7t k\u1EBF ho\u1EA1ch bu\u1ED5i 2, x\u1EBFp TKB, gi\xE1m s\xE1t k\xEA khai th\u1EEBa thi\u1EBFu ti\u1EBFt tr\xEAn webapp ph\xE2n c\xF4ng chuy\xEAn m\xF4n; C\xE1n b\u1ED9 ph\u1EE5 tr\xE1ch \u0110i\u1EC3m T\xE2n Ki\u1EC1u.
-       + 07 T\u1ED5 chuy\xEAn m\xF4n: X\xE2y d\u1EF1ng k\u1EBF ho\u1EA1ch d\u1EA1y bu\u1ED5i 2, ph\xE2n c\xF4ng gi\xE1o vi\xEAn theo \u0111\u1ECBnh m\u1EE9c, theo d\xF5i k\xEA khai th\u1EEBa thi\u1EBFu ti\u1EBFt.
+       + 06 T\u1ED5 chuy\xEAn m\xF4n v\xE0 T\u1ED5 V\u0103n ph\xF2ng: X\xE2y d\u1EF1ng k\u1EBF ho\u1EA1ch d\u1EA1y bu\u1ED5i 2, ph\xE2n c\xF4ng gi\xE1o vi\xEAn theo \u0111\u1ECBnh m\u1EE9c, theo d\xF5i k\xEA khai th\u1EEBa thi\u1EBFu ti\u1EBFt.
        + Gi\xE1o vi\xEAn b\u1ED9 m\xF4n, Gi\xE1o vi\xEAn ch\u1EE7 nhi\u1EC7m, Ban \u0111\u1EA1i di\u1EC7n CMHS.
      * V. CH\u1EBE \u0110\u1ED8 TH\xD4NG TIN, B\xC1O C\xC1O: B\xE1o c\xE1o \u0111\u1ECBnh k\u1EF3 h\u1ECDc k\u1EF3 1 v\xE0 cu\u1ED1i n\u0103m h\u1ECDc v\u1EC1 S\u1EDF GD\u0110T \u0110\u1ED3ng Th\xE1p (qua Ph\xF2ng GDPT).
    - Quy t\u1EAFc 2 (C\u0103n c\u1EE9 ph\xE1p l\xFD - B\u1EAET BU\u1ED8C R\u1EA4T NG\u1EAEN G\u1ECCN):
@@ -1296,15 +1296,15 @@ H\xC3Y XU\u1EA4T RA D\u1EEE LI\u1EC6U \u0110\u1ECANH D\u1EA0NG JSON \u0110\xDANG
             {
               heading: "II. \u0110\u1EB6C \u0110I\u1EC2M T\xCCNH H\xCCNH V\xC0 C\u01A0 C\u1EA4U \u0110I\u1EC0U KI\u1EC6N T\u1ED4 CH\u1EE8C",
               content: `1. Quy m\xF4 h\u1ECDc sinh v\xE0 l\u1EDBp h\u1ECDc:
-- To\xE0n tr\u01B0\u1EDDng: 53 l\u1EDBp v\u1EDBi 2.143 h\u1ECDc sinh (C\u1EA5p THCS: 39 l\u1EDBp v\u1EDBi 1.613 HS; C\u1EA5p THPT: 14 l\u1EDBp v\u1EDBi 530 HS).
+- To\xE0n tr\u01B0\u1EDDng: 53 l\u1EDBp v\u1EDBi 2.111 h\u1ECDc sinh (C\u1EA5p THCS: 39 l\u1EDBp v\u1EDBi 1.581 HS; C\u1EA5p THPT: 14 l\u1EDBp v\u1EDBi 530 HS).
 - Ph\xE2n b\u1ED5 theo 3 \u0111i\u1EC3m tr\u01B0\u1EDDng:
   + \u0110i\u1EC3m ch\xEDnh (Kh\u1ED1i 10, 11, 12): 14 l\u1EDBp, 530 h\u1ECDc sinh. C\u01A1 s\u1EDF v\u1EADt ch\u1EA5t c\xF3 14 ph\xF2ng h\u1ECDc, 09 ph\xF2ng b\u1ED9 m\xF4n ki\xEAn c\u1ED1, 03 ph\xF2ng l\u1EAFp gh\xE9p, ph\xF2ng m\xE1y vi t\xEDnh.
-  + \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u (Kh\u1ED1i 6, 7, 8, 9): 24 l\u1EDBp, 983 h\u1ECDc sinh. C\u01A1 s\u1EDF v\u1EADt ch\u1EA5t c\xF3 22 ph\xF2ng h\u1ECDc, 05 ph\xF2ng ch\u1EE9c n\u0103ng, s\xE2n b\xF3ng \u0111\xE1 mini, s\xE2n b\xF3ng chuy\u1EC1n.
-  + \u0110i\u1EC3m T\xE2n Ki\u1EC1u (Kh\u1ED1i 6, 7, 8, 9 - c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km): 15 l\u1EDBp, 557 h\u1ECDc sinh. C\u01A1 s\u1EDF v\u1EADt ch\u1EA5t c\xF3 09 ph\xF2ng h\u1ECDc, 10 ph\xF2ng b\u1ED9 m\xF4n.
+  + \u0110i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u (Kh\u1ED1i 6, 7, 8, 9): 24 l\u1EDBp, 980 h\u1ECDc sinh. C\u01A1 s\u1EDF v\u1EADt ch\u1EA5t c\xF3 22 ph\xF2ng h\u1ECDc, 05 ph\xF2ng ch\u1EE9c n\u0103ng, s\xE2n b\xF3ng \u0111\xE1 mini, s\xE2n b\xF3ng chuy\u1EC1n.
+  + \u0110i\u1EC3m T\xE2n Ki\u1EC1u (Kh\u1ED1i 6, 7, 8, 9 - c\xE1ch \u0111i\u1EC3m ch\xEDnh 11 km): 15 l\u1EDBp, 601 h\u1ECDc sinh. C\u01A1 s\u1EDF v\u1EADt ch\u1EA5t c\xF3 09 ph\xF2ng h\u1ECDc, 10 ph\xF2ng b\u1ED9 m\xF4n.
 
 2. \u0110\u1ED9i ng\u0169 c\xE1n b\u1ED9 qu\u1EA3n l\xFD v\xE0 gi\xE1o vi\xEAn:
 - T\u1ED5ng s\u1ED1: 120 ng\u01B0\u1EDDi (04 Ban Gi\xE1m hi\u1EC7u, 102 Gi\xE1o vi\xEAn tr\u1EF1c ti\u1EBFp gi\u1EA3ng d\u1EA1y, 14 Nh\xE2n vi\xEAn). C\xF3 85 \u0110\u1EA3ng vi\xEAn, 09 Th\u1EA1c s\u0129.
-- 08 T\u1ED5 chuy\xEAn m\xF4n: Ban Gi\xE1m hi\u1EC7u (04), T\u1ED5 To\xE1n (15), T\u1ED5 Ng\u1EEF v\u0103n - Th\u01B0 vi\u1EC7n - Thi\u1EBFt b\u1ECB (17), T\u1ED5 L\u1ECBch s\u1EED - \u0110\u1ECBa l\xFD - GDCD - GDKTPL (16), T\u1ED5 V\u1EADt l\xFD - H\xF3a h\u1ECDc - Sinh h\u1ECDc - C\xF4ng ngh\u1EC7 (26), T\u1ED5 Ngo\u1EA1i ng\u1EEF - Tin h\u1ECDc (16), T\u1ED5 GDTC - QPAN - Ngh\u1EC7 thu\u1EADt (12), T\u1ED5 V\u0103n ph\xF2ng (14).
+- C\u01A1 c\u1EA5u t\u1ED5 ch\u1EE9c g\u1ED3m: Ban Gi\xE1m hi\u1EC7u (04 c\xE1n b\u1ED9 qu\u1EA3n l\xFD) v\xE0 07 T\u1ED5 trong tr\u01B0\u1EDDng (06 t\u1ED5 chuy\xEAn m\xF4n: T\u1ED5 To\xE1n 15, T\u1ED5 Ng\u1EEF v\u0103n - TV - TB 17, T\u1ED5 L\u1ECBch s\u1EED - \u0110\u1ECBa l\xFD - GDCD - GDKTPL 16, T\u1ED5 V\u1EADt l\xFD - H\xF3a h\u1ECDc - Sinh h\u1ECDc - C\xF4ng ngh\u1EC7 26, T\u1ED5 Ngo\u1EA1i ng\u1EEF - Tin h\u1ECDc 16, T\u1ED5 GDTC - QPAN - Ngh\u1EC7 thu\u1EADt 12; v\xE0 01 T\u1ED5 V\u0103n ph\xF2ng 14).
 
 3. Thu\u1EADn l\u1EE3i v\xE0 kh\xF3 kh\u0103n:
 - Thu\u1EADn l\u1EE3i: \u0110\u01B0\u1EE3c s\u1EF1 quan t\xE2m s\xE2u s\xE1t c\u1EE7a S\u1EDF GD\u0110T \u0110\u1ED3ng Th\xE1p, ch\xEDnh quy\u1EC1n \u0111\u1ECBa ph\u01B0\u01A1ng v\xE0 s\u1EF1 \u0111\u1ED3ng thu\u1EADn cao c\u1EE7a Ban \u0111\u1EA1i di\u1EC7n CMHS. \u0110\u1ED9i ng\u0169 gi\xE1o vi\xEAn tr\u1EBB, nhi\u1EC7t huy\u1EBFt, 100% \u0111\u1EA1t chu\u1EA9n v\xE0 tr\xEAn chu\u1EA9n \u0111\xE0o t\u1EA1o.
@@ -1375,7 +1375,7 @@ b) Bu\u1ED5i chi\u1EC1u (Ch\xEDnh kh\xF3a kh\u1ED1i 6, 7 v\xE0 t\u0103ng c\u01B0
           ]
         };
       }
-      let contentII = `Quy m\xF4 \xE1p d\u1EE5ng: To\xE0n tr\u01B0\u1EDDng v\u1EDBi 53 l\u1EDBp v\xE0 2.143 h\u1ECDc sinh; 120 c\xE1n b\u1ED9 gi\xE1o vi\xEAn nh\xE2n vi\xEAn (102 gi\xE1o vi\xEAn tr\u1EF1c ti\u1EBFp gi\u1EA3ng d\u1EA1y). Trong \u0111\xF3: 39 l\u1EDBp c\u1EA5p THCS (24 l\u1EDBp \u0111i\u1EC3m ch\xEDnh \u0110\u1ED1c Binh Ki\u1EC1u v\u1EDBi 983 HS, 15 l\u1EDBp \u0111i\u1EC3m T\xE2n Ki\u1EC1u c\xE1ch 11km v\u1EDBi 557 HS) v\xE0 14 l\u1EDBp c\u1EA5p THPT v\u1EDBi 530 HS.`;
+      let contentII = `Quy m\xF4 \xE1p d\u1EE5ng: To\xE0n tr\u01B0\u1EDDng v\u1EDBi 53 l\u1EDBp v\xE0 2.111 h\u1ECDc sinh; 120 c\xE1n b\u1ED9 gi\xE1o vi\xEAn nh\xE2n vi\xEAn (102 gi\xE1o vi\xEAn tr\u1EF1c ti\u1EBFp gi\u1EA3ng d\u1EA1y). Trong \u0111\xF3: 39 l\u1EDBp c\u1EA5p THCS (24 l\u1EDBp \u0111i\u1EC3m \u0110\u1ED1c Binh Ki\u1EC1u v\u1EDBi 980 HS, 15 l\u1EDBp \u0111i\u1EC3m T\xE2n Ki\u1EC1u c\xE1ch 11km v\u1EDBi 601 HS) v\xE0 14 l\u1EDBp c\u1EA5p THPT v\u1EDBi 530 HS.`;
       let contentIII = `Th\u1EDDi gian th\u1EF1c hi\u1EC7n theo khung n\u0103m h\u1ECDc 2026 - 2027 (\u0111\u1EE7 35 tu\u1EA7n th\u1EF1c h\u1ECDc, HK1: 18 tu\u1EA7n, HK2: 17 tu\u1EA7n). Khung gi\u1EDD ho\u1EA1t \u0111\u1ED9ng bu\u1ED5i s\xE1ng t\u1EEB 7h00 \u0111\u1EBFn 11h30 (5 ti\u1EBFt), bu\u1ED5i chi\u1EC1u t\u1EEB 12h30 \u0111\u1EBFn 17h00 (5 ti\u1EBFt).`;
       if (topic.toLowerCase().includes("gi\xE1o vi\xEAn d\u1EA1y gi\u1ECFi") || topic.toLowerCase().includes("gvdg")) {
         specificLegal.push("Th\xF4ng t\u01B0 s\u1ED1 22/2019/TT-BGD\u0110T ng\xE0y 20/12/2019 c\u1EE7a B\u1ED9 GD\u0110T ban h\xE0nh Quy \u0111\u1ECBnh H\u1ED9i thi gi\xE1o vi\xEAn d\u1EA1y gi\u1ECFi c\u01A1 s\u1EDF gi\xE1o d\u1EE5c ph\u1ED5 th\xF4ng");
@@ -1390,9 +1390,9 @@ b) Bu\u1ED5i chi\u1EC1u (Ch\xEDnh kh\xF3a kh\u1ED1i 6, 7 v\xE0 t\u0103ng c\u01B0
         contentIII = `Tri\u1EC3n khai li\xEAn t\u1EE5c trong su\u1ED1t 35 tu\u1EA7n n\u0103m h\u1ECDc. \u0110\u1EE3t 1 t\u1EEB tu\u1EA7n 3 \u0111\u1EBFn tu\u1EA7n 17; \u0110\u1EE3t 2 t\u1EEB tu\u1EA7n 20 \u0111\u1EBFn tu\u1EA7n 34.`;
       } else if (topic.toLowerCase().includes("chuy\u1EC3n \u0111\u1ED5i s\u1ED1") || topic.toLowerCase().includes("ai") || topic.toLowerCase().includes("tr\xED tu\u1EC7 nh\xE2n t\u1EA1o")) {
         specificLegal.push("Quy\u1EBFt \u0111\u1ECBnh s\u1ED1 131/Q\u0110-TTg c\u1EE7a Th\u1EE7 t\u01B0\u1EDBng Ch\xEDnh ph\u1EE7 ph\xEA duy\u1EC7t \u0110\u1EC1 \xE1n T\u0103ng c\u01B0\u1EDDng \u1EE9ng d\u1EE5ng c\xF4ng ngh\u1EC7 th\xF4ng tin v\xE0 chuy\u1EC3n \u0111\u1ED5i s\u1ED1 trong gi\xE1o d\u1EE5c");
-        contentII = `1. N\xE2ng c\u1EA5p h\u1EA1 t\u1EA7ng m\u1EA1ng internet v\xE0 ph\xF2ng m\xE1y vi t\xEDnh t\u1EA1i c\u1EA3 2 \u0111i\u1EC3m tr\u01B0\u1EDDng.
+        contentII = `1. N\xE2ng c\u1EA5p h\u1EA1 t\u1EA7ng m\u1EA1ng internet v\xE0 ph\xF2ng m\xE1y vi t\xEDnh t\u1EA1i c\u1EA3 3 \u0111i\u1EC3m tr\u01B0\u1EDDng.
 2. S\u1EED d\u1EE5ng 100% h\u1ED3 s\u01A1, h\u1ECDc b\u1EA1, s\u1ED5 \u0111i\u1EC3m \u0111i\u1EC7n t\u1EED.
-3. T\u1ED5 ch\u1EE9c t\u1EADp hu\u1EA5n cho 101 gi\xE1o vi\xEAn v\u1EC1 khai th\xE1c AI an to\xE0n, li\xEAm ch\xEDnh h\u1ECDc thu\u1EADt v\xE0 b\u1EA3o v\u1EC7 d\u1EEF li\u1EC7u h\u1ECDc sinh.`;
+3. T\u1ED5 ch\u1EE9c t\u1EADp hu\u1EA5n cho \u0111\u1ED9i ng\u0169 gi\xE1o vi\xEAn v\u1EC1 khai th\xE1c AI an to\xE0n, li\xEAm ch\xEDnh h\u1ECDc thu\u1EADt v\xE0 b\u1EA3o v\u1EC7 d\u1EEF li\u1EC7u h\u1ECDc sinh.`;
         contentIII = `T\u1EADp hu\u1EA5n trong th\xE1ng 9/2026; tri\u1EC3n khai di\u1EC7n r\u1ED9ng t\u1EEB th\xE1ng 10/2026 \u0111\u1EBFn h\u1EBFt n\u0103m h\u1ECDc.`;
       } else if (topic.toLowerCase().includes("ki\u1EC3m tra n\u1ED9i b\u1ED9")) {
         specificLegal.push("Ngh\u1ECB \u0111\u1ECBnh s\u1ED1 42/2013/N\u0110-CP v\u1EC1 thanh tra gi\xE1o d\u1EE5c v\xE0 h\u01B0\u1EDBng d\u1EABn c\xF4ng t\xE1c ki\u1EC3m tra n\u1ED9i b\u1ED9 tr\u01B0\u1EDDng h\u1ECDc c\u1EE7a S\u1EDF GD\u0110T \u0110\u1ED3ng Th\xE1p");
@@ -1439,7 +1439,7 @@ b) Bu\u1ED5i chi\u1EC1u (Ch\xEDnh kh\xF3a kh\u1ED1i 6, 7 v\xE0 t\u0103ng c\u01B0
 - Th\u1EA7y Ph\xF3 Hi\u1EC7u tr\u01B0\u1EDFng Nguy\u1EC5n Minh Tr\xED tr\u1EF1c ti\u1EBFp ch\u1EC9 \u0111\u1EA1o chuy\xEAn m\xF4n, ki\u1EC3m tra \u0111\xF4n \u0111\u1ED1c ti\u1EBFn \u0111\u1ED9 th\u1EF1c hi\u1EC7n t\u1EA1i c\xE1c \u0111i\u1EC3m tr\u01B0\u1EDDng.
 
 2. C\xE1c T\u1ED5 chuy\xEAn m\xF4n v\xE0 \u0110i\u1EC3m tr\u01B0\u1EDDng:
-- 07 T\u1ED5 chuy\xEAn m\xF4n qu\xE1n tri\u1EC7t \u0111\u1EBFn 101 gi\xE1o vi\xEAn trong t\u1ED5; c\u1EED gi\xE1o vi\xEAn tham gia \u0111\xFAng quy \u0111\u1ECBnh.
+- 06 T\u1ED5 chuy\xEAn m\xF4n v\xE0 T\u1ED5 V\u0103n ph\xF2ng qu\xE1n tri\u1EC7t \u0111\u1EBFn 102 gi\xE1o vi\xEAn v\xE0 nh\xE2n vi\xEAn; th\u1EF1c hi\u1EC7n nhi\u1EC7m v\u1EE5 \u0111\xFAng quy \u0111\u1ECBnh.
 - B\u1ED9 ph\u1EADn ph\u1EE5 tr\xE1ch \u0110i\u1EC3m T\xE2n Ki\u1EC1u b\u1EA3o \u0111\u1EA3m c\u01A1 s\u1EDF v\u1EADt ch\u1EA5t, ph\xF2ng b\u1ED9 m\xF4n v\xE0 n\u1EC1n n\u1EBFp h\u1ECDc t\u1EADp.
 
 3. Gi\xE1o vi\xEAn v\xE0 Nh\xE2n vi\xEAn:
@@ -1449,8 +1449,8 @@ b) Bu\u1ED5i chi\u1EC1u (Ch\xEDnh kh\xF3a kh\u1ED1i 6, 7 v\xE0 t\u0103ng c\u01B0
         recipients: [
           "S\u1EDF GD\u0110T \u0110\u1ED3ng Th\xE1p (\u0111\u1EC3 b\xE1o c\xE1o);",
           "Ban Gi\xE1m hi\u1EC7u (\u0111\u1EC3 ch\u1EC9 \u0111\u1EA1o);",
-          "C\xE1c t\u1ED5 chuy\xEAn m\xF4n, v\u0103n ph\xF2ng (\u0111\u1EC3 th\u1EF1c hi\u1EC7n);",
-          "L\u01B0u: VT, CM."
+          "C\xE1c t\u1ED5 chuy\xEAn m\xF4n, t\u1ED5 v\u0103n ph\xF2ng (\u0111\u1EC3 th\u1EF1c hi\u1EC7n);",
+          "L\u01B0u: VT, Tr."
         ]
       };
     };

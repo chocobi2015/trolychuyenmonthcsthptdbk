@@ -17,7 +17,7 @@ export const SchoolOverviewBar: React.FC = () => {
               <span className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-medium">Năm học 2026 - 2027</span>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              Tổng số <strong className="text-slate-800">53 lớp</strong> (39 lớp THCS Khối 6-9 & 14 lớp THPT Khối 10-12) phân bổ trên 3 địa bàn riêng biệt:
+              Tổng số <strong className="text-slate-800">53 lớp • 2.111 học sinh</strong> (39 lớp THCS: 1.581 HS & 14 lớp THPT: 530 HS) phân bổ trên 3 địa bàn:
             </p>
           </div>
         </div>
@@ -31,7 +31,7 @@ export const SchoolOverviewBar: React.FC = () => {
 
       {/* 3 Campuses Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 pt-3 border-t border-slate-100 text-xs">
-        {SCHOOL_CAMPUSES.map((campus, idx) => (
+        {SCHOOL_CAMPUSES.map((campus) => (
           <div 
             key={campus.id} 
             className="p-2.5 rounded-lg border border-slate-200/70 bg-slate-50 hover:bg-white hover:border-blue-300 transition-all"
@@ -42,7 +42,7 @@ export const SchoolOverviewBar: React.FC = () => {
                 <span>{campus.name}</span>
               </div>
               <span className="bg-white border border-slate-200 px-2 py-0.5 rounded font-bold text-blue-700">
-                {campus.classCount} Lớp
+                {campus.classCount} Lớp {campus.studentCount ? `• ${campus.studentCount} HS` : ''}
               </span>
             </div>
             <div className="text-slate-600 flex justify-between items-center text-[11px] mb-1">

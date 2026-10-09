@@ -168,10 +168,10 @@ export const TeacherDirectoryTab: React.FC<TeacherDirectoryTabProps> = ({
               onChange={(e) => setSelectedCampus(e.target.value)}
               className="w-full py-2 px-3 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="ALL">Tất cả 3 Điểm trường</option>
-              <option value="THPTDBK">Điểm chính (THPT - 14 lớp)</option>
-              <option value="THCSDBK">Điểm Đốc Binh Kiều (24 lớp)</option>
-              <option value="THCSTK">Điểm Tân Kiều (15 lớp - 11km)</option>
+              <option value="ALL">Tất cả 3 Điểm trường (53 lớp - 2.111 HS)</option>
+              <option value="THPTDBK">Điểm chính (THPT - 14 lớp, 530 HS)</option>
+              <option value="THCSDBK">Điểm Đốc Binh Kiều (THCS - 24 lớp, 980 HS)</option>
+              <option value="THCSTK">Điểm Tân Kiều (THCS - 15 lớp, 601 HS - 11km)</option>
             </select>
           </div>
         </div>
