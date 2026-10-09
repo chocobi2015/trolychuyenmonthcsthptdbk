@@ -6,6 +6,7 @@ import {
   Table,
   TableRow,
   TableCell,
+  TableLayoutType,
   WidthType,
   AlignmentType,
   BorderStyle,
@@ -30,25 +31,37 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
     right: { style: BorderStyle.NONE, size: 0, color: 'auto' },
   };
 
+  // Trang A4 = 210mm = 11906 twips.
+  // Lề: Trái 25mm (1417 twips), Phải 18mm (1020 twips), Trên 20mm (1134 twips), Dưới 20mm (1134 twips)
+  // Chiều rộng khả dụng của trang in = 11906 - 1417 - 1020 = 9469 twips.
+  // Cột trái: 4100 twips (~43.3%), Cột phải: 5369 twips (~56.7%)
+  // Đảm bảo "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM" không bao giờ rớt chữ "NAM",
+  // "Độc lập - Tự do - Hạnh phúc" cân đối ngay ngắn và địa danh ngày tháng cùng hàng số ký hiệu.
+  const colLeftWidth = 4100;
+  const colRightWidth = 5369;
+  const totalHeaderWidth = colLeftWidth + colRightWidth;
+
   // Header 2-column table conforming to Vietnamese State Administration Standards & Decree 30/2020/NĐ-CP
   const headerTable = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
+    layout: TableLayoutType.FIXED,
+    columnWidths: [colLeftWidth, colRightWidth],
+    width: { size: totalHeaderWidth, type: WidthType.DXA },
     borders: noBorder,
     rows: [
       // Hàng 1: Cơ quan ban hành (trái) và Quốc hiệu, Tiêu ngữ (phải)
       new TableRow({
         children: [
-          // Left: Cơ quan ban hành (Font 12.5-13pt = size 25-26)
+          // Left: Cơ quan ban hành (Font 12pt = size 24)
           new TableCell({
-            width: { size: 38, type: WidthType.PERCENTAGE },
+            width: { size: colLeftWidth, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
                   new TextRun({
-                    text: doc.issuingAuthorityTop || 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
-                    size: 25, // 12.5pt
+                    text: doc.issuingAuthorityTop || 'SỞ GDĐT TỈNH ĐỒNG THÁP',
+                    size: 24, // 12pt
                     font: 'Times New Roman',
                   }),
                 ],
@@ -60,7 +73,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
                   new TextRun({
                     text: 'TRƯỜNG THCS VÀ THPT',
                     bold: true,
-                    size: 25, // 12.5pt
+                    size: 24, // 12pt
                     font: 'Times New Roman',
                   }),
                 ],
@@ -72,29 +85,29 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
                   new TextRun({
                     text: 'ĐỐC BINH KIỀU',
                     bold: true,
-                    size: 25, // 12.5pt
+                    size: 24, // 12pt
                     font: 'Times New Roman',
                   }),
                 ],
-                spacing: { after: 10 },
+                spacing: { after: 20 },
               }),
-              // Đường kẻ ngang dưới tên đơn vị: dài 1/3 - 1/2 độ dài tên, có khoảng cách không đè dấu nặng
+              // Đường kẻ ngang dưới tên đơn vị: dài 1/3 - 1/2 độ dài tên (7 ký tự gạch)
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
                   new TextRun({
-                    text: '────────',
+                    text: '───────',
                     size: 14, // 7pt nét thanh mảnh
                     font: 'Times New Roman',
                   }),
                 ],
-                spacing: { before: 20, after: 40 },
+                spacing: { before: 0, after: 40 },
               }),
             ],
           }),
-          // Right: Quốc hiệu, Tiêu ngữ (Font 12.5 & 13.5pt rộng 62% để không bao giờ bị nhảy chữ NAM)
+          // Right: Quốc hiệu, Tiêu ngữ (Cột rộng 5369 twips để không bao giờ bị nhảy chữ NAM)
           new TableCell({
-            width: { size: 62, type: WidthType.PERCENTAGE },
+            width: { size: colRightWidth, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
@@ -103,7 +116,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
                   new TextRun({
                     text: 'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
                     bold: true,
-                    size: 25, // 12.5pt chuẩn Nghị định 30 (12-13pt), vừa vặn tuyệt đối 1 hàng
+                    size: 24, // 12pt chuẩn Nghị định 30 (12-13pt), vừa vặn tuyệt đối 1 hàng
                     font: 'Times New Roman',
                   }),
                 ],
@@ -115,23 +128,23 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
                   new TextRun({
                     text: 'Độc lập - Tự do - Hạnh phúc',
                     bold: true,
-                    size: 27, // 13.5pt
+                    size: 26, // 13pt
                     font: 'Times New Roman',
                   }),
                 ],
-                spacing: { after: 10 },
+                spacing: { after: 20 },
               }),
-              // Đường kẻ ngang dưới Tiêu ngữ: dài bằng độ dài dòng chữ, có khoảng cách hở không đè dấu nặng
+              // Đường kẻ ngang dưới Tiêu ngữ: dài bằng độ dài dòng chữ (16 ký tự gạch)
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
                   new TextRun({
-                    text: '──────────────────────────',
+                    text: '────────────────',
                     size: 14, // 7pt nét thanh mảnh
                     font: 'Times New Roman',
                   }),
                 ],
-                spacing: { before: 20, after: 40 },
+                spacing: { before: 0, after: 40 },
               }),
             ],
           }),
@@ -141,7 +154,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
       new TableRow({
         children: [
           new TableCell({
-            width: { size: 38, type: WidthType.PERCENTAGE },
+            width: { size: colLeftWidth, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
@@ -149,7 +162,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
                 children: [
                   new TextRun({
                     text: doc.documentNumber || 'Số:    /KH-THCS&THPTĐBK',
-                    size: 25, // 12.5pt
+                    size: 24, // 12pt
                     font: 'Times New Roman',
                   }),
                 ],
@@ -158,16 +171,16 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
             ],
           }),
           new TableCell({
-            width: { size: 62, type: WidthType.PERCENTAGE },
+            width: { size: colRightWidth, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
                   new TextRun({
-                    text: doc.signDate || 'Đồng Tháp, ngày 28 tháng 9 năm 2026',
+                    text: doc.signDate || 'Đồng Tháp, ngày 09 tháng 10 năm 2026',
                     italics: true,
-                    size: 27, // 13.5pt
+                    size: 26, // 13pt
                     font: 'Times New Roman',
                   }),
                 ],
@@ -198,7 +211,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
     }),
   ];
 
-  // Subtitle / Trích yếu: e.g. "Tổ chức dạy học 2 buổi/ngày năm học 2026 - 2027" (size 28 = 14pt bold, có đường kẻ hở không đè dấu nặng)
+  // Subtitle / Trích yếu: e.g. "Triển khai thực hiện học bạ số kể từ năm học 2026 - 2027" (size 28 = 14pt bold, có đường kẻ hở không đè dấu nặng)
   if (doc.subTitle) {
     docChildren.push(
       new Paragraph({
@@ -211,19 +224,19 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
             font: 'Times New Roman',
           }),
         ],
-        spacing: { after: 10 },
+        spacing: { after: 20 },
       }),
       // Đường kẻ ngang dưới trích yếu: dài 1/3 - 1/2 độ dài dòng chữ theo NĐ 30, hở ra không đè lên dấu nặng
       new Paragraph({
         alignment: AlignmentType.CENTER,
         children: [
           new TextRun({
-            text: '────────────────',
+            text: '───────────────',
             size: 14, // 7pt nét thanh mảnh
             font: 'Times New Roman',
           }),
         ],
-        spacing: { before: 20, after: 200 },
+        spacing: { before: 0, after: 200 },
       })
     );
   } else {
@@ -445,15 +458,19 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
 
   // Footer: Recipients (Left 11-12pt) & Signer (Right 13-14pt bold)
   const signerLines = (doc.signerRole || 'HIỆU TRƯỞNG').split('\n');
+  const footerColLeft = 4500;
+  const footerColRight = 4969;
   const footerTable = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
+    layout: TableLayoutType.FIXED,
+    columnWidths: [footerColLeft, footerColRight],
+    width: { size: footerColLeft + footerColRight, type: WidthType.DXA },
     borders: noBorder,
     rows: [
       new TableRow({
         children: [
           // Left: Nơi nhận (Font 12pt bold italic, list items 11pt)
           new TableCell({
-            width: { size: 50, type: WidthType.PERCENTAGE },
+            width: { size: footerColLeft, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
@@ -502,7 +519,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
           }),
           // Right: Chức vụ & Họ tên người ký
           new TableCell({
-            width: { size: 50, type: WidthType.PERCENTAGE },
+            width: { size: footerColRight, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               ...signerLines.map(
@@ -557,8 +574,8 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
   // Document setup: Standard A4 margins according to Nghị định 30/2020/NĐ-CP
   // Lề trên: 20mm (1134 twips)
   // Lề dưới: 20mm (1134 twips)
-  // Lề trái: 30mm (1701 twips - để đóng tập hồ sơ)
-  // Lề phải: 15mm - 20mm (850 twips)
+  // Lề trái: 25mm (1417 twips - chuẩn 25-30mm của Nghị định 30)
+  // Lề phải: 18mm (1020 twips - chuẩn 15-20mm của Nghị định 30)
   const docxFile = new Document({
     sections: [
       {
@@ -567,8 +584,8 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
             margin: {
               top: 1134, // 20mm (2 cm)
               bottom: 1134, // 20mm (2 cm)
-              left: 1701, // 30mm (3 cm - lề trái)
-              right: 1134, // 20mm (2 cm - lề phải)
+              left: 1417, // 25mm (2.5 cm - lề trái)
+              right: 1020, // 18mm (1.8 cm - lề phải)
             },
           },
         },
