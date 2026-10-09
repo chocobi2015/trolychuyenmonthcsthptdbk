@@ -19,7 +19,7 @@ const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.143 học sinh (39 lớp TH
 - Lãnh đạo ký văn bản: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung; Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn toàn trường.
 - Định hướng chuyển đổi số: 100% hồ sơ, học bạ số, sổ điểm điện tử; khai thác AI an toàn, liêm chính trong dạy và học.`;
 
-const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v3';
+const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v5';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('editor');
@@ -68,6 +68,7 @@ export default function App() {
 
   // School Documents Archive (Kho văn bản của trường)
   const [documentsList, setDocumentsList] = useState<SchoolDocument[]>(() => {
+    const officialHbs43 = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-43');
     const officialHsss = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hsss-55');
     try {
       const version = localStorage.getItem('dbk_hsss_sync_version');
@@ -75,15 +76,26 @@ export default function App() {
       if (saved && version === OFFICIAL_HSSS_VERSION) {
         const parsed: SchoolDocument[] = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
+          // Check if doc-kh-hbs-43 is included
+          if (officialHbs43 && !parsed.some(d => d.id === 'doc-kh-hbs-43')) {
+            const merged = [officialHbs43, ...parsed];
+            localStorage.setItem('dbk_school_documents_archive', JSON.stringify(merged));
+            return merged;
+          }
           return parsed;
         }
       }
-      if (saved && officialHsss) {
+      if (saved) {
         const parsed: SchoolDocument[] = JSON.parse(saved);
         if (Array.isArray(parsed)) {
-          const upgraded = parsed.some(d => d.id === 'doc-kh-hsss-55')
-            ? parsed.map(d => d.id === 'doc-kh-hsss-55' ? officialHsss : d)
-            : [officialHsss, ...parsed];
+          let upgraded = [...parsed];
+          if (officialHsss) {
+            upgraded = upgraded.map(d => d.id === 'doc-kh-hsss-55' ? officialHsss : d);
+          }
+          if (officialHbs43) {
+            upgraded = upgraded.filter(d => d.id !== 'doc-kh-hbs-43');
+            upgraded.unshift(officialHbs43);
+          }
           localStorage.setItem('dbk_school_documents_archive', JSON.stringify(upgraded));
           localStorage.setItem('dbk_hsss_sync_version', OFFICIAL_HSSS_VERSION);
           return upgraded;
@@ -99,8 +111,8 @@ export default function App() {
 
   // Current document for Viewing / Editing in Editor
   const [currentDocument, setCurrentDocument] = useState<SchoolDocument>(() => {
-    const officialHsss = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hsss-55');
-    return officialHsss || INITIAL_SCHOOL_DOCUMENTS[0];
+    const officialHbs43 = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-43');
+    return officialHbs43 || INITIAL_SCHOOL_DOCUMENTS[0];
   });
 
   // Custom School Facts
@@ -133,10 +145,16 @@ export default function App() {
       .then((res) => res.json())
       .then((res) => {
         if (res.success && Array.isArray(res.data) && res.data.length > 0) {
+          const officialHbs43 = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-43');
           const officialHsss = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hsss-55');
-          const syncedDocs = res.data.map((d: SchoolDocument) =>
-            d.id === 'doc-kh-hsss-55' && officialHsss ? officialHsss : d
-          );
+          let syncedDocs = res.data.map((d: SchoolDocument) => {
+            if (d.id === 'doc-kh-hbs-43' && officialHbs43) return officialHbs43;
+            if (d.id === 'doc-kh-hsss-55' && officialHsss) return officialHsss;
+            return d;
+          });
+          if (officialHbs43 && !syncedDocs.some((d: SchoolDocument) => d.id === 'doc-kh-hbs-43')) {
+            syncedDocs = [officialHbs43, ...syncedDocs];
+          }
           setDocumentsList(syncedDocs);
           try {
             localStorage.setItem('dbk_school_documents_archive', JSON.stringify(syncedDocs));
@@ -145,11 +163,10 @@ export default function App() {
             console.error('Failed to save to localStorage', e);
           }
           setCurrentDocument((prev) => {
-            if (prev?.id === 'doc-kh-hsss-55' && officialHsss) {
-              return officialHsss;
-            }
+            if (prev?.id === 'doc-kh-hbs-43' && officialHbs43) return officialHbs43;
+            if (prev?.id === 'doc-kh-hsss-55' && officialHsss) return officialHsss;
             const match = syncedDocs.find((d: SchoolDocument) => d.id === prev?.id);
-            return match || officialHsss || syncedDocs[0];
+            return match || officialHbs43 || officialHsss || syncedDocs[0];
           });
         }
       })
