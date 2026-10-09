@@ -14,5 +14,6 @@ export const DEFAULT_DIRECTIVE_CATEGORIES: DirectiveCategory[] = [
   { id: 'Kiểm tra đánh giá', name: 'Kiểm tra đánh giá', label: 'Kiểm tra đánh giá' },
   { id: 'Hướng nghiệp & Phân luồng', name: 'Hướng nghiệp & Phân luồng', label: 'Hướng nghiệp & Phân luồng' },
   { id: 'Dạy thêm học thêm', name: 'Dạy thêm học thêm', label: 'Dạy thêm học thêm' },
+  { id: 'Giáo dục hòa nhập', name: 'Giáo dục hòa nhập', label: 'Giáo dục hòa nhập' },
   { id: 'Nhiệm vụ chung năm học', name: 'Nhiệm vụ chung năm học', label: 'Nhiệm vụ năm học' },
 ];

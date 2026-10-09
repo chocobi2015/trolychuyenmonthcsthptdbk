@@ -7,15 +7,16 @@ import { DocumentArchiveTab } from './components/DocumentArchiveTab';
 import { DepartmentDirectivesTab } from './components/DepartmentDirectivesTab';
 import { SchoolContextPanel } from './components/SchoolContextPanel';
 import { TeacherDirectoryTab } from './components/TeacherDirectoryTab';
+import { InclusiveEducationTab } from './components/InclusiveEducationTab';
 import { SchoolDocument, DepartmentDirective } from './types/document';
 import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
 import { INITIAL_DEPARTMENT_DIRECTIVES } from './data/mockDirectives';
 import { DirectiveCategory, DEFAULT_DIRECTIVE_CATEGORIES } from './data/categories';
 import { UploadDirectiveModal } from './components/UploadDirectiveModal';
 
-const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS).
+const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS), 25 học sinh khuyết tật học hòa nhập.
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
-- 08 Tổ chuyên môn: BGH (04), Toán (15 GV), Ngữ văn - Thư viện - Thiết bị (17), KHTN-CN (26 GV), KHXH (16 GV), Tiếng Anh-Tin học (16 GV), GDTC-QPAN-NT (12 GV), Tổ Văn phòng (14).
+- Cơ cấu 07 Tổ trong trường: 06 Tổ chuyên môn (Toán, Ngữ văn - TV - TB, KHTN-CN, KHXH, Ngoại ngữ - Tin học, GDTC - QPAN - Nghệ thuật) và 01 Tổ Văn phòng (14 NV).
 - Lãnh đạo ký văn bản: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung; Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn toàn trường.
 - Định hướng chuyển đổi số: 100% hồ sơ, học bạ số, sổ điểm điện tử; khai thác AI an toàn, liêm chính trong dạy và học.`;
 
@@ -83,6 +84,9 @@ export default function App() {
         if (updated.id === 'doc-kh-hbs-43' && !updated.documentNumber) {
           updated.documentNumber = 'Số: 43/KH-THCS&THPTĐBK';
         }
+        if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
+          updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
+        }
 
         // Đảm bảo người ký mặc định cho toàn trường là Thầy Phó Hiệu trưởng Nguyễn Minh Trí
         if (!updated.signerName || updated.signerName === 'Lê Thanh Cường') {
@@ -101,7 +105,15 @@ export default function App() {
       if (saved) {
         const parsed: SchoolDocument[] = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const valid = parsed
+          const map = new Map<string, SchoolDocument>();
+          parsed.forEach((d) => map.set(d.id, d));
+          // Đảm bảo văn bản chính thức mới (như Kế hoạch Giáo dục hòa nhập 35) luôn hiện diện
+          INITIAL_SCHOOL_DOCUMENTS.forEach((initDoc) => {
+            if (!map.has(initDoc.id) && !deletedIds.includes(initDoc.id)) {
+              map.set(initDoc.id, initDoc);
+            }
+          });
+          const valid = Array.from(map.values())
             .filter((d) => !deletedIds.includes(d.id) && d.id !== 'draft-ktdg-52-high-school-sessions' && d.id !== 'draft-ktdg-adjustment')
             .map(cleanDoc);
           if (valid.length > 0) {
@@ -186,6 +198,9 @@ export default function App() {
                 }
                 if (updated.id === 'doc-kh-hbs-43' && !updated.documentNumber) {
                   updated.documentNumber = 'Số: 43/KH-THCS&THPTĐBK';
+                }
+                if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
+                  updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
                 }
                 if (!updated.signerName || updated.signerName === 'Lê Thanh Cường') {
                   updated.signerRole = 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG';
@@ -570,6 +585,17 @@ export default function App() {
               }}
             />
           </div>
+        )}
+
+        {/* Tab 6: Inclusive Education (Giáo dục hòa nhập - CV 3326 & Kế hoạch 35) */}
+        {activeTab === 'inclusive_education' && (
+          <InclusiveEducationTab
+            onOpenDocumentInEditor={(doc) => {
+              setCurrentDocument(doc);
+              setActiveTab('editor');
+            }}
+            onContextualizeDirective={handleContextualizeDirective}
+          />
         )}
       </main>
 

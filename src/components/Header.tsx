@@ -17,7 +17,8 @@ import {
   ChevronDown,
   Check,
   Layers,
-  Menu
+  Menu,
+  HeartHandshake
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -92,6 +93,15 @@ export const Header: React.FC<HeaderProps> = ({
       icon: <Users className="w-4 h-4 text-purple-300" />,
       desc: 'Hồ sơ 53 lớp, 3 điểm trường, 102 giáo viên và tổ chuyên môn',
       accentColor: 'from-purple-500/20 to-pink-500/20',
+    },
+    {
+      id: 'inclusive_education',
+      name: '6. Giáo Dục Hòa Nhập (CV 3326 & Kế Hoạch 25 HSKT)',
+      shortName: '6. Giáo Dục Hòa Nhập',
+      icon: <HeartHandshake className="w-4 h-4 text-rose-300" />,
+      desc: 'Công văn 3326/SGDĐT, Kế hoạch số 35/KH & hồ sơ 25 học sinh khuyết tật học hòa nhập',
+      badge: '25 HSKT',
+      accentColor: 'from-rose-500/20 to-red-500/20',
     },
   ];
 

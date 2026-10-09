@@ -1,4 +1,5 @@
 import { SchoolDocument } from '../types/document';
+import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN } from './inclusiveEducationData';
 
 export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
   {
@@ -253,7 +254,7 @@ export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
     "id": "doc-kh-dtht-48",
     "type": "plan",
     "typeLabel": "Kế hoạch",
-    "documentNumber": "Số: 48/KH-THCS&THPTĐBK",
+    "documentNumber": "Số: 38/KH-THCS&THPTĐBK",
     "title": "KẾ HOẠCH",
     "subTitle": "Tổ chức dạy thêm, học thêm trong nhà trường năm học 2026 - 2027",
     "signDate": "Đồng Tháp, ngày 02 tháng 10 năm 2026",
@@ -377,5 +378,6 @@ export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
     ],
     "status": "official",
     "updatedAt": "2026-10-06T01:26:33.701Z"
-  }
+  },
+  OFFICIAL_INCLUSIVE_EDUCATION_PLAN
 ];

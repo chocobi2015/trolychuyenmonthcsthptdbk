@@ -1,8 +1,10 @@
 import { DepartmentDirective } from '../types/document';
 import SOURCES from './directiveSources.json';
 import { CV471_HTML, CV471_PLI_HTML, CV471_PLII_HTML, CV471_TEXT, CV471_PLI_TEXT, CV471_PLII_TEXT } from './cv471Source';
+import { DIRECTIVE_3326_GDHN } from './inclusiveEducationData';
 
 const BASE_DIRECTIVES: DepartmentDirective[] = [
+  DIRECTIVE_3326_GDHN,
   {
     "id": "directive-1251-ubnd",
     "documentNumber": "Số: 1251/KH-UBND",
