@@ -29,7 +29,9 @@ import {
   Phone,
   MapPin,
   Clock,
-  Send
+  Send,
+  Copy,
+  Check
 } from 'lucide-react';
 import { 
   DIRECTIVE_3326_GDHN, 
@@ -59,6 +61,18 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
   const [selectedStudentForModal, setSelectedStudentForModal] = useState<InclusiveStudentProfile | null>(null);
   const [isExportingWord, setIsExportingWord] = useState(false);
   const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
+  const [selectedDirectiveId, setSelectedDirectiveId] = useState<'3326' | '3408'>('3326');
+  const [directiveCopied, setDirectiveCopied] = useState(false);
+
+  const handleCopyDirective = async (content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setDirectiveCopied(true);
+      setTimeout(() => setDirectiveCopied(false), 2000);
+    } catch {
+      // fallback
+    }
+  };
 
   // Filter students
   const filteredStudents = INCLUSIVE_STUDENTS_LIST.filter(student => {
@@ -676,47 +690,331 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
       {/* SUB-TAB 4: CHỈ ĐẠO CỦA SỞ (CV 3326 & CV 3408) */}
       {activeSubTab === 'directive' && (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Card CV 3326 */}
-            <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
-                  {DIRECTIVE_3326_GDHN.documentNumber}
+          {/* Directive Switcher & Toolbar */}
+          <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={() => setSelectedDirectiveId('3326')}
+                className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition ${
+                  selectedDirectiveId === '3326'
+                    ? 'bg-rose-700 text-white shadow-sm ring-1 ring-rose-500'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                <FileText className="w-4 h-4" />
+                <span>1. Công văn 3326/SGDĐT-GDPT (HD Giáo dục hòa nhập)</span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono">
+                  Gốc
                 </span>
-                <span className="text-xs text-slate-500 font-medium">{DIRECTIVE_3326_GDHN.signDate}</span>
-              </div>
-              <h3 className="font-bold text-slate-900 text-sm">
-                {DIRECTIVE_3326_GDHN.title}
-              </h3>
-              <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                {DIRECTIVE_3326_GDHN.summary}
-              </p>
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500 font-medium">Người ký: {DIRECTIVE_3326_GDHN.signer}</span>
-                <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold text-[11px]">Đã số hóa</span>
-              </div>
+              </button>
+
+              <button
+                onClick={() => setSelectedDirectiveId('3408')}
+                className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition ${
+                  selectedDirectiveId === '3408'
+                    ? 'bg-amber-600 text-white shadow-sm ring-1 ring-amber-500'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                <FileCheck className="w-4 h-4" />
+                <span>2. Công văn 3408/SGDĐT-GDPT (Thống kê & Đăng ký nhu cầu)</span>
+              </button>
             </div>
 
-            {/* Card CV 3408 */}
-            <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
-                  {DIRECTIVE_3408_GDHN.documentNumber}
-                </span>
-                <span className="text-xs text-slate-500 font-medium">{DIRECTIVE_3408_GDHN.signDate}</span>
-              </div>
-              <h3 className="font-bold text-slate-900 text-sm">
-                {DIRECTIVE_3408_GDHN.title}
-              </h3>
-              <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                {DIRECTIVE_3408_GDHN.summary}
-              </p>
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500 font-medium">Người ký: {DIRECTIVE_3408_GDHN.signer}</span>
-                <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold text-[11px]">Kèm Phụ lục</span>
-              </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleCopyDirective(selectedDirectiveId === '3326' ? DIRECTIVE_3326_GDHN.fullContent : DIRECTIVE_3408_GDHN.fullContent)}
+                className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition"
+                title="Sao chép toàn văn văn bản"
+              >
+                {directiveCopied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
+                <span>{directiveCopied ? 'Đã sao chép' : 'Sao chép'}</span>
+              </button>
+
+              <button
+                onClick={() => window.print()}
+                className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition"
+                title="In văn bản"
+              >
+                <Printer className="w-3.5 h-3.5 text-slate-500" />
+                <span>In / PDF</span>
+              </button>
+
+              <button
+                onClick={() => setActiveSubTab('template')}
+                className="px-3.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 text-xs font-bold flex items-center gap-1.5 transition"
+                title="Xem mẫu KHGD cá nhân theo phụ lục CV 3326"
+              >
+                <ClipboardList className="w-3.5 h-3.5 text-rose-600" />
+                <span>Mẫu KHGDCN</span>
+              </button>
             </div>
           </div>
+
+          {/* VIEW DOCUMENT: CV 3326 */}
+          {selectedDirectiveId === '3326' && (
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-6 sm:p-12 max-w-4xl mx-auto space-y-6 text-slate-900 font-serif leading-relaxed text-sm">
+              {/* Header 2 columns */}
+              <div className="grid grid-cols-12 gap-4 pb-4 border-b border-slate-200">
+                <div className="col-span-12 sm:col-span-5 text-center sm:text-left space-y-1">
+                  <p className="text-xs uppercase text-slate-600 font-sans">UBND TỈNH ĐỒNG THÁP</p>
+                  <p className="font-bold text-xs uppercase text-slate-900 font-sans tracking-wide">
+                    SỞ GIÁO DỤC VÀ ĐÀO TẠO
+                  </p>
+                  <div className="w-24 h-0.5 bg-slate-300 mx-auto sm:mx-0 my-1"></div>
+                  <p className="font-mono text-xs font-bold text-slate-700 pt-1">
+                    Số: 3326/SGDĐT-GDPT
+                  </p>
+                  <p className="text-[11px] text-slate-500 italic pt-1">
+                    V/v hướng dẫn công tác giáo dục hòa nhập đối với trẻ em, học sinh khuyết tật tại các cơ sở giáo dục mầm non, phổ thông
+                  </p>
+                </div>
+
+                <div className="col-span-12 sm:col-span-7 text-center space-y-1">
+                  <p className="font-bold text-xs uppercase text-slate-900 font-sans tracking-wide">
+                    CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+                  </p>
+                  <p className="font-bold text-xs text-slate-800 font-sans">
+                    Độc lập - Tự do - Hạnh phúc
+                  </p>
+                  <div className="w-36 h-0.5 bg-slate-300 mx-auto my-1"></div>
+                  <p className="text-xs text-slate-600 italic pt-1">
+                    Đồng Tháp, ngày 27 tháng 8 năm 2026
+                  </p>
+                </div>
+              </div>
+
+              {/* Kính gửi */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 font-sans text-xs">
+                <p className="font-bold text-slate-900 uppercase">Kính gửi:</p>
+                <ul className="list-disc list-inside space-y-0.5 text-slate-700 pl-2">
+                  <li>Uỷ ban nhân dân các xã, phường;</li>
+                  <li>Thủ trưởng các đơn vị trực thuộc Sở.</li>
+                </ul>
+              </div>
+
+              {/* Căn cứ pháp lý */}
+              <div className="space-y-1.5 italic text-slate-700 text-xs pl-2 border-l-2 border-blue-300">
+                <p>Căn cứ Luật số 51/2010/QH12 của Quốc hội về Luật Người khuyết tật;</p>
+                <p>Căn cứ Thông tư số 03/2018/TT-BGDĐT ngày 29 tháng 01 năm 2018 của Bộ Giáo dục và Đào tạo (GDĐT) quy định về giáo dục hòa nhập đối với người khuyết tật;</p>
+                <p>Căn cứ Thông tư số 15/2026/TT-BGDĐT ngày 24 tháng 3 năm 2026 của Bộ GDĐT ban hành Điều lệ trường tiểu học, trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;</p>
+                <p>Căn cứ các quy định hiện hành về phân quyền, phân cấp, phân định thẩm quyền trong lĩnh vực giáo dục phổ thông;</p>
+              </div>
+
+              <p className="text-justify font-sans text-xs font-medium text-slate-800">
+                Sở GDĐT hướng dẫn công tác giáo dục hòa nhập đối với trẻ em, học sinh (gọi chung là học sinh) khuyết tật tại các cơ sở giáo dục mầm non, phổ thông như sau:
+              </p>
+
+              {/* Phần I: MỤC ĐÍCH, YÊU CẦU */}
+              <div className="space-y-2 pt-2">
+                <h3 className="font-bold text-sm uppercase text-slate-900 bg-slate-100 px-3 py-1.5 rounded font-sans">
+                  I. MỤC ĐÍCH, YÊU CẦU
+                </h3>
+                <div className="space-y-2 text-xs text-justify pl-2">
+                  <p><strong>1.</strong> Đảm bảo học sinh khuyết tật (HSKT) được thực hiện quyền học tập bình đẳng, được tôn trọng, hỗ trợ và tham gia các hoạt động giáo dục phù hợp; thực hiện đầy đủ quyền, chính sách về giáo dục theo quy định.</p>
+                  <p><strong>2.</strong> Thực hiện tốt công tác rà soát, thống kê, nắm thông tin số trẻ khuyết tật trên địa bàn, nhằm kịp thời tư vấn cho gia đình có biện pháp can thiệp sớm, đưa trẻ khuyết tật đến trường học hòa nhập.</p>
+                  <p><strong>3.</strong> Tổ chức giáo dục trên cơ sở khả năng, nhu cầu và tình trạng khuyết tật đã được xác định của từng học sinh; điều chỉnh hoạt động dạy học, hỗ trợ và đánh giá nhằm phát huy khả năng, sự tiến bộ và mức độ tham gia của HSKT.</p>
+                  <p><strong>4.</strong> Đảm bảo công tác giáo dục hòa nhập được thực hiện thống nhất, thực chất và phù hợp với điều kiện của cơ sở giáo dục; đảm bảo khả năng tiếp cận giáo dục, môi trường học tập an toàn, thân thiện và không kỳ thị, phân biệt đối xử; xác định rõ trách nhiệm của người đứng đầu, giáo viên và các lực lượng phối hợp trong tổ chức giáo dục, hỗ trợ và theo dõi sự tiến bộ của HSKT.</p>
+                </div>
+              </div>
+
+              {/* Phần II: NỘI DUNG HƯỚNG DẪN */}
+              <div className="space-y-3 pt-2">
+                <h3 className="font-bold text-sm uppercase text-slate-900 bg-slate-100 px-3 py-1.5 rounded font-sans">
+                  II. NỘI DUNG HƯỚNG DẪN
+                </h3>
+
+                {/* 1. Huy động tiếp nhận */}
+                <div className="space-y-1.5 text-xs text-justify pl-2">
+                  <h4 className="font-bold text-slate-900">1. Huy động, tiếp nhận, rà soát và bố trí học sinh</h4>
+                  <p>a) Các cơ sở giáo dục phối hợp với Uỷ ban nhân dân cấp xã nắm chắc số học sinh trong độ tuổi đi học, đặc biệt trong đó có trẻ khuyết tật để có biện pháp huy động trẻ khuyết tật trong độ tuổi tham gia giáo dục hòa nhập.</p>
+                  <p>b) Việc tiếp nhận, nhập học, tuyển sinh đối với HSKT thực hiện theo quy định hiện hành của từng cấp học; không đặt thêm điều kiện ngoài quy định.</p>
+                  <p>c) Trường hợp học sinh có biểu hiện khó khăn nghi do khuyết tật nhưng chưa có giấy xác nhận khuyết tật, cơ sở giáo dục không tự xác định dạng khuyết tật hoặc mức độ khuyết tật; tiếp tục đảm bảo việc học theo quy định chung, trao đổi với cha mẹ/người đại diện và hướng dẫn thực hiện thủ tục xác định mức độ khuyết tật theo quy định hiện hành. Khi cơ quan có thẩm quyền đề nghị, cơ sở giáo dục cung cấp thông tin về khó khăn trong học tập, sinh hoạt, giao tiếp của học sinh theo quy định.</p>
+                  <p>d) Người đứng đầu cơ sở giáo dục sắp xếp, bố trí các lớp học phù hợp với HSKT, đảm bảo mỗi lớp học hòa nhập có không quá 02 (hai) HSKT. Trường hợp đặc biệt, căn cứ điều kiện thực tế, người đứng đầu cơ sở giáo dục có thể bố trí thêm để HSKT có nhu cầu học hòa nhập được đi học. Quy định về số lượng HSKT trong lớp không được vận dụng thành điều kiện từ chối tiếp nhận HSKT học hòa nhập.</p>
+                </div>
+
+                {/* 2. KHGDCN */}
+                <div className="space-y-1.5 text-xs text-justify pl-2 pt-2 border-t border-slate-100">
+                  <h4 className="font-bold text-slate-900">2. Kế hoạch giáo dục cá nhân (KHGDCN)</h4>
+                  <p>a) Mỗi HSKT học hòa nhập có kế hoạch giáo dục cá nhân (KHGDCN). Giáo viên được phân công chủ trì, phối hợp với cha mẹ/người đại diện, nhân viên hỗ trợ giáo dục người khuyết tật (nếu được bố trí) và các lực lượng có liên quan để xây dựng, thực hiện KHGDCN trên cơ sở khả năng, nhu cầu của học sinh, chương trình giáo dục và điều kiện thực tế của cơ sở giáo dục.</p>
+                  <p>b) KHGDCN gồm các thông tin về: Khả năng, nhu cầu và đặc điểm cá nhân; mục tiêu năm học và mục tiêu học kỳ; thời gian, nội dung, biện pháp, người thực hiện; kết quả đánh giá và nội dung điều chỉnh sau đánh giá.</p>
+                  <div className="p-3 bg-amber-50 rounded-lg border border-amber-200 flex items-center justify-between gap-3 font-sans">
+                    <div>
+                      <p className="font-bold text-amber-950 text-xs">Biểu mẫu KHGDCN (tham khảo):</p>
+                      <p className="text-[11px] text-amber-800">Ban hành kèm theo Phụ lục đính kèm Công văn số 3326/SGDĐT-GDPT</p>
+                    </div>
+                    <button
+                      onClick={() => setActiveSubTab('template')}
+                      className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shrink-0 shadow-xs"
+                    >
+                      Mở Mẫu KHGDCN
+                    </button>
+                  </div>
+                </div>
+
+                {/* 3. Chương trình và hoạt động */}
+                <div className="space-y-1.5 text-xs text-justify pl-2 pt-2 border-t border-slate-100">
+                  <h4 className="font-bold text-slate-900">3. Tổ chức thực hiện chương trình và hoạt động giáo dục</h4>
+                  <p>a) Cơ sở giáo dục tổ chức giáo dục HSKT học hòa nhập theo chương trình giáo dục hiện hành của cấp học; căn cứ khả năng, nhu cầu của học sinh và mục tiêu trong KHGDCN để lựa chọn nội dung hỗ trợ, phương pháp, hình thức tổ chức, học liệu, phương tiện và điều kiện tham gia phù hợp.</p>
+                  <p>b) Trường hợp HSKT không có khả năng đáp ứng yêu cầu của chương trình giáo dục chung, người đứng đầu cơ sở giáo dục quyết định điều chỉnh, miễn, giảm, thay thế một số nội dung môn học, hoạt động giáo dục cho phù hợp theo Điều 3 Thông tư liên tịch số 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC và phải thể hiện trong KHGDCN.</p>
+                  <p>c) Khi cần hỗ trợ riêng trong một bài học hoặc hoạt động giáo dục, giáo viên thể hiện nội dung hỗ trợ cần thiết trong kế hoạch bài dạy/kế hoạch chuyên môn đang sử dụng, không yêu cầu lập một kế hoạch bài dạy riêng cho lớp có HSKT.</p>
+                  <p>d) Tạo điều kiện để HSKT tham gia các hoạt động giáo dục phù hợp; phát huy khả năng, sở trường, kỹ năng xã hội, kỹ năng tự phục vụ và kỹ năng đặc thù khi có nhu cầu.</p>
+                </div>
+
+                {/* 4. Kiểm tra đánh giá */}
+                <div className="space-y-1.5 text-xs text-justify pl-2 pt-2 border-t border-slate-100">
+                  <h4 className="font-bold text-slate-900">4. Kiểm tra, đánh giá; xét lên lớp và hoàn thành chương trình</h4>
+                  <p>a) Việc theo dõi, đánh giá HSKT học hòa nhập thực hiện theo chương trình giáo dục và quy định hiện hành của từng cấp học; đảm bảo phù hợp với khả năng, nhu cầu của từng học sinh, chú trọng động viên, khuyến khích sự nỗ lực và tiến bộ trong quá trình giáo dục.</p>
+                  <p>b) Đối với giáo dục mầm non: Việc theo dõi, đánh giá sự phát triển của trẻ khuyết tật thực hiện theo Chương trình giáo dục mầm non và các quy định hiện hành...</p>
+                  <p>c) Đối với giáo dục phổ thông:</p>
+                  <p className="pl-3">- Đối với môn học, hoạt động giáo dục mà HSKT có khả năng đáp ứng yêu cầu của chương trình giáo dục chung, việc kiểm tra, đánh giá thực hiện theo quy định của cấp học và các quy định hiện hành có liên quan.</p>
+                  <p className="pl-3">- Đối với môn học, hoạt động giáo dục hoặc nội dung mà học sinh không có khả năng đáp ứng yêu cầu của chương trình giáo dục chung, việc đánh giá căn cứ kết quả thực hiện KHGDCN theo quy định. Không kiểm tra, đánh giá những nội dung môn học hoặc hoạt động giáo dục đã được miễn theo quyết định của người có thẩm quyền.</p>
+                  <p className="pl-3">- Kết quả đánh giá được sử dụng để điều chỉnh hoạt động dạy học, hỗ trợ và KHGDCN khi cần thiết.</p>
+                  <p>d) Đối với giáo dục phổ thông, việc xét lên lớp, hoàn thành chương trình lớp học, chương trình cấp học và công nhận kết quả học tập thực hiện theo quy định hiện hành của cấp học. Trường hợp HSKT không đáp ứng chương trình giáo dục chung, việc xem xét kết quả thực hiện KHGDCN thực hiện theo quy định về chính sách giáo dục đối với người khuyết tật; không đặt thêm tiêu chí, hồ sơ hoặc thủ tục riêng đối với học sinh.</p>
+                </div>
+
+                {/* 5. Hồ sơ và quản lý thông tin */}
+                <div className="space-y-1.5 text-xs text-justify pl-2 pt-2 border-t border-slate-100">
+                  <h4 className="font-bold text-slate-900">5. Hồ sơ và quản lý thông tin</h4>
+                  <p>a) Hồ sơ của HSKT học hòa nhập thực hiện theo khoản 2 Điều 8 Thông tư số 03/2018/TT-BGDĐT, gồm hồ sơ theo quy định của cấp học, giấy xác nhận khuyết tật do cơ quan có thẩm quyền cấp và KHGDCN.</p>
+                  <p>b) Cơ sở giáo dục sử dụng hồ sơ học sinh hiện có; không lập thêm một bộ hồ sơ giáo dục hòa nhập trùng lặp. Công văn này không yêu cầu lập riêng sổ theo dõi HSKT, sao chép lại giấy tờ đã có hoặc tập hợp toàn bộ bài kiểm tra thành hồ sơ riêng, trừ trường hợp có quy định khác hoặc cần thiết để thực hiện quyền, chính sách và hỗ trợ trực tiếp cho HSKT.</p>
+                  <p>c) Khi học sinh chuyển lớp, chuyển trường hoặc chuyển cấp, cơ sở giáo dục bàn giao KHGDCN và thông tin cần thiết theo quy định hiện hành để đảm bảo tính liên tục của việc hỗ trợ; việc quản lý, sử dụng thông tin đúng mục đích và quyền riêng tư của học sinh.</p>
+                </div>
+
+                {/* 6. Chế độ chính sách */}
+                <div className="space-y-1.5 text-xs text-justify pl-2 pt-2 border-t border-slate-100">
+                  <h4 className="font-bold text-slate-900">6. Chế độ, chính sách</h4>
+                  <p>a) Học sinh: Việc thực hiện chính sách về học phí, học bổng, phương tiện, đồ dùng học tập và các chính sách giáo dục khác đối với người khuyết tật thực hiện theo đối tượng, điều kiện, trình tự, thủ tục của quy định hiện hành.</p>
+                  <p>b) Giáo viên: Chế độ đối với nhà giáo trực tiếp giảng dạy người khuyết tật theo phương thức giáo dục hòa nhập thực hiện theo quy định hiện hành (Thông tư liên tịch số 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC).</p>
+                </div>
+              </div>
+
+              {/* Phần III: TỔ CHỨC THỰC HIỆN */}
+              <div className="space-y-2 pt-2">
+                <h3 className="font-bold text-sm uppercase text-slate-900 bg-slate-100 px-3 py-1.5 rounded font-sans">
+                  III. TỔ CHỨC THỰC HIỆN
+                </h3>
+                <div className="space-y-2 text-xs text-justify pl-2">
+                  <p><strong>1. Sở Giáo dục và Đào tạo:</strong> Hướng dẫn chuyên môn; tổ chức hoặc phối hợp bồi dưỡng nghiệp vụ GD hòa nhập; phối hợp với UBND cấp xã theo dõi kiểm tra.</p>
+                  <p><strong>2. Đề nghị Uỷ ban nhân dân các xã, phường:</strong> Tổ chức triển khai, rà soát, huy động trẻ khuyết tật đến trường; thực hiện trách nhiệm xác định mức độ khuyết tật.</p>
+                  <p><strong>3. Các cơ sở giáo dục mầm non, phổ thông:</strong></p>
+                  <p className="pl-3">a) Người đứng đầu chịu trách nhiệm tổ chức giáo dục hòa nhập; bố trí lớp, phân công giáo viên; chỉ đạo xây dựng, thực hiện, rà soát KHGDCN; quyết định các nội dung thuộc thẩm quyền theo quy định.</p>
+                  <p className="pl-3">b) Giáo viên được phân công thực hiện KHGDCN, tổ chức dạy học và theo dõi, đánh giá; phối hợp cha mẹ/người đại diện, nhân viên hỗ trợ đảm bảo hỗ trợ liên tục, thiết thực.</p>
+                  <p className="pl-3">c) Quản lý hồ sơ, bảo mật thông tin; thực hiện chế độ báo cáo theo quy định.</p>
+                </div>
+              </div>
+
+              {/* Footer: Nơi nhận và Chữ ký */}
+              <div className="grid grid-cols-12 gap-4 pt-6 border-t border-slate-200">
+                <div className="col-span-12 sm:col-span-6 text-xs space-y-1">
+                  <p className="font-bold text-slate-800 uppercase font-sans">Nơi nhận:</p>
+                  <p className="text-slate-600">- Như trên;</p>
+                  <p className="text-slate-600">- Giám đốc, các Phó Giám đốc Sở (để báo cáo);</p>
+                  <p className="text-slate-600">- Lưu: VT, GDPT (ND).</p>
+                </div>
+
+                <div className="col-span-12 sm:col-span-6 text-center space-y-1">
+                  <p className="font-bold uppercase text-xs text-slate-900 font-sans">KT. GIÁM ĐỐC</p>
+                  <p className="font-bold uppercase text-xs text-slate-900 font-sans">PHÓ GIÁM ĐỐC</p>
+                  <div className="h-16 flex items-center justify-center italic text-blue-900 font-bold font-serif text-lg">
+                    Nguyễn Phương Toàn
+                  </div>
+                  <p className="font-bold text-xs text-slate-900 font-sans">Nguyễn Phương Toàn</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* VIEW DOCUMENT: CV 3408 */}
+          {selectedDirectiveId === '3408' && (
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-6 sm:p-12 max-w-4xl mx-auto space-y-6 text-slate-900 font-serif leading-relaxed text-sm">
+              <div className="grid grid-cols-12 gap-4 pb-4 border-b border-slate-200">
+                <div className="col-span-12 sm:col-span-5 text-center sm:text-left space-y-1">
+                  <p className="text-xs uppercase text-slate-600 font-sans">UBND TỈNH ĐỒNG THÁP</p>
+                  <p className="font-bold text-xs uppercase text-slate-900 font-sans tracking-wide">
+                    SỞ GIÁO DỤC VÀ ĐÀO TẠO
+                  </p>
+                  <div className="w-24 h-0.5 bg-slate-300 mx-auto sm:mx-0 my-1"></div>
+                  <p className="font-mono text-xs font-bold text-slate-700 pt-1">
+                    Số: 3408/SGDĐT-GDPT
+                  </p>
+                  <p className="text-[11px] text-slate-500 italic pt-1">
+                    V/v thống kê và đăng ký nhu cầu hỗ trợ giáo dục hòa nhập năm học 2026 - 2027
+                  </p>
+                </div>
+
+                <div className="col-span-12 sm:col-span-7 text-center space-y-1">
+                  <p className="font-bold text-xs uppercase text-slate-900 font-sans tracking-wide">
+                    CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+                  </p>
+                  <p className="font-bold text-xs text-slate-800 font-sans">
+                    Độc lập - Tự do - Hạnh phúc
+                  </p>
+                  <div className="w-36 h-0.5 bg-slate-300 mx-auto my-1"></div>
+                  <p className="text-xs text-slate-600 italic pt-1">
+                    Đồng Tháp, ngày 04 tháng 9 năm 2026
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 font-sans text-xs">
+                <p className="font-bold text-slate-900">Kính gửi:</p>
+                <p className="text-slate-700 pl-2">Các trường THPT, trường THCS-THPT trên địa bàn tỉnh Đồng Tháp.</p>
+              </div>
+
+              <div className="space-y-3 text-xs text-justify">
+                <p>
+                  Nhằm chuẩn bị tốt các điều kiện hỗ trợ chuyên môn, tập huấn giáo viên và trang cấp phương tiện hỗ trợ cho học sinh khuyết tật học hòa nhập năm học 2026 - 2027; Sở Giáo dục và Đào tạo yêu cầu các đơn vị:
+                </p>
+                <p>
+                  <strong>1.</strong> Rà soát, lập danh sách thống kê toàn bộ học sinh khuyết tật học hòa nhập tại cơ sở giáo dục (bao gồm các điểm trường nhánh, phân hiệu).
+                </p>
+                <p>
+                  <strong>2.</strong> Hoàn thành Biểu mẫu Phụ lục gồm:
+                </p>
+                <p className="pl-4">
+                  - <strong>Phần I: Thống kê số lượng học sinh khuyết tật</strong> (Họ tên, mã định danh, năm sinh, giới tính, dạng tật, mức độ, lớp, điểm trường, địa chỉ, số điện thoại).
+                </p>
+                <p className="pl-4">
+                  - <strong>Phần II: Đăng ký nhu cầu hỗ trợ giáo dục hòa nhập</strong> (Tập huấn chuyên môn, đánh giá phân loại nhu cầu, xây dựng KHGDCN, rèn luyện kỹ năng đặc thù, tư vấn hỗ trợ CSGD và gia đình).
+                </p>
+                <p>
+                  <strong>3.</strong> Báo cáo bằng văn bản về Sở GDĐT (qua Phòng GDPT) trước ngày 10/9/2026.
+                </p>
+              </div>
+
+              <div className="p-3 bg-rose-50 rounded-xl border border-rose-200 flex items-center justify-between gap-3 font-sans">
+                <div>
+                  <p className="font-bold text-rose-950 text-xs">Biểu Mẫu Phụ Lục Kèm Theo CV 3408 Của Trường Đốc Binh Kiều:</p>
+                  <p className="text-[11px] text-rose-800">Đã hoàn thành thống kê 25 học sinh (THPT: 3, ĐBK: 10, Tân Kiều: 12) & đăng ký 7 nhu cầu</p>
+                </div>
+                <button
+                  onClick={() => setIsPrintModalOpen(true)}
+                  className="px-3.5 py-1.5 rounded-lg bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs shrink-0 shadow-xs flex items-center gap-1.5"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>Xem Phụ Lục Đã Điền</span>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-12 gap-4 pt-6 border-t border-slate-200">
+                <div className="col-span-12 sm:col-span-6 text-xs space-y-1">
+                  <p className="font-bold text-slate-800 uppercase font-sans">Nơi nhận:</p>
+                  <p className="text-slate-600">- Như trên;</p>
+                  <p className="text-slate-600">- Lưu: VT, GDPT.</p>
+                </div>
+
+                <div className="col-span-12 sm:col-span-6 text-center space-y-1">
+                  <p className="font-bold uppercase text-xs text-slate-900 font-sans">KT. GIÁM ĐỐC</p>
+                  <p className="font-bold uppercase text-xs text-slate-900 font-sans">PHÓ GIÁM ĐỐC</p>
+                  <div className="h-16 flex items-center justify-center italic text-blue-900 font-bold font-serif text-lg">
+                    Huỳnh Thanh Hùng
+                  </div>
+                  <p className="font-bold text-xs text-slate-900 font-sans">Huỳnh Thanh Hùng</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
 

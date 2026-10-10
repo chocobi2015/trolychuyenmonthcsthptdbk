@@ -9,81 +9,92 @@ export const DIRECTIVE_3326_GDHN: DepartmentDirective = {
   documentNumber: 'Số: 3326/SGDĐT-GDPT',
   title: 'Hướng dẫn công tác giáo dục hòa nhập đối với trẻ em, học sinh khuyết tật tại các cơ sở giáo dục mầm non, phổ thông',
   topic: 'Giáo dục hòa nhập',
-  issuingAuthority: 'SỞ GDĐT TỈNH ĐỒNG THÁP',
+  issuingAuthority: 'SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP',
   signDate: 'Đồng Tháp, ngày 27 tháng 8 năm 2026',
-  signer: 'KT. GIÁM ĐỐC - PHÓ GIÁM ĐỐC Huỳnh Thanh Hùng',
-  summary: 'Hướng dẫn chi tiết toàn diện công tác giáo dục hòa nhập học sinh khuyết tật năm học 2026 - 2027: Huy động và tiếp nhận học sinh khuyết tật; Xây dựng và phê duyệt Kế hoạch giáo dục cá nhân (KHGDCN) theo mẫu thống nhất; Điều chỉnh nội dung dạy học và thực hiện miễn, giảm môn học; Đánh giá vì sự tiến bộ; Tinh giản hồ sơ quản lý và thực hiện đúng chế độ chính sách cho học sinh và giáo viên dạy hòa nhập.',
-  fullContent: `UBND TỈNH ĐỒNG THÁP
-SỞ GIÁO DỤC VÀ ĐÀO TẠO
-Số: 3326/SGDĐT-GDPT
-V/v hướng dẫn công tác giáo dục hòa nhập đối với trẻ em, học sinh khuyết tật tại các cơ sở giáo dục mầm non, phổ thông
+  signer: 'KT. GIÁM ĐỐC - PHÓ GIÁM ĐỐC Nguyễn Phương Toàn',
+  summary: 'Hướng dẫn toàn diện của Sở GDĐT Đồng Tháp về công tác giáo dục hòa nhập học sinh khuyết tật: huy động tiếp nhận, bố trí tối đa không quá 02 HSKT/lớp, bắt buộc lập Kế hoạch giáo dục cá nhân (KHGDCN), cho phép điều chỉnh/miễn giảm môn học theo TTLT 42/2013, kiểm tra đánh giá theo KHGDCN, quy định hồ sơ tinh gọn không lập sổ sách riêng trùng lặp, chế độ chính sách cho học sinh và giáo viên dạy hòa nhập.',
+  fileName: 'CV 3326-HD GIAO DUC HOA NHAP HSKT-GDPT.pdf',
+  fileSize: '1.8 MB (Bản ký số điện tử của Sở GDĐT)',
+  createdDate: '2026-08-27T00:00:00.000Z',
+  linkedSchoolDocumentIds: ['doc-kh-gdhn-35'],
+  fullContent: `UBND TỈNH ĐỒNG THÁP                    CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+SỞ GIÁO DỤC VÀ ĐÀO TẠO                        Độc lập - Tự do - Hạnh phúc
+Số: 3326/SGDĐT-GDPT                    Đồng Tháp, ngày 27 tháng 8 năm 2026
 
-CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
-Độc lập - Tự do - Hạnh phúc
-Đồng Tháp, ngày 27 tháng 8 năm 2026
+V/v hướng dẫn công tác giáo dục
+hòa nhập đối với trẻ em, học sinh
+khuyết tật tại các cơ sở giáo dục
+mầm non, phổ thông
 
 Kính gửi:
-- Phòng Giáo dục và Đào tạo các huyện, thành phố;
-- Các trường trung học phổ thông, trường phổ thông có nhiều cấp học;
-- Trung tâm Giáo dục thường xuyên tỉnh Đồng Tháp.
+- Uỷ ban nhân dân các xã, phường;
+- Thủ trưởng các đơn vị trực thuộc Sở.
 
-Căn cứ Luật Người khuyết tật năm 2010;
-Căn cứ Thông tư số 03/2018/TT-BGDĐT ngày 29/01/2018 của Bộ trưởng Bộ Giáo dục và Đào tạo ban hành Quy định về giáo dục hòa nhập đối với người khuyết tật;
-Căn cứ Thông tư liên tịch số 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC ngày 31/12/2013 quy định chính sách về giáo dục đối với người khuyết tật;
-Sở Giáo dục và Đào tạo (GDĐT) hướng dẫn các đơn vị triển khai thực hiện công tác giáo dục hòa nhập học sinh khuyết tật từ năm học 2026 - 2027 với các nội dung trọng tâm sau:
+Căn cứ Luật số 51/2010/QH12 của Quốc hội về Luật Người khuyết tật;
+Căn cứ Thông tư số 03/2018/TT-BGDĐT ngày 29 tháng 01 năm 2018 của Bộ Giáo dục và Đào tạo (GDĐT) quy định về giáo dục hòa nhập đối với người khuyết tật;
+Căn cứ Thông tư số 15/2026/TT-BGDĐT ngày 24 tháng 3 năm 2026 của Bộ GDĐT ban hành Điều lệ trường tiểu học, trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;
+Căn cứ các quy định hiện hành về phân quyền, phân cấp, phân định thẩm quyền trong lĩnh vực giáo dục phổ thông;
 
-I. HUY ĐỘNG, TIẾP NHẬN VÀ SẮP XẾP LỚP HỌC HÒA NHẬP
-1. Huy động trẻ em, học sinh khuyết tật đến trường:
-- Các cơ sở giáo dục chủ động phối hợp với chính quyền địa phương, các tổ chức đoàn thể rà soát trẻ em khuyết tật trong độ tuổi phổ cập trên địa bàn; vận động, tạo mọi điều kiện thuận lợi nhất để tiếp nhận các em vào học hòa nhập.
-- Tuyệt đối không từ chối tiếp nhận học sinh khuyết tật có khả năng học tập đến trường.
-2. Sắp xếp lớp học hòa nhập:
-- Mỗi lớp hòa nhập chỉ bố trí không quá 02 (hai) học sinh khuyết tật.
-- Giảm sĩ số học sinh/lớp có học sinh khuyết tật theo đúng quy định tại Thông tư 03/2018/TT-BGDĐT để giáo viên có thời gian, điều kiện quan tâm, hỗ trợ các em.
+Sở GDĐT hướng dẫn công tác giáo dục hòa nhập đối với trẻ em, học sinh (gọi chung là học sinh) khuyết tật tại các cơ sở giáo dục mầm non, phổ thông như sau:
 
-II. XÂY DỰNG VÀ QUẢN LÝ KẾ HOẠCH GIÁO DỤC CÁ NHÂN (KHGDCN)
-1. Thời gian và quy trình xây dựng:
-- KHGDCN được xây dựng trong tháng 9 hàng năm và hoàn thành trước ngày 30/9.
-- Giáo viên chủ nhiệm chủ trì, phối hợp với giáo viên bộ môn, cha mẹ học sinh và nhân viên y tế trường học tìm hiểu khả năng, nhu cầu của học sinh để xây dựng KHGDCN theo mẫu đính kèm Hướng dẫn này.
-2. Nội dung KHGDCN:
-- Xác định điểm mạnh, khó khăn, nhu cầu cần hỗ trợ.
-- Đặt ra mục tiêu năm học, mục tiêu Học kỳ I và Học kỳ II phù hợp với khả năng của học sinh (không áp đặt chỉ tiêu vượt quá năng lực).
-- Đề ra nội dung, biện pháp, phương tiện hỗ trợ và phân công người thực hiện cụ thể.
-- Đánh giá sự tiến bộ theo 3 mức độ: (1) Đạt mục tiêu; (2) Đạt khi có hỗ trợ; (3) Chưa đạt.
-3. Phê duyệt:
-- KHGDCN phải được Cha mẹ học sinh ký xác nhận và Hiệu trưởng/Phó Hiệu trưởng phụ trách chuyên môn ký duyệt, đóng dấu lưu trữ tại trường.
+I. MỤC ĐÍCH, YÊU CẦU
+1. Đảm bảo học sinh khuyết tật (HSKT) được thực hiện quyền học tập bình đẳng, được tôn trọng, hỗ trợ và tham gia các hoạt động giáo dục phù hợp; thực hiện đầy đủ quyền, chính sách về giáo dục theo quy định.
+2. Thực hiện tốt công tác rà soát, thống kê, nắm thông tin số trẻ khuyết tật trên địa bàn, nhằm kịp thời tư vấn cho gia đình có biện pháp can thiệp sớm, đưa trẻ khuyết tật đến trường học hòa nhập.
+3. Tổ chức giáo dục trên cơ sở khả năng, nhu cầu và tình trạng khuyết tật đã được xác định của từng học sinh; điều chỉnh hoạt động dạy học, hỗ trợ và đánh giá nhằm phát huy khả năng, sự tiến bộ và mức độ tham gia của HSKT.
+4. Đảm bảo công tác giáo dục hòa nhập được thực hiện thống nhất, thực chất và phù hợp với điều kiện của cơ sở giáo dục; đảm bảo khả năng tiếp cận giáo dục, môi trường học tập an toàn, thân thiện và không kỳ thị, phân biệt đối xử; xác định rõ trách nhiệm của người đứng đầu, giáo viên và các lực lượng phối hợp trong tổ chức giáo dục, hỗ trợ và theo dõi sự tiến bộ của HSKT.
 
-III. ĐIỀU CHỈNH NỘI DUNG DẠY HỌC, MIỄN GIẢM VÀ ĐÁNH GIÁ
-1. Điều chỉnh nội dung dạy học:
-- Căn cứ KHGDCN, giáo viên chủ động điều chỉnh yêu cầu cần đạt, giảm tải nội dung lý thuyết trừu tượng, tăng cường rèn luyện kỹ năng sống, kỹ năng tự phục vụ, kỹ năng giao tiếp.
-- Giáo viên tích hợp kế hoạch hỗ trợ học sinh khuyết tật vào Kế hoạch bài dạy (giáo án) hiện có; không yêu cầu giáo viên phải soạn thêm giáo án riêng biệt.
-2. Miễn, giảm môn học:
-- Thực hiện nghiêm túc quy định tại Thông tư liên tịch 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC: Học sinh khuyết tật được xem xét miễn, giảm các môn học hoặc nội dung học tập mà dạng tật của các em không đáp ứng được (như môn GDTC, GDQP-AN, môn Ngoại ngữ hoặc các môn tự nhiên đối với học sinh khuyết tật trí tuệ).
-- Hiệu trưởng ban hành quyết định miễn, giảm môn học căn cứ trên hồ sơ đề xuất của Hội đồng giáo dục nhà trường và đơn của gia đình học sinh.
-3. Kiểm tra, đánh giá, xét lên lớp và công nhận tốt nghiệp:
-- Đánh giá học sinh khuyết tật theo nguyên tắc động viên, khích lệ sự nỗ lực và tiến bộ là chính; không so sánh học sinh khuyết tật với học sinh bình thường.
-- Kết quả rèn luyện và học tập được đánh giá căn cứ trên mức độ hoàn thành KHGDCN.
-- Xét lên lớp và công nhận tốt nghiệp THCS, THPT: Áp dụng đầy đủ chính sách ưu tiên theo quy định của Bộ GDĐT; công nhận tốt nghiệp khi học sinh hoàn thành các mục tiêu đề ra trong KHGDCN.
+II. NỘI DUNG HƯỚNG DẪN
+1. Huy động, tiếp nhận, rà soát và bố trí học sinh
+a) Các cơ sở giáo dục phối hợp với Uỷ ban nhân dân cấp xã nắm chắc số học sinh trong độ tuổi đi học, đặc biệt trong đó có trẻ khuyết tật để có biện pháp huy động trẻ khuyết tật trong độ tuổi tham gia giáo dục hòa nhập.
+b) Việc tiếp nhận, nhập học, tuyển sinh đối với HSKT thực hiện theo quy định hiện hành của từng cấp học; không đặt thêm điều kiện ngoài quy định.
+c) Trường hợp học sinh có biểu hiện khó khăn nghi do khuyết tật nhưng chưa có giấy xác nhận khuyết tật, cơ sở giáo dục không tự xác định dạng khuyết tật hoặc mức độ khuyết tật; tiếp tục đảm bảo việc học theo quy định chung, trao đổi với cha mẹ/người đại diện và hướng dẫn thực hiện thủ tục xác định mức độ khuyết tật theo quy định hiện hành. Khi cơ quan có thẩm quyền đề nghị, cơ sở giáo dục cung cấp thông tin về khó khăn trong học tập, sinh hoạt, giao tiếp của học sinh theo quy định.
+d) Người đứng đầu cơ sở giáo dục sắp xếp, bố trí các lớp học phù hợp với HSKT, đảm bảo mỗi lớp học hòa nhập có không quá 02 (hai) HSKT. Trường hợp đặc biệt, căn cứ điều kiện thực tế, người đứng đầu cơ sở giáo dục có thể bố trí thêm để HSKT có nhu cầu học hòa nhập được đi học. Quy định về số lượng HSKT trong lớp không được vận dụng thành điều kiện từ chối tiếp nhận HSKT học hòa nhập.
 
-IV. HỒ SƠ QUẢN LÝ VÀ CHẾ ĐỘ CHÍNH SÁCH
-1. Tinh giản hồ sơ quản lý:
-- Hồ sơ giáo dục hòa nhập gồm đúng 3 loại: (1) Hồ sơ học sinh theo quy định chung; (2) Bản sao Giấy xác nhận mức độ khuyết tật do UBND cấp xã cấp; (3) Kế hoạch giáo dục cá nhân (KHGDCN) bản chính.
-- Tuyệt đối không lập thêm Sổ theo dõi HSKT riêng làm tăng áp lực sổ sách cho giáo viên.
-2. Chế độ chính sách:
-- Đảm bảo 100% học sinh khuyết tật được miễn học phí, hỗ trợ chi phí học tập theo Nghị định số 81/2021/NĐ-CP và Thông tư liên tịch 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC.
-- Chi trả đầy đủ, kịp thời phụ cấp trách nhiệm giảng dạy hòa nhập cho giáo viên dạy các lớp có học sinh khuyết tật theo đúng số tiết thực dạy.
+2. Kế hoạch giáo dục cá nhân (KHGDCN)
+a) Mỗi HSKT học hòa nhập có kế hoạch giáo dục cá nhân (KHGDCN). Giáo viên được phân công chủ trì, phối hợp với cha mẹ/người đại diện, nhân viên hỗ trợ giáo dục người khuyết tật (nếu được bố trí) và các lực lượng có liên quan để xây dựng, thực hiện KHGDCN trên cơ sở khả năng, nhu cầu của học sinh, chương trình giáo dục và điều kiện thực tế của cơ sở giáo dục.
+b) KHGDCN gồm các thông tin về: Khả năng, nhu cầu và đặc điểm cá nhân; mục tiêu năm học và mục tiêu học kỳ; thời gian, nội dung, biện pháp, người thực hiện; kết quả đánh giá và nội dung điều chỉnh sau đánh giá.
+(KHGDCN (tham khảo) tại Phụ lục đính kèm Công văn)
+
+3. Tổ chức thực hiện chương trình và hoạt động giáo dục
+a) Cơ sở giáo dục tổ chức giáo dục HSKT học hòa nhập theo chương trình giáo dục hiện hành của cấp học; căn cứ khả năng, nhu cầu của học sinh và mục tiêu trong KHGDCN để lựa chọn nội dung hỗ trợ, phương pháp, hình thức tổ chức, học liệu, phương tiện và điều kiện tham gia phù hợp.
+b) Trường hợp HSKT không có khả năng đáp ứng yêu cầu của chương trình giáo dục chung, người đứng đầu cơ sở giáo dục quyết định điều chỉnh, miễn, giảm, thay thế một số nội dung môn học, hoạt động giáo dục cho phù hợp theo Điều 3 Thông tư liên tịch số 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC và phải thể hiện trong KHGDCN.
+c) Khi cần hỗ trợ riêng trong một bài học hoặc hoạt động giáo dục, giáo viên thể hiện nội dung hỗ trợ cần thiết trong kế hoạch bài dạy/kế hoạch chuyên môn đang sử dụng, không yêu cầu lập một kế hoạch bài dạy riêng cho lớp có HSKT.
+d) Tạo điều kiện để HSKT tham gia các hoạt động giáo dục phù hợp; phát huy khả năng, sở trường, kỹ năng xã hội, kỹ năng tự phục vụ và kỹ năng đặc thù khi có nhu cầu.
+
+4. Kiểm tra, đánh giá; xét lên lớp và hoàn thành chương trình
+a) Việc theo dõi, đánh giá HSKT học hòa nhập thực hiện theo chương trình giáo dục và quy định hiện hành của từng cấp học; đảm bảo phù hợp với khả năng, nhu cầu của từng học sinh, chú trọng động viên, khuyến khích sự nỗ lực và tiến bộ trong quá trình giáo dục.
+b) Đối với giáo dục mầm non: Việc theo dõi, đánh giá sự phát triển của trẻ khuyết tật thực hiện theo Chương trình giáo dục mầm non và các quy định hiện hành...
+c) Đối với giáo dục phổ thông:
+- Đối với môn học, hoạt động giáo dục mà HSKT có khả năng đáp ứng yêu cầu của chương trình giáo dục chung, việc kiểm tra, đánh giá thực hiện theo quy định của cấp học và các quy định hiện hành có liên quan.
+- Đối với môn học, hoạt động giáo dục hoặc nội dung mà học sinh không có khả năng đáp ứng yêu cầu của chương trình giáo dục chung, việc đánh giá căn cứ kết quả thực hiện KHGDCN theo quy định. Không kiểm tra, đánh giá những nội dung môn học hoặc hoạt động giáo dục đã được miễn theo quyết định của người có thẩm quyền.
+- Kết quả đánh giá được sử dụng để điều chỉnh hoạt động dạy học, hỗ trợ và KHGDCN khi cần thiết.
+d) Đối với giáo dục phổ thông, việc xét lên lớp, hoàn thành chương trình lớp học, chương trình cấp học và công nhận kết quả học tập thực hiện theo quy định hiện hành của cấp học. Trường hợp HSKT không đáp ứng chương trình giáo dục chung, việc xem xét kết quả thực hiện KHGDCN thực hiện theo quy định về chính sách giáo dục đối với người khuyết tật; không đặt thêm tiêu chí, hồ sơ hoặc thủ tục riêng đối với học sinh.
+
+5. Hồ sơ và quản lý thông tin
+a) Hồ sơ của HSKT học hòa nhập thực hiện theo khoản 2 Điều 8 Thông tư số 03/2018/TT-BGDĐT, gồm hồ sơ theo quy định của cấp học, giấy xác nhận khuyết tật do cơ quan có thẩm quyền cấp và KHGDCN.
+b) Cơ sở giáo dục sử dụng hồ sơ học sinh hiện có; không lập thêm một bộ hồ sơ giáo dục hòa nhập trùng lặp. Công văn này không yêu cầu lập riêng sổ theo dõi HSKT, sao chép lại giấy tờ đã có hoặc tập hợp toàn bộ bài kiểm tra thành hồ sơ riêng, trừ trường hợp có quy định khác hoặc cần thiết để thực hiện quyền, chính sách và hỗ trợ trực tiếp cho HSKT.
+c) Khi học sinh chuyển lớp, chuyển trường hoặc chuyển cấp, cơ sở giáo dục bàn giao KHGDCN và thông tin cần thiết theo quy định hiện hành để đảm bảo tính liên tục của việc hỗ trợ; việc quản lý, sử dụng thông tin đúng mục đích và quyền riêng tư của học sinh.
+
+6. Chế độ, chính sách
+a) Học sinh: Việc thực hiện chính sách về học phí, học bổng, phương tiện, đồ dùng học tập và các chính sách giáo dục khác đối với người khuyết tật thực hiện theo đối tượng, điều kiện, trình tự, thủ tục của quy định hiện hành.
+b) Giáo viên: Chế độ đối với nhà giáo trực tiếp giảng dạy người khuyết tật theo phương thức giáo dục hòa nhập thực hiện theo quy định hiện hành (Thông tư liên tịch số 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC).
+
+III. TỔ CHỨC THỰC HIỆN
+1. Sở Giáo dục và Đào tạo: Hướng dẫn chuyên môn; tổ chức hoặc phối hợp bồi dưỡng nghiệp vụ GD hòa nhập; phối hợp với UBND cấp xã theo dõi kiểm tra.
+2. Đề nghị Uỷ ban nhân dân các xã, phường: Tổ chức triển khai, rà soát, huy động trẻ khuyết tật đến trường; thực hiện trách nhiệm xác định mức độ khuyết tật.
+3. Các cơ sở giáo dục mầm non, phổ thông:
+a) Người đứng đầu chịu trách nhiệm tổ chức giáo dục hòa nhập; bố trí lớp, phân công giáo viên; chỉ đạo xây dựng, thực hiện, rà soát KHGDCN; quyết định các nội dung thuộc thẩm quyền theo quy định.
+b) Giáo viên được phân công thực hiện KHGDCN, tổ chức dạy học và theo dõi, đánh giá; phối hợp cha mẹ/người đại diện, nhân viên hỗ trợ đảm bảo hỗ trợ liên tục, thiết thực.
+c) Quản lý hồ sơ, bảo mật thông tin; thực hiện chế độ báo cáo theo quy định.
 
 Nơi nhận:
-- Như trên (để thực hiện);
-- Giám đốc Sở GDĐT (để báo cáo);
-- Lưu: VT, GDPT.
+- Như trên;
+- Giám đốc, các Phó Giám đốc Sở (để báo cáo);
+- Lưu: VT, GDPT (ND).
 
 KT. GIÁM ĐỐC
 PHÓ GIÁM ĐỐC
-Huỳnh Thanh Hùng (đã ký)`,
-  createdDate: '2026-08-27T08:00:00Z',
-  fileName: 'cv_3326_sgddt_gdhn_signed.pdf',
-  fileSize: '1.8 MB (PDF chính thức)',
-  linkedSchoolDocumentIds: ['doc-kh-gdhn-35']
+Nguyễn Phương Toàn`
 };
 
 /**

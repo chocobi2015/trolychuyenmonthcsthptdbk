@@ -304,15 +304,48 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
               </button>
 
               {isCategoryDropdownOpen && (
-                <div className="absolute right-0 top-full mt-1.5 w-72 bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 z-30 max-h-80 overflow-y-auto">
+                <div className="absolute right-0 top-full mt-1.5 w-80 bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 z-30 max-h-96 overflow-y-auto">
                   <div className="px-3 py-1 text-[11px] font-bold text-slate-400 uppercase border-b border-slate-100 mb-1">
                     Danh sách các danh mục
                   </div>
+
+                  {/* Pinned Quick Selection for Giáo dục hòa nhập */}
+                  <div className="px-2 pb-1.5 pt-0.5 border-b border-slate-100 mb-1">
+                    <button
+                      onClick={() => {
+                        setSelectedTopic('Giáo dục hòa nhập');
+                        setIsCategoryDropdownOpen(false);
+                      }}
+                      className={`w-full text-left p-2 rounded-lg border transition flex items-center justify-between ${
+                        selectedTopic === 'Giáo dục hòa nhập'
+                          ? 'bg-rose-100 text-rose-950 border-rose-300 font-bold shadow-xs'
+                          : 'bg-rose-50/70 hover:bg-rose-100 text-rose-900 border-rose-200'
+                      }`}
+                      title="Chọn nhanh chuyên đề Giáo dục hòa nhập"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <HeartHandshake className="w-4 h-4 text-rose-600 shrink-0" />
+                        <div className="truncate">
+                          <p className="text-xs font-bold text-rose-900 truncate">
+                            Giáo dục hòa nhập (CV 3326 & 3408)
+                          </p>
+                          <p className="text-[10px] text-rose-600 truncate">
+                            2 văn bản Sở · 25 HSKT · 3 điểm trường
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-rose-600 text-white font-bold shrink-0 ml-1.5">
+                        MỚI
+                      </span>
+                    </button>
+                  </div>
+
                   {categories.map((c) => {
                     const count = c.id === 'all' 
                       ? directives.length 
                       : directives.filter((d) => d.topic === c.name || d.topic === c.id).length;
                     const isSelected = selectedTopic === c.id || selectedTopic === c.name;
+                    const isInclusive = c.id === 'Giáo dục hòa nhập' || c.name === 'Giáo dục hòa nhập';
                     return (
                       <button
                         key={c.id}
@@ -321,11 +354,20 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
                           setIsCategoryDropdownOpen(false);
                         }}
                         className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between transition ${
-                          isSelected ? 'bg-blue-50 text-blue-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                          isSelected 
+                            ? isInclusive ? 'bg-rose-100 text-rose-950 font-bold' : 'bg-blue-50 text-blue-800 font-bold' 
+                            : isInclusive ? 'bg-rose-50/40 text-rose-900 hover:bg-rose-50 font-medium' : 'text-slate-700 hover:bg-slate-50'
                         }`}
                       >
-                        <span className="truncate">{c.label}</span>
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-blue-200 text-blue-900 font-bold' : 'bg-slate-100 text-slate-500'}`}>
+                        <span className="truncate flex items-center gap-1.5">
+                          {isInclusive && <HeartHandshake className="w-3.5 h-3.5 text-rose-600 shrink-0" />}
+                          <span>{c.label}</span>
+                        </span>
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                          isSelected 
+                            ? isInclusive ? 'bg-rose-200 text-rose-900 font-bold' : 'bg-blue-200 text-blue-900 font-bold' 
+                            : isInclusive ? 'bg-rose-100 text-rose-800 font-bold' : 'bg-slate-100 text-slate-500'
+                        }`}>
                           {count}
                         </span>
                       </button>
@@ -384,6 +426,7 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
           >
             {categories.map((t) => {
               const isSelected = selectedTopic === t.id || selectedTopic === t.name;
+              const isInclusive = t.id === 'Giáo dục hòa nhập' || t.name === 'Giáo dục hòa nhập';
               const count = t.id === 'all' 
                 ? directives.length 
                 : directives.filter((d) => d.topic === t.name || d.topic === t.id).length;
@@ -394,15 +437,27 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
                   onClick={() => setSelectedTopic(t.name)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 shrink-0 ${
                     isSelected
-                      ? 'bg-blue-700 text-white shadow-xs'
+                      ? isInclusive
+                        ? 'bg-rose-700 text-white shadow-xs ring-1 ring-rose-400 font-bold'
+                        : 'bg-blue-700 text-white shadow-xs'
+                      : isInclusive
+                      ? 'bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 font-bold shadow-2xs'
                       : 'bg-white hover:bg-slate-100 text-slate-600 border border-slate-200'
                   }`}
                 >
+                  {isInclusive && <HeartHandshake className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-rose-600'} shrink-0`} />}
                   <span>{t.label}</span>
+                  {isInclusive && !isSelected && (
+                    <span className="text-[9px] px-1 py-0.2 rounded bg-rose-200 text-rose-950 font-bold">
+                      MỚI
+                    </span>
+                  )}
                   {t.id !== 'all' && (
                     <span
                       className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                        isSelected ? 'bg-blue-800 text-blue-100' : 'bg-slate-100 text-slate-500'
+                        isSelected 
+                          ? isInclusive ? 'bg-rose-900 text-rose-100 font-bold' : 'bg-blue-800 text-blue-100' 
+                          : isInclusive ? 'bg-rose-200 text-rose-900 font-bold' : 'bg-slate-100 text-slate-500'
                       }`}
                     >
                       {count}
@@ -499,6 +554,67 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
 
       {/* Directives List */}
       <div className="space-y-4">
+        {/* Special Banner when Giáo dục hòa nhập category is selected */}
+        {selectedTopic === 'Giáo dục hòa nhập' && (
+          <div className="bg-gradient-to-r from-rose-900 via-rose-800 to-red-950 text-white rounded-2xl p-5 sm:p-6 shadow-md border border-rose-700/60 space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/30 border border-rose-300/30 text-rose-100 text-xs font-semibold backdrop-blur-sm">
+                  <HeartHandshake className="w-4 h-4 text-rose-300" />
+                  <span>Chuyên đề: Giáo Dục Hòa Nhập Trẻ Em, Học Sinh Khuyết Tật</span>
+                  <span className="px-1.5 py-0.2 rounded bg-amber-400 text-slate-900 font-bold text-[10px]">
+                    2 Văn bản chỉ đạo của Sở
+                  </span>
+                </div>
+                <h2 className="text-lg md:text-xl font-bold tracking-tight text-white">
+                  Chỉ Đạo Chuyên Môn Của Sở GDĐT Đồng Tháp Về Công Tác Giáo Dục Hòa Nhập
+                </h2>
+                <p className="text-xs text-rose-100/90 leading-relaxed max-w-3xl">
+                  Gồm <strong>Công văn số 3326/SGDĐT-GDPT</strong> ngày 27/8/2026 (Phó Giám đốc Nguyễn Phương Toàn ký) hướng dẫn toàn diện chuyên môn, lập KHGDCN, miễn giảm môn học theo TTLT 42/2013, hồ sơ tinh giản và chế độ phụ cấp nhà giáo; và <strong>Công văn số 3408/SGDĐT-GDPT</strong> ngày 04/9/2026 về thống kê 25 học sinh khuyết tật tại 3 điểm trường và đăng ký nhu cầu hỗ trợ.
+                </p>
+              </div>
+
+              {onOpenInclusiveTab && (
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0">
+                  <button
+                    onClick={onOpenInclusiveTab}
+                    className="px-4 py-2.5 rounded-xl bg-white text-rose-950 hover:bg-rose-50 text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition active:scale-95"
+                    title="Mở tab chuyên sâu Quản lý học sinh khuyết tật và Kế hoạch trường"
+                  >
+                    <HeartHandshake className="w-4 h-4 text-rose-700" />
+                    <span>Mở Tab Quản Lý & Danh Sách 25 HSKT (Tab 6)</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Quick Information Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-rose-700/60 text-xs">
+              <div className="bg-rose-950/40 border border-rose-700/50 rounded-xl p-3 space-y-1">
+                <span className="text-rose-300 font-bold block text-[11px] uppercase tracking-wider">
+                  CV 3326/SGDĐT-GDPT
+                </span>
+                <p className="font-semibold text-white">Hướng dẫn công tác GDHN</p>
+                <p className="text-[11px] text-rose-200/80">Ký bởi: PGĐ Nguyễn Phương Toàn (27/8/2026)</p>
+              </div>
+              <div className="bg-rose-950/40 border border-rose-700/50 rounded-xl p-3 space-y-1">
+                <span className="text-amber-300 font-bold block text-[11px] uppercase tracking-wider">
+                  CV 3408/SGDĐT-GDPT
+                </span>
+                <p className="font-semibold text-white">Thống kê & Đăng ký hỗ trợ</p>
+                <p className="text-[11px] text-rose-200/80">Kèm Phụ lục báo cáo (04/9/2026)</p>
+              </div>
+              <div className="bg-rose-950/40 border border-rose-700/50 rounded-xl p-3 space-y-1">
+                <span className="text-emerald-300 font-bold block text-[11px] uppercase tracking-wider">
+                  Kế hoạch 35/KH của trường
+                </span>
+                <p className="font-semibold text-white">Cụ thể hóa cho 25 HSKT</p>
+                <p className="text-[11px] text-rose-200/80">Điểm chính: 3 · ĐBK: 10 · Tân Kiều: 12</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {filteredDirectives.map((directive) => {
           const linkedDocs = getLinkedSchoolDocs(directive);
 

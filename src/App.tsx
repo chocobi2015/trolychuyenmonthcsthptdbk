@@ -13,7 +13,7 @@ import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
 import { INITIAL_DEPARTMENT_DIRECTIVES } from './data/mockDirectives';
 import { DirectiveCategory, DEFAULT_DIRECTIVE_CATEGORIES } from './data/categories';
 import { UploadDirectiveModal } from './components/UploadDirectiveModal';
-import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN } from './data/inclusiveEducationData';
+import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN, DIRECTIVE_3326_GDHN, DIRECTIVE_3408_GDHN } from './data/inclusiveEducationData';
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS), 25 học sinh khuyết tật học hòa nhập (03 HS THPT Điểm chính, 10 HS THCS Điểm Đốc Binh Kiều, 12 HS THCS Điểm Tân Kiều cách 11km).
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
@@ -38,6 +38,10 @@ export default function App() {
         for (const initDir of INITIAL_DEPARTMENT_DIRECTIVES) {
           map.set(initDir.id, initDir);
         }
+        // Đảm bảo văn bản GDHN (CV 3326 chuẩn Sở và CV 3408) luôn hiện diện và cập nhật mới nhất
+        map.set(DIRECTIVE_3326_GDHN.id, DIRECTIVE_3326_GDHN);
+        map.set(DIRECTIVE_3408_GDHN.id, DIRECTIVE_3408_GDHN);
+
         for (const userDir of parsed) {
           if (map.has(userDir.id)) continue;
           const isDuplicate = Array.from(map.values()).some((existing) => {
@@ -57,7 +61,9 @@ export default function App() {
             map.set(userDir.id, userDir);
           }
         }
-        return Array.from(map.values());
+        const mergedList = Array.from(map.values());
+        localStorage.setItem('dbk_department_directives', JSON.stringify(mergedList));
+        return mergedList;
       }
       return INITIAL_DEPARTMENT_DIRECTIVES;
     } catch {
