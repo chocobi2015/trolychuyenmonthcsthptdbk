@@ -1,5 +1,6 @@
 import { SchoolDocument } from '../types/document';
 import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN } from './inclusiveEducationData';
+import { OFFICIAL_AI_EDUCATION_PLAN } from './aiEducationData';
 
 export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
   {
@@ -379,5 +380,6 @@ export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
     "status": "official",
     "updatedAt": "2026-10-06T01:26:33.701Z"
   },
-  OFFICIAL_INCLUSIVE_EDUCATION_PLAN
+  OFFICIAL_INCLUSIVE_EDUCATION_PLAN,
+  OFFICIAL_AI_EDUCATION_PLAN
 ];
