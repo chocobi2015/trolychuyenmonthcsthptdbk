@@ -17,7 +17,7 @@ export const DIRECTIVE_1059_AI: DepartmentDirective = {
   fileSize: '1.8 MB (Toàn văn 8 trang & Phụ lục hướng dẫn ma trận 3 hình thức triển khai)',
   summary: 'Kế hoạch chỉ đạo trọng tâm của Sở GDĐT Đồng Tháp thực hiện hướng dẫn của Bộ GDĐT (CV 5588 và QĐ 2422): Triển khai nội dung giáo dục AI cốt lõi 12 tiết/lớp/năm học lồng ghép trong dạy học 2 buổi/ngày; kết hợp lồng ghép môn học và hoạt động CLB theo nhu cầu; bảo đảm công bằng, có phương án không thiết bị, an toàn dữ liệu, đạo đức và bản quyền; chế độ báo cáo qua https://baocao.gdpt.vn.',
   fileName: '1059_KH_SGNDT_28_8_2026_TrienKhaiGiaoDucAI_DongThap.pdf',
-  linkedSchoolDocumentIds: ['doc-kh-ai-40'],
+  linkedSchoolDocumentIds: ['doc-kh-ai-18'],
   fullContent: `UBND TỈNH ĐỒNG THÁP
 SỞ GIÁO DỤC VÀ ĐÀO TẠO
 
@@ -172,7 +172,7 @@ IV. DANH MỤC HỒ SƠ TỐI THIỂU TẠI CƠ SỞ GIÁO DỤC
 };
 
 /**
- * Kế hoạch số 40/KH-THCS&THPTĐBK ngày 03/9/2026 của Trường THCS và THPT Đốc Binh Kiều
+ * Kế hoạch số 18/KH-THCS&THPTĐBK ngày 05/9/2026 của Trường THCS và THPT Đốc Binh Kiều
  * CỤ THỂ HÓA 100% TỪ KẾ HOẠCH 1059/KH-SGDĐT CỦA SỞ GDĐT ĐỒNG THÁP:
  * - Quy mô: 53 lớp, hơn 2.100 học sinh (cấp THCS và THPT)
  * - 3 điểm trường: Điểm chính (THPT), Điểm Đốc Binh Kiều (THCS), Điểm Tân Kiều (THCS, cách 11km)
@@ -180,18 +180,18 @@ IV. DANH MỤC HỒ SƠ TỐI THIỂU TẠI CƠ SỞ GIÁO DỤC
  * - Đủ 13 mục theo cấu trúc gợi ý của Sở và chi tiết 3 hình thức triển khai, 10 quy tắc sử dụng AI.
  */
 export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
-  id: 'doc-kh-ai-40',
+  id: 'doc-kh-ai-18',
   type: 'plan',
   typeLabel: 'Kế hoạch',
-  documentNumber: 'Số: 40/KH-THCS&THPTĐBK',
+  documentNumber: 'Số: 18/KH-THCS&THPTĐBK',
   title: 'KẾ HOẠCH',
   subTitle: 'Triển khai thực hiện nội dung giáo dục trí tuệ nhân tạo (AI) năm học 2026 - 2027',
   issuingAuthorityTop: 'SỞ GDĐT TỈNH ĐỒNG THÁP',
   issuingAuthority: 'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
   signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
   signerName: 'Nguyễn Minh Trí',
-  signDate: 'Đốc Binh Kiều, ngày 03 tháng 9 năm 2026',
-  createdDate: '2026-09-03T08:00:00Z',
+  signDate: 'Đốc Binh Kiều, ngày 05 tháng 9 năm 2026',
+  createdDate: '2026-09-05T08:00:00Z',
   sourceDirectiveId: 'directive-1059-ai',
   sourceDirective: 'Kế hoạch số 1059/KH-SGDĐT ngày 28/8/2026 của Sở GDĐT tỉnh Đồng Tháp',
   sourceDirectiveFullText: 'Kế hoạch Triển khai thực hiện nội dung giáo dục trí tuệ nhân tạo cho học sinh phổ thông trên địa bàn tỉnh Đồng Tháp từ năm học 2026 - 2027 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp.',
@@ -367,7 +367,7 @@ Mọi sự cố về an toàn thông tin, nghi vấn tài khoản bị đánh c�
       heading: 'VIII. DANH MỤC HỒ SƠ QUẢN LÝ TỐI THIỂU TẠI TRƯỜNG',
       content: `Căn cứ Phụ lục IV của Kế hoạch số 1059/KH-SGDĐT, nhà trường thiết lập và lưu trữ đầy đủ 06 bộ hồ sơ quản lý tối thiểu sau:
 
-1. Bộ hồ sơ 1: Kế hoạch giáo dục AI của nhà trường (Kế hoạch số 40/KH-THCS&THPTĐBK, Quyết định thành lập Tổ công tác triển khai giáo dục AI năm học 2026 - 2027).
+1. Bộ hồ sơ 1: Kế hoạch giáo dục AI của nhà trường (Kế hoạch số 18/KH-THCS&THPTĐBK, Quyết định thành lập Tổ công tác triển khai giáo dục AI năm học 2026 - 2027).
 2. Bộ hồ sơ 2: Kế hoạch dạy học chuyên đề cốt lõi 12 tiết của Tổ Tin học (Kèm ma trận phân phối chương trình, giáo án/KHBD chi tiết, phiếu học tập, phương án học tập không thiết bị).
 3. Bộ hồ sơ 3: Quy tắc sử dụng AI trong nhà trường (Văn bản Quy định 10 nguyên tắc sử dụng AI, bản cam kết có chữ ký của học sinh và biên bản sinh hoạt lớp triển khai quy tắc).
 4. Bộ hồ sơ 4: Hồ sơ rà soát danh mục công cụ, phần mềm, học liệu AI (Biên bản thẩm định chuyên môn của Tổ Tin học về tính an toàn, bảo mật, độ tuổi phù hợp và bản quyền của các công cụ đưa vào giảng dạy).
@@ -431,7 +431,7 @@ Mọi sự cố về an toàn thông tin, nghi vấn tài khoản bị đánh c�
     {
       heading: 'XI. CHẾ ĐỘ THÔNG TIN, BÁO CÁO VÀ TIẾN ĐỘ THỜI GIAN',
       content: `1. Tiến độ thời gian thực hiện:
-- Ngày 01/9 - 03/9/2026: Ban Giám hiệu hoàn thiện và ban hành Kế hoạch số 40/KH-THCS&THPTĐBK; Tổ Tin học hoàn thiện giáo án 12 tiết chuyên đề cốt lõi.
+- Ngày 01/9 - 05/9/2026: Ban Giám hiệu hoàn thiện và ban hành Kế hoạch số 18/KH-THCS&THPTĐBK; Tổ Tin học hoàn thiện giáo án 12 tiết chuyên đề cốt lõi.
 - Trước ngày 05/9/2026: Gửi Kế hoạch giáo dục AI của nhà trường về Sở GDĐT qua hệ thống liên kết https://baocao.gdpt.vn và email Phòng Giáo dục Phổ thông.
 - Từ ngày 07/9/2026: Bắt đầu triển khai giảng dạy chuyên đề AI buổi chiều và lồng ghép trong các môn học tại 53 lớp ở cả 3 điểm trường.
 - Tháng 10/2026: Ra mắt Câu lạc bộ "Tin học & AI Đốc Binh Kiều"; tổ chức kiểm tra rà soát việc thực hiện tại Điểm Tân Kiều.
@@ -445,7 +445,7 @@ Mọi sự cố về an toàn thông tin, nghi vấn tài khoản bị đánh c�
     },
     {
       heading: 'PHỤ LỤC I: KHUNG PHÂN PHỐI THỜI LƯỢNG 12 TIẾT CHUYÊN ĐỀ GIÁO DỤC AI CỐT LÕI (DẠY HỌC BUỔI 2)',
-      content: `(Kèm theo Kế hoạch số 40/KH-THCS&THPTĐBK ngày 03 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều)
+      content: `(Kèm theo Kế hoạch số 18/KH-THCS&THPTĐBK ngày 05 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều)
 
 | Tiết | Khối 6, 7 (THCS) | Khối 8, 9 (THCS) | Khối 10, 11, 12 (THPT) | Hình thức / Học liệu | Ghi chú |
 | :---: | :--- | :--- | :--- | :--- | :--- |
@@ -464,7 +464,7 @@ Mọi sự cố về an toàn thông tin, nghi vấn tài khoản bị đánh c�
     },
     {
       heading: 'PHỤ LỤC II: MA TRẬN PHỐI HỢP 3 HÌNH THỨC TRIỂN KHAI TẠI CÁC ĐIỂM TRƯỜNG',
-      content: `(Kèm theo Kế hoạch số 40/KH-THCS&THPTĐBK ngày 03 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều)
+      content: `(Kèm theo Kế hoạch số 18/KH-THCS&THPTĐBK ngày 05 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều)
 
 | Hình thức | Mục tiêu chính | Địa điểm & Đối tượng | Thời lượng | Người phụ trách chính | Sản phẩm minh chứng |
 | :--- | :--- | :--- | :--- | :--- | :--- |

@@ -15,6 +15,7 @@ import { DirectiveCategory, DEFAULT_DIRECTIVE_CATEGORIES } from './data/categori
 import { UploadDirectiveModal } from './components/UploadDirectiveModal';
 import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN, DIRECTIVE_3326_GDHN, DIRECTIVE_3408_GDHN } from './data/inclusiveEducationData';
 import { OFFICIAL_AI_EDUCATION_PLAN } from './data/aiEducationData';
+import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './data/qualityManagementData';
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS), 25 học sinh khuyết tật học hòa nhập (03 HS THPT Điểm chính, 10 HS THCS Điểm Đốc Binh Kiều, 12 HS THCS Điểm Tân Kiều cách 11km).
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
@@ -107,11 +108,20 @@ export default function App() {
             signerName: 'Nguyễn Minh Trí'
           };
         }
-        if (updated.id === 'doc-kh-ai-40') {
+        if (updated.id === 'doc-kh-ai-40' || updated.id === 'doc-kh-ai-18') {
           return {
             ...OFFICIAL_AI_EDUCATION_PLAN,
-            id: 'doc-kh-ai-40',
-            documentNumber: 'Số: 40/KH-THCS&THPTĐBK',
+            id: 'doc-kh-ai-18',
+            documentNumber: 'Số: 18/KH-THCS&THPTĐBK',
+            signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
+            signerName: 'Nguyễn Minh Trí'
+          };
+        }
+        if (updated.id === 'doc-kh-qlcl-20') {
+          return {
+            ...OFFICIAL_QUALITY_MANAGEMENT_PLAN,
+            id: 'doc-kh-qlcl-20',
+            documentNumber: 'Số: 20/KH-THCS&THPTĐBK',
             signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
             signerName: 'Nguyễn Minh Trí'
           };
@@ -251,9 +261,13 @@ export default function App() {
                   updated.id = 'doc-kh-gdhn-15';
                   updated.documentNumber = 'Số: 15/KH-THCS&THPTĐBK';
                 }
-                if (updated.id === 'doc-kh-ai-40') {
-                  updated.id = 'doc-kh-ai-40';
-                  updated.documentNumber = 'Số: 40/KH-THCS&THPTĐBK';
+                if (updated.id === 'doc-kh-ai-40' || updated.id === 'doc-kh-ai-18') {
+                  updated.id = 'doc-kh-ai-18';
+                  updated.documentNumber = 'Số: 18/KH-THCS&THPTĐBK';
+                }
+                if (updated.id === 'doc-kh-qlcl-20') {
+                  updated.id = 'doc-kh-qlcl-20';
+                  updated.documentNumber = 'Số: 20/KH-THCS&THPTĐBK';
                 }
                 if (!updated.signerName || updated.signerName === 'Lê Thanh Cường') {
                   updated.signerRole = 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG';
