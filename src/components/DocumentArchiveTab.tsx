@@ -12,7 +12,10 @@ import {
   CheckCircle, 
   Clock,
   Printer,
-  ChevronRight
+  ChevronRight,
+  ArrowDownUp,
+  ArrowDown,
+  ArrowUp
 } from 'lucide-react';
 import { SchoolDocument, DOCUMENT_TYPES } from '../types/document';
 import { exportDocumentToDocx } from '../utils/docxExport';
@@ -32,16 +35,41 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string>('ALL');
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
 
-  const filteredDocs = documents.filter((doc) => {
-    const matchesType = selectedType === 'ALL' || doc.type === selectedType;
-    const matchesSearch =
-      doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      doc.documentNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (doc.subTitle && doc.subTitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      doc.signerName.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesType && matchesSearch;
-  });
+  // Hàm trích xuất mốc thời gian chính xác từ ngày ký văn bản (VD: "Đồng Tháp, ngày 09 tháng 10 năm 2026")
+  const getDocumentTimestamp = (doc: SchoolDocument): number => {
+    if (doc.signDate) {
+      const match = doc.signDate.match(/ngày\s+(\d{1,2})\s+tháng\s+(\d{1,2})\s+năm\s+(\d{4})/i);
+      if (match) {
+        const day = parseInt(match[1], 10);
+        const month = parseInt(match[2], 10) - 1; // 0-indexed
+        const year = parseInt(match[3], 10);
+        return new Date(year, month, day).getTime();
+      }
+    }
+    if (doc.createdDate) {
+      const time = new Date(doc.createdDate).getTime();
+      if (!isNaN(time)) return time;
+    }
+    return 0;
+  };
+
+  const filteredDocs = documents
+    .filter((doc) => {
+      const matchesType = selectedType === 'ALL' || doc.type === selectedType;
+      const matchesSearch =
+        doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doc.documentNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (doc.subTitle && doc.subTitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        doc.signerName.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesType && matchesSearch;
+    })
+    .sort((a, b) => {
+      const timeA = getDocumentTimestamp(a);
+      const timeB = getDocumentTimestamp(b);
+      return sortOrder === 'newest' ? timeB - timeA : timeA - timeB;
+    });
 
   const getTypeLabel = (type: string) => {
     const found = DOCUMENT_TYPES.find((d) => d.type === type);
@@ -121,6 +149,24 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
               ))}
             </select>
           </div>
+        </div>
+
+        {/* Sort Order Selector (Mới nhất -> Cũ nhất) */}
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
+            className="px-3 py-2 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition shadow-2xs"
+            title={`Bấm để đảo chiều sắp xếp (Hiện tại: ${sortOrder === 'newest' ? 'Mới nhất đến cũ nhất' : 'Cũ nhất đến mới nhất'})`}
+          >
+            <ArrowDownUp className="w-3.5 h-3.5 text-blue-600" />
+            <span className="text-slate-500">Sắp xếp:</span>
+            <span className="font-bold text-blue-800">
+              {sortOrder === 'newest' ? 'Mới nhất → Cũ nhất' : 'Cũ nhất → Mới nhất'}
+            </span>
+          </button>
+          <span className="text-xs text-slate-500 font-medium whitespace-nowrap hidden sm:inline">
+            ({filteredDocs.length} văn bản)
+          </span>
         </div>
       </div>
 
