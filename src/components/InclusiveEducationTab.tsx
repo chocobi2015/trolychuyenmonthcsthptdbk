@@ -151,20 +151,20 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
               <button
                 onClick={() => onOpenDocumentInEditor(OFFICIAL_INCLUSIVE_EDUCATION_PLAN)}
                 className="px-4 py-2.5 rounded-xl bg-white text-rose-900 hover:bg-rose-50 text-xs font-bold flex items-center gap-2 shadow-md transition transform hover:-translate-y-0.5"
-                title="Mở Kế hoạch số 35/KH-THCS&THPTĐBK trong Trình soạn thảo A4 Word"
+                title="Mở Kế hoạch số 15/KH-THCS&THPTĐBK trong Trình xem A4 Word"
               >
-                <Edit3 className="w-4 h-4 text-rose-700" />
-                <span>Mở Soạn Thảo Kế Hoạch 35</span>
+                <FileText className="w-4 h-4 text-rose-700" />
+                <span>Xem Kế Hoạch 15/KH</span>
               </button>
 
               <button
                 onClick={handleExportPlanWord}
                 disabled={isExportingWord}
                 className="px-4 py-2.5 rounded-xl bg-rose-700/80 hover:bg-rose-600 text-white border border-rose-400/40 text-xs font-semibold flex items-center gap-2 transition"
-                title="Tải file Word Kế hoạch số 35/KH-THCS&THPTĐBK (.docx)"
+                title="Tải file Word Kế hoạch số 15/KH-THCS&THPTĐBK (.docx)"
               >
                 <Download className="w-4 h-4" />
-                <span>{isExportingWord ? 'Đang xuất Word...' : 'Tải File Word Kế Hoạch 35'}</span>
+                <span>{isExportingWord ? 'Đang xuất Word...' : 'Tải File Word Kế Hoạch 15'}</span>
               </button>
 
               <button
@@ -247,7 +247,7 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
           }`}
         >
           <FileText className="w-4 h-4" />
-          <span>2. Kế Hoạch Trường (Số 35/KH - Đã Cập Nhật 3 Điểm)</span>
+          <span>2. Kế Hoạch Trường (Số 15/KH - Đã Cập Nhật 3 Điểm)</span>
         </button>
 
         <button
@@ -502,7 +502,7 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
         </div>
       )}
 
-      {/* SUB-TAB 2: KẾ HOẠCH TRƯỜNG SỐ 35/KH (ĐÃ ĐIỀU CHỈNH 3 ĐIỂM TRƯỜNG) */}
+      {/* SUB-TAB 2: KẾ HOẠCH TRƯỜNG SỐ 15/KH (ĐÃ ĐIỀU CHỈNH 3 ĐIỂM TRƯỜNG) */}
       {activeSubTab === 'plan' && (
         <div className="space-y-6">
           {/* Action cards banner */}
@@ -530,8 +530,8 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
                 onClick={() => onOpenDocumentInEditor(OFFICIAL_INCLUSIVE_EDUCATION_PLAN)}
                 className="px-3.5 py-2 rounded-lg bg-rose-700 hover:bg-rose-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition"
               >
-                <Edit3 className="w-3.5 h-3.5" />
-                <span>Mở trong Trình soạn thảo A4 Word</span>
+                <FileText className="w-3.5 h-3.5" />
+                <span>Mở xem A4 chuẩn NĐ 30</span>
               </button>
 
               <button

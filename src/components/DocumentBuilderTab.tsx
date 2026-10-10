@@ -885,7 +885,7 @@ Cụ thể hóa văn bản chỉ đạo sau đây thành một [KẾ HOẠCH / Q
                 <strong>Bước 2:</strong> Sau khi AI trong khung chat tạo ra văn bản, bạn sao chép toàn bộ nội dung đó.
               </p>
               <p>
-                <strong>Bước 3:</strong> Dán vào ô bên phải và bấm <em>"Đưa Lên Trình Soạn Thảo & Xuất File"</em> để xem trên mẫu A4, chỉnh sửa và tải tệp Word (.docx).
+                <strong>Bước 3:</strong> Dán vào ô bên phải và bấm <em>"Đưa Lên Trình Xem A4 & Xuất File"</em> để xem trên mẫu A4 chuẩn Nghị định 30, in ấn và tải tệp Word (.docx).
               </p>
             </div>
 
@@ -938,7 +938,7 @@ Cụ thể hóa văn bản chỉ đạo sau đây thành một [KẾ HOẠCH / Q
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-800 hover:to-teal-800 text-white text-xs font-bold flex items-center gap-2 shadow-sm transition"
               >
                 <FileCheck className="w-4 h-4 text-emerald-200" />
-                <span>ĐƯA LÊN TRÌNH SOẠN THẢO & XUẤT FILE NGAY</span>
+                <span>ĐƯA LÊN TRÌNH XEM A4 & XUẤT FILE</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

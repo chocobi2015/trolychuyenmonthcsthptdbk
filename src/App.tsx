@@ -94,9 +94,14 @@ export default function App() {
         if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
           updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
         }
-        if (updated.id === 'doc-kh-gdhn-35') {
+        if (updated.id === 'doc-kh-2buoi') {
+          updated.documentNumber = 'Số: 35/KH-THCS&THPTĐBK';
+        }
+        if (updated.id === 'doc-kh-gdhn-35' || updated.id === 'doc-kh-gdhn-15') {
           return {
             ...OFFICIAL_INCLUSIVE_EDUCATION_PLAN,
+            id: 'doc-kh-gdhn-15',
+            documentNumber: 'Số: 15/KH-THCS&THPTĐBK',
             signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
             signerName: 'Nguyễn Minh Trí'
           };
@@ -228,6 +233,13 @@ export default function App() {
                 }
                 if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
                   updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
+                }
+                if (updated.id === 'doc-kh-2buoi') {
+                  updated.documentNumber = 'Số: 35/KH-THCS&THPTĐBK';
+                }
+                if (updated.id === 'doc-kh-gdhn-35' || updated.id === 'doc-kh-gdhn-15') {
+                  updated.id = 'doc-kh-gdhn-15';
+                  updated.documentNumber = 'Số: 15/KH-THCS&THPTĐBK';
                 }
                 if (!updated.signerName || updated.signerName === 'Lê Thanh Cường') {
                   updated.signerRole = 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG';

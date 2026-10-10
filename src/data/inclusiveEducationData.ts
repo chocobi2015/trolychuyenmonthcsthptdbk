@@ -16,7 +16,7 @@ export const DIRECTIVE_3326_GDHN: DepartmentDirective = {
   fileName: 'CV 3326-HD GIAO DUC HOA NHAP HSKT-GDPT.pdf',
   fileSize: '1.8 MB (Bản ký số điện tử của Sở GDĐT)',
   createdDate: '2026-08-27T00:00:00.000Z',
-  linkedSchoolDocumentIds: ['doc-kh-gdhn-35'],
+  linkedSchoolDocumentIds: ['doc-kh-gdhn-15'],
   fullContent: `UBND TỈNH ĐỒNG THÁP                    CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
 SỞ GIÁO DỤC VÀ ĐÀO TẠO                        Độc lập - Tự do - Hạnh phúc
 Số: 3326/SGDĐT-GDPT                    Đồng Tháp, ngày 27 tháng 8 năm 2026
@@ -132,7 +132,7 @@ KT. GIÁM ĐỐC - PHÓ GIÁM ĐỐC Huỳnh Thanh Hùng (đã ký)`,
   createdDate: '2026-09-04T08:00:00Z',
   fileName: 'cv_3408_sgddt_thong_ke_nhu_cau_gdhn.pdf',
   fileSize: '1.2 MB',
-  linkedSchoolDocumentIds: ['doc-kh-gdhn-35']
+  linkedSchoolDocumentIds: ['doc-kh-gdhn-15']
 };
 
 /**
@@ -192,10 +192,10 @@ export const INCLUSIVE_DEMAND_SURVEY = [
  * - Cấp THCS - Điểm Tân Kiều (cách 11km): 12 học sinh (6A9, 6A10, 7A9, 8A9, 8A10, 9A9, 9A10)
  */
 export const OFFICIAL_INCLUSIVE_EDUCATION_PLAN: SchoolDocument = {
-  id: 'doc-kh-gdhn-35',
+  id: 'doc-kh-gdhn-15',
   type: 'plan',
   typeLabel: 'Kế hoạch',
-  documentNumber: 'Số: 35/KH-THCS&THPTĐBK',
+  documentNumber: 'Số: 15/KH-THCS&THPTĐBK',
   title: 'KẾ HOẠCH',
   subTitle: 'Thực hiện công tác giáo dục hòa nhập học sinh khuyết tật năm học 2026 - 2027',
   issuingAuthorityTop: 'SỞ GDĐT TỈNH ĐỒNG THÁP',

@@ -606,7 +606,7 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
               </div>
               <div className="bg-rose-950/40 border border-rose-700/50 rounded-xl p-3 space-y-1">
                 <span className="text-emerald-300 font-bold block text-[11px] uppercase tracking-wider">
-                  Kế hoạch 35/KH của trường
+                  Kế hoạch 15/KH của trường
                 </span>
                 <p className="font-semibold text-white">Cụ thể hóa cho 25 HSKT</p>
                 <p className="text-[11px] text-rose-200/80">Điểm chính: 3 · ĐBK: 10 · Tân Kiều: 12</p>

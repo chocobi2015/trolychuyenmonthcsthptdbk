@@ -202,7 +202,7 @@ export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
     "id": "doc-kh-2buoi",
     "type": "plan",
     "typeLabel": "Kế hoạch",
-    "documentNumber": "Số: 33/KH-THCS&THPTĐBK",
+    "documentNumber": "Số: 35/KH-THCS&THPTĐBK",
     "title": "KẾ HOẠCH",
     "subTitle": "Tổ chức dạy học 2 buổi/ngày năm học 2026 - 2027",
     "signDate": "Đồng Tháp, ngày 28 tháng 9 năm 2026",
