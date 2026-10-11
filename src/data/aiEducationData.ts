@@ -201,8 +201,6 @@ export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
     'Kế hoạch số 1251/KH-UBND ngày 17 tháng 8 năm 2026 của Ủy ban nhân dân tỉnh Đồng Tháp về tổ chức dạy học 2 buổi/ngày đối với cơ sở giáo dục phổ thông trên địa bàn tỉnh Đồng Tháp',
     'Kế hoạch số 2890/KH-SGDĐT ngày 27 tháng 8 năm 2026 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp về triển khai tổ chức dạy học 2 buổi/ngày đối với cơ sở giáo dục phổ thông trên địa bàn tỉnh Đồng Tháp',
     'Kế hoạch số 1059/KH-SGDĐT ngày 28 tháng 8 năm 2026 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp về việc triển khai thực hiện nội dung giáo dục trí tuệ nhân tạo cho học sinh phổ thông trên địa bàn tỉnh Đồng Tháp từ năm học 2026 - 2027',
-    'Kế hoạch số 34/KH-THCS&THPTĐBK ngày 25 tháng 8 năm 2026 của Trường THCS và THPT Đốc Binh Kiều về Kế hoạch Giáo dục Nhà trường năm học 2026 - 2027',
-    'Kế hoạch số 35/KH-THCS&THPTĐBK ngày 28 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều về việc tổ chức dạy học 2 buổi/ngày năm học 2026 - 2027'
   ],
   sections: [
     {
@@ -292,7 +290,7 @@ Trang bị những kiến thức và kỹ năng cơ bản, tối thiểu, thiế
       content: `Thực hiện nghiêm túc Ma trận phối hợp 03 hình thức triển khai theo chỉ đạo tại Kế hoạch số 1059/KH-SGDĐT của Sở GDĐT Đồng Tháp:
 
 1. Hình thức 1: Thực hiện chuyên đề giáo dục AI (Nội dung cốt lõi 12 tiết)
-- Bố trí trong Kế hoạch dạy học 2 buổi/ngày (buổi chiều) của nhà trường theo đúng Kế hoạch số 35/KH-THCS&THPTĐBK:
+- Bố trí trong Kế hoạch dạy học 2 buổi/ngày (buổi chiều) của nhà trường theo định hướng dạy học 2 buổi/ngày của Sở GDĐT:
   + Thời lượng: 12 tiết/lớp/năm học (bố trí 01 tiết/tuần trong 12 tuần của năm học: 08 tuần trong Học kỳ I và 04 tuần đầu Học kỳ II).
   + Lực lượng phụ trách: Giáo viên Tổ Tin học làm nòng cốt giảng dạy trực tiếp tại các phòng máy vi tính và phòng học bộ môn của 3 điểm trường.
   + Phương án thích ứng (Không thiết bị): Tại các lớp hoặc tuần học luân phiên chưa thể bố trí phòng máy, giáo viên triển khai phương pháp "AI không cắm điện" (Unplugged AI) bằng phiếu bài tập trực quan, đóng vai thuật toán, thảo luận tình huống thực tế; đảm bảo 100% học sinh đều đạt chuẩn kiến thức kỹ năng mà không bị gián đoạn.

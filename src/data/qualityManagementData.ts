@@ -132,7 +132,6 @@ export const OFFICIAL_QUALITY_MANAGEMENT_PLAN: SchoolDocument = {
     'Thông tư số 09/2024/TT-BGDĐT ngày 03 tháng 6 năm 2024 của Bộ trưởng Bộ Giáo dục và Đào tạo quy định về công khai trong hoạt động của các cơ sở giáo dục thuộc hệ thống giáo dục quốc dân',
     'Công văn số 5922/BGDĐT-GDPT ngày 03 tháng 9 năm 2026 của Bộ Giáo dục và Đào tạo về việc rà soát, cắt giảm các cuộc thi, hội thi, phong trào không cần thiết nhằm giảm áp lực cho học sinh và giáo viên',
     'Công văn số 3562/SGDĐT-QLCL ngày 14 tháng 9 năm 2026 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp về việc hướng dẫn thực hiện nhiệm vụ quản lý chất lượng năm học 2026 - 2027',
-    'Kế hoạch số 34/KH-THCS&THPTĐBK ngày 25 tháng 8 năm 2026 của Trường THCS và THPT Đốc Binh Kiều về Kế hoạch Giáo dục Nhà trường năm học 2026 - 2027'
   ],
   sections: [
     {

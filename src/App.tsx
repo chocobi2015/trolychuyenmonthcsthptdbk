@@ -8,6 +8,7 @@ import { DepartmentDirectivesTab } from './components/DepartmentDirectivesTab';
 import { SchoolContextPanel } from './components/SchoolContextPanel';
 import { TeacherDirectoryTab } from './components/TeacherDirectoryTab';
 import { InclusiveEducationTab } from './components/InclusiveEducationTab';
+import { DepartmentMeetingsTab } from './components/DepartmentMeetingsTab';
 import { SchoolDocument, DepartmentDirective } from './types/document';
 import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
 import { INITIAL_DEPARTMENT_DIRECTIVES } from './data/mockDirectives';
@@ -655,7 +656,12 @@ export default function App() {
           </div>
         )}
 
-        {/* Tab 6: Inclusive Education (Giáo dục hòa nhập - CV 3326 & Kế hoạch 35) */}
+        {/* Tab 6: Department Meetings (Tổ chuyên môn - Họp tổ 2 tuần/lần & biên bản) */}
+        {activeTab === 'department_meetings' && (
+          <DepartmentMeetingsTab />
+        )}
+
+        {/* Tab 7: Inclusive Education (Giáo dục hòa nhập - CV 3326 & Kế hoạch 15) */}
         {activeTab === 'inclusive_education' && (
           <InclusiveEducationTab
             onOpenDocumentInEditor={(doc) => {

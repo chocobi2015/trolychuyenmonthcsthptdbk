@@ -20,6 +20,28 @@ app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 const PERSISTED_DOCS_PATH = path.join(__dirname, 'src', 'data', 'persistedDocuments.json');
 const PERSISTED_DIRECTIVES_PATH = path.join(__dirname, 'src', 'data', 'persistedDirectives.json');
 const PERSISTED_CATEGORIES_PATH = path.join(__dirname, 'src', 'data', 'persistedCategories.json');
+const PERSISTED_MEETINGS_PATH = path.join(__dirname, 'src', 'data', 'persistedDepartmentMeetings.json');
+
+function getPersistedDepartmentMeetings(): any[] {
+  try {
+    if (fs.existsSync(PERSISTED_MEETINGS_PATH)) {
+      const data = fs.readFileSync(PERSISTED_MEETINGS_PATH, 'utf-8');
+      const list = JSON.parse(data);
+      if (Array.isArray(list)) return list;
+    }
+  } catch (e) {
+    console.error('Failed to read persisted department meetings:', e);
+  }
+  return [];
+}
+
+function savePersistedDepartmentMeetings(meetings: any[]) {
+  try {
+    fs.writeFileSync(PERSISTED_MEETINGS_PATH, JSON.stringify(meetings, null, 2), 'utf-8');
+  } catch (e) {
+    console.error('Failed to write persisted department meetings:', e);
+  }
+}
 
 const DEFAULT_CATEGORIES = [
   { id: 'all', name: 'Tất cả chuyên đề', label: 'Tất cả chuyên đề' },
@@ -1058,6 +1080,50 @@ app.delete('/api/categories/:id', (req, res) => {
   }
 });
 
+// API: Get all department meetings from server disk
+app.get('/api/department-meetings', (req, res) => {
+  try {
+    const list = getPersistedDepartmentMeetings();
+    res.json({ success: true, data: list });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// API: Save or update a department meeting permanently to server disk
+app.post('/api/department-meetings', (req, res) => {
+  try {
+    const meeting = req.body;
+    if (!meeting || !meeting.id) {
+      return res.status(400).json({ success: false, error: 'Meeting id is required' });
+    }
+    const list = getPersistedDepartmentMeetings();
+    const idx = list.findIndex((m: any) => m.id === meeting.id);
+    if (idx !== -1) {
+      list[idx] = { ...list[idx], ...meeting, updatedAt: new Date().toISOString() };
+    } else {
+      list.unshift({ ...meeting, createdAt: meeting.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString() });
+    }
+    savePersistedDepartmentMeetings(list);
+    res.json({ success: true, data: idx !== -1 ? list[idx] : list[0] });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// API: Delete department meeting from server disk
+app.delete('/api/department-meetings/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    let list = getPersistedDepartmentMeetings();
+    list = list.filter((m: any) => m.id !== id);
+    savePersistedDepartmentMeetings(list);
+    res.json({ success: true, message: 'Deleted successfully' });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // API: Contextualize Higher Directives into Official School Administrative Documents (Nghị định 30/2020/NĐ-CP)
 app.post('/api/documents/contextualize', async (req, res) => {
   try {
@@ -1094,6 +1160,11 @@ app.post('/api/documents/contextualize', async (req, res) => {
     const targetTypeLabel = typeLabels[documentType] || 'KẾ HOẠCH';
     const targetCodePrefix = typeCodePrefixes[documentType] || 'KH-THCS&THPTĐBK';
 
+    const meetings = getPersistedDepartmentMeetings();
+    const meetingsContext = meetings.length > 0
+      ? meetings.slice(0, 7).map((m: any) => `- [${m.departmentName} - ${m.week}]: ${m.topic}. Nghị quyết: ${m.resolutions?.[0] || 'Chấp hành nghiêm túc tiến độ.'}`).join('\n')
+      : 'Các tổ chuyên môn đang tích cực triển khai kế hoạch giáo dục năm học.';
+
     const prompt = `
 Bạn là Thư ký Chuyên môn và Trợ lý Quản lý Giáo dục cao cấp của Trường THCS và THPT Đốc Binh Kiều (tỉnh Đồng Tháp).
 Thầy Phó Hiệu Trưởng Nguyễn Minh Trí giao nhiệm vụ CỤ THỂ HÓA VĂN BẢN CHỈ ĐẠO CỦA CẤP TRÊN thành văn bản hành chính sư phạm chính thức của nhà trường.
@@ -1108,11 +1179,20 @@ THÔNG TIN TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU:
 - Cơ cấu: 07 Tổ chuyên môn (Tổ Toán 15 GV, Tổ Ngữ văn 12 GV, Tổ KHTN-CN 26 GV, Tổ Lịch sử-Địa lý-GDCD 16 GV, Tổ Tiếng Anh-Tin học 16 GV, Tổ GDTC-QPAN-Nghệ thuật 12 GV, Ban Giám hiệu).
 - Lãnh đạo ký văn bản: ${signerRole} - Họ tên: ${signerName}.
 
+NGỮ CẢNH CÔNG VIỆC THỰC TẾ TỪ CÁC BIÊN BẢN HỌP TỔ CHUYÊN MÔN (2 TUẦN/LẦN) ĐÃ NỘP:
+${meetingsContext}
+
 YÊU CẦU THỰC HIỆN:
 - Loại văn bản cần ban hành: ${targetTypeLabel} (${documentType})
 - Số hiệu văn bản dự kiến: ${customDocumentNumber || `Số: .../${targetCodePrefix}`}
 - Tiêu đề mong muốn (nếu có): ${customTitle || 'Tự động tạo tiêu đề phù hợp chuẩn văn thư'}
 - Yêu cầu trọng tâm của Phó Hiệu Trưởng: ${specificFocus || 'Cụ thể hóa chi tiết cho 53 lớp, chú trọng giải pháp điểm Tân Kiều cách 11km và ứng dụng chuyển đổi số/AI thực tiễn.'}
+
+QUY TẮC BẮT BUỘC VỀ CĂN CỨ VĂN BẢN (LEGAL BASES) & THỜI GIAN THEO CHỈ ĐẠO CỦA THẦY:
+1. Căn cứ pháp lý chỉ được viện dẫn các văn bản cấp trên (Bộ GDĐT, UBND tỉnh, Sở GDĐT) hoặc văn bản của trường ĐÃ ĐƯỢC BAN HÀNH TRƯỚC ngày ký của văn bản này.
+2. TUYỆT ĐỐI KHÔNG đưa vào căn cứ các văn bản nội bộ của trường có ngày ban hành trong tương lai hoặc có số hiệu lớn hơn văn bản đang xây dựng (Ví dụ: một văn bản có ngày ký là 05/9/2026 thì TUYỆT ĐỐI KHÔNG căn cứ Kế hoạch 34 ngày 25/9 hay Kế hoạch 35 ngày 28/9 của trường; ngày 05/9 là ngày trước, hai ngày kia là của tương lai).
+3. Dù nội dung có kế thừa các kế hoạch khác thì chỉ tự ngầm hiểu để triển khai nội dung trong các mục, KHÔNG ĐƯỢC ĐƯA VÀO PHẦN CĂN CỨ vì rất vô lý.
+4. Căn cứ pháp lý chỉ giữ 01 hoặc 02 dòng chuẩn xác nhất: (1) Văn bản chỉ đạo trực tiếp của Sở GDĐT/Bộ GDĐT đang cụ thể hóa; (2) Kế hoạch thời gian năm học hoặc văn bản cấp trên có liên quan ban hành trước thời điểm này.
 
 VĂN BẢN NGUỒN CỦA SỞ / BỘ / CẤP TRÊN GỬI VÀO ĐỂ CỤ THỂ HÓA:
 """
@@ -1134,9 +1214,9 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
   "sourceDirective": "Tên và số hiệu văn bản nguồn của cấp trên",
   "legalBases": [
     "Căn cứ [Văn bản/công văn chỉ đạo trực tiếp của Sở GDĐT hoặc Bộ GDĐT đang cụ thể hóa, ghi rõ số, ngày ban hành, cơ quan ban hành và trích yếu nội dung];",
-    "Căn cứ Kế hoạch số 34/KH-THCS&THPTĐBK ngày 25 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều về Kế hoạch giáo dục nhà trường năm học 2026 - 2027."
+    "Căn cứ [Văn bản pháp quy của cấp trên đã ban hành trước thời điểm này hoặc tình hình thực tế tại đơn vị];"
   ],
-  "__NOTE_LEGAL_BASES__": "QUY TẮC CỨNG: Chỉ để lại đúng 01 hoặc 02 căn cứ quan trọng nhất ở trên, tuyệt đối không liệt kê tràn lan các thông tư khác",
+  "__NOTE_LEGAL_BASES__": "QUY TẮC CỨNG: Chỉ để lại đúng 01 hoặc 02 căn cứ quan trọng nhất ở trên, tuyệt đối không liệt kê tràn lan các thông tư khác và tuyệt đối không căn cứ văn bản tương lai",
   "sections": [
     {
       "heading": "I. MỤC ĐÍCH, YÊU CẦU",

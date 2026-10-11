@@ -13,6 +13,7 @@ import {
   UnderlineType,
 } from 'docx';
 import { SchoolDocument } from '../types/document';
+import { DepartmentMeeting } from '../types/meeting';
 
 export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
   const noBorder = {
@@ -605,3 +606,376 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
   document.body.removeChild(anchor);
   URL.revokeObjectURL(url);
 }
+
+export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<void> {
+  const noBorder = {
+    top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    left: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    right: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    insideHorizontal: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    insideVertical: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+  };
+
+  const cellNoBorder = {
+    top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    left: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    right: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+  };
+
+  const colLeftWidth = 4100;
+  const colRightWidth = 5369;
+  const totalHeaderWidth = colLeftWidth + colRightWidth;
+
+  const headerTable = new Table({
+    layout: TableLayoutType.FIXED,
+    columnWidths: [colLeftWidth, colRightWidth],
+    width: { size: totalHeaderWidth, type: WidthType.DXA },
+    borders: noBorder,
+    rows: [
+      new TableRow({
+        children: [
+          new TableCell({
+            width: { size: colLeftWidth, type: WidthType.DXA },
+            borders: cellNoBorder,
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: 'SỞ GDĐT TỈNH ĐỒNG THÁP', font: 'Times New Roman', size: 24, bold: false }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: 'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU', font: 'Times New Roman', size: 24, bold: true }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: meeting.departmentName.toUpperCase(), font: 'Times New Roman', size: 24, bold: true }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: meeting.meetingNumber || 'Số: .../BB', font: 'Times New Roman', size: 24, bold: false }),
+                ],
+              }),
+            ],
+          }),
+          new TableCell({
+            width: { size: colRightWidth, type: WidthType.DXA },
+            borders: cellNoBorder,
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: 'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM', font: 'Times New Roman', size: 24, bold: true }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: 'Độc lập - Tự do - Hạnh phúc', font: 'Times New Roman', size: 26, bold: true, underline: { type: UnderlineType.SINGLE } }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 120 },
+                children: [
+                  new TextRun({ text: meeting.meetingDate || 'Tháp Mười, năm 2026', font: 'Times New Roman', size: 24, italics: true }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+
+  const children: (Paragraph | Table)[] = [
+    headerTable,
+    new Paragraph({ spacing: { before: 240 } }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      children: [
+        new TextRun({ text: 'BIÊN BẢN HỌP TỔ CHUYÊN MÔN', font: 'Times New Roman', size: 32, bold: true }),
+      ],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 180 },
+      children: [
+        new TextRun({ text: `(${meeting.week} - ${meeting.semester} - Năm học ${meeting.schoolYear})`, font: 'Times New Roman', size: 26, italics: true, bold: true }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 120, after: 60 },
+      children: [
+        new TextRun({ text: '1. Thời gian: ', font: 'Times New Roman', size: 26, bold: true }),
+        new TextRun({ text: meeting.meetingDate, font: 'Times New Roman', size: 26 }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 60, after: 60 },
+      children: [
+        new TextRun({ text: '2. Địa điểm: ', font: 'Times New Roman', size: 26, bold: true }),
+        new TextRun({ text: meeting.location, font: 'Times New Roman', size: 26 }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 60, after: 60 },
+      children: [
+        new TextRun({ text: '3. Thành phần tham dự: ', font: 'Times New Roman', size: 26, bold: true }),
+        new TextRun({ text: `Có mặt: ${meeting.attendees.present}/${meeting.attendees.total} thành viên; Vắng: ${meeting.attendees.absent || '0'}`, font: 'Times New Roman', size: 26 }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 60, after: 60 },
+      children: [
+        new TextRun({ text: '4. Chủ trì: ', font: 'Times New Roman', size: 26, bold: true }),
+        new TextRun({ text: meeting.leader, font: 'Times New Roman', size: 26 }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 60, after: 120 },
+      children: [
+        new TextRun({ text: '5. Thư ký: ', font: 'Times New Roman', size: 26, bold: true }),
+        new TextRun({ text: meeting.secretary, font: 'Times New Roman', size: 26 }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 120, after: 120 },
+      children: [
+        new TextRun({ text: 'CHỦ ĐỀ SINH HOẠT CHUYÊN MÔN: ', font: 'Times New Roman', size: 26, bold: true, color: '1E3A8A' }),
+        new TextRun({ text: meeting.topic, font: 'Times New Roman', size: 26, bold: true }),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 180, after: 60 },
+      children: [
+        new TextRun({ text: 'NỘI DUNG VÀ DIỄN BIẾN CUỘC HỌP:', font: 'Times New Roman', size: 26, bold: true }),
+      ],
+    }),
+  ];
+
+  // Parse lines in meeting.content
+  const contentLines = meeting.content.split('\n');
+  contentLines.forEach(line => {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      children.push(new Paragraph({ spacing: { before: 60 } }));
+      return;
+    }
+    const isHeading = /^[I|V|X]+\.|\d+\.\s+[A-ZÀ-Ỹ]/.test(trimmed);
+    children.push(
+      new Paragraph({
+        spacing: { before: isHeading ? 140 : 60, after: 60 },
+        children: [
+          new TextRun({
+            text: trimmed,
+            font: 'Times New Roman',
+            size: 26,
+            bold: isHeading,
+          }),
+        ],
+      })
+    );
+  });
+
+  // Nghị quyết / Kết luận
+  if (meeting.resolutions && meeting.resolutions.length > 0) {
+    children.push(new Paragraph({ spacing: { before: 180 } }));
+    children.push(
+      new Paragraph({
+        spacing: { before: 120, after: 80 },
+        children: [
+          new TextRun({ text: 'KẾT LUẬN VÀ NGHỊ QUYẾT CỦA TỔ TRƯỞNG:', font: 'Times New Roman', size: 26, bold: true }),
+        ],
+      })
+    );
+    meeting.resolutions.forEach((res, idx) => {
+      children.push(
+        new Paragraph({
+          spacing: { before: 40, after: 40 },
+          indent: { left: 360 },
+          children: [
+            new TextRun({ text: `${idx + 1}. `, font: 'Times New Roman', size: 26, bold: true }),
+            new TextRun({ text: res, font: 'Times New Roman', size: 26 }),
+          ],
+        })
+      );
+    });
+  }
+
+  // Phân công nhiệm vụ cụ thể 2 tuần tiếp theo
+  if (meeting.tasks && meeting.tasks.length > 0) {
+    children.push(new Paragraph({ spacing: { before: 180 } }));
+    children.push(
+      new Paragraph({
+        spacing: { before: 120, after: 80 },
+        children: [
+          new TextRun({ text: 'PHÂN CÔNG NHIỆM VỤ CỤ THỂ 2 TUẦN TIẾP THEO:', font: 'Times New Roman', size: 26, bold: true }),
+        ],
+      })
+    );
+
+    const taskBorder = {
+      top: { style: BorderStyle.SINGLE, size: 4, color: 'CBD5E1' },
+      bottom: { style: BorderStyle.SINGLE, size: 4, color: 'CBD5E1' },
+      left: { style: BorderStyle.SINGLE, size: 4, color: 'CBD5E1' },
+      right: { style: BorderStyle.SINGLE, size: 4, color: 'CBD5E1' },
+    };
+
+    const taskRows = [
+      new TableRow({
+        children: [
+          new TableCell({
+            width: { size: 800, type: WidthType.DXA },
+            borders: taskBorder,
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'STT', bold: true, font: 'Times New Roman', size: 22 })] })],
+          }),
+          new TableCell({
+            width: { size: 4400, type: WidthType.DXA },
+            borders: taskBorder,
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Nội dung nhiệm vụ', bold: true, font: 'Times New Roman', size: 22 })] })],
+          }),
+          new TableCell({
+            width: { size: 2200, type: WidthType.DXA },
+            borders: taskBorder,
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Người phụ trách', bold: true, font: 'Times New Roman', size: 22 })] })],
+          }),
+          new TableCell({
+            width: { size: 2069, type: WidthType.DXA },
+            borders: taskBorder,
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Thời hạn', bold: true, font: 'Times New Roman', size: 22 })] })],
+          }),
+        ],
+      }),
+      ...meeting.tasks.map((t, idx) =>
+        new TableRow({
+          children: [
+            new TableCell({
+              width: { size: 800, type: WidthType.DXA },
+              borders: taskBorder,
+              children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `${idx + 1}`, font: 'Times New Roman', size: 22 })] })],
+            }),
+            new TableCell({
+              width: { size: 4400, type: WidthType.DXA },
+              borders: taskBorder,
+              children: [new Paragraph({ children: [new TextRun({ text: t.task, font: 'Times New Roman', size: 22 })] })],
+            }),
+            new TableCell({
+              width: { size: 2200, type: WidthType.DXA },
+              borders: taskBorder,
+              children: [new Paragraph({ children: [new TextRun({ text: t.assignee, font: 'Times New Roman', size: 22 })] })],
+            }),
+            new TableCell({
+              width: { size: 2069, type: WidthType.DXA },
+              borders: taskBorder,
+              children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: t.deadline, font: 'Times New Roman', size: 22 })] })],
+            }),
+          ],
+        })
+      ),
+    ];
+
+    children.push(
+      new Table({
+        layout: TableLayoutType.FIXED,
+        width: { size: 9469, type: WidthType.DXA },
+        columnWidths: [800, 4400, 2200, 2069],
+        rows: taskRows,
+      })
+    );
+  }
+
+  // Footer Signatures
+  const sigTable = new Table({
+    layout: TableLayoutType.FIXED,
+    columnWidths: [4734, 4735],
+    width: { size: 9469, type: WidthType.DXA },
+    borders: noBorder,
+    rows: [
+      new TableRow({
+        children: [
+          new TableCell({
+            width: { size: 4734, type: WidthType.DXA },
+            borders: cellNoBorder,
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 240 },
+                children: [new TextRun({ text: 'THƯ KÝ', bold: true, font: 'Times New Roman', size: 26 })],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: '(Ký và ghi rõ họ tên)', italics: true, font: 'Times New Roman', size: 22 })],
+              }),
+              new Paragraph({ spacing: { before: 900 } }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: meeting.secretary, bold: true, font: 'Times New Roman', size: 26 })],
+              }),
+            ],
+          }),
+          new TableCell({
+            width: { size: 4735, type: WidthType.DXA },
+            borders: cellNoBorder,
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 240 },
+                children: [new TextRun({ text: 'TỔ TRƯỞNG CHUYÊN MÔN', bold: true, font: 'Times New Roman', size: 26 })],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: '(Ký và ghi rõ họ tên)', italics: true, font: 'Times New Roman', size: 22 })],
+              }),
+              new Paragraph({ spacing: { before: 900 } }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: meeting.leader, bold: true, font: 'Times New Roman', size: 26 })],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+
+  children.push(sigTable);
+
+  const docxFile = new Document({
+    sections: [
+      {
+        properties: {
+          page: {
+            margin: {
+              top: 1134,
+              bottom: 1134,
+              left: 1417,
+              right: 1020,
+            },
+          },
+        },
+        children,
+      },
+    ],
+  });
+
+  const blob = await Packer.toBlob(docxFile);
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  const safeFilename = `BIEN_BAN_HOP_${meeting.departmentName.replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g, '_')}_${meeting.week.replace(/[^a-zA-Z0-9]/g, '_')}.docx`;
+  anchor.download = safeFilename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  document.body.removeChild(anchor);
+  URL.revokeObjectURL(url);
+}
+

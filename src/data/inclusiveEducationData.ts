@@ -210,8 +210,6 @@ export const OFFICIAL_INCLUSIVE_EDUCATION_PLAN: SchoolDocument = {
     'Thông tư số 15/2026/TT-BGDĐT ngày 24/3/2026 của Bộ trưởng Bộ Giáo dục và Đào tạo ban hành Điều lệ trường trung học',
     'Thông tư liên tịch số 42/2013/TTLT-BGDĐT-BLĐTBXH-BTC ngày 31/12/2013 của Bộ GDĐT, Bộ LĐTBXH và Bộ Tài chính quy định chính sách về giáo dục đối với người khuyết tật',
     'Công văn số 3326/SGDĐT-GDPT ngày 27/8/2026 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp về việc hướng dẫn công tác giáo dục hòa nhập đối với trẻ em, học sinh khuyết tật tại các cơ sở giáo dục mầm non, phổ thông',
-    'Công văn số 3408/SGDĐT-GDPT ngày 04/9/2026 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp về việc thống kê và đăng ký nhu cầu hỗ trợ giáo dục hòa nhập năm học 2026 - 2027',
-    'Kế hoạch số 34/KH-THCS&THPTĐBK ngày 25/8/2026 của Trường THCS và THPT Đốc Binh Kiều về Kế hoạch Giáo dục Nhà trường năm học 2026 - 2027'
   ],
   sections: [
     {
