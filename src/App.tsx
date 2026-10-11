@@ -97,8 +97,9 @@ export default function App() {
         if (updated.id === 'doc-kh-ktdg-52' && (!updated.documentNumber || updated.documentNumber.includes('__') || updated.documentNumber.includes('52'))) {
           updated.documentNumber = 'Số: 39/KH-THCS&THPTĐBK';
         }
-        if (updated.id === 'doc-kh-hbs-43' && !updated.documentNumber) {
-          updated.documentNumber = 'Số: 43/KH-THCS&THPTĐBK';
+        if (updated.id === 'doc-kh-hbs-43' || updated.id === 'doc-kh-hbs-18') {
+          updated.id = 'doc-kh-hbs-18';
+          updated.documentNumber = 'Số: 18/KH-THCS&THPTĐBK';
         }
         if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
           updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
@@ -184,8 +185,8 @@ export default function App() {
 
   // Current document for Viewing / Editing in Editor
   const [currentDocument, setCurrentDocument] = useState<SchoolDocument>(() => {
-    const officialHbs43 = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-43');
-    return officialHbs43 || INITIAL_SCHOOL_DOCUMENTS[0];
+    const officialHbs = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-18' || d.id === 'doc-kh-hbs-43');
+    return officialHbs || INITIAL_SCHOOL_DOCUMENTS[0];
   });
 
   // Custom School Facts
@@ -255,8 +256,9 @@ export default function App() {
                 if (updated.id === 'doc-kh-ktdg-52' && (!updated.documentNumber || updated.documentNumber.includes('__') || updated.documentNumber.includes('52'))) {
                   updated.documentNumber = 'Số: 39/KH-THCS&THPTĐBK';
                 }
-                if (updated.id === 'doc-kh-hbs-43' && !updated.documentNumber) {
-                  updated.documentNumber = 'Số: 43/KH-THCS&THPTĐBK';
+                if (updated.id === 'doc-kh-hbs-43' || updated.id === 'doc-kh-hbs-18') {
+                  updated.id = 'doc-kh-hbs-18';
+                  updated.documentNumber = 'Số: 18/KH-THCS&THPTĐBK';
                 }
                 if (updated.id === 'doc-kh-dtht-48' && (updated.documentNumber === 'Số: 48/KH-THCS&THPTĐBK' || !updated.documentNumber)) {
                   updated.documentNumber = 'Số: 38/KH-THCS&THPTĐBK';
