@@ -118,8 +118,9 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
               : 'border-transparent text-slate-600 hover:text-slate-900'
           }`}
         >
-          <BookOpen className="w-4 h-4" />
-          <span>4. 08 Tổ & 96 GV Bộ môn</span>
+          <Users className="w-4 h-4 text-purple-600" />
+          <span>4. Cơ cấu 07 Tổ & 120 Nhân Sự</span>
+          <span className="px-1.5 py-0.2 bg-purple-600 text-white text-[10px] rounded-full font-bold">120</span>
         </button>
         <button
           onClick={() => setActiveSection('students')}
@@ -328,16 +329,21 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
         </div>
       )}
 
-      {/* Section 4: Departments & Subject Teachers */}
+      {/* Section 4: Departments & Master Staff */}
       {activeSection === 'subjects' && (
         <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
-          <div className="border-b pb-2 flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
-              <Users className="w-4 h-4 text-blue-600" />
-              <span>Đội Ngũ 120 Cán Bộ, Giáo Viên, Nhân Viên & 96 GV Bộ Môn</span>
-            </h3>
-            <span className="text-xs text-slate-500">
-              100% đạt chuẩn đào tạo (88 ĐH, 8 Thạc sĩ)
+          <div className="border-b pb-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-purple-600" />
+                <span>Đội Ngũ 120 Cán Bộ, Giáo Viên, Nhân Viên (Chuẩn 100% từ NHAN SU TOAN TRUONG.xlsx)</span>
+              </h3>
+              <p className="text-xs text-slate-500 mt-0.5">
+                04 Ban Giám hiệu • 14 Tổ Văn phòng • 102 Giáo viên (06 tổ chuyên môn) • 85 Đảng viên • 09 Thạc sĩ
+              </p>
+            </div>
+            <span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded shrink-0 self-start sm:self-auto">
+              Đã lưu dữ liệu vào hệ thống
             </span>
           </div>
 

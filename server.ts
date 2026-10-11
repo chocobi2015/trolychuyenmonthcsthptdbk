@@ -22,6 +22,7 @@ const PERSISTED_DIRECTIVES_PATH = path.join(__dirname, 'src', 'data', 'persisted
 const PERSISTED_CATEGORIES_PATH = path.join(__dirname, 'src', 'data', 'persistedCategories.json');
 const PERSISTED_MEETINGS_PATH = path.join(__dirname, 'src', 'data', 'persistedDepartmentMeetings.json');
 const PERSISTED_STUDENTS_PATH = path.join(__dirname, 'src', 'data', 'schoolStudentMasterData.json');
+const PERSISTED_STAFF_PATH = path.join(__dirname, 'src', 'data', 'schoolStaffMasterData.json');
 
 function getPersistedStudentData(): any {
   try {
@@ -40,6 +41,26 @@ function savePersistedStudentData(studentData: any) {
     fs.writeFileSync(PERSISTED_STUDENTS_PATH, JSON.stringify(studentData, null, 2), 'utf-8');
   } catch (e) {
     console.error('Failed to write persisted student data:', e);
+  }
+}
+
+function getPersistedStaffData(): any {
+  try {
+    if (fs.existsSync(PERSISTED_STAFF_PATH)) {
+      const data = fs.readFileSync(PERSISTED_STAFF_PATH, 'utf-8');
+      return JSON.parse(data);
+    }
+  } catch (e) {
+    console.error('Failed to read persisted staff data:', e);
+  }
+  return null;
+}
+
+function savePersistedStaffData(staffData: any) {
+  try {
+    fs.writeFileSync(PERSISTED_STAFF_PATH, JSON.stringify(staffData, null, 2), 'utf-8');
+  } catch (e) {
+    console.error('Failed to write persisted staff data:', e);
   }
 }
 
@@ -234,10 +255,18 @@ HỒ SƠ VÀ DỮ LIỆU THỰC TẾ CHUẨN XÁC CỦA TRƯỜNG (Từ Kế ho�
    - 53 lớp với 2.111 học sinh (bình quân 39,83 HS/lớp), 25 học sinh khuyết tật.
    - Cấp THCS: 39 lớp (1.582 HS) gồm Khối 6 (10 lớp, 411 HS); Khối 7 (9 lớp, 367 HS); Khối 8 (10 lớp, 398 HS); Khối 9 (10 lớp, 406 HS).
    - Cấp THPT: 14 lớp (529 HS) gồm Khối 10 (5 lớp, 203 HS); Khối 11 (4 lớp, 141 HS); Khối 12 (5 lớp, 185 HS).
-3. Đội ngũ cán bộ, giáo viên, nhân viên:
-   - Tổng cộng: 120 người (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên). 65 nữ, 85 Đảng viên, 09 Thạc sĩ.
-   - 96 giáo viên giảng dạy bộ môn đạt chuẩn 100% (88 ĐH, 8 ThS).
-   - Cơ cấu tổ chức: Ban Giám hiệu (04 cán bộ quản lý: Hiệu trưởng Lê Thanh Cường, Phó Hiệu trưởng Nguyễn Minh Trí...) và 07 Tổ trong trường (06 tổ chuyên môn: Tổ Toán 15, Tổ Ngữ văn - TV - TB 17, Tổ Lịch sử - Địa lý - GDCD - GDKTPL 16, Tổ Vật lý - Hóa học - Sinh học - Công nghệ 26, Tổ Ngoại ngữ - Tin học 16, Tổ GDTC - QPAN - Nghệ thuật 12; và 01 Tổ Văn phòng 14).
+3. Đội ngũ cán bộ, giáo viên, nhân viên (Chuẩn 100% từ file Excel NHAN SU TOAN TRUONG):
+   - Tổng cộng: 120 người (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên). 63 nữ, 55 nam, 85 Đảng viên, 09 Thạc sĩ.
+   - Ban Giám hiệu (04 lãnh đạo):
+     * Thầy Hiệu trưởng Lê Thanh Cường: Phụ trách chung toàn trường (Thạc sỹ QLGD, Đảng viên, LLCT Cao cấp).
+     * Thầy Phó Hiệu trưởng Nguyễn Minh Trí: Trực tiếp phụ trách chuyên môn toàn trường (ĐHSP GDCT, Vật lý, Đảng viên, LLCT Cao cấp).
+     * Thầy Phó Hiệu trưởng Phan Thanh Thảo: Nguyên Hiệu trưởng THCS Đốc Binh Kiều (Đại học Lịch sử, Đảng viên, LLCT Trung cấp).
+     * Thầy Phó Hiệu trưởng Nguyễn Thanh Tòng: Nguyên Hiệu trưởng THCS Tân Kiều, phụ trách cơ sở Điểm Tân Kiều (Đại học Sinh học, Đảng viên, LLCT Trung cấp).
+   - Cơ cấu 07 Tổ trong trường:
+     * Ban Giám hiệu: 04 người (100% Đảng viên, 01 ThS).
+     * Tổ Văn phòng: 14 người (Tổ trưởng: Trần Văn Út; Tổ phó: Nguyễn Văn Quân, Nguyễn Thị Thúy Huỳnh; Kế toán, Văn thư, Y tế, Thủ quỹ, Thiết bị, Bảo vệ, Phục vụ).
+     * 06 Tổ chuyên môn (102 giáo viên): Tổ Toán (15), Tổ Ngữ văn - TV - TB (17), Tổ Lịch sử - Địa lý - GDCD - GDKTPL (16), Tổ Vật lý - Hóa học - Sinh học - CN (26), Tổ Ngoại ngữ - Tin học (16), Tổ GDTC - QPAN - Nghệ thuật (12).
+   - 100% giáo viên đạt chuẩn đào tạo theo Luật Giáo dục; 85 Đảng viên; 09 Thạc sĩ.
 4. Phân bổ cơ sở vật chất tại 03 điểm trường (Tổng diện tích: 35.380,5 m²):
    - Điểm chính (THPT Đốc Binh Kiều cũ): 15.683 m², khối 10-12 (14 lớp, 529 HS gồm Khối 10: 203 HS, Khối 11: 141 HS, Khối 12: 185 HS), 14 phòng học (9 kiên cố, 3 lắp ghép), 09 phòng bộ môn, PCCC 2 máy bơm, 11 tủ chữa cháy.
    - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp - 6 lớp đầu mỗi khối 6-9, 980 HS gồm K6: 245, K7: 234, K8: 251, K9: 250), 22 phòng học, 05 phòng chức năng, sân bóng mini.
@@ -1167,6 +1196,33 @@ app.post('/api/school-data/students', (req, res) => {
     }
     savePersistedStudentData(incomingData);
     res.json({ success: true, data: incomingData, message: 'Đã lưu số liệu học sinh thành công lên hệ thống' });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// API: Get Master School Staff & Teacher Data (from NHAN SU TOAN TRUONG.xlsx)
+app.get('/api/school-data/staff', (req, res) => {
+  try {
+    const data = getPersistedStaffData();
+    if (!data) {
+      return res.status(404).json({ success: false, error: 'Staff master data not found' });
+    }
+    res.json({ success: true, data });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// API: Save or update Master School Staff Data
+app.post('/api/school-data/staff', (req, res) => {
+  try {
+    const incomingData = req.body;
+    if (!incomingData || !incomingData.staff) {
+      return res.status(400).json({ success: false, error: 'Invalid staff master data' });
+    }
+    savePersistedStaffData(incomingData);
+    res.json({ success: true, data: incomingData, message: 'Đã lưu danh sách nhân sự thành công lên hệ thống' });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }

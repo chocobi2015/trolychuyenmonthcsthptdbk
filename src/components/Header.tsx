@@ -218,6 +218,20 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
+          <button
+            onClick={() => setActiveTab('school_profile')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition active:scale-95 border ${
+              activeTab === 'school_profile'
+                ? 'bg-purple-600 text-white border-purple-300 shadow-sm'
+                : 'bg-purple-900/60 hover:bg-purple-800 text-purple-100 border-purple-500/40'
+            }`}
+            title="Xem toàn bộ 120 Cán bộ, Giáo viên, Nhân viên từ file Excel NHAN SU TOAN TRUONG"
+          >
+            <Users className="w-3.5 h-3.5 text-purple-300" />
+            <span>Hồ Sơ 120 Nhân Sự</span>
+            <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-200 border border-purple-400/30 rounded font-bold">Chuẩn Excel</span>
+          </button>
+
           {onOpenUploadModal && (
             <button
               onClick={onOpenUploadModal}
