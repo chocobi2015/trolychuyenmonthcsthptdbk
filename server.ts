@@ -297,6 +297,11 @@ HỒ SƠ VÀ DỮ LIỆU THỰC TẾ CHUẨN XÁC CỦA TRƯỜNG (Từ Kế ho�
    - Dự giờ: Hiệu trưởng >= 10% GV/kỳ; PHT >= 30% GV/kỳ (theo Điểm trường); TTCM dự 100% GV ở điểm công tác, >= 30% ở 2 điểm còn lại; GV dự đồng nghiệp >= 4 tiết/kỳ.
    - Chuẩn quốc gia: Phấn đấu đạt chuẩn Quốc gia mức độ 1 vào năm 2029.
 
+6. CÁC HƯỚNG DẪN VÀ PHẢN HỒI HỌP TỔ CHUYÊN MÔN THỰC TẾ (LƯU TRỮ CHÍNH THỨC):
+   - Hướng dẫn họp tổ lần 2 (16/09/2026 - PHT Nguyễn Minh Trí ký): Triển khai Kế hoạch GD nhà trường, CV 3284, 1061, 1091 (trường thuộc Cụm 2); định mức cột điểm kiểm tra đánh giá theo CV 471; danh sách 25 HS khuyết tật hòa nhập (22 THCS, 03 THPT).
+   - Bảng tổng hợp ý kiến & Phản hồi sau Họp tổ lần 2 (21/09/2026 - PHT Nguyễn Minh Trí trả lời): Điều chỉnh ĐBQ tốt nghiệp THPT 2027 (Sử 7,81; Văn 7,52; Toán 5,14; Lý 4,82; Sinh 5,36); chỉ tiêu HSG cấp tỉnh 18 giải; điều chỉnh dạy minh họa còn 01 tiết/học kỳ; 2 điểm THCS kiểm tra chung đề, ma trận và thời gian; duyệt KHBD trên vnEdu; tích hợp NLS 40% linh hoạt.
+   - Hướng dẫn họp tổ lần 3 (06/10/2026 - PHT Nguyễn Minh Trí ký): Triển khai Kế hoạch dạy 2 buổi/ngày, dạy thêm học thêm, kiểm tra đánh giá; giải pháp xếp TKB theo tỷ lệ tiết dạy bình quân/buổi; kê thừa giờ hàng tuần dạng PDF trên website; chấn chỉnh các hạn chế chuyên môn (bỏ tiết, dạy nhanh, mượn sách HS, quản lý nề nếp); triển khai họp HĐBM cấp THPT.
+
 QUY TẮC BẮT BUỘC KHI SOẠN THẢO VĂN BẢN (KHÔNG ĐƯỢC PHẠM VÀO):
 - Quy tắc 1 (Căn cứ pháp lý): Chỉ viện dẫn các văn bản thật sự làm cơ sở trực tiếp cho văn bản. Không nhồi nhét tràn lan các nghị định chung chung.
 - Quy tắc 2 (Chỉ đạo tổ chức): Kế hoạch hoặc Quyết định do Phó Hiệu trưởng Nguyễn Minh Trí ký thay Hiệu trưởng (KT. HIỆU TRƯỞNG / PHÓ HIỆU TRƯỞNG).

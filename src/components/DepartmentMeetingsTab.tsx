@@ -78,6 +78,10 @@ export const DepartmentMeetingsTab: React.FC = () => {
           const json = await res.json();
           if (json.success && Array.isArray(json.data) && json.data.length > 0) {
             setMeetings(json.data);
+            try {
+              localStorage.setItem('dbk_department_meetings', JSON.stringify(json.data));
+            } catch (e) {}
+            setIsLoading(false);
             return;
           }
         }
@@ -90,8 +94,11 @@ export const DepartmentMeetingsTab: React.FC = () => {
         const local = localStorage.getItem('dbk_department_meetings');
         if (local) {
           const parsed = JSON.parse(local);
-          if (Array.isArray(parsed) && parsed.length > 0) {
+          // If local has the old mock meetings (length > 3 or has meeting-toan-t1-2), prefer INITIAL_DEPARTMENT_MEETINGS
+          const hasOldMock = parsed.some((m: any) => m.id === 'meeting-toan-t1-2' || m.id === 'meeting-tin-t1-2');
+          if (Array.isArray(parsed) && parsed.length > 0 && !hasOldMock) {
             setMeetings(parsed);
+            setIsLoading(false);
             return;
           }
         }
@@ -104,6 +111,7 @@ export const DepartmentMeetingsTab: React.FC = () => {
       try {
         localStorage.setItem('dbk_department_meetings', JSON.stringify(INITIAL_DEPARTMENT_MEETINGS));
       } catch (e) {}
+      setIsLoading(false);
     };
 
     fetchMeetings();
@@ -429,9 +437,9 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
             <div className="text-[11px] text-emerald-400 mt-0.5">102 GV & 18 NV</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-            <div className="text-xs text-slate-400 font-medium">Biên Bản Đã Nộp</div>
-            <div className="text-xl font-bold text-white mt-1">{meetings.length} Biên bản</div>
-            <div className="text-[11px] text-indigo-300 mt-0.5">{distinctDeptsWithMeetings}/7 tổ có biên bản</div>
+            <div className="text-xs text-slate-400 font-medium">Hồ Sơ & Văn Bản</div>
+            <div className="text-xl font-bold text-white mt-1">{meetings.length} Văn bản</div>
+            <div className="text-[11px] text-indigo-300 mt-0.5">2 Hướng dẫn + 1 Trả lời họp tổ</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 border border-white/10">
             <div className="text-xs text-slate-400 font-medium">Nhiệm Vụ 2 Tuần</div>
@@ -567,7 +575,15 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
           </div>
         ) : (
           filteredMeetings.map((meeting) => {
-            const dept = SCHOOL_DEPARTMENTS.find(d => d.id === meeting.departmentId) || SCHOOL_DEPARTMENTS[0];
+            const isAllDepts = meeting.departmentId === 'all';
+            const dept = SCHOOL_DEPARTMENTS.find(d => d.id === meeting.departmentId) || {
+              id: 'all',
+              name: meeting.departmentName || 'Chỉ đạo Toàn trường (07 Tổ CM & VP)',
+              shortName: 'Toàn trường',
+              color: 'text-indigo-800',
+              bgLight: 'bg-indigo-50',
+              borderLight: 'border-indigo-300'
+            };
             return (
               <div 
                 key={meeting.id}
