@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 import { DepartmentMeeting, DepartmentTask, DepartmentInfo } from '../types/meeting';
 import { SCHOOL_DEPARTMENTS, INITIAL_DEPARTMENT_MEETINGS } from '../data/departmentMeetingsData';
-import { OPINIONS_MEETING_3_DATA, OpinionItem } from '../data/meetingRepliesData';
+import { DEPARTMENT_FEEDBACKS_MEETING_3, DepartmentFeedbackGroup } from '../data/meetingRepliesData';
 import { exportMeetingToDocx } from '../utils/docxExport';
 import { extractTextFromFile } from '../utils/fileReader';
 
@@ -42,8 +42,7 @@ export const DepartmentMeetingsTab: React.FC = () => {
   
   // Modals
   const [viewingMeeting, setViewingMeeting] = useState<DepartmentMeeting | null>(null);
-  const [modalViewMode, setModalViewMode] = useState<'table' | 'a4'>('table');
-  const [opinionCategoryFilter, setOpinionCategoryFilter] = useState<string>('all');
+  const [opinionDeptFilter, setOpinionDeptFilter] = useState<string>('all');
   const [isEditorModalOpen, setIsEditorModalOpen] = useState(false);
   const [editingMeetingId, setEditingMeetingId] = useState<string | null>(null);
   const [showAiContextModal, setShowAiContextModal] = useState(false);
@@ -781,31 +780,6 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' && (
-                  <div className="flex items-center bg-slate-800 p-0.5 rounded-lg border border-slate-700 mr-2">
-                    <button
-                      onClick={() => setModalViewMode('table')}
-                      className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-                        modalViewMode === 'table'
-                          ? 'bg-indigo-600 text-white shadow-xs'
-                          : 'text-slate-300 hover:text-white'
-                      }`}
-                    >
-                      Bảng Tổng Hợp Chi Tiết
-                    </button>
-                    <button
-                      onClick={() => setModalViewMode('a4')}
-                      className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-                        modalViewMode === 'a4'
-                          ? 'bg-indigo-600 text-white shadow-xs'
-                          : 'text-slate-300 hover:text-white'
-                      }`}
-                    >
-                      Toàn Văn A4
-                    </button>
-                  </div>
-                )}
-
                 {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' ? (
                   <a
                     href="/api/department-meetings/download/tra-loi-lan-3"
@@ -851,226 +825,211 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
 
             {/* Modal Body Container */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-100">
-              {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' && modalViewMode === 'table' ? (
-                /* Rich Scientific Table View for Meeting 3 */
-                <div className="bg-white rounded-xl shadow-md border border-slate-200 p-6 sm:p-8 max-w-5xl mx-auto space-y-6">
-                  {/* Document Header Standard */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-200 text-center font-serif">
+              {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' ? (
+                /* Formal Administrative Document (Văn bản Kế hoạch / Thông báo trả lời theo Tổ từ trên xuống dưới - Nghị định 30) */
+                <div className="bg-white rounded-xl shadow-lg border border-slate-300 p-6 sm:p-12 max-w-4xl mx-auto space-y-6 font-serif text-slate-900 leading-relaxed text-sm">
+                  {/* Header 2 Columns Quốc hiệu & Cơ quan ban hành */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-200 text-center">
                     <div>
-                      <div className="text-xs text-slate-600">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP</div>
-                      <div className="text-xs font-bold uppercase text-slate-900">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
-                      <div className="text-xs italic text-indigo-900 font-semibold pt-1">Số: 03/TB-THCS&THPTĐBK</div>
+                      <div className="text-xs text-slate-700">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP</div>
+                      <div className="text-xs sm:text-sm font-bold uppercase text-slate-900">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+                      <div className="text-xs text-slate-800 font-semibold pt-1">Số: 186/TB-THCS-THPT</div>
                     </div>
                     <div>
-                      <div className="text-xs font-bold uppercase text-slate-900">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
-                      <div className="text-xs font-bold underline underline-offset-4 text-slate-900">Độc lập - Tự do - Hạnh phúc</div>
+                      <div className="text-xs sm:text-sm font-bold uppercase text-slate-900">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                      <div className="text-xs sm:text-sm font-bold underline underline-offset-4 text-slate-900">Độc lập - Tự do - Hạnh phúc</div>
                       <div className="text-xs italic text-slate-600 pt-1">Tháp Mười, ngày 09 tháng 10 năm 2026</div>
                     </div>
                   </div>
 
-                  <div className="text-center py-2 space-y-1 font-serif">
-                    <h2 className="text-lg sm:text-xl font-bold uppercase text-indigo-950">
-                      BẢNG TỔNG HỢP Ý KIẾN HỌP TỔ CHUYÊN MÔN
+                  {/* Document Title */}
+                  <div className="text-center py-3 space-y-1">
+                    <h2 className="text-lg sm:text-xl font-bold uppercase text-slate-950">
+                      THÔNG BÁO KẾT LUẬN
                     </h2>
-                    <h3 className="text-base font-bold uppercase text-indigo-900">
-                      VÀ NỘI DUNG TRẢ LỜI, CHỈ ĐẠO CỦA BAN GIÁM HIỆU
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                      Về việc tiếp thu, giải đáp và chỉ đạo thực hiện ý kiến, kiến nghị<br />
+                      của các tổ chuyên môn tại kỳ họp định kỳ lần 3, ngày 08/10/2026
                     </h3>
-                    <p className="text-xs italic text-slate-600">
-                      (Tổng hợp từ 06 Biên bản Họp Tổ chuyên môn ngày 08/10/2026 - Chuẩn hóa theo thể thức Nghị định 30/2020/NĐ-CP)
-                    </p>
                   </div>
 
-                  {/* Quick Export Alert */}
-                  <div className="flex flex-col sm:flex-row items-center justify-between p-3.5 bg-blue-50 border border-blue-200 rounded-xl gap-3">
-                    <div className="flex items-center gap-2.5 text-xs text-blue-900">
-                      <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
-                      <span>
-                        Nội dung đã được biên tập, sắp xếp khoa học theo từng lĩnh vực chuyên đề và có đầy đủ căn cứ pháp lý. Thầy/Cô có thể xuất ngay file Word chuẩn thể thức để lưu hành hoặc gửi các tổ.
+                  {/* Căn cứ pháp lý */}
+                  <div className="space-y-1.5 text-xs text-slate-700 italic border-l-2 border-indigo-400 pl-4 py-1">
+                    <p>• Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15/9/2020 của Bộ Giáo dục và Đào tạo ban hành Điều lệ trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;</p>
+                    <p>• Căn cứ Kế hoạch thời gian năm học 2026 - 2027 và Kế hoạch giáo dục nhà trường của Trường THCS và THPT Đốc Binh Kiều;</p>
+                    <p>• Căn cứ Biên bản họp định kỳ lần 3 ngày 08/10/2026 của 06 Tổ chuyên môn trong nhà trường;</p>
+                  </div>
+
+                  <p className="indent-8 text-justify text-slate-800">
+                    Ban Giám hiệu Trường THCS và THPT Đốc Binh Kiều đã tổng hợp đầy đủ các ý kiến, kiến nghị và đề xuất của từng tổ chuyên môn. Nhằm kịp thời tháo gỡ khó khăn, thống nhất quy trình chuyên môn và bảo đảm thực hiện thắng lợi nhiệm vụ năm học, Ban Giám hiệu thông báo kết luận tiếp thu, giải đáp chi tiết theo từng tổ chuyên môn như sau:
+                  </p>
+
+                  {/* Action & Filter Bar */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between p-3.5 bg-blue-50 border border-blue-200 rounded-xl gap-3 font-sans not-italic">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-xs font-bold text-blue-950 flex items-center gap-1 mr-1">
+                        <Filter className="w-3.5 h-3.5 text-blue-700" />
+                        <span>Xem theo tổ:</span>
                       </span>
+                      {[
+                        { id: 'all', label: 'Tất cả 06 Tổ' },
+                        { id: 'toan', label: 'I. Tổ Toán' },
+                        { id: 'ly-hoa-sinh-cn', label: 'II. Tổ KHTN - Công nghệ' },
+                        { id: 'van-tv-tb', label: 'III. Tổ Ngữ văn' },
+                        { id: 'su-dia-gdcd', label: 'IV. Tổ Sử - Địa - GDCD' },
+                        { id: 'the-duc-gdqp-nt', label: 'V. Tổ Thể dục - GDQPAN' },
+                        { id: 'tieng-anh-tin-hoc', label: 'VI. Tổ Tiếng Anh - Tin học' }
+                      ].map(f => (
+                        <button
+                          key={f.id}
+                          onClick={() => setOpinionDeptFilter(f.id)}
+                          className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
+                            opinionDeptFilter === f.id
+                              ? 'bg-blue-700 text-white border-blue-700 shadow-xs'
+                              : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
+                          }`}
+                        >
+                          {f.label}
+                        </button>
+                      ))}
                     </div>
+
                     <a
                       href="/api/department-meetings/download/tra-loi-lan-3"
                       download="TRẢ LỜI HỌP TỔ LẦN 3 - 08-10-2026.docx"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shrink-0 shadow-sm transition-all"
+                      className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs shrink-0 shadow-sm transition-all"
                     >
                       <Download className="w-3.5 h-3.5" />
-                      <span>Tải Tệp Word (.docx)</span>
+                      <span>Tải Bản Word (.docx)</span>
                     </a>
                   </div>
 
-                  {/* Filter by Category Chips */}
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2">
-                    <span className="text-xs font-bold text-slate-700 flex items-center gap-1 mr-1">
-                      <Filter className="w-3.5 h-3.5 text-indigo-600" />
-                      <span>Lọc lĩnh vực:</span>
-                    </span>
-                    {[
-                      { id: 'all', label: 'Tất cả (10 mục)' },
-                      { id: '1. Khảo thí & Cấu trúc đề kiểm tra', label: '1. Khảo thí & Đề kiểm tra (4)' },
-                      { id: '2. Chế độ chính sách & Bảo hiểm xã hội', label: '2. Chế độ & BHXH (2)' },
-                      { id: '3. Cải cách hành chính & Hồ sơ sổ sách', label: '3. Cải cách hành chính (1)' },
-                      { id: '4. Đạo đức nhà giáo & Tâm lý sư phạm', label: '4. Đạo đức & Tâm lý sư phạm (1)' },
-                      { id: '5. Hoạt động thể thao & Môn GDTC', label: '5. Thể thao & Hội thao 2027 (1)' },
-                      { id: '6. Tổ Tiếng Anh - Tin học', label: '6. Tổ Tiếng Anh - Tin học (1)' },
-                    ].map(f => (
-                      <button
-                        key={f.id}
-                        onClick={() => setOpinionCategoryFilter(f.id)}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
-                          opinionCategoryFilter === f.id
-                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
-                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                        }`}
-                      >
-                        {f.label}
-                      </button>
-                    ))}
-                  </div>
+                  {/* Body Content: Trình bày từ trên xuống dưới THEO TỔ (Dạng văn bản kế hoạch) */}
+                  <div className="space-y-8 pt-2">
+                    {DEPARTMENT_FEEDBACKS_MEETING_3.filter(
+                      dept => opinionDeptFilter === 'all' || dept.deptId === opinionDeptFilter
+                    ).map((dept) => (
+                      <div key={dept.deptId} className="space-y-4">
+                        {/* Heading Tổ */}
+                        <div className="border-b-2 border-slate-900 pb-1.5 pt-2 flex items-center justify-between">
+                          <h4 className="text-base sm:text-lg font-bold uppercase text-slate-950 tracking-wide">
+                            {dept.orderRom}. {dept.deptName}
+                          </h4>
+                          <span className="font-sans text-xs px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-300 font-semibold">
+                            {dept.opinions.length} nội dung
+                          </span>
+                        </div>
 
-                  {/* Main Opinions Table */}
-                  <div className="overflow-x-auto rounded-xl border border-slate-300 shadow-xs">
-                    <table className="w-full border-collapse text-left text-xs font-serif">
-                      <thead>
-                        <tr className="bg-slate-100 text-slate-900 border-b border-slate-300 font-bold uppercase text-[11px] tracking-wider">
-                          <th className="p-3 border-r border-slate-300 text-center w-12">STT</th>
-                          <th className="p-3 border-r border-slate-300 w-44">Lĩnh vực & Tổ đề xuất</th>
-                          <th className="p-3 border-r border-slate-300 w-80">Nội dung ý kiến, đề xuất của Tổ</th>
-                          <th className="p-3">Nội dung trả lời, chỉ đạo của Ban Giám hiệu</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-200">
-                        {OPINIONS_MEETING_3_DATA.filter(
-                          item => opinionCategoryFilter === 'all' || item.category === opinionCategoryFilter || (opinionCategoryFilter.includes('Chế độ') && item.category.includes('Chế độ'))
-                        ).map((item) => (
-                          <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
-                            {/* STT */}
-                            <td className="p-3.5 border-r border-slate-200 text-center font-bold text-slate-800 align-top">
-                              {item.id}
-                            </td>
-
-                            {/* Lĩnh vực & Tổ */}
-                            <td className="p-3.5 border-r border-slate-200 align-top space-y-1.5">
-                              <span className="inline-block px-2 py-0.5 rounded bg-indigo-50 text-indigo-900 font-bold text-[10px] border border-indigo-200">
-                                {item.category}
-                              </span>
-                              <div className="font-bold text-slate-900 text-xs">
-                                {item.department}
-                              </div>
-                              {item.contributor && (
-                                <div className="text-[11px] italic text-slate-600">
-                                  {item.contributor}
-                                </div>
-                              )}
-                            </td>
-
-                            {/* Nội dung ý kiến đề xuất */}
-                            <td className="p-3.5 border-r border-slate-200 align-top space-y-2 text-slate-800 leading-relaxed">
-                              <div className="font-semibold text-slate-900">
-                                {item.opinion}
-                              </div>
-
-                              {item.opinionDetails && item.opinionDetails.length > 0 && (
-                                <div className="space-y-1 pl-1 text-[11.5px]">
-                                  {item.opinionDetails.map((od, idx) => (
-                                    <div key={idx} className="flex items-start gap-1.5">
-                                      <span className="text-slate-400">•</span>
-                                      <span>{od}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-
-                              {item.tableData && (
-                                <div className="mt-2 pt-2 border-t border-slate-200">
-                                  <div className="text-[10.5px] font-bold text-slate-700 uppercase mb-1">
-                                    Đề xuất cấu trúc chi tiết:
-                                  </div>
-                                  <table className="w-full text-[10.5px] border border-slate-300">
-                                    <thead>
-                                      <tr className="bg-slate-100">
-                                        {item.tableData.headers.map((th, hi) => (
-                                          <th key={hi} className="p-1 border border-slate-300 text-center font-bold">
-                                            {th}
-                                          </th>
-                                        ))}
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {item.tableData.rows.map((row, ri) => (
-                                        <tr key={ri} className="border-t border-slate-200">
-                                          {row.map((cell, ci) => (
-                                            <td key={ci} className={`p-1 border border-slate-300 ${ci === 0 ? 'font-semibold' : 'text-center'}`}>
-                                              {cell}
-                                            </td>
-                                          ))}
-                                        </tr>
-                                      ))}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              )}
-                            </td>
-
-                            {/* Trả lời & Chỉ đạo của BGH */}
-                            <td className="p-3.5 align-top space-y-2 leading-relaxed">
-                              <div className="font-bold text-emerald-900 flex items-start gap-1.5">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                                <span>{item.response}</span>
-                              </div>
-
-                              {item.responseDetails && item.responseDetails.length > 0 && (
-                                <div className="space-y-1.5 pl-5 text-[11.5px] text-slate-800">
-                                  {item.responseDetails.map((rd, idx) => (
-                                    <div key={idx} className="flex items-start gap-1.5">
-                                      <span className="text-emerald-600 font-bold">✓</span>
-                                      <span>{rd}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-
-                              {item.legalBasis && (
-                                <div className="p-2 bg-slate-50 border-l-2 border-indigo-500 rounded text-[11px] italic text-slate-700">
-                                  <strong className="not-italic text-slate-900">Căn cứ: </strong>
-                                  {item.legalBasis}
-                                </div>
-                              )}
-
-                              {item.actionUnit && (
-                                <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
-                                  <span className="font-semibold text-slate-700">Đơn vị thực hiện:</span>
-                                  <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-medium">
-                                    {item.actionUnit}
+                        {/* Opinions list inside department */}
+                        <div className="space-y-6 pl-1 sm:pl-3">
+                          {dept.opinions.map((op, opIdx) => (
+                            <div key={opIdx} className="space-y-3">
+                              {/* Opinion Title */}
+                              <div className="font-bold text-slate-950 text-sm sm:text-base flex items-baseline gap-2">
+                                <span className="text-blue-900">{opIdx + 1}.</span>
+                                <span>{op.title}</span>
+                                {op.contributor && (
+                                  <span className="font-normal italic text-xs text-slate-600 font-sans">
+                                    ({op.contributor})
                                   </span>
-                                  {item.note && (
-                                    <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 italic">
-                                      {item.note}
-                                    </span>
+                                )}
+                              </div>
+
+                              {/* a) Nội dung ý kiến đề xuất */}
+                              <div className="bg-slate-50 border-l-4 border-slate-400 p-3.5 rounded-r-lg space-y-2">
+                                <div className="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-1.5 font-sans">
+                                  <span className="w-2 h-2 rounded-full bg-slate-500"></span>
+                                  <span>a) Nội dung ý kiến, đề xuất của Tổ:</span>
+                                </div>
+                                <div className="space-y-1.5 text-slate-800 text-xs sm:text-sm pl-2">
+                                  {op.opinionContent.map((line, lIdx) => (
+                                    <p key={lIdx} className="leading-relaxed">
+                                      {line}
+                                    </p>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* b) Trả lời và chỉ đạo của Ban Giám hiệu */}
+                              <div className="bg-emerald-50/70 border-l-4 border-emerald-600 p-3.5 rounded-r-lg space-y-2">
+                                <div className="font-bold text-emerald-900 text-xs uppercase tracking-wider flex items-center gap-1.5 font-sans">
+                                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                                  <span>b) {op.responseTitle}</span>
+                                </div>
+                                <div className="space-y-1.5 text-slate-900 text-xs sm:text-sm pl-2">
+                                  {op.responseContent.map((line, rIdx) => (
+                                    <p key={rIdx} className="leading-relaxed">
+                                      {line}
+                                    </p>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Legal basis & Assignment info */}
+                              {(op.legalBasis || op.assignment) && (
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-xs text-slate-600 pl-4 pt-0.5">
+                                  {op.legalBasis && (
+                                    <div className="flex items-center gap-1">
+                                      <strong className="text-slate-800">Căn cứ:</strong>
+                                      <span className="italic">{op.legalBasis}</span>
+                                    </div>
+                                  )}
+                                  {op.assignment && (
+                                    <div className="flex items-center gap-1">
+                                      <strong className="text-slate-800">Đơn vị thực hiện:</strong>
+                                      <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-medium">
+                                        {op.assignment}
+                                      </span>
+                                    </div>
                                   )}
                                 </div>
                               )}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
-                  {/* Signatures Footer */}
-                  <div className="grid grid-cols-2 gap-8 pt-8 mt-6 border-t border-slate-200 font-serif text-xs">
+                  {/* Section VII: TỔ CHỨC THỰC HIỆN */}
+                  {opinionDeptFilter === 'all' && (
+                    <div className="border-t-2 border-slate-900 pt-5 mt-8 space-y-3">
+                      <h4 className="text-base sm:text-lg font-bold uppercase text-slate-950">
+                        VII. TỔ CHỨC THỰC HIỆN
+                      </h4>
+                      <div className="space-y-2 text-slate-800 text-xs sm:text-sm pl-2">
+                        <p>
+                          <strong>1.</strong> Ban Giám hiệu phân công các đồng chí Phó Hiệu trưởng phụ trách chuyên môn trực tiếp rà soát, bổ sung các nội dung đã thống nhất vào Kế hoạch kiểm tra đánh giá của nhà trường; chỉ đạo văn phòng chuyên môn ban hành phụ lục điều chỉnh gửi về các tổ bộ môn.
+                        </p>
+                        <p>
+                          <strong>2.</strong> Các đồng chí Tổ trưởng chuyên môn chịu trách nhiệm phổ biến chi tiết toàn bộ nội dung văn bản này đến từng cán bộ, giáo viên, nhân viên trong tổ tại phiên họp chuyên môn gần nhất; tổ chức thực hiện nghiêm túc, đúng tiến độ.
+                        </p>
+                        <p>
+                          <strong>3.</strong> Bộ phận Kế toán - Văn phòng khẩn trương hoàn thiện hồ sơ rà soát thâm niên nhà giáo của giáo viên theo đúng chỉ đạo tại văn bản này; lập bảng kê chi trả dạy thay, dạy thừa giờ kịp thời, chính xác cho thầy cô giáo.
+                        </p>
+                        <p>
+                          <strong>4.</strong> Toàn thể cán bộ, giáo viên, nhân viên nhà trường nêu cao tinh thần trách nhiệm, tăng cường đoàn kết nội bộ, thực hiện tốt kỷ cương nền nếp và văn hóa ứng xử sư phạm, chung tay xây dựng trường học hạnh phúc, hoàn thành xuất sắc nhiệm vụ năm học 2026 - 2027./.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Footer & Signatures */}
+                  <div className="grid grid-cols-2 gap-8 pt-8 mt-6 border-t border-slate-300 font-serif text-xs">
                     <div className="space-y-1">
                       <div className="font-bold italic text-slate-900">Nơi nhận:</div>
-                      <div className="text-slate-600 leading-relaxed text-[11px]">
-                        - Ban Giám hiệu (chỉ đạo);<br />
-                        - 06 Tổ chuyên môn (thực hiện);<br />
-                        - Bộ phận Kế toán - TCCB (phối hợp);<br />
-                        - Lưu: VT, CM.
+                      <div className="text-slate-700 leading-relaxed text-[11px]">
+                        - Lãnh đạo trường (để chỉ đạo);<br />
+                        - 06 Tổ chuyên môn (để thực hiện);<br />
+                        - Bộ phận VP, Kế toán (để thực hiện);<br />
+                        - Lưu: VT, BGH.
                       </div>
                     </div>
                     <div className="text-center space-y-14">
                       <div>
+                        <div className="font-bold uppercase text-slate-900">TM. BAN GIÁM HIỆU</div>
                         <div className="font-bold uppercase text-slate-900">HIỆU TRƯỞNG</div>
-                        <div className="italic text-slate-500 text-[11px]">(Ký số & ban hành)</div>
+                        <div className="italic text-slate-500 text-[11px]">(Đã ký và đóng dấu)</div>
                       </div>
                       <div className="font-bold text-slate-900 text-sm">
                         Lê Thanh Cường

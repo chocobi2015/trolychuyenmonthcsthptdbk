@@ -9,8 +9,6 @@ import {
   WidthType,
   AlignmentType,
   BorderStyle,
-  TableLayoutType,
-  ShadingType,
   Header,
   Footer,
   PageNumber
@@ -18,624 +16,795 @@ import {
 import * as fs from 'fs';
 import * as path from 'path';
 
-export interface OpinionItem {
-  id: number;
-  category: string;
-  department: string;
-  contributor?: string;
-  opinion: string;
-  opinionDetails?: string[];
-  tableData?: { headers: string[]; rows: string[][] };
-  response: string;
-  responseDetails?: string[];
-  legalBasis?: string;
-  actionUnit?: string;
-  note?: string;
+export interface DepartmentFeedback {
+  deptId: string;
+  deptName: string;
+  orderRom: string;
+  opinions: {
+    title: string;
+    contributor?: string;
+    opinionContent: string[];
+    responseTitle: string;
+    responseContent: string[];
+    legalBasis?: string;
+    assignment?: string;
+  }[];
 }
 
-export const OPINIONS_MEETING_3: OpinionItem[] = [
+export const DEPARTMENT_FEEDBACKS_MEETING_3: DepartmentFeedback[] = [
   {
-    id: 1,
-    category: '1. Khảo thí & Cấu trúc đề kiểm tra',
-    department: 'Tổ Toán',
-    contributor: 'Tổ Toán (Cấp THCS & THPT)',
-    opinion: 'Đề xuất cấu trúc đề kiểm tra định kỳ môn Toán do GV THCS chưa được tập huấn câu hỏi Đúng/Sai, Trả lời ngắn.',
-    opinionDetails: [
-      '- Toán THCS: Trắc nghiệm Phần I (28 câu = 7,0đ, 0,25đ/câu); Phần II: 0đ; Phần III: 0đ; Tự luận: 3,0đ; Thời gian làm bài: 90 phút.',
-      '- Toán THPT (Khối 10, 11): TN Phần I: 12 câu (3,0đ); TN Phần II Đúng/Sai: 2 câu (2,0đ); TN Phần III Trả lời ngắn: 4 câu (2,0đ); Tự luận: 3,0đ; Thời gian làm bài: 90 phút.',
-      '- Riêng khối 12: Thực hiện 100% theo đúng cấu trúc đề thi tốt nghiệp THPT năm 2025 của Bộ GDĐT.'
-    ],
-    tableData: {
-      headers: ['Môn học', 'TN Phần I', 'TN Phần II', 'TN Phần III', 'Tự luận', 'Thời gian'],
-      rows: [
-        ['Toán THCS', '7,0đ (28 câu)', '0đ', '0đ', '3,0đ', '90 phút'],
-        ['Toán THPT (10, 11)', '3,0đ (12 câu)', '2,0đ (2 câu)', '2,0đ (4 câu)', '3,0đ', '90 phút'],
-        ['Toán 12', 'Theo cấu trúc đề thi tốt nghiệp THPT 2025 của Bộ GDĐT', '', '', '', '90 phút']
-      ]
-    },
-    response: 'Ban Giám hiệu ĐỒNG Ý hoàn toàn với đề xuất của Tổ Toán.',
-    responseDetails: [
-      '- Cấp THCS: Thống nhất áp dụng cấu trúc 70% Trắc nghiệm nhiều lựa chọn (Phần I - 28 câu) + 30% Tự luận (3,0 điểm), thời gian 90 phút. Cấu trúc này sát thực tế năng lực học sinh THCS, giảm tải áp lực tâm lý và thuận tiện trong chấm thi.',
-      '- Cấp THPT (Khối 10, 11): Thống nhất áp dụng định dạng kết hợp cả 3 dạng trắc nghiệm và tự luận (3,0đ) để rèn luyện kỹ năng tiếp cận định dạng thi mới cho học sinh.',
-      '- Khối 12: Bắt buộc thực hiện đúng 100% theo cấu trúc đề thi tốt nghiệp THPT từ năm 2025 của Bộ GDĐT.'
-    ],
-    legalBasis: 'Thông tư 22/2021/TT-BGDĐT; Quyết định 764/QĐ-BGDĐT ngày 08/3/2024 của Bộ GDĐT.',
-    actionUnit: 'Tổ Toán & GV bộ môn',
-    note: 'Đã phê duyệt'
+    deptId: 'toan',
+    deptName: 'TỔ TOÁN',
+    orderRom: 'I',
+    opinions: [
+      {
+        title: 'Ý kiến 1: Về cấu trúc đề kiểm tra định kỳ môn Toán',
+        contributor: 'Tổ Toán (Cấp THCS và THPT)',
+        opinionContent: [
+          'Đối với cấu trúc đề kiểm tra định kỳ, do giáo viên dạy cấp THCS chưa được tập huấn biên soạn câu hỏi dạng Đúng/Sai (Phần II) và dạng trả lời ngắn (Phần III) nên tổ đề xuất cấu trúc như sau:',
+          '1. Toán THCS: Trắc nghiệm Phần I (nhiều lựa chọn) gồm 28 câu = 7,0 điểm (0,25 điểm/câu); Phần II (Đúng/Sai): 0 điểm; Phần III (Trả lời ngắn): 0 điểm; Tự luận: 3,0 điểm. Thời gian làm bài: 90 phút.',
+          '2. Toán THPT (khối 10, 11): Trắc nghiệm Phần I gồm 12 câu = 3,0 điểm (0,25 điểm/câu); Trắc nghiệm Phần II (Đúng/Sai) gồm 2 câu = 2,0 điểm (mỗi câu 4 ý, tổng cộng 8 ý hỏi); Trắc nghiệm Phần III (Trả lời ngắn) gồm 4 câu = 2,0 điểm (0,5 điểm/câu); Tự luận: 3,0 điểm. Thời gian làm bài: 90 phút.',
+          '3. Riêng khối 12: Thực hiện theo định dạng cấu trúc đề thi tốt nghiệp THPT năm 2025 của Bộ Giáo dục và Đào tạo (100% trắc nghiệm khách quan, thời gian làm bài 90 phút).'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          'Ban Giám hiệu thống nhất phê duyệt cấu trúc đề kiểm tra định kỳ theo đề xuất của Tổ Toán, cụ thể:',
+          '- Đối với cấp THCS: Thống nhất áp dụng cấu trúc: 70% Trắc nghiệm nhiều lựa chọn Phần I (28 câu = 7,0 điểm) + 30% Tự luận (3,0 điểm), thời gian làm bài 90 phút. Cấu trúc này phù hợp với thực tế đội ngũ giáo viên THCS đang tiếp cận Chương trình GDPT 2018, giúp học sinh ổn định tâm lý và thuận tiện trong tổ chức chấm bài.',
+          '- Giao Tổ trưởng chuyên môn Toán xây dựng kế hoạch bồi dưỡng, tập huấn nội bộ cho giáo viên THCS kỹ năng biên soạn câu hỏi Đúng/Sai và trả lời ngắn thông qua các buổi sinh hoạt chuyên môn theo nghiên cứu bài học, chuẩn bị lộ trình áp dụng từng bước cho các năm học tiếp theo.',
+          '- Đối với cấp THPT (khối 10, 11): Đồng ý áp dụng cấu trúc kết hợp (Phần I: 3,0 điểm; Phần II: 2,0 điểm; Phần III: 2,0 điểm; Tự luận: 3,0 điểm, thời gian 90 phút) nhằm rèn luyện và chuẩn bị sớm năng lực làm quen các định dạng trắc nghiệm mới cho học sinh.',
+          '- Riêng khối 12: Bắt buộc thực hiện đúng 100% theo định dạng cấu trúc đề thi tốt nghiệp THPT năm 2025 quy định tại Quyết định số 764/QĐ-BGDĐT ngày 08/03/2024 của Bộ Giáo dục và Đào tạo.'
+        ],
+        legalBasis: 'Căn cứ Thông tư 22/2021/TT-BGDĐT và Quyết định số 764/QĐ-BGDĐT của Bộ GDĐT.',
+        assignment: 'Tổ trưởng Tổ Toán và giáo viên giảng dạy môn Toán cấp THCS & THPT.'
+      }
+    ]
   },
   {
-    id: 2,
-    category: '1. Khảo thí & Cấu trúc đề kiểm tra',
-    department: 'Tổ Vật lý - Hóa - Sinh - KHTN - Công nghệ',
-    contributor: 'Nhóm bộ môn KHTN, Công nghệ, Vật lí',
-    opinion: 'Đề xuất số câu hỏi và cấu trúc đề kiểm tra định kỳ môn KHTN, Công nghệ, Vật lý (10, 11) có thay đổi so với kế hoạch ban đầu của trường.',
-    opinionDetails: [
-      '- Công nghệ 6, 7, 8, 9: TN Phần I: 7,0đ (28 câu); Phần II: 0đ; Phần III: 0đ; Tự luận: 3,0đ; Thời gian: 45 phút.',
-      '- Khoa học tự nhiên (THCS): TN Phần I: 7,0đ (28 câu); Phần II: 0đ; Phần III: 0đ; Tự luận: 3,0đ; Thời gian: 60 phút.',
-      '- Vật lí (10, 11): TN Phần I: 4,0đ (16 câu); TN Phần II Đúng/Sai: 2,0đ (2 câu); TN Phần III: 1,0đ (4 câu); Tự luận: 3,0đ; Thời gian: 45 phút.'
-    ],
-    tableData: {
-      headers: ['Môn học', 'TN Phần I', 'TN Phần II', 'TN Phần III', 'Tự luận', 'Thời gian'],
-      rows: [
-        ['Công nghệ 6,7,8,9', '7,0đ (28 câu)', '0đ', '0đ', '3,0đ', '45 phút'],
-        ['Khoa học tự nhiên', '7,0đ (28 câu)', '0đ', '0đ', '3,0đ', '60 phút'],
-        ['Vật lí (10, 11)', '4,0đ (16 câu)', '2,0đ (2 câu)', '1,0đ (4 câu)', '3,0đ', '45 phút']
-      ]
-    },
-    response: 'Ban Giám hiệu THỐNG NHẤT VÀ PHÊ DUYỆT cấu trúc đề kiểm tra định kỳ do Tổ đề xuất.',
-    responseDetails: [
-      '- Môn Công nghệ và KHTN (THCS): Chấp thuận định dạng 7,0đ trắc nghiệm nhiều lựa chọn + 3,0đ tự luận. Thời gian KHTN 60 phút, Công nghệ 45 phút là phù hợp quy định.',
-      '- Môn Vật lí (10, 11): Chấp thuận cấu trúc 4,0đ (TN I) + 2,0đ (TN II) + 1,0đ (TN III) + 3,0đ (Tự luận), thời gian 45 phút. Tổ trưởng duyệt ma trận - đặc tả trước khi ra đề.'
-    ],
-    legalBasis: 'Kế hoạch giáo dục nhà trường số 38/KH-THCS&THPTĐBK; Thông tư 22/2021/TT-BGDĐT.',
-    actionUnit: 'Tổ Lý - Hóa - Sinh - KHTN - Công nghệ',
-    note: 'Đã phê duyệt'
+    deptId: 'ly-hoa-sinh-cn',
+    deptName: 'TỔ VẬT LÝ – HÓA HỌC – SINH HỌC – KHTN – CÔNG NGHỆ',
+    orderRom: 'II',
+    opinions: [
+      {
+        title: 'Ý kiến 1: Về cấu trúc đề kiểm tra định kỳ môn Công nghệ, KHTN và Vật lý (10, 11)',
+        contributor: 'Tập thể Tổ bộ môn KHTN - Công nghệ',
+        opinionContent: [
+          'Tổ đề xuất số câu hỏi và cấu trúc đề kiểm tra định kỳ các môn KHTN, Công nghệ, Vật lý (10, 11) có điều chỉnh so với dự thảo kế hoạch kiểm tra của Trường như sau:',
+          '1. Công nghệ khối 6, 7, 8, 9: Trắc nghiệm Phần I: 7,0 điểm (28 câu); Trắc nghiệm Phần II: 0 điểm; Trắc nghiệm Phần III: 0 điểm; Tự luận: 3,0 điểm. Thời gian làm bài: 45 phút.',
+          '2. Khoa học tự nhiên (KHTN khối 6, 7, 8, 9): Trắc nghiệm Phần I: 7,0 điểm (28 câu); Trắc nghiệm Phần II: 0 điểm; Trắc nghiệm Phần III: 0 điểm; Tự luận: 3,0 điểm. Thời gian làm bài: 60 phút.',
+          '3. Vật lí khối 10, 11: Trắc nghiệm Phần I: 4,0 điểm (16 câu); Trắc nghiệm Phần II (Đúng/Sai): 2,0 điểm (2 câu, 8 ý hỏi); Trắc nghiệm Phần III (Trả lời ngắn): 1,0 điểm (4 câu, 0,25đ/câu); Tự luận: 3,0 điểm. Thời gian làm bài: 45 phút.'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          'Ban Giám hiệu thống nhất phê duyệt cấu trúc kiểm tra định kỳ do Tổ đề xuất:',
+          '- Môn Công nghệ cấp THCS: Thống nhất áp dụng cấu trúc Phần I (7,0 điểm/28 câu) + Tự luận (3,0 điểm), thời gian 45 phút.',
+          '- Môn Khoa học tự nhiên cấp THCS: Thống nhất cấu trúc Phần I (7,0 điểm/28 câu) + Tự luận (3,0 điểm), thời gian 60 phút. Yêu cầu nhóm bộ môn KHTN xây dựng ma trận phân định tỷ lệ điểm hài hòa giữa các phân môn (Vật lý, Hóa học, Sinh học) tương ứng với số tiết thực dạy trong phân phối chương trình tính đến thời điểm kiểm tra.',
+          '- Môn Vật lí khối 10, 11: Thống nhất áp dụng cấu trúc kết hợp (Phần I: 4,0 điểm; Phần II: 2,0 điểm; Phần III: 1,0 điểm; Tự luận: 3,0 điểm, thời gian 45 phút).',
+          '- Đối với khối 12 các môn Vật lý, Hóa học, Sinh học: Thực hiện nghiêm túc 100% định dạng đề thi tốt nghiệp THPT từ năm 2025 theo đúng văn bản hướng dẫn của Bộ Giáo dục và Đào tạo (40 lệnh hỏi, thời gian làm bài 50 phút).'
+        ],
+        legalBasis: 'Căn cứ Thông tư 22/2021/TT-BGDĐT; Kế hoạch giáo dục nhà trường năm học 2026 - 2027.',
+        assignment: 'Tổ trưởng chuyên môn và nhóm trưởng bộ môn Lý, Hóa, Sinh, KHTN, Công nghệ.'
+      },
+      {
+        title: 'Ý kiến 2: Về xem xét chế độ phụ cấp thâm niên nhà giáo của Cô Nguyễn Kim Ngân',
+        contributor: 'Cô Nguyễn Kim Ngân (Giáo viên trong tổ kiến nghị)',
+        opinionContent: [
+          'Nhờ lãnh đạo trường xem xét dùm trường hợp của Cô Nguyễn Kim Ngân: Cô Ngân tháng 9/2011 đi dạy hợp đồng và có đóng bảo hiểm xã hội. Đến năm 2012 Cô Ngân nhận nhiệm sở và đi dạy thực hiện chế độ tập sự theo quy định nên đến năm 2018 Cô Ngân mới được hưởng thâm niên 5% và đến tháng 8/2026 thì thâm niên hưởng 13%.',
+          'Theo Nghị định 77/2021/NĐ-CP thì trường hợp này có được tính hưởng thâm niên từ năm 2011 hay không?'
+        ],
+        responseTitle: 'Trả lời và giải quyết của Ban Giám hiệu:',
+        responseContent: [
+          '- Căn cứ pháp lý: Nghị định số 77/2021/NĐ-CP ngày 01/8/2021 của Chính phủ quy định về chế độ phụ cấp thâm niên nhà giáo. Tại Điều 2 và Khoản 1 Điều 3 quy định: Thời gian tính hưởng phụ cấp thâm niên là thời gian giảng dạy, giáo dục có đóng bảo hiểm xã hội bắt buộc trong các cơ sở giáo dục công lập. Khoản 2 Điều 3 quy định: Thời gian tập sự, thử việc không được tính hưởng phụ cấp thâm niên.',
+          '- Về trường hợp cụ thể của Cô Nguyễn Kim Ngân: Giai đoạn hợp đồng có đóng BHXH bắt buộc từ tháng 9/2011 đến trước khi tập sự năm 2012 nếu đúng vị trí việc làm giảng dạy tại cơ sở giáo dục công lập thì hoàn toàn ĐỦ ĐIỀU KIỆN được cộng dồn vào thời gian công tác tính hưởng phụ cấp thâm niên nhà giáo.',
+          '- Chỉ đạo giải quyết: Ban Giám hiệu giao bộ phận Kế toán - Văn phòng khẩn trương rà soát lại toàn bộ hồ sơ gốc của cô Nguyễn Kim Ngân (hợp đồng giảng dạy năm 2011, sổ BHXH, quyết định tuyển dụng và hoàn thành tập sự 2012). Kế toán trường lập hồ sơ xác minh và có văn bản xin ý kiến hướng dẫn nghiệp vụ của Phòng Giáo dục Trung học / Phòng Kế hoạch - Tài chính Sở GDĐT để giải quyết điều chỉnh mốc tính thâm niên và truy lĩnh chế độ cho cô Ngân đúng quy định, hoàn thành dứt điểm trong tháng 10/2026.'
+        ],
+        legalBasis: 'Căn cứ Nghị định số 77/2021/NĐ-CP ngày 01/8/2021 của Chính phủ.',
+        assignment: 'Bộ phận Kế toán - Văn phòng phối hợp cá nhân cô Nguyễn Kim Ngân thực hiện.'
+      }
+    ]
   },
   {
-    id: 3,
-    category: '1. Khảo thí & Cấu trúc đề kiểm tra',
-    department: 'Tổ Sử - Địa - GDCD - GDKTPL',
-    contributor: 'Nhóm bộ môn KHXH',
-    opinion: 'Các ý kiến góp ý cụ thể về Kế hoạch kiểm tra, đánh giá của trường (Kế hoạch số 39):',
-    opinionDetails: [
-      'a) Trang 3, mục 2.b: Danh mục kiểm tra tập trung chưa có môn GDCD.',
-      'b) Trang 4, Phần II: Câu hỏi trắc nghiệm Đúng/Sai quy định đúng 1 ý được 0,1đ; Tổ đề nghị mỗi ý đúng được 0,25đ.',
-      'c) Trang 8, mục III, Bước 1: Đề nghị nhóm 3 môn chỉ nộp ma trận cho chuyên môn phê duyệt. GV nào được phân công ra đề thì soạn và nộp bảng đặc tả trực tiếp cho chuyên môn để bảo mật, vì môn xã hội nếu công bố bảng đặc tả thì gần như lộ nội dung chính của đề.',
-      'd) Trang 8: Lịch kiểm tra giữa kỳ 2 đang xếp vào tuần 26, đề nghị dời sang tuần 27 vì PPCT THCS xây dựng tiết kiểm tra vào tuần 27.',
-      'e) Trang 14, 16, 17: Thời gian kiểm tra môn LS&ĐL, GDCD bị ghi nhầm thời gian giữa các bảng.',
-      'f) Trang 15: Thời gian kiểm tra môn Lịch sử, Địa lí, GDKTPL lớp 12 ghi 45 phút; Tổ đề nghị điều chỉnh thành 50 phút.'
-    ],
-    response: 'Ban Giám hiệu giải đáp và điều chỉnh cụ thể từng nội dung như sau:',
-    responseDetails: [
-      '- Mục a (Môn GDCD): Môn GDCD cấp THCS kiểm tra theo thời khóa biểu trên lớp bằng ma trận và đề thống nhất của tổ; nhà trường bổ sung ghi chú rõ ràng vào văn bản.',
-      '- Mục b (Thang điểm câu hỏi Đúng/Sai): Bộ GDĐT quy định chấm theo phân hóa năng lực (1 ý: 0,1đ; 2 ý: 0,25đ; 3 ý: 0,5đ; 4 ý: 1,0đ). Đối với khối 10, 11 kiểm tra nội bộ chấm kết hợp tự luận, Tổ trưởng lập văn bản ma trận thang điểm cụ thể trình PHT duyệt trước khi kiểm tra.',
-      '- Mục c (Bảo mật bảng đặc tả môn xã hội): HOÀN TOÀN NHẤT TRÍ. Công khai ma trận để học sinh định hướng ôn tập; Bảng đặc tả chi tiết và Đề thi do GV ra đề bảo mật và nộp trực tiếp cho PHT chuyên môn.',
-      '- Mục d (Lịch kiểm tra GK2): TIẾP THU VÀ ĐIỀU CHỈNH dời sang Tuần 27 để khớp với PPCT cấp THCS.',
-      '- Mục e (Đính chính thời gian): Giao Bộ phận chuyên môn rà soát và đính chính thống nhất tại trang 14, 16, 17: LS&ĐL THCS 45 phút/phân môn (hoặc 60 phút/bài tích hợp), GDCD THCS 45 phút.',
-      '- Mục f (Thời gian môn lớp 12): ĐỒNG Ý ĐIỀU CHỈNH thời gian kiểm tra định kỳ môn Lịch sử, Địa lí, GDKTPL lớp 12 thành 50 phút (chuẩn hóa theo định dạng thi tốt nghiệp THPT 2025).'
-    ],
-    legalBasis: 'Quyết định 764/QĐ-BGDĐT; Thông tư 22/2021/TT-BGDĐT; Kế hoạch 39/KH-THCS&THPTĐBK.',
-    actionUnit: 'PHT Chuyên môn & Tổ Sử - Địa - GDCD - GDKTPL',
-    note: 'Đã thống nhất & đính chính'
+    deptId: 'van-tv-tb',
+    deptName: 'TỔ NGỮ VĂN – THƯ VIỆN – THIẾT BỊ',
+    orderRom: 'III',
+    opinions: [
+      {
+        title: 'Ý kiến 1: Kiến nghị của Thầy Nghĩa (Điểm Đốc Binh Kiều)',
+        contributor: 'Thầy Nghĩa (Điểm Đốc Binh Kiều)',
+        opinionContent: [
+          '1. Nên giảm bớt thủ tục hành chính, cụ thể họp tổ Chuyên môn 2 lần/tháng thì có thể đan xen giữa trực tiếp và trực tuyến.',
+          '2. Kiểm tra Kế hoạch bài dạy (KHBD) nên yêu cầu giáo viên nộp vào các khoảng thời gian hợp lý, tránh nộp khi công việc quá nhiều như ôn kiểm tra hoặc thi định kỳ...',
+          '3. Đề xuất ra đề kiểm tra định kỳ: Nên chọn giáo viên có dạy khối lớp đó ra đề để bám sát nội dung, chương trình.'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          '- Về hình thức họp tổ chuyên môn đan xen trực tiếp và trực tuyến: Ban Giám hiệu hoàn toàn nhất trí. Theo Thông tư 32/2020/TT-BGDĐT, tổ chuyên môn sinh hoạt định kỳ 2 tuần/lần. Nhà trường khuyến khích đẩy mạnh chuyển đổi số: các phiên họp mang tính chất triển khai công việc, kế hoạch tháng có thể tổ chức trực tuyến qua Google Meet/Zoom; các phiên họp chuyên đề trọng tâm, sinh hoạt chuyên môn theo nghiên cứu bài học, thao giảng dự giờ thì tổ chức trực tiếp. Tổ trưởng chủ động đăng ký hình thức họp phù hợp.',
+          '- Về thời gian kiểm tra hồ sơ Kế hoạch bài dạy (KHBD): Nhà trường tiếp thu ý kiến. Ban Giám hiệu và Tổ trưởng chuyên môn sẽ thống nhất lịch kiểm tra hồ sơ cố định, tránh các tuần cao điểm ôn tập, kiểm tra định kỳ hoặc thời gian giáo viên tập trung chấm bài, vào điểm để giảm tải áp lực cho đội ngũ thầy cô.',
+          '- Về phân công giáo viên ra đề kiểm tra định kỳ: Nhà trường thống nhất nguyên tắc: BGH ưu tiên phân công giáo viên đang trực tiếp giảng dạy tại khối lớp ra đề để bảo đảm bám sát chương trình và đặc điểm học sinh, kết hợp phản biện chéo giữa các giáo viên cùng nhóm môn để đảm bảo tính khách quan và chất lượng đề kiểm tra.'
+        ],
+        legalBasis: 'Thông tư số 32/2020/TT-BGDĐT; Kế hoạch chuyển đổi số ngành giáo dục.',
+        assignment: 'Tổ trưởng Tổ Ngữ văn và Phó Hiệu trưởng phụ trách chuyên môn.'
+      },
+      {
+        title: 'Ý kiến 2: Kiến nghị của Cô Thảo (Điểm Tân Kiều)',
+        contributor: 'Cô Thảo (Điểm Tân Kiều)',
+        opinionContent: [
+          '1. Khi giáo viên vi phạm, nếu có đưa tên lên Website thì cần xác minh chính xác, tránh nhầm lẫn ảnh hưởng tâm lý giáo viên.',
+          '2. Nếu có vi phạm, xử lý công bằng, đúng quy trình, không thiên vị.',
+          '3. Ghi rõ vi phạm điều gì, tránh ghi chung chung như: "GV bị HS phản ánh về phương pháp giảng dạy" làm GV lo lắng vì không biết vi phạm cụ thể là gì để khắc phục, tránh tái phạm.'
+        ],
+        responseTitle: 'Trả lời và cam kết của Ban Giám hiệu:',
+        responseContent: [
+          '- Về việc đưa tên lên Website và xác minh thông tin: Ban Giám hiệu khẳng định nguyên tắc quản lý: Nhà trường TUYỆT ĐỐI KHÔNG đăng tải công khai danh tính cá nhân giáo viên có sơ suất hoặc khuyết điểm lên Website/Cổng thông tin điện tử của trường. Mọi phản ánh từ học sinh, phụ huynh đều phải được BGH và Tổ chuyên môn kiểm tra, xác minh thận trọng, lắng nghe ý kiến giải trình của giáo viên trước khi đưa ra kết luận.',
+          '- Về tính công bằng và quy trình xử lý: Nhà trường cam kết xử lý khách quan, công tâm, đúng quy trình, đúng thẩm quyền theo Luật Viên chức và Quy chế làm việc của cơ quan, không bao che nhưng cũng tuyệt đối không định kiến, không thiên vị.',
+          '- Về nội dung thông báo cụ thể: Ban Giám hiệu hoàn toàn nhất trí. Nghiêm cấm việc nhận xét hoặc đánh giá mơ hồ, chung chung. Mọi nhắc nhở, góp ý phải nêu rõ nội dung cụ thể (ở tiết học nào, nội dung gì, quy định nào chưa thực hiện đúng) để giáo viên nắm bắt rõ nguyên nhân, kịp thời rút kinh nghiệm và điều chỉnh phương pháp sư phạm.'
+        ],
+        legalBasis: 'Luật Viên chức 2010; Luật sửa đổi bổ sung một số điều của Luật Cán bộ, CC, VC 2019.',
+        assignment: 'Ban Giám hiệu nhà trường và Tổ trưởng Tổ Ngữ văn.'
+      },
+      {
+        title: 'Ý kiến 3: Kiến nghị của Cô Dương (Điểm Đốc Binh Kiều)',
+        contributor: 'Cô Dương (Điểm Đốc Binh Kiều)',
+        opinionContent: [
+          'Không nên nêu tên giáo viên vi phạm lên toàn trường vì sẽ tạo áp lực tâm lý nặng nề cho giáo viên; có thể báo về tổ Chuyên môn để tổ chức góp ý, nhắc nhở nội bộ.'
+        ],
+        responseTitle: 'Trả lời và định hướng của Ban Giám hiệu:',
+        responseContent: [
+          '- Ban Giám hiệu hoàn toàn tiếp thu và đồng thuận với ý kiến đóng góp của Cô Dương.',
+          '- Định hướng của nhà trường là xây dựng "Môi trường học đường hạnh phúc", văn hóa ứng xử nhân văn, tôn trọng và đồng hành cùng nhà giáo. Đối với các thiếu sót về chuyên môn, Ban Giám hiệu sẽ trực tiếp trao đổi riêng với giáo viên hoặc gửi thông tin nội bộ cho Tổ trưởng chuyên môn để tổ sinh hoạt, góp ý chân tình, giúp đỡ đồng nghiệp cùng hoàn thiện, không bêu tên hay phê bình trước toàn thể hội đồng sư phạm nhà trường.'
+        ],
+        legalBasis: 'Kế hoạch xây dựng Trường học hạnh phúc của Ngành Giáo dục Đào tạo.',
+        assignment: 'Ban Giám hiệu và Ban Chấp hành Công đoàn cơ sở.'
+      }
+    ]
   },
   {
-    id: 4,
-    category: '1. Khảo thí & Cấu trúc đề kiểm tra',
-    department: 'Tổ Ngữ văn - Thư viện - Thiết bị',
-    contributor: 'Thầy Nghĩa (Điểm ĐBK)',
-    opinion: 'Đề xuất nguyên tắc ra đề kiểm tra định kỳ: Nên ưu tiên phân công giáo viên có trực tiếp dạy khối lớp đó ra đề để bám sát nội dung, phân hóa đối tượng và chương trình giảng dạy.',
-    response: 'Ban Giám hiệu NHẤT TRÍ CAO với đề xuất.',
-    responseDetails: [
-      '- Ban chuyên môn yêu cầu các Tổ trưởng chuyên môn khi phân công ra đề kiểm tra định kỳ phải ưu tiên giáo viên đang trực tiếp đứng lớp khối thi đó biên soạn ma trận, đặc tả và đề thi.',
-      '- Phân công 01 giáo viên cùng nhóm bộ môn thực hiện phản biện đề độc lập trước khi gửi duyệt bảo mật.'
-    ],
-    legalBasis: 'Quy chế chuyên môn năm học 2026 - 2027 của Trường THCS & THPT Đốc Binh Kiều.',
-    actionUnit: 'Tổ trưởng các Tổ chuyên môn',
-    note: 'Áp dụng từ đợt KT giữa kỳ I'
+    deptId: 'su-dia-gdcd',
+    deptName: 'TỔ SỬ – ĐỊA – GDCD – GDKT&PL',
+    orderRom: 'IV',
+    opinions: [
+      {
+        title: 'Ý kiến 1: Về Kế hoạch Kiểm tra, đánh giá định kỳ của nhà trường',
+        contributor: 'Tổ Sử - Địa - GDCD - GDKT&PL',
+        opinionContent: [
+          'Tổ có các ý kiến cụ thể đóng góp vào Kế hoạch kiểm tra đánh giá như sau:',
+          '1. Trang 3 mục 2.b: Kiểm tra tập trung hiện chưa có môn GDCD, đề nghị bổ sung môn GDCD vào danh mục kiểm tra tập trung.',
+          '2. Trang 4: Phần II Câu hỏi trắc nghiệm dạng Đúng / Sai: Hiện quy định đúng 1 ý được 0,1 điểm, đề nghị điều chỉnh thành mỗi ý được 0,25 điểm.',
+          '3. Trang 8 mục III Bước 1: Nhóm 3 bộ môn trong Tổ đề nghị trước mắt nộp ma trận cho chuyên môn phê duyệt. Giáo viên nào được phân công ra đề môn/khối nào thì giáo viên đó soạn và nộp bảng đặc tả trực tiếp cho chuyên môn. Vì môn xã hội nếu công bố bảng đặc tả trước thì nội dung chính của Đề kiểm tra gần như bị lộ.',
+          '4. Trang 8: Thời gian kiểm tra giữa kỳ 2 theo kế hoạch ghi tuần 26, đề nghị kiểm tra sang tuần 27 vì PPCT THCS xây dựng kiểm tra vào tuần 27 (kế hoạch ghi tuần 26 bị cấn tiến độ).',
+          '5. Trang 14, 16, 17: Thời gian kiểm tra môn Lịch sử & Địa lí, GDCD cấp THCS bị ghi nhầm thời gian, đề nghị đính chính.',
+          '6. Trang 15 phụ lục kiểm tra: Thời gian kiểm tra môn Lịch sử, Địa lí, GDKT&PL lớp 12 ghi 45 phút, tổ đề nghị nâng lên 50 phút.'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          '- Về môn GDCD (mục 1): Tiếp thu ý kiến của Tổ, Ban Giám hiệu bổ sung môn GDCD vào danh mục kiểm tra tập trung theo đúng tiến độ chung.',
+          '- Về thang điểm câu hỏi Đúng/Sai Phần II (mục 2): Ban Giám hiệu giải thích và hướng dẫn: Theo định dạng cấu trúc đề thi của Bộ GDĐT (Quyết định số 764/QĐ-BGDĐT), cách tính điểm Phần II là tính điểm lũy tiến theo số ý đúng trong một câu hỏi (chọn đúng 1 ý được 0,1 điểm; đúng 2 ý được 0,25 điểm; đúng 3 ý được 0,5 điểm; đúng cả 4 ý được 1,0 điểm cho cả câu). Đây là quy chuẩn quốc gia nhằm phân hóa năng lực và hạn chế việc đoán mò, không áp dụng cào bằng 0,25 điểm/ý. Đề nghị tổ thực hiện đúng theo quy chuẩn kỹ thuật của Bộ GDĐT.',
+          '- Về nộp ma trận và bảng đặc tả (mục 3): Ban Giám hiệu chấp thuận đề xuất rất xác đáng này. Nhằm bảo đảm tuyệt đối tính bảo mật của đề kiểm tra các môn Khoa học Xã hội, Tổ chuyên môn chỉ công bố Ma trận tổng quát cho học sinh ôn tập. Bảng đặc tả chi tiết kèm đề kiểm tra và đáp án do giáo viên ra đề gửi trực tiếp, bảo mật cho Ban Giám hiệu duyệt.',
+          '- Về tuần kiểm tra giữa kỳ 2 (mục 4): Ban Giám hiệu thống nhất điều chỉnh lịch kiểm tra giữa kỳ 2 sang Tuần 27 để khớp hoàn toàn với Phân phối chương trình cấp THCS.',
+          '- Về đính chính thời gian kiểm tra tại các trang 14, 16, 17 (mục 5): Bộ phận chuyên môn tiếp thu và đã chỉnh sửa chính xác thời lượng môn LS&ĐL, GDCD THCS theo Thông tư 22/2021/TT-BGDĐT.',
+          '- Về thời gian kiểm tra môn Lịch sử, Địa lí, GDKT&PL lớp 12 (mục 6): Thống nhất điều chỉnh từ 45 phút lên 50 phút, đồng bộ với định dạng đề thi tốt nghiệp THPT năm 2025 của Bộ GDĐT.'
+        ],
+        legalBasis: 'Thông tư 22/2021/TT-BGDĐT; Quyết định 764/QĐ-BGDĐT của Bộ GDĐT.',
+        assignment: 'Bộ phận chuyên môn nhà trường và Tổ trưởng Tổ Sử - Địa - GDCD - GDKT&PL.'
+      },
+      {
+        title: 'Ý kiến 2: Về ngày giờ công và giải quyết chế độ cho giáo viên ốm đau, thai sản',
+        contributor: 'Tổ Sử - Địa - GDCD - GDKT&PL',
+        opinionContent: [
+          '1. Tuần 4: Cô Châu (điểm trường Tân Kiều) nằm viện do mổ giác mạc: Giáo viên dạy thay có được kê tiết (tính thừa giờ/thanh toán dạy thay) không?',
+          '2. Giáo viên đang dạy bị bệnh đột xuất trong buổi dạy: Nhà trường giải quyết chế độ nghỉ và bố trí quản lý lớp như thế nào?'
+        ],
+        responseTitle: 'Trả lời và hướng dẫn của Ban Giám hiệu:',
+        responseContent: [
+          '- Về trường hợp Cô Châu nằm viện mổ mắt (mục 1): Căn cứ Thông tư 28/2009/TT-BGDĐT và Thông tư 15/2020/TT-BGDĐT về chế độ làm việc của giáo viên phổ thông, giáo viên ốm đau có giấy ra viện/nghỉ hưởng BHXH hợp lệ thì không bị trừ định mức tiết dạy. Giáo viên được BGH phân công dạy thay cô Châu được kê tiết dạy thay (dạy thừa giờ) và được thanh toán kinh phí dạy thừa giờ theo Quy chế chi tiêu nội bộ của nhà trường. Tổ trưởng chuyên môn lập bảng tổng hợp số tiết dạy thay gửi bộ phận Kế toán để thực hiện chi trả.',
+          '- Về trường hợp giáo viên bệnh đột xuất trong buổi dạy (mục 2):',
+          '  + Về xử lý tức thời: Giáo viên báo ngay cho Tổ trưởng chuyên môn và Phó Hiệu trưởng trực ngày (hoặc Tổng phụ trách/Giám thị) để kịp thời cử giáo viên trống tiết quản lý lớp, bảo đảm an toàn cho học sinh và hỗ trợ giáo viên đến phòng Y tế học đường hoặc cơ sở y tế gần nhất.',
+          '  + Về chế độ và dạy bù: Giáo viên sau đó bổ sung giấy tờ y tế/chứng nhận nghỉ việc hưởng BHXH. Các tiết học bị gián đoạn sẽ được Tổ chuyên môn xếp lịch dạy bù hoặc tính giờ dạy thay theo đúng quy chế hiện hành.'
+        ],
+        legalBasis: 'Thông tư 28/2009/TT-BGDĐT; Thông tư 15/2020/TT-BGDĐT; Luật Bảo hiểm xã hội.',
+        assignment: 'Tổ trưởng chuyên môn và bộ phận Kế toán - Y tế nhà trường.'
+      }
+    ]
   },
   {
-    id: 5,
-    category: '2. Chế độ chính sách & Bảo hiểm xã hội',
-    department: 'Tổ Vật lý - Hóa - Sinh - KHTN - Công nghệ',
-    contributor: 'Cô Nguyễn Kim Ngân',
-    opinion: 'Nhờ Lãnh đạo trường xem xét chế độ phụ cấp thâm niên nhà giáo của Cô Nguyễn Kim Ngân: Tháng 9/2011 đi dạy hợp đồng và có đóng BHXH bắt buộc. Năm 2012 nhận nhiệm sở tập sự theo quy định, năm 2018 mới được hưởng thâm niên 5%, đến tháng 8/2026 hưởng 13%. Hỏi: Theo Nghị định 77/2021/NĐ-CP thì thời gian dạy hợp đồng từ năm 2011 có được tính hưởng thâm niên không?',
-    response: 'Ban Giám hiệu đã chỉ đạo rà soát và trả lời hướng dẫn cụ thể căn cứ pháp lý:',
-    responseDetails: [
-      '- Căn cứ Khoản 1 Điều 3 Nghị định số 77/2021/NĐ-CP ngày 01/8/2021 của Chính phủ: Thời gian giảng dạy, giáo dục có đóng bảo hiểm xã hội bắt buộc trong các cơ sở giáo dục công lập được tính hưởng phụ cấp thâm niên nhà giáo (thời gian tập sự không tính hưởng).',
-      '- Phân tích trường hợp Cô Ngân: Khoảng thời gian từ tháng 09/2011 đến thời điểm nhận quyết định tập sự năm 2012 (nếu có Hợp đồng làm công việc giảng dạy và có tham gia đóng BHXH bắt buộc đầy đủ) ĐỦ ĐIỀU KIỆN ĐƯỢC TÍNH CỘNG DỒN vào thời gian công tác để tính hưởng phụ cấp thâm niên nghề.',
-      '- Việc trước đây chưa tính cộng dồn thời gian hợp đồng có đóng BHXH dẫn đến mốc tính thâm niên bị chậm.',
-      '- Chỉ đạo giải quyết: Nhà trường giao Bộ phận Kế toán - Tổ chức cán bộ tiếp nhận hồ sơ gốc của Cô Ngân (Hợp đồng lao động 2011, Sổ BHXH xác nhận quá trình đóng BHXH, Quyết định tuyển dụng và Quyết định công nhận hết thời gian tập sự). Sau khi đối chiếu xác thực, nhà trường sẽ lập văn bản đề nghị Sở GDĐT Đồng Tháp xem xét điều chỉnh mốc hưởng phụ cấp thâm niên và truy lĩnh theo đúng quy định pháp luật.'
-    ],
-    legalBasis: 'Nghị định số 77/2021/NĐ-CP ngày 01/8/2021 của Chính phủ quy định chế độ phụ cấp thâm niên nhà giáo.',
-    actionUnit: 'Bộ phận Kế toán - TCCB & Cô Nguyễn Kim Ngân',
-    note: '[Kế toán tiếp nhận hồ sơ trong tháng 10/2026]'
+    deptId: 'the-duc-gdqp-nt',
+    deptName: 'TỔ THỂ DỤC – GDQPAN – NGHỆ THUẬT',
+    orderRom: 'V',
+    opinions: [
+      {
+        title: 'Ý kiến 1: Về tham gia Hội thao truyền thống học sinh năm 2027',
+        contributor: 'Tổ Thể dục - GDQPAN - Nghệ thuật',
+        opinionContent: [
+          'Công văn số 3701/SGDĐT-VP ngày 22/09/2026 của Sở GDĐT V/v cắt giảm các cuộc thi, hồ sơ sổ sách hội họp và báo cáo gửi Sở Giáo dục có nội dung tổ chức Hội thao truyền thống học sinh trong năm 2027 gồm các môn: Cầu lông, Đá cầu, Bóng chuyền, Điền kinh, Bơi lội... cấp TH, THCS, THPT. Tổ kiến nghị nhà trường có định hướng kế hoạch chuẩn bị.'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          'Ban Giám hiệu ghi nhận và thống nhất chủ trương chuẩn bị sớm. Giao Tổ Thể dục - GDQPAN xây dựng Kế hoạch tham gia Hội thao học sinh truyền thống năm 2027 ngay từ đầu năm học 2026 - 2027. Nhà trường sẽ tạo điều kiện tối đa về cơ sở vật chất (sân tập, dụng cụ thi đấu) và cân đối kinh phí hỗ trợ công tác huấn luyện, bồi dưỡng theo đúng Quy chế chi tiêu nội bộ của đơn vị.'
+        ],
+        legalBasis: 'Công văn số 3701/SGDĐT-VP ngày 22/09/2026 của Sở GDĐT Đồng Tháp.',
+        assignment: 'Tổ Thể dục - GDQPAN - Nghệ thuật.'
+      },
+      {
+        title: 'Ý kiến 2: Về bồi dưỡng học sinh năng khiếu thể thao',
+        contributor: 'Tổ Thể dục - GDQPAN - Nghệ thuật',
+        opinionContent: [
+          'Giáo viên có học sinh năng khiếu thì lên kế hoạch tập luyện sớm để đạt thành tích tốt.'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          'Ban Giám hiệu rất hoan nghênh tinh thần trách nhiệm và chủ động của các thầy cô. Giao các giáo viên bộ môn tiến hành rà soát, tuyển chọn các em học sinh có tố chất, năng khiếu thể thao qua giờ dạy chính khóa; lập danh sách đội tuyển năng khiếu và xây dựng kế hoạch tập luyện chi tiết (thời gian, địa điểm, nội dung huấn luyện) trình BGH phê duyệt để tổ chức tập luyện ngoài giờ hiệu quả, bảo đảm an toàn tuyệt đối cho học sinh.'
+        ],
+        legalBasis: 'Kế hoạch hoạt động thể dục thể thao năm học 2026 - 2027 của nhà trường.',
+        assignment: 'Giáo viên bộ môn Thể dục - GDQPAN.'
+      },
+      {
+        title: 'Ý kiến 3: Về nội dung Thể thao tự chọn (TTTC) môn GDTC THCS',
+        contributor: 'Tổ Thể dục - GDQPAN - Nghệ thuật',
+        opinionContent: [
+          'Môn Giáo dục thể chất cấp THCS có chủ đề Thể thao tự chọn (TTTC) tối thiểu dạy 2 nội dung/khối (Bóng chuyền, Bóng đá, Đá cầu...).'
+        ],
+        responseTitle: 'Trả lời và chỉ đạo của Ban Giám hiệu:',
+        responseContent: [
+          'Thống nhất thực hiện nghiêm túc theo Chương trình GDPT 2018 môn GDTC cấp THCS. Giao Tổ trưởng chuyên môn chỉ đạo nhóm bộ môn căn cứ điều kiện thực tế sân bãi, trang thiết bị tại 2 điểm trường (Đốc Binh Kiều và Tân Kiều) cùng nguyện vọng của đa số học sinh để lựa chọn tối thiểu 2 môn thể thao tự chọn phù hợp nhất, đưa vào Kế hoạch giáo dục môn học ngay từ đầu năm học.'
+        ],
+        legalBasis: 'Chương trình GDPT 2018 môn Giáo dục thể chất.',
+        assignment: 'Tổ trưởng chuyên môn và nhóm giáo viên GDTC cấp THCS.'
+      }
+    ]
   },
   {
-    id: 6,
-    category: '2. Chế độ chính sách & Ngày giờ công',
-    department: 'Tổ Sử - Địa - GDCD - GDKTPL',
-    contributor: 'Điểm trường Tân Kiều & Điểm ĐBK',
-    opinion: 'Chế độ ngày giờ công và giải quyết dạy thay cho giáo viên:',
-    opinionDetails: [
-      'a) Tuần 4: Cô Châu (điểm trường Tân Kiều) nằm viện do phẫu thuật giác mạc -> Giáo viên dạy thay có được kê tiết tính thừa giờ/thanh toán dạy thay không?',
-      'b) Trường hợp giáo viên đang giảng dạy bị bệnh đột xuất tại trường: Quy trình giải quyết cho nghỉ và phân công dạy thay.'
-    ],
-    response: 'Ban Giám hiệu hướng dẫn quy trình và quyền lợi của giáo viên như sau:',
-    responseDetails: [
-      '- Về trường hợp Cô Châu: Căn cứ Thông tư 28/2009/TT-BGDĐT và Quy chế chi tiêu nội bộ của trường, giáo viên được phân công dạy thay hợp lệ cho đồng nghiệp nghỉ nằm viện phẫu thuật ĐƯỢC KÊ TÍNH TIẾT DẠY THAY ĐẦY ĐỦ. Tổ trưởng lập Bảng tổng hợp tiết dạy thay gửi BGH duyệt để tính thừa giờ theo quy chế.',
-      '- Về giáo viên bệnh đột xuất: Khi xảy ra đột xuất tại trường, GV hoặc đồng nghiệp báo ngay cho Y tế trường sơ cứu, đồng thời thông báo cho BGH và Tổ trưởng để bố trí người quản lý lớp thay ngay buổi học đó, đảm bảo an toàn tuyệt đối cho học sinh. Sau đó GV bổ sung giấy tờ y tế (giấy nghỉ việc hưởng BHXH) để giải quyết chế độ ốm đau theo Luật BHXH.'
-    ],
-    legalBasis: 'Thông tư 28/2009/TT-BGDĐT; Thông tư 15/2020/TT-BGDĐT; Quy chế chi tiêu nội bộ trường.',
-    actionUnit: 'Tổ trưởng chuyên môn & Bộ phận Kế toán',
-    note: 'Đã hướng dẫn cụ thể'
-  },
-  {
-    id: 7,
-    category: '3. Cải cách hành chính & Hồ sơ sổ sách',
-    department: 'Tổ Ngữ văn - Thư viện - Thiết bị',
-    contributor: 'Thầy Nghĩa (Điểm ĐBK)',
-    opinion: 'Đề xuất cải cách thủ tục hành chính trong sinh hoạt tổ và kiểm tra giáo án:',
-    opinionDetails: [
-      '- Giảm bớt thủ tục hành chính: Họp tổ Chuyên môn 2 lần/tháng thì có thể đan xen giữa trực tiếp và trực tuyến.',
-      '- Kiểm tra KHBD: Yêu cầu nộp vào các khoảng thời gian hợp lý, tránh dồn vào lúc công việc quá nhiều như ôn thi hoặc kiểm tra định kỳ.'
-    ],
-    response: 'Ban Giám hiệu HOÀN TOÀN ĐỒNG THUẬN VÀ CHỈ ĐẠO THỰC HIỆN NGAY:',
-    responseDetails: [
-      '- Về họp tổ chuyên môn: Cho phép Tổ chuyên môn linh hoạt tổ chức 01 lần họp trực tiếp (sinh hoạt chuyên môn theo nghiên cứu bài học, thao giảng, chuyên đề) và 01 lần họp trực tuyến (giao ban chuyên môn, đánh giá công việc). Tổ trưởng vẫn lập biên bản lưu trữ điện tử đầy đủ.',
-      '- Về kiểm tra KHBD: Tổ trưởng chuyên môn xây dựng kế hoạch kiểm tra giáo án phân kỳ đều đặn trong tháng, tuyệt đối không dồn lịch thu kiểm tra vào các tuần cao điểm ôn tập, kiểm tra định kỳ hay sơ kết.'
-    ],
-    legalBasis: 'Thông tư 32/2020/TT-BGDĐT; Chỉ đạo chuyển đổi số ngành Giáo dục tỉnh Đồng Tháp.',
-    actionUnit: 'Tổ trưởng các Tổ chuyên môn',
-    note: 'Áp dụng thực hiện ngay'
-  },
-  {
-    id: 8,
-    category: '4. Đạo đức nhà giáo & Tâm lý sư phạm',
-    department: 'Tổ Ngữ văn - Thư viện - Thiết bị',
-    contributor: 'Cô Thảo (Tân Kiều), Cô Dương (ĐBK)',
-    opinion: 'Đề xuất về quy trình xác minh thông tin phản ánh và hình thức xử lý góp ý đối với giáo viên:',
-    opinionDetails: [
-      '- Khi GV có vi phạm/phản ánh, nếu đưa tên lên Website thì cần xác minh chính xác, tránh nhầm lẫn ảnh hưởng tâm lý GV.',
-      '- Xử lý vi phạm công bằng, đúng quy trình, khách quan, không thiên vị.',
-      '- Ghi rõ cụ thể vi phạm điều gì, tránh ghi chung chung như "GV bị HS phản ánh về phương pháp giảng dạy" làm GV hoang mang lo lắng.',
-      '- Không nên nêu tên GV vi phạm lên toàn trường gây áp lực tâm lý nặng nề; nên báo về Tổ Chuyên môn để nhắc nhở, giúp đỡ đồng nghiệp.'
-    ],
-    response: 'Ban Giám hiệu khẳng định quan điểm chỉ đạo nhân văn, sư phạm và chuẩn mực:',
-    responseDetails: [
-      '- 1. Tuyệt đối KHÔNG đăng tải thông tin phản ánh chưa xác minh hoặc thông tin phê bình cá nhân giáo viên lên Website nhà trường hay các phương tiện thông tin công cộng.',
-      '- 2. Mọi thông tin phản ánh từ phụ huynh, học sinh phải được BGH và Tổ chuyên môn xác minh thận trọng, khách quan, có sự làm việc và lắng nghe giải trình trực tiếp từ giáo viên.',
-      '- 3. Khi góp ý hoặc nhắc nhở, phải chỉ rõ nội dung, tình huống và căn cứ chuyên môn cụ thể, không nhận xét mơ hồ, chung chung.',
-      '- 4. Ưu tiên hình thức trao đổi riêng với cá nhân hoặc gửi nội dung về Tổ chuyên môn để sinh hoạt, nhắc nhở mang tính xây dựng, đồng hành cùng giáo viên tiến bộ, tránh việc nêu tên trước hội đồng toàn trường gây áp lực tâm lý tiêu cực.'
-    ],
-    legalBasis: 'Quy định về đạo đức nhà giáo (Quyết định 16/2008/QĐ-BGDĐT); Điều lệ trường trung học.',
-    actionUnit: 'Ban Giám hiệu & Các Tổ trưởng chuyên môn',
-    note: 'Quán triệt toàn trường'
-  },
-  {
-    id: 9,
-    category: '5. Hoạt động thể thao & Môn GDTC',
-    department: 'Tổ Thể dục - GDQPAN - Nghệ thuật',
-    contributor: 'Tập thể Tổ Thể dục',
-    opinion: 'Thực hiện Công văn 3701/SGDĐT-VP ngày 22/09/2026 về cắt giảm cuộc thi, chuẩn bị Hội thao truyền thống học sinh năm 2027:',
-    opinionDetails: [
-      '- GV có HS năng khiếu chủ động lên kế hoạch tập luyện các môn (Cầu lông, Đá cầu, Bóng chuyền, Điền kinh, Bơi lội...) chuẩn bị tham gia Hội thao truyền thống học sinh năm 2027.',
-      '- Môn GDTC THCS: Chủ đề Thể thao tự chọn (TTTC) tối thiểu dạy 2 nội dung/khối (Bóng chuyền, bóng đá, đá cầu...).'
-    ],
-    response: 'Ban Giám hiệu BIỂU DƯƠNG VÀ ỦNG HỘ CHỦ ĐỘNG CỦA TỔ:',
-    responseDetails: [
-      '- Thống nhất giao Tổ Thể dục khảo sát và lập Kế hoạch huấn luyện năng khiếu thể thao từ đầu năm học 2026 - 2027 để chuẩn bị tham gia Hội thao năm 2027. BGH sẽ tạo điều kiện tối đa về cơ sở vật chất sân bãi, thiết bị tập luyện và kinh phí hỗ trợ.',
-      '- Thống nhất môn GDTC cấp THCS tổ chức giảng dạy tối thiểu 2 nội dung Thể thao tự chọn/khối lớp theo đúng chương trình GDPT 2018 và điều kiện thực tế của 2 điểm trường.'
-    ],
-    legalBasis: 'Công văn 3701/SGDĐT-VP ngày 22/09/2026 của Sở GDĐT Đồng Tháp; CT GDPT 2018.',
-    actionUnit: 'Tổ Thể dục - GDQPAN - Nghệ thuật',
-    note: 'Đã phê duyệt chủ trương'
-  },
-  {
-    id: 10,
-    category: '6. Tổ Tiếng Anh - Tin học',
-    department: 'Tổ Tiếng Anh - Tin học',
-    contributor: 'Tập thể Tổ Tiếng Anh - Tin học',
-    opinion: 'Tổ đã tiến hành họp và quán triệt các hướng dẫn của nhà trường. Không có đề xuất, kiến nghị phát sinh.',
-    response: 'Ban Giám hiệu ghi nhận tinh thần đồng thuận, nhất trí cao của tập thể Tổ Tiếng Anh - Tin học trong việc triển khai kế hoạch giáo dục.',
-    legalBasis: 'Biên bản họp tổ chuyên môn ngày 08/10/2026.',
-    actionUnit: 'Tổ Tiếng Anh - Tin học',
-    note: 'Ghi nhận'
+    deptId: 'tieng-anh-tin-hoc',
+    deptName: 'TỔ TIẾNG ANH – TIN HỌC',
+    orderRom: 'VI',
+    opinions: [
+      {
+        title: 'Ý kiến đóng góp, đề xuất với nhà trường',
+        contributor: 'Tổ Tiếng Anh - Tin học',
+        opinionContent: [
+          'Tổ thảo luận, thống nhất toàn bộ các nội dung chỉ đạo chuyên môn của Ban Giám hiệu nhà trường và không có đề xuất, kiến nghị gì thêm.'
+        ],
+        responseTitle: 'Ý kiến ghi nhận của Ban Giám hiệu:',
+        responseContent: [
+          'Ban Giám hiệu ghi nhận và biểu dương tinh thần trách nhiệm, sự đồng thuận cao và tinh thần chủ động triển khai kế hoạch năm học của tập thể Tổ Tiếng Anh - Tin học.',
+          'Đề nghị Tổ tiếp tục phát huy tinh thần đoàn kết, đẩy mạnh ứng dụng công nghệ thông tin và chuyển đổi số trong giảng dạy, tích cực bồi dưỡng nâng cao năng lực ngoại ngữ và tin học cho học sinh theo các kế hoạch trọng tâm của nhà trường.'
+        ],
+        legalBasis: 'Kế hoạch thực hiện nhiệm vụ năm học 2026 - 2027.',
+        assignment: 'Tập thể Tổ Tiếng Anh - Tin học.'
+      }
+    ]
   }
 ];
 
 export async function generateMeetingReplyDocx(outputPath: string): Promise<void> {
-  const tableBorder = {
-    top: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-    bottom: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-    left: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-    right: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-  };
-
-  const headerBorder = {
-    top: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-    bottom: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-    left: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-    right: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-  };
-
+  const FONT_NAME = 'Times New Roman';
   const noBorder = {
     top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
     bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
     left: { style: BorderStyle.NONE, size: 0, color: 'auto' },
-    right: { style: BorderStyle.NONE, size: 0, color: 'auto' },
+    right: { style: BorderStyle.NONE, size: 0, color: 'auto' }
   };
 
   const children: (Paragraph | Table)[] = [];
 
-  // 1. Quoc hieu & Tieu ngu Table
-  const topTable = new Table({
-    layout: TableLayoutType.FIXED,
-    columnWidths: [4677, 4678],
-    width: { size: 9355, type: WidthType.DXA },
+  // Header 2 columns (chuẩn Nghị định 30/2020/NĐ-CP)
+  const headerTable = new Table({
+    width: { size: 100, type: WidthType.PERCENTAGE },
     borders: noBorder,
     rows: [
       new TableRow({
         children: [
           new TableCell({
-            width: { size: 4677, type: WidthType.DXA },
+            width: { size: 45, type: WidthType.PERCENTAGE },
             borders: noBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP', font: 'Times New Roman', size: 23 }),
-                ],
+                  new TextRun({
+                    text: 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: 'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU', bold: true, font: 'Times New Roman', size: 24 }),
-                ],
+                  new TextRun({
+                    text: 'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
+                    bold: true,
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { before: 80 },
+                spacing: { after: 120 },
                 children: [
-                  new TextRun({ text: 'Số: 03/TB-THCS&THPTĐBK', italics: true, font: 'Times New Roman', size: 23 }),
-                ],
-              }),
-            ],
+                  new TextRun({
+                    text: 'Số: 186/TB-THCS-THPT',
+                    size: 24,
+                    font: FONT_NAME
+                  })
+                ]
+              })
+            ]
           }),
           new TableCell({
-            width: { size: 4678, type: WidthType.DXA },
+            width: { size: 55, type: WidthType.PERCENTAGE },
             borders: noBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: 'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM', bold: true, font: 'Times New Roman', size: 24 }),
-                ],
+                  new TextRun({
+                    text: 'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
+                    bold: true,
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: 'Độc lập - Tự do - Hạnh phúc', bold: true, font: 'Times New Roman', size: 24 }),
-                ],
+                  new TextRun({
+                    text: 'Độc lập - Tự do - Hạnh phúc',
+                    bold: true,
+                    size: 24,
+                    font: FONT_NAME
+                  })
+                ]
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { before: 80 },
+                spacing: { after: 120 },
                 children: [
-                  new TextRun({ text: 'Tháp Mười, ngày 09 tháng 10 năm 2026', italics: true, font: 'Times New Roman', size: 23 }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      }),
-    ],
+                  new TextRun({
+                    text: 'Tháp Mười, ngày 09 tháng 10 năm 2026',
+                    italics: true,
+                    size: 24,
+                    font: FONT_NAME
+                  })
+                ]
+              })
+            ]
+          })
+        ]
+      })
+    ]
   });
+  children.push(headerTable);
 
-  children.push(topTable);
-
-  // Title
+  // Document Title (In đậm, canh giữa)
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { before: 280, after: 80 },
+      spacing: { before: 240, after: 100 },
       children: [
         new TextRun({
-          text: 'BẢNG TỔNG HỢP Ý KIẾN HỌP TỔ CHUYÊN MÔN',
+          text: 'THÔNG BÁO KẾT LUẬN',
           bold: true,
-          font: 'Times New Roman',
           size: 28,
-        }),
-      ],
+          font: FONT_NAME
+        })
+      ]
     }),
     new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { after: 80 },
       children: [
         new TextRun({
-          text: 'VÀ NỘI DUNG TRẢ LỜI, CHỈ ĐẠO CỦA BAN GIÁM HIỆU',
+          text: 'Về việc tiếp thu, giải đáp và chỉ đạo thực hiện ý kiến, kiến nghị',
           bold: true,
-          font: 'Times New Roman',
           size: 26,
-        }),
-      ],
+          font: FONT_NAME
+        })
+      ]
     }),
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { after: 240 },
+      spacing: { after: 280 },
       children: [
         new TextRun({
-          text: '(Phiên họp Tổ chuyên môn lần 3 - Ngày 08 tháng 10 năm 2026)',
-          italics: true,
-          font: 'Times New Roman',
-          size: 24,
-        }),
-      ],
+          text: 'của các tổ chuyên môn tại kỳ họp định kỳ lần 3, ngày 08/10/2026',
+          bold: true,
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
     })
   );
 
-  // Table header
-  const tableRows: TableRow[] = [
-    new TableRow({
-      tableHeader: true,
+  // Phần Căn cứ pháp lý & Mở đầu
+  children.push(
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 120, line: 300 },
       children: [
-        new TableCell({
-          width: { size: 600, type: WidthType.DXA },
-          borders: headerBorder,
-          shading: { fill: 'E2E8F0', type: ShadingType.CLEAR },
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [new TextRun({ text: 'STT', bold: true, font: 'Times New Roman', size: 22 })],
-            }),
-          ],
-        }),
-        new TableCell({
-          width: { size: 2000, type: WidthType.DXA },
-          borders: headerBorder,
-          shading: { fill: 'E2E8F0', type: ShadingType.CLEAR },
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [new TextRun({ text: 'Lĩnh vực & Tổ đề xuất', bold: true, font: 'Times New Roman', size: 22 })],
-            }),
-          ],
-        }),
-        new TableCell({
-          width: { size: 3200, type: WidthType.DXA },
-          borders: headerBorder,
-          shading: { fill: 'E2E8F0', type: ShadingType.CLEAR },
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [new TextRun({ text: 'Nội dung ý kiến, đề xuất của Tổ', bold: true, font: 'Times New Roman', size: 22 })],
-            }),
-          ],
-        }),
-        new TableCell({
-          width: { size: 3555, type: WidthType.DXA },
-          borders: headerBorder,
-          shading: { fill: 'E2E8F0', type: ShadingType.CLEAR },
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [new TextRun({ text: 'Nội dung trả lời & chỉ đạo của BGH\n(Kèm căn cứ quy định)', bold: true, font: 'Times New Roman', size: 22 })],
-            }),
-          ],
-        }),
-      ],
+        new TextRun({
+          text: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15/9/2020 của Bộ Giáo dục và Đào tạo ban hành Điều lệ trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;',
+          italics: true,
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
     }),
-  ];
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 120, line: 300 },
+      children: [
+        new TextRun({
+          text: 'Căn cứ Kế hoạch thời gian năm học 2026 - 2027 và Kế hoạch giáo dục nhà trường của Trường THCS và THPT Đốc Binh Kiều;',
+          italics: true,
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 180, line: 300 },
+      children: [
+        new TextRun({
+          text: 'Căn cứ Biên bản họp định kỳ lần 3 ngày 08/10/2026 của 06 Tổ chuyên môn trong nhà trường;',
+          italics: true,
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 240, line: 320 },
+      children: [
+        new TextRun({
+          text: 'Ban Giám hiệu Trường THCS và THPT Đốc Binh Kiều đã tổng hợp đầy đủ các ý kiến, kiến nghị và đề xuất của từng tổ chuyên môn. Nhằm kịp thời tháo gỡ khó khăn, thống nhất quy trình chuyên môn và bảo đảm thực hiện thắng lợi nhiệm vụ năm học, Ban Giám hiệu thông báo kết luận tiếp thu, giải đáp chi tiết theo từng tổ chuyên môn như sau:',
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    })
+  );
 
-  // Table Body rows
-  for (const item of OPINIONS_MEETING_3) {
-    const opinionParas: Paragraph[] = [
+  // Render từng Tổ từ trên xuống dưới dạng văn bản hành chính kế hoạch (KHÔNG DÙNG BẢNG TO)
+  DEPARTMENT_FEEDBACKS_MEETING_3.forEach((dept) => {
+    // Tiêu đề Tổ
+    children.push(
       new Paragraph({
+        alignment: AlignmentType.LEFT,
+        spacing: { before: 240, after: 140 },
         children: [
-          new TextRun({ text: item.opinion, bold: true, font: 'Times New Roman', size: 22 }),
-        ],
-      }),
-    ];
-
-    if (item.opinionDetails && item.opinionDetails.length > 0) {
-      for (const d of item.opinionDetails) {
-        opinionParas.push(
-          new Paragraph({
-            spacing: { before: 40 },
-            children: [
-              new TextRun({ text: d, font: 'Times New Roman', size: 21 }),
-            ],
+          new TextRun({
+            text: `${dept.orderRom}. ${dept.deptName}`,
+            bold: true,
+            size: 27,
+            font: FONT_NAME
           })
-        );
-      }
-    }
-
-    // Embed small inner table if available
-    if (item.tableData) {
-      opinionParas.push(
-        new Paragraph({
-          spacing: { before: 60, after: 40 },
-          children: [
-            new TextRun({ text: '[Bảng cấu trúc đề xuất chi tiết:]', italics: true, bold: true, font: 'Times New Roman', size: 20 }),
-          ],
-        })
-      );
-      for (const r of item.tableData.rows) {
-        opinionParas.push(
-          new Paragraph({
-            spacing: { before: 20 },
-            children: [
-              new TextRun({ text: `• ${r[0]}: `, bold: true, font: 'Times New Roman', size: 20 }),
-              new TextRun({ text: `Phần I: ${r[1]} | Phần II: ${r[2] || '-'} | Phần III: ${r[3] || '-'} | Tự luận: ${r[4]} | TG: ${r[5]}`, font: 'Times New Roman', size: 20 }),
-            ],
-          })
-        );
-      }
-    }
-
-    const responseParas: Paragraph[] = [
-      new Paragraph({
-        children: [
-          new TextRun({ text: item.response, bold: true, font: 'Times New Roman', size: 22 }),
-        ],
-      }),
-    ];
-
-    if (item.responseDetails && item.responseDetails.length > 0) {
-      for (const rd of item.responseDetails) {
-        responseParas.push(
-          new Paragraph({
-            spacing: { before: 40 },
-            children: [
-              new TextRun({ text: rd, font: 'Times New Roman', size: 21 }),
-            ],
-          })
-        );
-      }
-    }
-
-    if (item.legalBasis) {
-      responseParas.push(
-        new Paragraph({
-          spacing: { before: 60 },
-          children: [
-            new TextRun({ text: '• Căn cứ: ', bold: true, italics: true, font: 'Times New Roman', size: 20 }),
-            new TextRun({ text: item.legalBasis, italics: true, font: 'Times New Roman', size: 20 }),
-          ],
-        })
-      );
-    }
-
-    if (item.actionUnit) {
-      responseParas.push(
-        new Paragraph({
-          spacing: { before: 40 },
-          children: [
-            new TextRun({ text: '• Thực hiện: ', bold: true, font: 'Times New Roman', size: 20 }),
-            new TextRun({ text: item.actionUnit, font: 'Times New Roman', size: 20 }),
-            new TextRun({ text: ` (${item.note || ''})`, italics: true, font: 'Times New Roman', size: 19 }),
-          ],
-        })
-      );
-    }
-
-    tableRows.push(
-      new TableRow({
-        children: [
-          new TableCell({
-            width: { size: 600, type: WidthType.DXA },
-            borders: tableBorder,
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [new TextRun({ text: `${item.id}`, bold: true, font: 'Times New Roman', size: 22 })],
-              }),
-            ],
-          }),
-          new TableCell({
-            width: { size: 2000, type: WidthType.DXA },
-            borders: tableBorder,
-            children: [
-              new Paragraph({
-                children: [
-                  new TextRun({ text: item.category, bold: true, font: 'Times New Roman', size: 21 }),
-                ],
-              }),
-              new Paragraph({
-                spacing: { before: 40 },
-                children: [
-                  new TextRun({ text: item.department, bold: true, color: '1E3A8A', font: 'Times New Roman', size: 21 }),
-                ],
-              }),
-              new Paragraph({
-                spacing: { before: 20 },
-                children: [
-                  new TextRun({ text: item.contributor || '', italics: true, font: 'Times New Roman', size: 20 }),
-                ],
-              }),
-            ],
-          }),
-          new TableCell({
-            width: { size: 3200, type: WidthType.DXA },
-            borders: tableBorder,
-            children: opinionParas,
-          }),
-          new TableCell({
-            width: { size: 3555, type: WidthType.DXA },
-            borders: tableBorder,
-            children: responseParas,
-          }),
-        ],
+        ]
       })
     );
-  }
 
-  const mainTable = new Table({
-    layout: TableLayoutType.FIXED,
-    columnWidths: [600, 2000, 3200, 3555],
-    width: { size: 9355, type: WidthType.DXA },
-    rows: tableRows,
+    // Từng ý kiến của tổ
+    dept.opinions.forEach((op, opIdx) => {
+      // Tên ý kiến / Tiêu đề mục
+      children.push(
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          indent: { left: 240 },
+          spacing: { before: 140, after: 80 },
+          children: [
+            new TextRun({
+              text: `${opIdx + 1}. ${op.title}`,
+              bold: true,
+              size: 26,
+              font: FONT_NAME
+            }),
+            op.contributor ? new TextRun({
+              text: ` (${op.contributor})`,
+              italics: true,
+              size: 25,
+              font: FONT_NAME
+            }) : new TextRun({ text: '' })
+          ]
+        })
+      );
+
+      // Nội dung ý kiến của tổ
+      children.push(
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          indent: { left: 400 },
+          spacing: { after: 60 },
+          children: [
+            new TextRun({
+              text: 'a) Nội dung ý kiến, đề xuất của Tổ:',
+              bold: true,
+              italics: true,
+              size: 26,
+              font: FONT_NAME
+            })
+          ]
+        })
+      );
+
+      op.opinionContent.forEach((line) => {
+        children.push(
+          new Paragraph({
+            alignment: AlignmentType.JUSTIFIED,
+            indent: { left: 600 },
+            spacing: { after: 60, line: 300 },
+            children: [
+              new TextRun({
+                text: line,
+                size: 26,
+                font: FONT_NAME
+              })
+            ]
+          })
+        );
+      });
+
+      // Trả lời của Ban Giám hiệu
+      children.push(
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          indent: { left: 400 },
+          spacing: { before: 80, after: 60 },
+          children: [
+            new TextRun({
+              text: 'b) ' + op.responseTitle,
+              bold: true,
+              italics: true,
+              size: 26,
+              font: FONT_NAME
+            })
+          ]
+        })
+      );
+
+      op.responseContent.forEach((line) => {
+        children.push(
+          new Paragraph({
+            alignment: AlignmentType.JUSTIFIED,
+            indent: { left: 600 },
+            spacing: { after: 60, line: 300 },
+            children: [
+              new TextRun({
+                text: line,
+                size: 26,
+                font: FONT_NAME
+              })
+            ]
+          })
+        );
+      });
+
+      // Căn cứ pháp lý & phân công nếu có
+      if (op.legalBasis || op.assignment) {
+        const metaTexts: TextRun[] = [];
+        if (op.legalBasis) {
+          metaTexts.push(
+            new TextRun({
+              text: '- Căn cứ: ',
+              bold: true,
+              size: 25,
+              font: FONT_NAME
+            }),
+            new TextRun({
+              text: `${op.legalBasis}  `,
+              italics: true,
+              size: 25,
+              font: FONT_NAME
+            })
+          );
+        }
+        if (op.assignment) {
+          metaTexts.push(
+            new TextRun({
+              text: '- Đơn vị thực hiện: ',
+              bold: true,
+              size: 25,
+              font: FONT_NAME
+            }),
+            new TextRun({
+              text: op.assignment,
+              size: 25,
+              font: FONT_NAME
+            })
+          );
+        }
+
+        children.push(
+          new Paragraph({
+            alignment: AlignmentType.JUSTIFIED,
+            indent: { left: 600 },
+            spacing: { before: 60, after: 120, line: 300 },
+            children: metaTexts
+          })
+        );
+      }
+    });
   });
 
-  children.push(mainTable);
+  // Mục Tổ chức thực hiện
+  children.push(
+    new Paragraph({
+      alignment: AlignmentType.LEFT,
+      spacing: { before: 280, after: 140 },
+      children: [
+        new TextRun({
+          text: 'VII. TỔ CHỨC THỰC HIỆN',
+          bold: true,
+          size: 27,
+          font: FONT_NAME
+        })
+      ]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 100, line: 300 },
+      children: [
+        new TextRun({
+          text: '1. Ban Giám hiệu phân công các đồng chí Phó Hiệu trưởng phụ trách chuyên môn trực tiếp rà soát, bổ sung các nội dung đã thống nhất vào Kế hoạch kiểm tra đánh giá của nhà trường; chỉ đạo văn phòng chuyên môn ban hành phụ lục điều chỉnh gửi về các tổ bộ môn.',
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 100, line: 300 },
+      children: [
+        new TextRun({
+          text: '2. Các đồng chí Tổ trưởng chuyên môn chịu trách nhiệm phổ biến chi tiết toàn bộ nội dung văn bản này đến từng cán bộ, giáo viên, nhân viên trong tổ tại phiên họp chuyên môn gần nhất; tổ chức thực hiện nghiêm túc, đúng tiến độ.',
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 100, line: 300 },
+      children: [
+        new TextRun({
+          text: '3. Bộ phận Kế toán - Văn phòng khẩn trương hoàn thiện hồ sơ rà soát thâm niên nhà giáo của giáo viên theo đúng chỉ đạo tại văn bản này; lập bảng kê chi trả dạy thay, dạy thừa giờ kịp thời, chính xác cho thầy cô giáo.',
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      indent: { firstLine: 450 },
+      spacing: { after: 240, line: 300 },
+      children: [
+        new TextRun({
+          text: '4. Toàn thể cán bộ, giáo viên, nhân viên nhà trường nêu cao tinh thần trách nhiệm, tăng cường đoàn kết nội bộ, thực hiện tốt kỷ cương nền nếp và văn hóa ứng xử sư phạm, chung tay xây dựng trường học hạnh phúc, hoàn thành xuất sắc nhiệm vụ năm học 2026 - 2027./.',
+          size: 26,
+          font: FONT_NAME
+        })
+      ]
+    })
+  );
 
-  // Signatures Section
-  const sigTable = new Table({
-    layout: TableLayoutType.FIXED,
-    columnWidths: [4677, 4678],
-    width: { size: 9355, type: WidthType.DXA },
+  // Footer / Ký tên và Nơi nhận
+  const signTable = new Table({
+    width: { size: 100, type: WidthType.PERCENTAGE },
     borders: noBorder,
     rows: [
       new TableRow({
         children: [
           new TableCell({
-            width: { size: 4677, type: WidthType.DXA },
+            width: { size: 50, type: WidthType.PERCENTAGE },
             borders: noBorder,
             children: [
               new Paragraph({
-                spacing: { before: 240 },
+                alignment: AlignmentType.LEFT,
                 children: [
-                  new TextRun({ text: 'Nơi nhận:', bold: true, italics: true, font: 'Times New Roman', size: 22 }),
-                ],
+                  new TextRun({
+                    text: 'Nơi nhận:',
+                    bold: true,
+                    italics: true,
+                    size: 24,
+                    font: FONT_NAME
+                  })
+                ]
               }),
               new Paragraph({
+                alignment: AlignmentType.LEFT,
                 children: [
-                  new TextRun({ text: '- Ban Giám hiệu (chỉ đạo);\n- 06 Tổ chuyên môn (thực hiện);\n- Bộ phận Kế toán - TCCB (phối hợp);\n- Lưu: VT, CM.', font: 'Times New Roman', size: 20 }),
-                ],
+                  new TextRun({
+                    text: '- Lãnh đạo trường (để chỉ đạo);',
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
               }),
-            ],
+              new Paragraph({
+                alignment: AlignmentType.LEFT,
+                children: [
+                  new TextRun({
+                    text: '- 06 Tổ chuyên môn (để thực hiện);',
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
+              }),
+              new Paragraph({
+                alignment: AlignmentType.LEFT,
+                children: [
+                  new TextRun({
+                    text: '- Bộ phận VP, Kế toán (để thực hiện);',
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
+              }),
+              new Paragraph({
+                alignment: AlignmentType.LEFT,
+                children: [
+                  new TextRun({
+                    text: '- Lưu: VT, BGH.',
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
+              })
+            ]
           }),
           new TableCell({
-            width: { size: 4678, type: WidthType.DXA },
+            width: { size: 50, type: WidthType.PERCENTAGE },
             borders: noBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { before: 240 },
                 children: [
-                  new TextRun({ text: 'HIỆU TRƯỞNG', bold: true, font: 'Times New Roman', size: 24 }),
-                ],
+                  new TextRun({
+                    text: 'TM. BAN GIÁM HIỆU',
+                    bold: true,
+                    size: 24,
+                    font: FONT_NAME
+                  })
+                ]
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { after: 800 },
+                children: [
+                  new TextRun({
+                    text: 'HIỆU TRƯỞNG',
+                    bold: true,
+                    size: 24,
+                    font: FONT_NAME
+                  })
+                ]
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: '(Ký, đóng dấu số phát hành)', italics: true, font: 'Times New Roman', size: 21 }),
-                ],
-              }),
-              new Paragraph({ spacing: { before: 700 } }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({ text: 'Lê Thanh Cường', bold: true, font: 'Times New Roman', size: 24 }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      }),
-    ],
+                  new TextRun({
+                    text: '(Đã ký và đóng dấu)',
+                    italics: true,
+                    size: 22,
+                    font: FONT_NAME
+                  })
+                ]
+              })
+            ]
+          })
+        ]
+      })
+    ]
   });
-
-  children.push(sigTable);
+  children.push(signTable);
 
   const doc = new Document({
     sections: [
@@ -643,19 +812,52 @@ export async function generateMeetingReplyDocx(outputPath: string): Promise<void
         properties: {
           page: {
             margin: {
-              top: 1134, // 20mm
+              top: 1134,    // 20mm
               bottom: 1134, // 20mm
-              left: 1701, // 30mm
-              right: 850, // 15mm
-            },
-          },
+              left: 1701,   // 30mm
+              right: 850    // 15mm
+            }
+          }
         },
-        children,
-      },
-    ],
+        headers: {
+          default: new Header({
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.RIGHT,
+                children: [
+                  new TextRun({
+                    text: 'Trường THCS & THPT Đốc Binh Kiều - Trả lời họp tổ chuyên môn lần 3',
+                    size: 18,
+                    italics: true,
+                    font: FONT_NAME
+                  })
+                ]
+              })
+            ]
+          })
+        },
+        footers: {
+          default: new Footer({
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({
+                    children: ['Trang ', PageNumber.CURRENT, ' / ', PageNumber.TOTAL_PAGES],
+                    size: 20,
+                    font: FONT_NAME
+                  })
+                ]
+              })
+            ]
+          })
+        },
+        children
+      }
+    ]
   });
 
   const buffer = await Packer.toBuffer(doc);
   fs.writeFileSync(outputPath, buffer);
-  console.log(`Successfully generated DOCX at: ${outputPath}`);
+  console.log(`Successfully generated DOCX to ${outputPath}`);
 }
