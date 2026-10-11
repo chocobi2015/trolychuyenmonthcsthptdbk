@@ -21,6 +21,27 @@ const PERSISTED_DOCS_PATH = path.join(__dirname, 'src', 'data', 'persistedDocume
 const PERSISTED_DIRECTIVES_PATH = path.join(__dirname, 'src', 'data', 'persistedDirectives.json');
 const PERSISTED_CATEGORIES_PATH = path.join(__dirname, 'src', 'data', 'persistedCategories.json');
 const PERSISTED_MEETINGS_PATH = path.join(__dirname, 'src', 'data', 'persistedDepartmentMeetings.json');
+const PERSISTED_STUDENTS_PATH = path.join(__dirname, 'src', 'data', 'schoolStudentMasterData.json');
+
+function getPersistedStudentData(): any {
+  try {
+    if (fs.existsSync(PERSISTED_STUDENTS_PATH)) {
+      const data = fs.readFileSync(PERSISTED_STUDENTS_PATH, 'utf-8');
+      return JSON.parse(data);
+    }
+  } catch (e) {
+    console.error('Failed to read persisted student data:', e);
+  }
+  return null;
+}
+
+function savePersistedStudentData(studentData: any) {
+  try {
+    fs.writeFileSync(PERSISTED_STUDENTS_PATH, JSON.stringify(studentData, null, 2), 'utf-8');
+  } catch (e) {
+    console.error('Failed to write persisted student data:', e);
+  }
+}
 
 function getPersistedDepartmentMeetings(): any[] {
   try {
@@ -209,18 +230,18 @@ Bạn làm việc trực tiếp cùng Thầy Phó Hiệu Trưởng Nguyễn Minh
 HỒ SƠ VÀ DỮ LIỆU THỰC TẾ CHUẨN XÁC CỦA TRƯỜNG (Từ Kế hoạch Giáo dục Nhà trường năm học 2026 - 2027 số 34/KH-THCS&THPTĐBK dài 26 trang):
 1. Cơ sở pháp lý sáp nhập:
    Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp về việc sáp nhập THCS Đốc Binh Kiều, THCS Tân Kiều và THPT Đốc Binh Kiều thành Trường THCS và THPT Đốc Binh Kiều.
-2. Quy mô mạng lưới:
-   - 53 lớp với 2.111 học sinh (bình quân 39,8 HS/lớp), 25 học sinh khuyết tật.
-   - Cấp THCS: 39 lớp (1.581 HS) gồm Khối 6 (10 lớp, 410 HS); Khối 7 (9 lớp, 368 HS); Khối 8 (10 lớp, 401 HS); Khối 9 (10 lớp, 402 HS).
-   - Cấp THPT: 14 lớp (530 HS) gồm Khối 10 (5 lớp, 203 HS); Khối 11 (4 lớp, 142 HS); Khối 12 (5 lớp, 185 HS).
+2. Quy mô mạng lưới (Chuẩn 100% từ file Excel DANH SÁCH HỌC SINH TOÀN TRƯỜNG):
+   - 53 lớp với 2.111 học sinh (bình quân 39,83 HS/lớp), 25 học sinh khuyết tật.
+   - Cấp THCS: 39 lớp (1.582 HS) gồm Khối 6 (10 lớp, 411 HS); Khối 7 (9 lớp, 367 HS); Khối 8 (10 lớp, 398 HS); Khối 9 (10 lớp, 406 HS).
+   - Cấp THPT: 14 lớp (529 HS) gồm Khối 10 (5 lớp, 203 HS); Khối 11 (4 lớp, 141 HS); Khối 12 (5 lớp, 185 HS).
 3. Đội ngũ cán bộ, giáo viên, nhân viên:
    - Tổng cộng: 120 người (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên). 65 nữ, 85 Đảng viên, 09 Thạc sĩ.
    - 96 giáo viên giảng dạy bộ môn đạt chuẩn 100% (88 ĐH, 8 ThS).
    - Cơ cấu tổ chức: Ban Giám hiệu (04 cán bộ quản lý: Hiệu trưởng Lê Thanh Cường, Phó Hiệu trưởng Nguyễn Minh Trí...) và 07 Tổ trong trường (06 tổ chuyên môn: Tổ Toán 15, Tổ Ngữ văn - TV - TB 17, Tổ Lịch sử - Địa lý - GDCD - GDKTPL 16, Tổ Vật lý - Hóa học - Sinh học - Công nghệ 26, Tổ Ngoại ngữ - Tin học 16, Tổ GDTC - QPAN - Nghệ thuật 12; và 01 Tổ Văn phòng 14).
 4. Phân bổ cơ sở vật chất tại 03 điểm trường (Tổng diện tích: 35.380,5 m²):
-   - Điểm chính (THPT Đốc Binh Kiều cũ): 15.683 m², khối 10-12 (14 lớp, 530 HS), 14 phòng học (9 kiên cố, 3 lắp ghép), 09 phòng bộ môn, PCCC 2 máy bơm, 11 tủ chữa cháy.
-   - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp, 980 HS), 22 phòng học, 05 phòng chức năng, sân bóng mini.
-   - Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km): 8.570,8 m², khối 6-9 (15 lớp, 601 HS), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
+   - Điểm chính (THPT Đốc Binh Kiều cũ): 15.683 m², khối 10-12 (14 lớp, 529 HS gồm Khối 10: 203 HS, Khối 11: 141 HS, Khối 12: 185 HS), 14 phòng học (9 kiên cố, 3 lắp ghép), 09 phòng bộ môn, PCCC 2 máy bơm, 11 tủ chữa cháy.
+   - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp - 6 lớp đầu mỗi khối 6-9, 980 HS gồm K6: 245, K7: 234, K8: 251, K9: 250), 22 phòng học, 05 phòng chức năng, sân bóng mini.
+   - Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km): 8.570,8 m², khối 6-9 (15 lớp - các lớp từ A7 trở đi, 602 HS gồm K6: 166, K7: 133, K8: 147, K9: 156), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
 5. KHUNG THỜI GIAN HOẠT ĐỘNG TRONG NGÀY (ÁP DỤNG THỐNG NHẤT 3 ĐIỂM TRƯỜNG - MỖI BUỔI ĐỦ 5 TIẾT):
    - BUỔI SÁNG (6h30 - 11h30): Khối 8, 9, 10, 11, 12 học chính khóa & 2 buổi/ngày; Khối 6, 7 học trải nghiệm, bồi dưỡng HSG, phụ đạo yếu, sinh hoạt CLB:
      * 6h30 - 6h45 (15 phút): Vệ sinh trường, lớp
@@ -1124,6 +1145,33 @@ app.delete('/api/department-meetings/:id', (req, res) => {
   }
 });
 
+// API: Get Master School Student & Class Data (from DANH SÁCH HỌC SINH TOÀN TRƯỜNG.xlsx)
+app.get('/api/school-data/students', (req, res) => {
+  try {
+    const data = getPersistedStudentData();
+    if (!data) {
+      return res.status(404).json({ success: false, error: 'Student master data not found' });
+    }
+    res.json({ success: true, data });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// API: Save or update Master School Student Data
+app.post('/api/school-data/students', (req, res) => {
+  try {
+    const incomingData = req.body;
+    if (!incomingData || !incomingData.classes) {
+      return res.status(400).json({ success: false, error: 'Invalid student master data' });
+    }
+    savePersistedStudentData(incomingData);
+    res.json({ success: true, data: incomingData, message: 'Đã lưu số liệu học sinh thành công lên hệ thống' });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // API: Contextualize Higher Directives into Official School Administrative Documents (Nghị định 30/2020/NĐ-CP)
 app.post('/api/documents/contextualize', async (req, res) => {
   try {
@@ -1169,14 +1217,16 @@ app.post('/api/documents/contextualize', async (req, res) => {
 Bạn là Thư ký Chuyên môn và Trợ lý Quản lý Giáo dục cao cấp của Trường THCS và THPT Đốc Binh Kiều (tỉnh Đồng Tháp).
 Thầy Phó Hiệu Trưởng Nguyễn Minh Trí giao nhiệm vụ CỤ THỂ HÓA VĂN BẢN CHỈ ĐẠO CỦA CẤP TRÊN thành văn bản hành chính sư phạm chính thức của nhà trường.
 
-THÔNG TIN TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU:
+THÔNG TIN TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (SỐ LIỆU CHÍNH THỨC):
 - Trực thuộc: SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP
-- Địa bàn: Huyện Tháp Mười, Tỉnh Đồng Tháp
-- Quy mô mạng lưới: 53 lớp, 2.128 học sinh.
-  + Cấp THCS: 39 lớp (Điểm chính Đốc Binh Kiều: 24 lớp; Điểm Tân Kiều: 15 lớp, cách điểm chính 11 km).
-  + Cấp THPT: 14 lớp (Khối 10: 5 lớp, Khối 11: 4 lớp, Khối 12: 5 lớp) học tại Điểm chính.
-- Đội ngũ: 101 Cán bộ, giáo viên, nhân viên (04 BGH, 93 GV, 04 NV).
-- Cơ cấu: 07 Tổ chuyên môn (Tổ Toán 15 GV, Tổ Ngữ văn 12 GV, Tổ KHTN-CN 26 GV, Tổ Lịch sử-Địa lý-GDCD 16 GV, Tổ Tiếng Anh-Tin học 16 GV, Tổ GDTC-QPAN-Nghệ thuật 12 GV, Ban Giám hiệu).
+- Địa bàn: Xã Đốc Binh Kiều và Xã Tân Kiều, Huyện Tháp Mười, Tỉnh Đồng Tháp
+- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
+  + Điểm chính (Cấp THPT): 14 lớp (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
+  + Điểm Trường Đốc Binh Kiều (Cấp THCS - 6 lớp đầu mỗi khối 6-9): 24 lớp (Khối 6: 6 lớp - 245 HS, Khối 7: 6 lớp - 234 HS, Khối 8: 6 lớp - 251 HS, Khối 9: 6 lớp - 250 HS) với 980 học sinh.
+  + Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách điểm chính 11 km): 15 lớp (Khối 6: 4 lớp - 166 HS, Khối 7: 3 lớp - 133 HS, Khối 8: 4 lớp - 147 HS, Khối 9: 4 lớp - 156 HS) với 602 học sinh.
+  + Tổng cấp THCS: 39 lớp (1.582 HS); Tổng cấp THPT: 14 lớp (529 HS); Học sinh khuyết tật hòa nhập: 25 HS.
+- Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên).
+- Cơ cấu: 07 Tổ (06 Tổ chuyên môn và 01 Tổ Văn phòng).
 - Lãnh đạo ký văn bản: ${signerRole} - Họ tên: ${signerName}.
 
 NGỮ CẢNH CÔNG VIỆC THỰC TẾ TỪ CÁC BIÊN BẢN HỌP TỔ CHUYÊN MÔN (2 TUẦN/LẦN) ĐÃ NỘP:
@@ -1283,8 +1333,8 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
             heading: 'II. ĐẶC ĐIỂM TÌNH HÌNH NHÀ TRƯỜNG',
             content: `1. Quy mô trường lớp và học sinh:
 - Tổng số: 53 lớp với 2.111 học sinh, bố trí tại 3 điểm trường:
-  + Cấp THCS: 39 lớp với 1.581 học sinh (gồm Khối 6: 10 lớp, 410 HS; Khối 7: 9 lớp, 368 HS; Khối 8: 10 lớp, 401 HS; Khối 9: 10 lớp, 402 HS). Trong đó: Điểm Đốc Binh Kiều có 24 lớp (980 HS); Điểm Tân Kiều có 15 lớp (601 HS, cách điểm chính 11 km).
-  + Cấp THPT: 14 lớp với 530 học sinh học tại Điểm chính (Khối 10: 5 lớp, 203 HS; Khối 11: 4 lớp, 142 HS; Khối 12: 5 lớp, 185 HS).
+  + Cấp THCS: 39 lớp với 1.582 học sinh (gồm Khối 6: 10 lớp, 411 HS; Khối 7: 9 lớp, 367 HS; Khối 8: 10 lớp, 398 HS; Khối 9: 10 lớp, 406 HS). Trong đó: Điểm Đốc Binh Kiều có 24 lớp (980 HS); Điểm Tân Kiều có 15 lớp (602 HS, cách điểm chính 11 km).
+  + Cấp THPT: 14 lớp với 529 học sinh học tại Điểm chính (Khối 10: 5 lớp, 203 HS; Khối 11: 4 lớp, 141 HS; Khối 12: 5 lớp, 185 HS).
 
 2. Đội ngũ cán bộ, giáo viên, nhân viên:
 - Tổng số: 120 người (04 Ban Giám hiệu; 102 Giáo viên giảng dạy; 14 Nhân viên).
@@ -1397,9 +1447,9 @@ QUY ĐỊNH BẮT BUỘC VỀ ĐỘ DÀI VÀ TÍNH CỤ THỂ (TUYỆT ĐỐI KH
 1. Thầy Phó Hiệu trưởng yêu cầu văn bản PHẢI RẤT DÀI, CHI TIẾT, CỤ THỂ TỪNG MỤC, KHÔNG ĐƯỢC VIẾT TÓM TẮT HAY CHUNG CHUNG.
 2. Số liệu thực tế của Trường THCS và THPT Đốc Binh Kiều (năm học 2026 - 2027):
    - Mạng lưới: 53 lớp với 2.111 học sinh tại 3 điểm trường:
-     + Điểm chính (THPT): Khối 10, 11, 12 (14 lớp, 530 học sinh).
-     + Điểm Đốc Binh Kiều (THCS): Khối 6, 7, 8, 9 (24 lớp, 980 học sinh).
-     + Điểm Tân Kiều (THCS): Khối 6, 7, 8, 9 (15 lớp, 601 học sinh, cách điểm chính 11 km).
+     + Điểm chính (THPT): Khối 10, 11, 12 (14 lớp, 529 học sinh gồm K10: 203, K11: 141, K12: 185).
+     + Điểm Đốc Binh Kiều (THCS): Khối 6, 7, 8, 9 (24 lớp - 6 lớp đầu mỗi khối, 980 học sinh).
+     + Điểm Tân Kiều (THCS): Khối 6, 7, 8, 9 (15 lớp - từ A7 trở đi, 602 học sinh, cách điểm chính 11 km).
    - Đội ngũ: 120 CB-GV-NV (102 giáo viên trực tiếp giảng dạy), cơ cấu 07 tổ (06 tổ chuyên môn và 01 tổ văn phòng).
    - Ban Giám hiệu: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung, Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn.
 ${is2BuoiPlan ? `
@@ -1521,11 +1571,11 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
             {
               heading: 'II. ĐẶC ĐIỂM TÌNH HÌNH VÀ CƠ CẤU ĐIỀU KIỆN TỔ CHỨC',
               content: `1. Quy mô học sinh và lớp học:
-- Toàn trường: 53 lớp với 2.111 học sinh (Cấp THCS: 39 lớp với 1.581 HS; Cấp THPT: 14 lớp với 530 HS).
+- Toàn trường: 53 lớp với 2.111 học sinh (Cấp THCS: 39 lớp với 1.582 HS; Cấp THPT: 14 lớp với 529 HS).
 - Phân bổ theo 3 điểm trường:
-  + Điểm chính (Khối 10, 11, 12): 14 lớp, 530 học sinh. Cơ sở vật chất có 14 phòng học, 09 phòng bộ môn kiên cố, 03 phòng lắp ghép, phòng máy vi tính.
+  + Điểm chính (Khối 10, 11, 12): 14 lớp, 529 học sinh. Cơ sở vật chất có 14 phòng học, 09 phòng bộ môn kiên cố, 03 phòng lắp ghép, phòng máy vi tính.
   + Điểm Đốc Binh Kiều (Khối 6, 7, 8, 9): 24 lớp, 980 học sinh. Cơ sở vật chất có 22 phòng học, 05 phòng chức năng, sân bóng đá mini, sân bóng chuyền.
-  + Điểm Tân Kiều (Khối 6, 7, 8, 9 - cách điểm chính 11 km): 15 lớp, 601 học sinh. Cơ sở vật chất có 09 phòng học, 10 phòng bộ môn.
+  + Điểm Tân Kiều (Khối 6, 7, 8, 9 - cách điểm chính 11 km): 15 lớp, 602 học sinh. Cơ sở vật chất có 09 phòng học, 10 phòng bộ môn.
 
 2. Đội ngũ cán bộ quản lý và giáo viên:
 - Tổng số: 120 người (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên). Có 85 Đảng viên, 09 Thạc sĩ.
@@ -1601,7 +1651,7 @@ b) Buổi chiều (Chính khóa khối 6, 7 và tăng cường khối 8, 9, 10, 
         };
       }
 
-      let contentII = `Quy mô áp dụng: Toàn trường với 53 lớp và 2.111 học sinh; 120 cán bộ giáo viên nhân viên (102 giáo viên trực tiếp giảng dạy). Trong đó: 39 lớp cấp THCS (24 lớp điểm Đốc Binh Kiều với 980 HS, 15 lớp điểm Tân Kiều cách 11km với 601 HS) và 14 lớp cấp THPT với 530 HS.`;
+      let contentII = `Quy mô áp dụng: Toàn trường với 53 lớp và 2.111 học sinh; 120 cán bộ giáo viên nhân viên (102 giáo viên trực tiếp giảng dạy). Trong đó: 39 lớp cấp THCS (24 lớp điểm Đốc Binh Kiều với 980 HS, 15 lớp điểm Tân Kiều cách 11km với 602 HS) và 14 lớp cấp THPT với 529 HS.`;
       let contentIII = `Thời gian thực hiện theo khung năm học 2026 - 2027 (đủ 35 tuần thực học, HK1: 18 tuần, HK2: 17 tuần). Khung giờ hoạt động buổi sáng từ 7h00 đến 11h30 (5 tiết), buổi chiều từ 12h30 đến 17h00 (5 tiết).`;
 
       if (topic.toLowerCase().includes('giáo viên dạy giỏi') || topic.toLowerCase().includes('gvdg')) {

@@ -9,6 +9,7 @@ import { SchoolContextPanel } from './components/SchoolContextPanel';
 import { TeacherDirectoryTab } from './components/TeacherDirectoryTab';
 import { InclusiveEducationTab } from './components/InclusiveEducationTab';
 import { DepartmentMeetingsTab } from './components/DepartmentMeetingsTab';
+import { SchoolStudentsModal } from './components/SchoolStudentsModal';
 import { SchoolDocument, DepartmentDirective } from './types/document';
 import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
 import { INITIAL_DEPARTMENT_DIRECTIVES } from './data/mockDirectives';
@@ -18,7 +19,11 @@ import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN, DIRECTIVE_3326_GDHN, DIRECTIVE_3408_
 import { OFFICIAL_AI_EDUCATION_PLAN } from './data/aiEducationData';
 import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './data/qualityManagementData';
 
-const DEFAULT_SCHOOL_FACTS = `- Quy mô: 53 lớp, 2.111 học sinh (39 lớp THCS gồm 24 lớp điểm Đốc Binh Kiều: 980 HS, 15 lớp điểm Tân Kiều cách 11km: 601 HS; 14 lớp THPT: 530 HS), 25 học sinh khuyết tật học hòa nhập (03 HS THPT Điểm chính, 10 HS THCS Điểm Đốc Binh Kiều, 12 HS THCS Điểm Tân Kiều cách 11km).
+const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
+  + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
+  + Điểm Trường Đốc Binh Kiều: 24 lớp cấp THCS (6 lớp đầu mỗi khối 6-9: Khối 6: 6 lớp - 245 HS, Khối 7: 6 lớp - 234 HS, Khối 8: 6 lớp - 251 HS, Khối 9: 6 lớp - 250 HS) với 980 học sinh.
+  + Điểm Trường Tân Kiều (cách 11km): 15 lớp cấp THCS (các lớp từ A7 trở đi: Khối 6: 4 lớp - 166 HS, Khối 7: 3 lớp - 133 HS, Khối 8: 4 lớp - 147 HS, Khối 9: 4 lớp - 156 HS) với 602 học sinh.
+  + Tổng cấp THCS: 39 lớp (1.582 HS); Tổng cấp THPT: 14 lớp (529 HS); Học sinh khuyết tật hòa nhập: 25 HS.
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
 - Cơ cấu 07 Tổ trong trường: 06 Tổ chuyên môn (Toán, Ngữ văn - TV - TB, KHTN-CN, KHXH, Ngoại ngữ - Tin học, GDTC - QPAN - Nghệ thuật) và 01 Tổ Văn phòng (14 NV).
 - Lãnh đạo ký văn bản: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung; Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn toàn trường.
@@ -30,6 +35,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<string>('editor');
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isUploadDirectiveModalOpen, setIsUploadDirectiveModalOpen] = useState(false);
+  const [isStudentsModalOpen, setIsStudentsModalOpen] = useState(false);
 
   // Department Directives Repository (Lưu trữ sẵn trên webapp)
   const [directivesList, setDirectivesList] = useState<DepartmentDirective[]>(() => {
@@ -570,6 +576,7 @@ export default function App() {
       <Header
         onOpenLegalModal={() => setIsLegalModalOpen(true)}
         onOpenUploadModal={() => setIsUploadDirectiveModalOpen(true)}
+        onOpenStudentsModal={() => setIsStudentsModalOpen(true)}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         hasActiveDocument={!!currentDocument}
@@ -636,6 +643,7 @@ export default function App() {
             <SchoolContextPanel
               customFacts={customFacts}
               onUpdateCustomFacts={setCustomFacts}
+              onOpenStudentsModal={() => setIsStudentsModalOpen(true)}
               onViewSchoolPlanDoc={() => {
                 const plan34 = documentsList.find((d) => d.id === 'doc-kh-gd-34') || INITIAL_SCHOOL_DOCUMENTS[0];
                 if (plan34) {
@@ -692,6 +700,12 @@ export default function App() {
           setSelectedDirectiveForBuilder(newDir);
           setActiveTab('builder');
         }}
+      />
+
+      {/* School Students & Classes Master Data Modal */}
+      <SchoolStudentsModal
+        isOpen={isStudentsModalOpen}
+        onClose={() => setIsStudentsModalOpen(false)}
       />
     </div>
   );

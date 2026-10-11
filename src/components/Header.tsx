@@ -18,12 +18,14 @@ import {
   Check,
   Layers,
   Menu,
-  HeartHandshake
+  HeartHandshake,
+  FileSpreadsheet
 } from 'lucide-react';
 
 interface HeaderProps {
   onOpenLegalModal: () => void;
   onOpenUploadModal?: () => void;
+  onOpenStudentsModal?: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
   hasActiveDocument?: boolean;
@@ -42,6 +44,7 @@ interface TabItem {
 export const Header: React.FC<HeaderProps> = ({ 
   onOpenLegalModal, 
   onOpenUploadModal,
+  onOpenStudentsModal,
   activeTab, 
   setActiveTab,
   hasActiveDocument = false,
@@ -203,6 +206,18 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Quick Actions */}
         <div className="flex items-center gap-2 self-stretch md:self-auto justify-end flex-wrap">
+          {onOpenStudentsModal && (
+            <button
+              onClick={onOpenStudentsModal}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-700/80 hover:bg-indigo-600 text-white border border-indigo-400/40 shadow-sm transition active:scale-95"
+              title="Xem thống kê chuẩn xác 53 lớp và 2.111 học sinh tại 3 điểm trường từ file Excel"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-300" />
+              <span>Số Liệu 53 Lớp (2.111 HS)</span>
+              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 rounded font-bold">Chuẩn Excel</span>
+            </button>
+          )}
+
           {onOpenUploadModal && (
             <button
               onClick={onOpenUploadModal}

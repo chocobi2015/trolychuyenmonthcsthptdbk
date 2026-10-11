@@ -206,10 +206,10 @@ export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
     {
       heading: 'I. ĐẶC ĐIỂM TÌNH HÌNH NHÀ TRƯỜNG',
       content: `1. Quy mô trường lớp và học sinh năm học 2026 - 2027:
-- Toàn trường có tổng cộng 53 lớp với 2.145 học sinh phân bổ tại 03 điểm trường trên địa bàn xã Đốc Binh Kiều và xã Tân Kiều:
-  + Điểm trường chính (Cấp THPT): 24 lớp (Khối 10: 08 lớp, Khối 11: 08 lớp, Khối 12: 08 lớp) với 980 học sinh.
-  + Điểm Trường Đốc Binh Kiều (Cấp THCS): 16 lớp (Khối 6: 04 lớp, Khối 7: 04 lớp, Khối 8: 04 lớp, Khối 9: 04 lớp) với 655 học sinh.
-  + Điểm Trường Tân Kiều (Cấp THCS - cách điểm chính 11km): 13 lớp (Khối 6: 03 lớp, Khối 7: 03 lớp, Khối 8: 03 lớp, Khối 9: 04 lớp) với 510 học sinh.
+- Toàn trường có tổng cộng 53 lớp với 2.111 học sinh phân bổ tại 03 điểm trường trên địa bàn xã Đốc Binh Kiều và xã Tân Kiều:
+  + Điểm trường chính (Cấp THPT): 14 lớp (Khối 10: 05 lớp với 203 HS, Khối 11: 04 lớp với 141 HS, Khối 12: 05 lớp với 185 HS) với tổng số 529 học sinh.
+  + Điểm Trường Đốc Binh Kiều (Cấp THCS - 6 lớp đầu tiên mỗi khối 6-9): 24 lớp (Khối 6: 06 lớp với 245 HS, Khối 7: 06 lớp với 234 HS, Khối 8: 06 lớp với 251 HS, Khối 9: 06 lớp với 250 HS) với tổng số 980 học sinh.
+  + Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách điểm chính 11km): 15 lớp (Khối 6: 04 lớp với 166 HS, Khối 7: 03 lớp với 133 HS, Khối 8: 04 lớp với 147 HS, Khối 9: 04 lớp với 156 HS) với tổng số 602 học sinh.
 
 2. Đội ngũ cán bộ quản lý, giáo viên, nhân viên:
 - Tổng số 120 cán bộ quản lý, giáo viên, nhân viên (102 giáo viên trực tiếp đứng lớp, 100% đạt chuẩn và trên chuẩn trình độ đào tạo).
@@ -236,7 +236,7 @@ export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
 - Đổi mới mạnh mẽ phương pháp dạy học, kiểm tra đánh giá theo hướng phát triển năng lực người học, nâng cao chất lượng giáo dục toàn diện của Trường THCS và THPT Đốc Binh Kiều.
 
 2. Chỉ tiêu cụ thể trong năm học 2026 - 2027:
-- 100% các lớp (53/53 lớp) với toàn bộ 2.145 học sinh từ khối 6 đến khối 12 được học đủ thời lượng tối thiểu 12 tiết/năm học nội dung giáo dục AI cốt lõi theo Khung của Bộ GDĐT.
+- 100% các lớp (53/53 lớp) với toàn bộ 2.111 học sinh từ khối 6 đến khối 12 được học đủ thời lượng tối thiểu 12 tiết/năm học nội dung giáo dục AI cốt lõi theo Khung của Bộ GDĐT.
 - 100% cán bộ quản lý, giáo viên (102 giáo viên) tham gia tập huấn, nắm vững Khung giáo dục AI theo Quyết định 2422/QĐ-BGDĐT và Kế hoạch 1059/KH-SGDĐT của Sở GDĐT.
 - 100% các tổ chuyên môn (Toán, Tin học, Ngữ văn, KHTN, Lịch sử - Địa lý, Ngoại ngữ, GDCD, HĐTN-HN) xây dựng ít nhất từ 02 đến 04 kế hoạch bài dạy có lồng ghép nội dung giáo dục AI phù hợp với đặc thù môn học.
 - Thành lập và duy trì hiệu quả 02 Câu lạc bộ "Tin học & Trí tuệ nhân tạo (AI Club Đốc Binh Kiều)" tại Điểm chính THPT và Điểm THCS, thu hút ít nhất 80 học sinh nòng cốt tham gia sinh hoạt; có ít nhất 01 - 02 dự án nghiên cứu KHKT cấp trường ứng dụng AI tham dự Cuộc thi KHKT cấp tỉnh.
@@ -247,7 +247,7 @@ export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
     {
       heading: 'III. ĐỐI TƯỢNG VÀ PHẠM VI THỰC HIỆN',
       content: `1. Đối tượng áp dụng:
-- Toàn thể 2.145 học sinh thuộc 53 lớp thuộc 2 cấp học: Cấp THCS (Khối 6, 7, 8, 9) và Cấp THPT (Khối 10, 11, 12) của Trường THCS và THPT Đốc Binh Kiều.
+- Toàn thể 2.111 học sinh thuộc 53 lớp thuộc 2 cấp học: Cấp THCS (Khối 6, 7, 8, 9) và Cấp THPT (Khối 10, 11, 12) của Trường THCS và THPT Đốc Binh Kiều.
 - Toàn thể cán bộ quản lý, giáo viên, nhân viên các tổ chuyên môn và tổ văn phòng trong nhà trường.
 - Ban Đại diện Cha mẹ học sinh toàn trường và các điểm trường.
 

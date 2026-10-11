@@ -1,0 +1,686 @@
+{
+  "fileName": "DANH SÁCH HỌC SINH TOÀN TRƯỜNG.xlsx",
+  "academicYear": "2026 - 2027",
+  "totalClasses": 53,
+  "totalStudents": 2111,
+  "campuses": {
+    "main": {
+      "id": "main",
+      "name": "Điểm chính (Cấp THPT)",
+      "description": "14 lớp cấp THPT (Khối 10, 11, 12)",
+      "classesCount": 14,
+      "studentsCount": 529,
+      "grades": {
+        "10": {
+          "classes": 5,
+          "students": 203,
+          "list": [
+            "10CB1",
+            "10CB2",
+            "10CB3",
+            "10CB4",
+            "10CB5"
+          ]
+        },
+        "11": {
+          "classes": 4,
+          "students": 141,
+          "list": [
+            "11CB1",
+            "11CB2",
+            "11CB3",
+            "11CB4"
+          ]
+        },
+        "12": {
+          "classes": 5,
+          "students": 185,
+          "list": [
+            "12CB1",
+            "12CB2",
+            "12CB3",
+            "12CB4",
+            "12CB5"
+          ]
+        }
+      }
+    },
+    "dbk": {
+      "id": "dbk",
+      "name": "Điểm Trường Đốc Binh Kiều (Cấp THCS)",
+      "description": "6 lớp đầu tiên của mỗi khối THCS (Khối 6, 7, 8, 9)",
+      "classesCount": 24,
+      "studentsCount": 980,
+      "grades": {
+        "6": {
+          "classes": 6,
+          "students": 245,
+          "list": [
+            "6A1",
+            "6A2",
+            "6A3",
+            "6A4",
+            "6A5",
+            "6A6"
+          ]
+        },
+        "7": {
+          "classes": 6,
+          "students": 234,
+          "list": [
+            "7A1",
+            "7A2",
+            "7A3",
+            "7A4",
+            "7A5",
+            "7A6"
+          ]
+        },
+        "8": {
+          "classes": 6,
+          "students": 251,
+          "list": [
+            "8A1",
+            "8A2",
+            "8A3",
+            "8A4",
+            "8A5",
+            "8A6"
+          ]
+        },
+        "9": {
+          "classes": 6,
+          "students": 250,
+          "list": [
+            "9A1",
+            "9A2",
+            "9A3",
+            "9A4",
+            "9A5",
+            "9A6"
+          ]
+        }
+      }
+    },
+    "tankieu": {
+      "id": "tankieu",
+      "name": "Điểm Trường Tân Kiều (Cấp THCS)",
+      "description": "Các lớp còn lại mỗi khối THCS (từ lớp 6A7, 7A7, 8A7, 9A7 trở đi, cách điểm chính 11 km)",
+      "classesCount": 15,
+      "studentsCount": 602,
+      "grades": {
+        "6": {
+          "classes": 4,
+          "students": 166,
+          "list": [
+            "6A7",
+            "6A8",
+            "6A9",
+            "6A10"
+          ]
+        },
+        "7": {
+          "classes": 3,
+          "students": 133,
+          "list": [
+            "7A7",
+            "7A8",
+            "7A9"
+          ]
+        },
+        "8": {
+          "classes": 4,
+          "students": 147,
+          "list": [
+            "8A7",
+            "8A8",
+            "8A9",
+            "8A10"
+          ]
+        },
+        "9": {
+          "classes": 4,
+          "students": 156,
+          "list": [
+            "9A7",
+            "9A8",
+            "9A9",
+            "9A10"
+          ]
+        }
+      }
+    }
+  },
+  "classes": [
+    {
+      "id": "cls-1",
+      "className": "6A1",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 1
+    },
+    {
+      "id": "cls-2",
+      "className": "6A2",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 2
+    },
+    {
+      "id": "cls-3",
+      "className": "6A3",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 3
+    },
+    {
+      "id": "cls-4",
+      "className": "6A4",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 40,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 4
+    },
+    {
+      "id": "cls-5",
+      "className": "6A5",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 5
+    },
+    {
+      "id": "cls-6",
+      "className": "6A6",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 6
+    },
+    {
+      "id": "cls-7",
+      "className": "6A7",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 7
+    },
+    {
+      "id": "cls-8",
+      "className": "6A8",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 43,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 8
+    },
+    {
+      "id": "cls-9",
+      "className": "6A9",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 40,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 9
+    },
+    {
+      "id": "cls-10",
+      "className": "6A10",
+      "grade": 6,
+      "level": "THCS",
+      "studentCount": 42,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 10
+    },
+    {
+      "id": "cls-11",
+      "className": "7A1",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 11
+    },
+    {
+      "id": "cls-12",
+      "className": "7A2",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 40,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 12
+    },
+    {
+      "id": "cls-13",
+      "className": "7A3",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 42,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 13
+    },
+    {
+      "id": "cls-14",
+      "className": "7A4",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 37,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 14
+    },
+    {
+      "id": "cls-15",
+      "className": "7A5",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 37,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 15
+    },
+    {
+      "id": "cls-16",
+      "className": "7A6",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 37,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 16
+    },
+    {
+      "id": "cls-17",
+      "className": "7A7",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 44,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 17
+    },
+    {
+      "id": "cls-18",
+      "className": "7A8",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 45,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 18
+    },
+    {
+      "id": "cls-19",
+      "className": "7A9",
+      "grade": 7,
+      "level": "THCS",
+      "studentCount": 44,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 19
+    },
+    {
+      "id": "cls-20",
+      "className": "8A1",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 42,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 20
+    },
+    {
+      "id": "cls-21",
+      "className": "8A2",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 40,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 21
+    },
+    {
+      "id": "cls-22",
+      "className": "8A3",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 22
+    },
+    {
+      "id": "cls-23",
+      "className": "8A4",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 44,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 23
+    },
+    {
+      "id": "cls-24",
+      "className": "8A5",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 43,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 24
+    },
+    {
+      "id": "cls-25",
+      "className": "8A6",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 25
+    },
+    {
+      "id": "cls-26",
+      "className": "8A7",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 36,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 26
+    },
+    {
+      "id": "cls-27",
+      "className": "8A8",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 38,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 27
+    },
+    {
+      "id": "cls-28",
+      "className": "8A9",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 36,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 28
+    },
+    {
+      "id": "cls-29",
+      "className": "8A10",
+      "grade": 8,
+      "level": "THCS",
+      "studentCount": 37,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 29
+    },
+    {
+      "id": "cls-30",
+      "className": "9A1",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 42,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 30
+    },
+    {
+      "id": "cls-31",
+      "className": "9A2",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 38,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 31
+    },
+    {
+      "id": "cls-32",
+      "className": "9A3",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 44,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 32
+    },
+    {
+      "id": "cls-33",
+      "className": "9A4",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 41,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 33
+    },
+    {
+      "id": "cls-34",
+      "className": "9A5",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 42,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 34
+    },
+    {
+      "id": "cls-35",
+      "className": "9A6",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 43,
+      "campusId": "dbk",
+      "campusName": "Điểm Đốc Binh Kiều",
+      "order": 35
+    },
+    {
+      "id": "cls-36",
+      "className": "9A7",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 39,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 36
+    },
+    {
+      "id": "cls-37",
+      "className": "9A8",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 37,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 37
+    },
+    {
+      "id": "cls-38",
+      "className": "9A9",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 40,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 38
+    },
+    {
+      "id": "cls-39",
+      "className": "9A10",
+      "grade": 9,
+      "level": "THCS",
+      "studentCount": 40,
+      "campusId": "tankieu",
+      "campusName": "Điểm Tân Kiều",
+      "order": 39
+    },
+    {
+      "id": "cls-40",
+      "className": "10CB1",
+      "grade": 10,
+      "level": "THPT",
+      "studentCount": 35,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 40
+    },
+    {
+      "id": "cls-41",
+      "className": "10CB2",
+      "grade": 10,
+      "level": "THPT",
+      "studentCount": 30,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 41
+    },
+    {
+      "id": "cls-42",
+      "className": "10CB3",
+      "grade": 10,
+      "level": "THPT",
+      "studentCount": 46,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 42
+    },
+    {
+      "id": "cls-43",
+      "className": "10CB4",
+      "grade": 10,
+      "level": "THPT",
+      "studentCount": 47,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 43
+    },
+    {
+      "id": "cls-44",
+      "className": "10CB5",
+      "grade": 10,
+      "level": "THPT",
+      "studentCount": 45,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 44
+    },
+    {
+      "id": "cls-45",
+      "className": "11CB1",
+      "grade": 11,
+      "level": "THPT",
+      "studentCount": 43,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 45
+    },
+    {
+      "id": "cls-46",
+      "className": "11CB2",
+      "grade": 11,
+      "level": "THPT",
+      "studentCount": 34,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 46
+    },
+    {
+      "id": "cls-47",
+      "className": "11CB3",
+      "grade": 11,
+      "level": "THPT",
+      "studentCount": 35,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 47
+    },
+    {
+      "id": "cls-48",
+      "className": "11CB4",
+      "grade": 11,
+      "level": "THPT",
+      "studentCount": 29,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 48
+    },
+    {
+      "id": "cls-49",
+      "className": "12CB1",
+      "grade": 12,
+      "level": "THPT",
+      "studentCount": 28,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 49
+    },
+    {
+      "id": "cls-50",
+      "className": "12CB2",
+      "grade": 12,
+      "level": "THPT",
+      "studentCount": 23,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 50
+    },
+    {
+      "id": "cls-51",
+      "className": "12CB3",
+      "grade": 12,
+      "level": "THPT",
+      "studentCount": 47,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 51
+    },
+    {
+      "id": "cls-52",
+      "className": "12CB4",
+      "grade": 12,
+      "level": "THPT",
+      "studentCount": 47,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 52
+    },
+    {
+      "id": "cls-53",
+      "className": "12CB5",
+      "grade": 12,
+      "level": "THPT",
+      "studentCount": 40,
+      "campusId": "main",
+      "campusName": "Điểm chính (THPT)",
+      "order": 53
+    }
+  ]
+}

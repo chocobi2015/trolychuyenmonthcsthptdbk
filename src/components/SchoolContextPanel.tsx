@@ -23,12 +23,14 @@ interface SchoolContextPanelProps {
   customFacts: string;
   onUpdateCustomFacts: (facts: string) => void;
   onViewSchoolPlanDoc?: () => void;
+  onOpenStudentsModal?: () => void;
 }
 
 export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
   customFacts,
   onUpdateCustomFacts,
   onViewSchoolPlanDoc,
+  onOpenStudentsModal,
 }) => {
   const [localFacts, setLocalFacts] = useState(customFacts);
   const [saved, setSaved] = useState(false);
@@ -144,12 +146,12 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                 <span>Điểm Chính (THPT Đốc Binh Kiều cũ)</span>
               </h3>
               <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
-                14 Lớp THPT (530 HS)
+                14 Lớp THPT (529 HS)
               </span>
             </div>
             <div className="text-xs text-slate-600 space-y-1">
               <p>• <strong>Diện tích</strong>: 15.683 m².</p>
-              <p>• <strong>Học sinh</strong>: Khối 10 (5 lớp, 203 HS), Khối 11 (4 lớp, 142 HS), Khối 12 (5 lớp, 185 HS).</p>
+              <p>• <strong>Học sinh</strong>: Khối 10 (5 lớp, 203 HS), Khối 11 (4 lớp, 141 HS), Khối 12 (5 lớp, 185 HS).</p>
               <p>• <strong>Cơ sở vật chất</strong>: Khu hiệu bộ; 09 phòng học kiên cố, 03 phòng lắp ghép; 09 phòng học bộ môn; Thư viện; 3 khu vệ sinh 3 tầng; hệ thống PCCC 2 máy bơm, 11 tủ chữa cháy vách tường.</p>
             </div>
           </div>
@@ -162,12 +164,12 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                 <span>Điểm Đốc Binh Kiều (THCS cũ)</span>
               </h3>
               <span className="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">
-                24 Lớp THCS (999 HS)
+                24 Lớp THCS (980 HS)
               </span>
             </div>
             <div className="text-xs text-slate-600 space-y-1">
               <p>• <strong>Diện tích</strong>: 11.126,7 m².</p>
-              <p>• <strong>Học sinh</strong>: Khối 6 (6 lớp, 250 HS), Khối 7 (6 lớp, 240 HS), Khối 8 (6 lớp, 256 HS), Khối 9 (6 lớp, 253 HS).</p>
+              <p>• <strong>Học sinh (6 lớp đầu mỗi khối)</strong>: Khối 6 (6 lớp, 245 HS), Khối 7 (6 lớp, 234 HS), Khối 8 (6 lớp, 251 HS), Khối 9 (6 lớp, 250 HS).</p>
               <p>• <strong>Cơ sở vật chất</strong>: 22 phòng học; 05 phòng chức năng; 01 nhà công vụ; sân bóng đá mini, sân bóng chuyền, khu tập luyện GDTC.</p>
             </div>
           </div>
@@ -180,13 +182,13 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                 <span>Điểm Tân Kiều (THCS Tân Kiều cũ)</span>
               </h3>
               <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                15 Lớp THCS (614 HS)
+                15 Lớp THCS (602 HS)
               </span>
             </div>
             <div className="text-xs text-slate-600 space-y-1">
               <p>• <strong>Khoảng cách</strong>: Cách điểm chính <strong>11 km</strong> (xã Tân Kiều).</p>
               <p>• <strong>Diện tích</strong>: 8.570,8 m².</p>
-              <p>• <strong>Học sinh</strong>: Khối 6 (4 lớp, 167 HS), Khối 7 (3 lớp, 137 HS), Khối 8 (4 lớp, 153 HS), Khối 9 (4 lớp, 157 HS).</p>
+              <p>• <strong>Học sinh (từ A7 trở đi)</strong>: Khối 6 (4 lớp, 166 HS), Khối 7 (3 lớp, 133 HS), Khối 8 (4 lớp, 147 HS), Khối 9 (4 lớp, 156 HS).</p>
               <p>• <strong>Cơ sở vật chất</strong>: 09 phòng học; 10 phòng bộ môn (tiếng Anh, đa năng, tin học, KHTN 2 phòng, KHXH, công nghệ); 10 phòng làm việc và sinh hoạt, có phòng Ban Giám hiệu thường trực.</p>
             </div>
           </div>
@@ -398,7 +400,7 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                 Áp dụng thống nhất cho toàn bộ văn bản chỉ đạo, hồ sơ sổ sách điện tử, học bạ số và phân công chuyên môn.
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <div className="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg border border-white/20 text-center">
                 <span className="text-xs text-blue-200 block">Tổng số lớp</span>
                 <span className="text-lg font-black text-amber-300">53 Lớp</span>
@@ -411,6 +413,16 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                 <span className="text-xs text-blue-200 block">HS Khuyết tật</span>
                 <span className="text-lg font-black text-emerald-300">25 HS</span>
               </div>
+              {onOpenStudentsModal && (
+                <button
+                  onClick={onOpenStudentsModal}
+                  className="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition ml-1"
+                  title="Mở bảng tra cứu chi tiết và bộ lọc 53 lớp học"
+                >
+                  <TableProperties className="w-4 h-4" />
+                  <span>Tra Cứu & Bộ Lọc 53 Lớp</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -419,18 +431,18 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
             <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-2xs">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Cấp THCS (Khối 6-9)</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-xl font-black text-blue-900">1.581 HS</span>
+                <span className="text-xl font-black text-blue-900">1.582 HS</span>
                 <span className="text-xs font-semibold text-slate-600">(39 Lớp)</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
-                22 HS khuyết tật • Điểm ĐBK (24 lớp - 980 HS) & Tân Kiều (15 lớp - 601 HS)
+                22 HS khuyết tật • Điểm ĐBK (24 lớp - 980 HS) & Tân Kiều (15 lớp - 602 HS)
               </p>
             </div>
 
             <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-2xs">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Cấp THPT (Khối 10-12)</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-xl font-black text-indigo-900">530 HS</span>
+                <span className="text-xl font-black text-indigo-900">529 HS</span>
                 <span className="text-xs font-semibold text-slate-600">(14 Lớp)</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -445,18 +457,18 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                 <span className="text-xs font-semibold text-slate-600">(24 Lớp THCS)</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
-                Khối 6 (245 HS), Khối 7 (235 HS), Khối 8 (251 HS), Khối 9 (249 HS)
+                Khối 6 (245 HS), Khối 7 (234 HS), Khối 8 (251 HS), Khối 9 (250 HS)
               </p>
             </div>
 
             <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-2xs">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Điểm Tân Kiều (Cách 11 km)</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-xl font-black text-emerald-900">601 HS</span>
+                <span className="text-xl font-black text-emerald-900">602 HS</span>
                 <span className="text-xs font-semibold text-slate-600">(15 Lớp THCS)</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
-                Khối 6 (165 HS), Khối 7 (133 HS), Khối 8 (150 HS), Khối 9 (153 HS)
+                Khối 6 (166 HS), Khối 7 (133 HS), Khối 8 (147 HS), Khối 9 (156 HS)
               </p>
             </div>
           </div>
@@ -466,7 +478,7 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
             <div className="flex items-center justify-between border-b pb-2">
               <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <TableProperties className="w-4 h-4 text-blue-700" />
-                <span>Bảng 1: Thống Kê Số Lớp và Số Học Sinh Theo Khối Lớp (Tính đến 25/9/2026)</span>
+                <span>Bảng 1: Thống Kê Số Lớp và Số Học Sinh Theo Khối Lớp (Chuẩn Từ Danh Sách Toàn Trường)</span>
               </h4>
               <span className="text-xs text-slate-500 font-medium">Bình quân toàn trường: <strong>39,83 HS/lớp</strong></span>
             </div>
@@ -503,11 +515,11 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                           <td className="py-2 px-3 text-center border-r border-blue-200">★</td>
                           <td className="py-2 px-3 border-r border-blue-200">CỘNG CẤP THCS</td>
                           <td className="py-2 px-3 text-center border-r border-blue-200">39</td>
-                          <td className="py-2 px-3 text-center text-blue-900 border-r border-blue-200">1.581</td>
+                          <td className="py-2 px-3 text-center text-blue-900 border-r border-blue-200">1.582</td>
                           <td className="py-2 px-3 text-center text-pink-700 border-r border-blue-200">770</td>
                           <td className="py-2 px-3 text-center border-r border-blue-200">4</td>
                           <td className="py-2 px-3 text-center text-emerald-700 border-r border-blue-200">22</td>
-                          <td className="py-2 px-3 text-blue-900">Điểm ĐBK: 24 lớp (980 HS) • Điểm Tân Kiều: 15 lớp (601 HS)</td>
+                          <td className="py-2 px-3 text-blue-900">Điểm ĐBK: 24 lớp (980 HS) • Điểm Tân Kiều: 15 lớp (602 HS)</td>
                         </tr>
                       )}
                     </React.Fragment>
@@ -516,11 +528,11 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                     <td className="py-2 px-3 text-center border-r border-indigo-200">★</td>
                     <td className="py-2 px-3 border-r border-indigo-200">CỘNG CẤP THPT</td>
                     <td className="py-2 px-3 text-center border-r border-indigo-200">14</td>
-                    <td className="py-2 px-3 text-center text-indigo-900 border-r border-indigo-200">530</td>
+                    <td className="py-2 px-3 text-center text-indigo-900 border-r border-indigo-200">529</td>
                     <td className="py-2 px-3 text-center text-pink-700 border-r border-indigo-200">268</td>
                     <td className="py-2 px-3 text-center border-r border-indigo-200">1</td>
                     <td className="py-2 px-3 text-center text-emerald-700 border-r border-indigo-200">3</td>
-                    <td className="py-2 px-3 text-indigo-900">Điểm chính: 14 lớp (Khối 10: 203; Khối 11: 142; Khối 12: 185)</td>
+                    <td className="py-2 px-3 text-indigo-900">Điểm chính: 14 lớp (Khối 10: 203; Khối 11: 141; Khối 12: 185)</td>
                   </tr>
                   <tr className="bg-amber-100/80 font-black text-amber-950 border-y-2 border-amber-300">
                     <td className="py-2.5 px-3 text-center border-r border-amber-300">✔</td>
@@ -530,7 +542,7 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                     <td className="py-2.5 px-3 text-center text-pink-800 border-r border-amber-300">1.038 Nữ</td>
                     <td className="py-2.5 px-3 text-center border-r border-amber-300">5 HS</td>
                     <td className="py-2.5 px-3 text-center text-emerald-800 border-r border-amber-300">25 HS</td>
-                    <td className="py-2.5 px-3 text-amber-900">Chuẩn số liệu thống nhất áp dụng cho năm học 2026 - 2027</td>
+                    <td className="py-2.5 px-3 text-amber-900">Khớp đúng 100% tệp Excel Danh sách học sinh toàn trường</td>
                   </tr>
                 </tbody>
               </table>
@@ -583,15 +595,15 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
             </div>
           </div>
 
-          {/* Table 3: Danh sách 53 lớp chi tiết */}
+          {/* Table 3: Danh sách 53 lớp chi tiết chính xác từ file Excel */}
           <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs space-y-3">
             <div className="flex items-center justify-between border-b pb-2">
               <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <Building2 className="w-4 h-4 text-amber-600" />
-                <span>Bảng 3: Chi Tiết Sĩ Số Toàn Bộ 53 Lớp Học Trong Nhà Trường</span>
+                <span>Bảng 3: Chi Tiết Sĩ Số Toàn Bộ 53 Lớp Học Trong Nhà Trường (Từ File Excel Gốc)</span>
               </h4>
-              <span className="text-xs bg-slate-100 px-2 py-0.5 rounded font-medium text-slate-600">
-                100% Khớp đúng với 2.111 học sinh
+              <span className="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold">
+                100% Khớp đúng 2.111 học sinh
               </span>
             </div>
 
@@ -599,48 +611,48 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
               {/* Khối 6 */}
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1.5">
                 <div className="flex justify-between font-bold text-slate-900 border-b pb-1">
-                  <span>Khối 6 (10 lớp - 410 HS)</span>
+                  <span>Khối 6 (10 lớp - 411 HS)</span>
                   <span className="text-blue-700">6 KT</span>
                 </div>
-                <div className="text-[11px] text-slate-600 space-y-0.5">
-                  <p><strong>Điểm ĐBK (245 HS):</strong> 6A1 (41), 6A2 (41), 6A3 (41), 6A4 (41), 6A5 (40), 6A6 (41)</p>
-                  <p><strong>Điểm Tân Kiều (165 HS):</strong> 6A7 (41), 6A8 (42), 6A9 (41), 6A10 (41)</p>
+                <div className="text-[11px] text-slate-600 space-y-1">
+                  <p><strong>Điểm ĐBK (6 lớp đầu - 245 HS):</strong> 6A1 (41), 6A2 (41), 6A3 (41), 6A4 (40), 6A5 (41), 6A6 (41)</p>
+                  <p><strong>Điểm Tân Kiều (A7 trở đi - 166 HS):</strong> 6A7 (41), 6A8 (43), 6A9 (40), 6A10 (42)</p>
                 </div>
               </div>
 
               {/* Khối 7 */}
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1.5">
                 <div className="flex justify-between font-bold text-slate-900 border-b pb-1">
-                  <span>Khối 7 (9 lớp - 368 HS)</span>
+                  <span>Khối 7 (9 lớp - 367 HS)</span>
                   <span className="text-blue-700">6 KT</span>
                 </div>
-                <div className="text-[11px] text-slate-600 space-y-0.5">
-                  <p><strong>Điểm ĐBK (235 HS):</strong> 7A1 (39), 7A2 (39), 7A3 (40), 7A4 (39), 7A5 (39), 7A6 (39)</p>
-                  <p><strong>Điểm Tân Kiều (133 HS):</strong> 7A7 (45), 7A8 (44), 7A9 (44)</p>
+                <div className="text-[11px] text-slate-600 space-y-1">
+                  <p><strong>Điểm ĐBK (6 lớp đầu - 234 HS):</strong> 7A1 (41), 7A2 (40), 7A3 (42), 7A4 (37), 7A5 (37), 7A6 (37)</p>
+                  <p><strong>Điểm Tân Kiều (A7 trở đi - 133 HS):</strong> 7A7 (44), 7A8 (45), 7A9 (44)</p>
                 </div>
               </div>
 
               {/* Khối 8 */}
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1.5">
                 <div className="flex justify-between font-bold text-slate-900 border-b pb-1">
-                  <span>Khối 8 (10 lớp - 401 HS)</span>
+                  <span>Khối 8 (10 lớp - 398 HS)</span>
                   <span className="text-blue-700">7 KT</span>
                 </div>
-                <div className="text-[11px] text-slate-600 space-y-0.5">
-                  <p><strong>Điểm ĐBK (251 HS):</strong> 8A1 (42), 8A2 (42), 8A3 (42), 8A4 (42), 8A5 (42), 8A6 (41)</p>
-                  <p><strong>Điểm Tân Kiều (150 HS):</strong> 8A7 (38), 8A8 (37), 8A9 (38), 8A10 (37)</p>
+                <div className="text-[11px] text-slate-600 space-y-1">
+                  <p><strong>Điểm ĐBK (6 lớp đầu - 251 HS):</strong> 8A1 (42), 8A2 (40), 8A3 (41), 8A4 (44), 8A5 (43), 8A6 (41)</p>
+                  <p><strong>Điểm Tân Kiều (A7 trở đi - 147 HS):</strong> 8A7 (36), 8A8 (38), 8A9 (36), 8A10 (37)</p>
                 </div>
               </div>
 
               {/* Khối 9 */}
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1.5">
                 <div className="flex justify-between font-bold text-slate-900 border-b pb-1">
-                  <span>Khối 9 (10 lớp - 402 HS)</span>
+                  <span>Khối 9 (10 lớp - 406 HS)</span>
                   <span className="text-blue-700">3 KT</span>
                 </div>
-                <div className="text-[11px] text-slate-600 space-y-0.5">
-                  <p><strong>Điểm ĐBK (249 HS):</strong> 9A1 (42), 9A2 (41), 9A3 (42), 9A4 (41), 9A5 (41), 9A6 (42)</p>
-                  <p><strong>Điểm Tân Kiều (153 HS):</strong> 9A7 (39), 9A8 (38), 9A9 (38), 9A10 (38)</p>
+                <div className="text-[11px] text-slate-600 space-y-1">
+                  <p><strong>Điểm ĐBK (6 lớp đầu - 250 HS):</strong> 9A1 (42), 9A2 (38), 9A3 (44), 9A4 (41), 9A5 (42), 9A6 (43)</p>
+                  <p><strong>Điểm Tân Kiều (A7 trở đi - 156 HS):</strong> 9A7 (39), 9A8 (37), 9A9 (40), 9A10 (40)</p>
                 </div>
               </div>
 
@@ -650,9 +662,9 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                   <span>Khối 10 (5 lớp - 203 HS)</span>
                   <span className="text-indigo-700">1 KT</span>
                 </div>
-                <div className="text-[11px] text-slate-600 space-y-0.5">
-                  <p><strong>Điểm chính THPT (203 HS):</strong></p>
-                  <p>10CB1 (37 HS), 10CB2 (29 HS), 10CB3 (44 HS), 10CB4 (48 HS), 10CB5 (45 HS)</p>
+                <div className="text-[11px] text-slate-600 space-y-1">
+                  <p><strong>Điểm chính THPT (5 lớp - 203 HS):</strong></p>
+                  <p>10CB1 (35 HS), 10CB2 (30 HS), 10CB3 (46 HS), 10CB4 (47 HS), 10CB5 (45 HS)</p>
                 </div>
               </div>
 
@@ -662,9 +674,9 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
                   <span>Khối 11 (4 lớp) & Khối 12 (5 lớp)</span>
                   <span className="text-indigo-700">2 KT (K11)</span>
                 </div>
-                <div className="text-[11px] text-slate-600 space-y-0.5">
-                  <p><strong>Khối 11 (142 HS):</strong> 11CB1 (40), 11CB2 (35), 11CB3 (34), 11CB4 (33)</p>
-                  <p><strong>Khối 12 (185 HS):</strong> 12CB1 (28), 12CB2 (23), 12CB3 (46), 12CB4 (47), 12CB5 (41)</p>
+                <div className="text-[11px] text-slate-600 space-y-1">
+                  <p><strong>Khối 11 (4 lớp - 141 HS):</strong> 11CB1 (43), 11CB2 (34), 11CB3 (35), 11CB4 (29)</p>
+                  <p><strong>Khối 12 (5 lớp - 185 HS):</strong> 12CB1 (28), 12CB2 (23), 12CB3 (47), 12CB4 (47), 12CB5 (40)</p>
                 </div>
               </div>
             </div>
