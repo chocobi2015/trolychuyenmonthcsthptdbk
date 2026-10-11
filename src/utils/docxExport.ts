@@ -608,6 +608,16 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
 }
 
 export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<void> {
+  if (meeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026') {
+    const anchor = document.createElement('a');
+    anchor.href = '/api/department-meetings/download/tra-loi-lan-3';
+    anchor.download = 'TRẢ LỜI HỌP TỔ LẦN 3 - 08-10-2026.docx';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    return;
+  }
+
   const noBorder = {
     top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
     bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },

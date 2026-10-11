@@ -1179,6 +1179,44 @@ app.delete('/api/department-meetings/:id', (req, res) => {
   }
 });
 
+// API: Download DOCX file of department meeting replies
+app.get('/api/department-meetings/download/tra-loi-lan-3', (req, res) => {
+  try {
+    const targetPath = path.join(__dirname, 'HOP TO CHUYEN MON', 'TRẢ LỜI HỌP TỔ LẦN 3 - 08-10-2026.docx');
+    const fallbackPath = path.join(__dirname, 'public', 'downloads', 'TRA_LOI_HOP_TO_CM_LAN_3_08_10_2026.docx');
+    const finalPath = fs.existsSync(targetPath) ? targetPath : (fs.existsSync(fallbackPath) ? fallbackPath : null);
+
+    if (!finalPath) {
+      return res.status(404).json({ success: false, error: 'Tệp văn bản không tồn tại trên hệ thống' });
+    }
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', 'attachment; filename="TRA_LOI_HOP_TO_CM_LAN_3_08_10_2026.docx"');
+    const fileStream = fs.createReadStream(finalPath);
+    fileStream.pipe(res);
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.get('/api/department-meetings/download/file/:filename', (req, res) => {
+  try {
+    const filename = decodeURIComponent(req.params.filename);
+    const hopToDir = path.join(__dirname, 'HOP TO CHUYEN MON');
+    const fullPath = path.join(hopToDir, filename);
+
+    if (!fs.existsSync(fullPath)) {
+      return res.status(404).json({ success: false, error: 'Tệp không tồn tại' });
+    }
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"`);
+    fs.createReadStream(fullPath).pipe(res);
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // API: Get Master School Student & Class Data (from DANH SÁCH HỌC SINH TOÀN TRƯỜNG.xlsx)
 app.get('/api/school-data/students', (req, res) => {
   try {

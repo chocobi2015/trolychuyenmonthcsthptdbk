@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { DepartmentMeeting, DepartmentTask, DepartmentInfo } from '../types/meeting';
 import { SCHOOL_DEPARTMENTS, INITIAL_DEPARTMENT_MEETINGS } from '../data/departmentMeetingsData';
+import { OPINIONS_MEETING_3_DATA, OpinionItem } from '../data/meetingRepliesData';
 import { exportMeetingToDocx } from '../utils/docxExport';
 import { extractTextFromFile } from '../utils/fileReader';
 
@@ -41,6 +42,8 @@ export const DepartmentMeetingsTab: React.FC = () => {
   
   // Modals
   const [viewingMeeting, setViewingMeeting] = useState<DepartmentMeeting | null>(null);
+  const [modalViewMode, setModalViewMode] = useState<'table' | 'a4'>('table');
+  const [opinionCategoryFilter, setOpinionCategoryFilter] = useState<string>('all');
   const [isEditorModalOpen, setIsEditorModalOpen] = useState(false);
   const [editingMeetingId, setEditingMeetingId] = useState<string | null>(null);
   const [showAiContextModal, setShowAiContextModal] = useState(false);
@@ -96,7 +99,8 @@ export const DepartmentMeetingsTab: React.FC = () => {
           const parsed = JSON.parse(local);
           // If local has the old mock meetings (length > 3 or has meeting-toan-t1-2), prefer INITIAL_DEPARTMENT_MEETINGS
           const hasOldMock = parsed.some((m: any) => m.id === 'meeting-toan-t1-2' || m.id === 'meeting-tin-t1-2');
-          if (Array.isArray(parsed) && parsed.length > 0 && !hasOldMock) {
+          const hasMeeting3 = parsed.some((m: any) => m.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026');
+          if (Array.isArray(parsed) && parsed.length > 0 && !hasOldMock && hasMeeting3) {
             setMeetings(parsed);
             setIsLoading(false);
             return;
@@ -439,7 +443,7 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
           <div className="bg-white/5 rounded-xl p-3 border border-white/10">
             <div className="text-xs text-slate-400 font-medium">Hồ Sơ & Văn Bản</div>
             <div className="text-xl font-bold text-white mt-1">{meetings.length} Văn bản</div>
-            <div className="text-[11px] text-indigo-300 mt-0.5">2 Hướng dẫn + 1 Trả lời họp tổ</div>
+            <div className="text-[11px] text-indigo-300 mt-0.5">2 Hướng dẫn + 2 Trả lời họp tổ (Lần 2 & 3)</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 border border-white/10">
             <div className="text-xs text-slate-400 font-medium">Nhiệm Vụ 2 Tuần</div>
@@ -596,6 +600,12 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                       <span className={`px-2.5 py-1 rounded-md text-xs font-bold ${dept.bgLight} ${dept.color} border ${dept.borderLight}`}>
                         {dept.name}
                       </span>
+                      {meeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' && (
+                        <span className="px-2.5 py-1 rounded-md text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 flex items-center gap-1 shadow-xs">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                          BẢNG TỔNG HỢP & TRẢ LỜI CỦA BGH (08/10/2026)
+                        </span>
+                      )}
                       <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-mono font-medium border border-slate-200">
                         {meeting.meetingNumber}
                       </span>
@@ -641,14 +651,26 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                       <Eye className="w-3.5 h-3.5" />
                       <span>Xem A4</span>
                     </button>
-                    <button
-                      onClick={() => exportMeetingToDocx(meeting)}
-                      className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition-all cursor-pointer"
-                      title="Xuất file Word .docx"
-                    >
-                      <Download className="w-3.5 h-3.5 text-blue-600" />
-                      <span>Word</span>
-                    </button>
+                    {meeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' ? (
+                      <a
+                        href="/api/department-meetings/download/tra-loi-lan-3"
+                        download="TRẢ LỜI HỌP TỔ LẦN 3 - 08-10-2026.docx"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all"
+                        title="Tải tệp Word (.docx) chuẩn thể thức Nghị định 30"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Tải file Word .docx</span>
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => exportMeetingToDocx(meeting)}
+                        className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition-all cursor-pointer"
+                        title="Xuất file Word .docx"
+                      >
+                        <Download className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Word</span>
+                      </button>
+                    )}
                     <button
                       onClick={() => handleCopyMeetingText(meeting)}
                       className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-all cursor-pointer"
@@ -743,27 +765,73 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-scaleIn border border-slate-200">
             {/* Modal Top Bar */}
-            <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+            <div className="px-6 py-4 bg-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-indigo-400" />
-                <h3 className="font-bold text-sm sm:text-base">
-                  Biên Bản Họp {viewingMeeting.departmentName} ({viewingMeeting.week})
-                </h3>
+                <div>
+                  <h3 className="font-bold text-sm sm:text-base">
+                    {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026'
+                      ? 'Bảng Tổng Hợp Ý Kiến 6 Tổ & Trả Lời Của BGH (Lần 3 - 08/10/2026)'
+                      : `Biên Bản Họp ${viewingMeeting.departmentName} (${viewingMeeting.week})`}
+                  </h3>
+                  <div className="text-[11px] text-slate-400">
+                    {viewingMeeting.meetingNumber} • {viewingMeeting.meetingDate}
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => exportMeetingToDocx(viewingMeeting)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors cursor-pointer"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Xuất Word (.docx)</span>
-                </button>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' && (
+                  <div className="flex items-center bg-slate-800 p-0.5 rounded-lg border border-slate-700 mr-2">
+                    <button
+                      onClick={() => setModalViewMode('table')}
+                      className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
+                        modalViewMode === 'table'
+                          ? 'bg-indigo-600 text-white shadow-xs'
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      Bảng Tổng Hợp Chi Tiết
+                    </button>
+                    <button
+                      onClick={() => setModalViewMode('a4')}
+                      className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
+                        modalViewMode === 'a4'
+                          ? 'bg-indigo-600 text-white shadow-xs'
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      Toàn Văn A4
+                    </button>
+                  </div>
+                )}
+
+                {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' ? (
+                  <a
+                    href="/api/department-meetings/download/tra-loi-lan-3"
+                    download="TRẢ LỜI HỌP TỔ LẦN 3 - 08-10-2026.docx"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors shadow-sm"
+                    title="Tải tệp Word (.docx) chuẩn thể thức Nghị định 30"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Tải Word (.docx)</span>
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => exportMeetingToDocx(viewingMeeting)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Xuất Word (.docx)</span>
+                  </button>
+                )}
+
                 <button
                   onClick={() => window.print()}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition-colors cursor-pointer border border-slate-700"
                 >
                   <Printer className="w-3.5 h-3.5" />
-                  <span>In A4</span>
+                  <span>In</span>
                 </button>
                 <button
                   onClick={() => handleCopyMeetingText(viewingMeeting)}
@@ -774,139 +842,374 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                 </button>
                 <button
                   onClick={() => setViewingMeeting(null)}
-                  className="p-1.5 text-slate-400 hover:text-white rounded-lg transition-colors cursor-pointer ml-2"
+                  className="p-1.5 text-slate-400 hover:text-white rounded-lg transition-colors cursor-pointer ml-1"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
-            {/* A4 Document Paper Simulation */}
-            <div className="flex-1 overflow-y-auto p-6 sm:p-10 bg-slate-100">
-              <div className="bg-white shadow-lg border border-slate-300 max-w-3xl mx-auto p-8 sm:p-12 text-slate-900 font-serif leading-relaxed text-sm">
-                {/* Header 2 Columns */}
-                <div className="grid grid-cols-2 gap-4 pb-4 border-b border-slate-200">
-                  <div className="text-center space-y-0.5">
-                    <div className="text-xs font-normal">SỞ GDĐT TỈNH ĐỒNG THÁP</div>
-                    <div className="text-xs font-bold uppercase">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
-                    <div className="text-xs font-bold uppercase text-indigo-900">{viewingMeeting.departmentName}</div>
-                    <div className="text-xs font-normal text-slate-600 pt-1">{viewingMeeting.meetingNumber}</div>
-                  </div>
-                  <div className="text-center space-y-0.5">
-                    <div className="text-xs font-bold uppercase">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
-                    <div className="text-xs font-bold underline underline-offset-4">Độc lập - Tự do - Hạnh phúc</div>
-                    <div className="text-xs italic text-slate-600 pt-1.5">{viewingMeeting.meetingDate}</div>
-                  </div>
-                </div>
-
-                {/* Title */}
-                <div className="text-center py-6 space-y-1">
-                  <h1 className="text-lg sm:text-xl font-bold uppercase tracking-wide">
-                    BIÊN BẢN HỌP TỔ CHUYÊN MÔN
-                  </h1>
-                  <p className="text-xs italic font-semibold text-slate-700">
-                    ({viewingMeeting.week} - {viewingMeeting.semester} - Năm học {viewingMeeting.schoolYear})
-                  </p>
-                </div>
-
-                {/* Meeting Meta */}
-                <div className="space-y-1.5 py-2 border-b border-slate-200 text-xs">
-                  <div><strong>1. Thời gian:</strong> {viewingMeeting.meetingDate}</div>
-                  <div><strong>2. Địa điểm:</strong> {viewingMeeting.location}</div>
-                  <div>
-                    <strong>3. Thành phần tham dự:</strong> Có mặt {viewingMeeting.attendees.present}/{viewingMeeting.attendees.total} thành viên; 
-                    {viewingMeeting.attendees.absent ? ` Vắng: ${viewingMeeting.attendees.absent}` : ' Vắng: Không'}
-                  </div>
-                  <div><strong>4. Chủ trì:</strong> {viewingMeeting.leader}</div>
-                  <div><strong>5. Thư ký:</strong> {viewingMeeting.secretary}</div>
-                </div>
-
-                {/* Topic */}
-                <div className="my-4 p-3 bg-indigo-50/70 border-l-4 border-indigo-600 rounded-r text-xs">
-                  <span className="font-bold text-indigo-950 uppercase">Chủ đề sinh hoạt chuyên môn: </span>
-                  <span className="font-semibold text-indigo-900">{viewingMeeting.topic}</span>
-                </div>
-
-                {/* Body Content */}
-                <div className="space-y-4 my-6 text-xs sm:text-sm">
-                  <div className="font-bold uppercase tracking-wider text-slate-900">
-                    NỘI DUNG VÀ DIỄN BIẾN CUỘC HỌP:
-                  </div>
-                  <div className="whitespace-pre-line leading-relaxed text-slate-800 space-y-2">
-                    {viewingMeeting.content}
-                  </div>
-                </div>
-
-                {/* Resolutions */}
-                {viewingMeeting.resolutions && viewingMeeting.resolutions.length > 0 && (
-                  <div className="my-6 space-y-2 text-xs sm:text-sm">
-                    <div className="font-bold uppercase tracking-wider text-slate-900">
-                      KẾT LUẬN VÀ NGHỊ QUYẾT CỦA TỔ TRƯỞNG:
+            {/* Modal Body Container */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-100">
+              {viewingMeeting.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026' && modalViewMode === 'table' ? (
+                /* Rich Scientific Table View for Meeting 3 */
+                <div className="bg-white rounded-xl shadow-md border border-slate-200 p-6 sm:p-8 max-w-5xl mx-auto space-y-6">
+                  {/* Document Header Standard */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-200 text-center font-serif">
+                    <div>
+                      <div className="text-xs text-slate-600">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP</div>
+                      <div className="text-xs font-bold uppercase text-slate-900">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+                      <div className="text-xs italic text-indigo-900 font-semibold pt-1">Số: 03/TB-THCS&THPTĐBK</div>
                     </div>
-                    <ol className="list-decimal pl-5 space-y-1.5 text-slate-800">
-                      {viewingMeeting.resolutions.map((res, i) => (
-                        <li key={i}>{res}</li>
-                      ))}
-                    </ol>
-                  </div>
-                )}
-
-                {/* Tasks Table */}
-                {viewingMeeting.tasks && viewingMeeting.tasks.length > 0 && (
-                  <div className="my-6 space-y-2 text-xs">
-                    <div className="font-bold uppercase tracking-wider text-slate-900">
-                      PHÂN CÔNG NHIỆM VỤ CỤ THỂ 2 TUẦN TIẾP THEO:
+                    <div>
+                      <div className="text-xs font-bold uppercase text-slate-900">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                      <div className="text-xs font-bold underline underline-offset-4 text-slate-900">Độc lập - Tự do - Hạnh phúc</div>
+                      <div className="text-xs italic text-slate-600 pt-1">Tháp Mười, ngày 09 tháng 10 năm 2026</div>
                     </div>
-                    <table className="w-full border-collapse border border-slate-300 text-left">
+                  </div>
+
+                  <div className="text-center py-2 space-y-1 font-serif">
+                    <h2 className="text-lg sm:text-xl font-bold uppercase text-indigo-950">
+                      BẢNG TỔNG HỢP Ý KIẾN HỌP TỔ CHUYÊN MÔN
+                    </h2>
+                    <h3 className="text-base font-bold uppercase text-indigo-900">
+                      VÀ NỘI DUNG TRẢ LỜI, CHỈ ĐẠO CỦA BAN GIÁM HIỆU
+                    </h3>
+                    <p className="text-xs italic text-slate-600">
+                      (Tổng hợp từ 06 Biên bản Họp Tổ chuyên môn ngày 08/10/2026 - Chuẩn hóa theo thể thức Nghị định 30/2020/NĐ-CP)
+                    </p>
+                  </div>
+
+                  {/* Quick Export Alert */}
+                  <div className="flex flex-col sm:flex-row items-center justify-between p-3.5 bg-blue-50 border border-blue-200 rounded-xl gap-3">
+                    <div className="flex items-center gap-2.5 text-xs text-blue-900">
+                      <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span>
+                        Nội dung đã được biên tập, sắp xếp khoa học theo từng lĩnh vực chuyên đề và có đầy đủ căn cứ pháp lý. Thầy/Cô có thể xuất ngay file Word chuẩn thể thức để lưu hành hoặc gửi các tổ.
+                      </span>
+                    </div>
+                    <a
+                      href="/api/department-meetings/download/tra-loi-lan-3"
+                      download="TRẢ LỜI HỌP TỔ LẦN 3 - 08-10-2026.docx"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shrink-0 shadow-sm transition-all"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Tải Tệp Word (.docx)</span>
+                    </a>
+                  </div>
+
+                  {/* Filter by Category Chips */}
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2">
+                    <span className="text-xs font-bold text-slate-700 flex items-center gap-1 mr-1">
+                      <Filter className="w-3.5 h-3.5 text-indigo-600" />
+                      <span>Lọc lĩnh vực:</span>
+                    </span>
+                    {[
+                      { id: 'all', label: 'Tất cả (10 mục)' },
+                      { id: '1. Khảo thí & Cấu trúc đề kiểm tra', label: '1. Khảo thí & Đề kiểm tra (4)' },
+                      { id: '2. Chế độ chính sách & Bảo hiểm xã hội', label: '2. Chế độ & BHXH (2)' },
+                      { id: '3. Cải cách hành chính & Hồ sơ sổ sách', label: '3. Cải cách hành chính (1)' },
+                      { id: '4. Đạo đức nhà giáo & Tâm lý sư phạm', label: '4. Đạo đức & Tâm lý sư phạm (1)' },
+                      { id: '5. Hoạt động thể thao & Môn GDTC', label: '5. Thể thao & Hội thao 2027 (1)' },
+                      { id: '6. Tổ Tiếng Anh - Tin học', label: '6. Tổ Tiếng Anh - Tin học (1)' },
+                    ].map(f => (
+                      <button
+                        key={f.id}
+                        onClick={() => setOpinionCategoryFilter(f.id)}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
+                          opinionCategoryFilter === f.id
+                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        {f.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Main Opinions Table */}
+                  <div className="overflow-x-auto rounded-xl border border-slate-300 shadow-xs">
+                    <table className="w-full border-collapse text-left text-xs font-serif">
                       <thead>
-                        <tr className="bg-slate-100">
-                          <th className="border border-slate-300 p-2 text-center w-10">STT</th>
-                          <th className="border border-slate-300 p-2">Nội dung nhiệm vụ</th>
-                          <th className="border border-slate-300 p-2 w-44">Người phụ trách</th>
-                          <th className="border border-slate-300 p-2 w-28 text-center">Thời hạn</th>
-                          <th className="border border-slate-300 p-2 w-28 text-center">Trạng thái</th>
+                        <tr className="bg-slate-100 text-slate-900 border-b border-slate-300 font-bold uppercase text-[11px] tracking-wider">
+                          <th className="p-3 border-r border-slate-300 text-center w-12">STT</th>
+                          <th className="p-3 border-r border-slate-300 w-44">Lĩnh vực & Tổ đề xuất</th>
+                          <th className="p-3 border-r border-slate-300 w-80">Nội dung ý kiến, đề xuất của Tổ</th>
+                          <th className="p-3">Nội dung trả lời, chỉ đạo của Ban Giám hiệu</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {viewingMeeting.tasks.map((t, idx) => (
-                          <tr key={t.id}>
-                            <td className="border border-slate-300 p-2 text-center">{idx + 1}</td>
-                            <td className="border border-slate-300 p-2">{t.task}</td>
-                            <td className="border border-slate-300 p-2">{t.assignee}</td>
-                            <td className="border border-slate-300 p-2 text-center">{t.deadline}</td>
-                            <td className="border border-slate-300 p-2 text-center">
-                              <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
-                                t.status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                              }`}>
-                                {t.status === 'completed' ? 'Đã xong' : 'Đang làm'}
+                      <tbody className="divide-y divide-slate-200">
+                        {OPINIONS_MEETING_3_DATA.filter(
+                          item => opinionCategoryFilter === 'all' || item.category === opinionCategoryFilter || (opinionCategoryFilter.includes('Chế độ') && item.category.includes('Chế độ'))
+                        ).map((item) => (
+                          <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                            {/* STT */}
+                            <td className="p-3.5 border-r border-slate-200 text-center font-bold text-slate-800 align-top">
+                              {item.id}
+                            </td>
+
+                            {/* Lĩnh vực & Tổ */}
+                            <td className="p-3.5 border-r border-slate-200 align-top space-y-1.5">
+                              <span className="inline-block px-2 py-0.5 rounded bg-indigo-50 text-indigo-900 font-bold text-[10px] border border-indigo-200">
+                                {item.category}
                               </span>
+                              <div className="font-bold text-slate-900 text-xs">
+                                {item.department}
+                              </div>
+                              {item.contributor && (
+                                <div className="text-[11px] italic text-slate-600">
+                                  {item.contributor}
+                                </div>
+                              )}
+                            </td>
+
+                            {/* Nội dung ý kiến đề xuất */}
+                            <td className="p-3.5 border-r border-slate-200 align-top space-y-2 text-slate-800 leading-relaxed">
+                              <div className="font-semibold text-slate-900">
+                                {item.opinion}
+                              </div>
+
+                              {item.opinionDetails && item.opinionDetails.length > 0 && (
+                                <div className="space-y-1 pl-1 text-[11.5px]">
+                                  {item.opinionDetails.map((od, idx) => (
+                                    <div key={idx} className="flex items-start gap-1.5">
+                                      <span className="text-slate-400">•</span>
+                                      <span>{od}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+
+                              {item.tableData && (
+                                <div className="mt-2 pt-2 border-t border-slate-200">
+                                  <div className="text-[10.5px] font-bold text-slate-700 uppercase mb-1">
+                                    Đề xuất cấu trúc chi tiết:
+                                  </div>
+                                  <table className="w-full text-[10.5px] border border-slate-300">
+                                    <thead>
+                                      <tr className="bg-slate-100">
+                                        {item.tableData.headers.map((th, hi) => (
+                                          <th key={hi} className="p-1 border border-slate-300 text-center font-bold">
+                                            {th}
+                                          </th>
+                                        ))}
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {item.tableData.rows.map((row, ri) => (
+                                        <tr key={ri} className="border-t border-slate-200">
+                                          {row.map((cell, ci) => (
+                                            <td key={ci} className={`p-1 border border-slate-300 ${ci === 0 ? 'font-semibold' : 'text-center'}`}>
+                                              {cell}
+                                            </td>
+                                          ))}
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              )}
+                            </td>
+
+                            {/* Trả lời & Chỉ đạo của BGH */}
+                            <td className="p-3.5 align-top space-y-2 leading-relaxed">
+                              <div className="font-bold text-emerald-900 flex items-start gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <span>{item.response}</span>
+                              </div>
+
+                              {item.responseDetails && item.responseDetails.length > 0 && (
+                                <div className="space-y-1.5 pl-5 text-[11.5px] text-slate-800">
+                                  {item.responseDetails.map((rd, idx) => (
+                                    <div key={idx} className="flex items-start gap-1.5">
+                                      <span className="text-emerald-600 font-bold">✓</span>
+                                      <span>{rd}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+
+                              {item.legalBasis && (
+                                <div className="p-2 bg-slate-50 border-l-2 border-indigo-500 rounded text-[11px] italic text-slate-700">
+                                  <strong className="not-italic text-slate-900">Căn cứ: </strong>
+                                  {item.legalBasis}
+                                </div>
+                              )}
+
+                              {item.actionUnit && (
+                                <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
+                                  <span className="font-semibold text-slate-700">Đơn vị thực hiện:</span>
+                                  <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-medium">
+                                    {item.actionUnit}
+                                  </span>
+                                  {item.note && (
+                                    <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 italic">
+                                      {item.note}
+                                    </span>
+                                  )}
+                                </div>
+                              )}
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                )}
 
-                {/* Signatures */}
-                <div className="grid grid-cols-2 gap-8 pt-8 mt-8 border-t border-slate-200 text-center text-xs">
-                  <div className="space-y-16">
-                    <div>
-                      <div className="font-bold uppercase">THƯ KÝ</div>
-                      <div className="italic text-slate-500">(Ký và ghi rõ họ tên)</div>
+                  {/* Signatures Footer */}
+                  <div className="grid grid-cols-2 gap-8 pt-8 mt-6 border-t border-slate-200 font-serif text-xs">
+                    <div className="space-y-1">
+                      <div className="font-bold italic text-slate-900">Nơi nhận:</div>
+                      <div className="text-slate-600 leading-relaxed text-[11px]">
+                        - Ban Giám hiệu (chỉ đạo);<br />
+                        - 06 Tổ chuyên môn (thực hiện);<br />
+                        - Bộ phận Kế toán - TCCB (phối hợp);<br />
+                        - Lưu: VT, CM.
+                      </div>
                     </div>
-                    <div className="font-bold">{viewingMeeting.secretary}</div>
-                  </div>
-                  <div className="space-y-16">
-                    <div>
-                      <div className="font-bold uppercase">TỔ TRƯỞNG CHUYÊN MÔN</div>
-                      <div className="italic text-slate-500">(Ký và ghi rõ họ tên)</div>
+                    <div className="text-center space-y-14">
+                      <div>
+                        <div className="font-bold uppercase text-slate-900">HIỆU TRƯỞNG</div>
+                        <div className="italic text-slate-500 text-[11px]">(Ký số & ban hành)</div>
+                      </div>
+                      <div className="font-bold text-slate-900 text-sm">
+                        Lê Thanh Cường
+                      </div>
                     </div>
-                    <div className="font-bold">{viewingMeeting.leader}</div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                /* Simulated A4 Document Paper */
+                <div className="bg-white shadow-lg border border-slate-300 max-w-3xl mx-auto p-8 sm:p-12 text-slate-900 font-serif leading-relaxed text-sm">
+                  {/* Header 2 Columns */}
+                  <div className="grid grid-cols-2 gap-4 pb-4 border-b border-slate-200">
+                    <div className="text-center space-y-0.5">
+                      <div className="text-xs font-normal">SỞ GDĐT TỈNH ĐỒNG THÁP</div>
+                      <div className="text-xs font-bold uppercase">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+                      <div className="text-xs font-bold uppercase text-indigo-900">{viewingMeeting.departmentName}</div>
+                      <div className="text-xs font-normal text-slate-600 pt-1">{viewingMeeting.meetingNumber}</div>
+                    </div>
+                    <div className="text-center space-y-0.5">
+                      <div className="text-xs font-bold uppercase">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                      <div className="text-xs font-bold underline underline-offset-4">Độc lập - Tự do - Hạnh phúc</div>
+                      <div className="text-xs italic text-slate-600 pt-1.5">{viewingMeeting.meetingDate}</div>
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <div className="text-center py-6 space-y-1">
+                    <h1 className="text-lg sm:text-xl font-bold uppercase tracking-wide">
+                      {viewingMeeting.id.includes('tra-loi')
+                        ? 'BẢNG TỔNG HỢP Ý KIẾN HỌP TỔ CHUYÊN MÔN VÀ TRẢ LỜI CỦA BGH'
+                        : 'BIÊN BẢN HỌP TỔ CHUYÊN MÔN'}
+                    </h1>
+                    <p className="text-xs italic font-semibold text-slate-700">
+                      ({viewingMeeting.week} - {viewingMeeting.semester} - Năm học {viewingMeeting.schoolYear})
+                    </p>
+                  </div>
+
+                  {/* Meeting Meta */}
+                  <div className="space-y-1.5 py-2 border-b border-slate-200 text-xs">
+                    <div><strong>1. Thời gian:</strong> {viewingMeeting.meetingDate}</div>
+                    <div><strong>2. Địa điểm:</strong> {viewingMeeting.location}</div>
+                    <div>
+                      <strong>3. Thành phần tham dự:</strong> Có mặt {viewingMeeting.attendees.present}/{viewingMeeting.attendees.total} thành viên; 
+                      {viewingMeeting.attendees.absent ? ` Vắng: ${viewingMeeting.attendees.absent}` : ' Vắng: Không'}
+                    </div>
+                    <div><strong>4. Chủ trì:</strong> {viewingMeeting.leader}</div>
+                    <div><strong>5. Thư ký:</strong> {viewingMeeting.secretary}</div>
+                  </div>
+
+                  {/* Topic */}
+                  <div className="my-4 p-3 bg-indigo-50/70 border-l-4 border-indigo-600 rounded-r text-xs">
+                    <span className="font-bold text-indigo-950 uppercase">Chủ đề sinh hoạt chuyên môn: </span>
+                    <span className="font-semibold text-indigo-900">{viewingMeeting.topic}</span>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="space-y-4 my-6 text-xs sm:text-sm">
+                    <div className="font-bold uppercase tracking-wider text-slate-900">
+                      NỘI DUNG VÀ DIỄN BIẾN CUỘC HỌP:
+                    </div>
+                    <div className="whitespace-pre-line leading-relaxed text-slate-800 space-y-2">
+                      {viewingMeeting.content}
+                    </div>
+                  </div>
+
+                  {/* Resolutions */}
+                  {viewingMeeting.resolutions && viewingMeeting.resolutions.length > 0 && (
+                    <div className="my-6 space-y-2 text-xs sm:text-sm">
+                      <div className="font-bold uppercase tracking-wider text-slate-900">
+                        KẾT LUẬN VÀ NGHỊ QUYẾT:
+                      </div>
+                      <ol className="list-decimal pl-5 space-y-1.5 text-slate-800">
+                        {viewingMeeting.resolutions.map((res, i) => (
+                          <li key={i}>{res}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  {/* Tasks Table */}
+                  {viewingMeeting.tasks && viewingMeeting.tasks.length > 0 && (
+                    <div className="my-6 space-y-2 text-xs">
+                      <div className="font-bold uppercase tracking-wider text-slate-900">
+                        PHÂN CÔNG NHIỆM VỤ CỤ THỂ:
+                      </div>
+                      <table className="w-full border-collapse border border-slate-300 text-left">
+                        <thead>
+                          <tr className="bg-slate-100">
+                            <th className="border border-slate-300 p-2 text-center w-10">STT</th>
+                            <th className="border border-slate-300 p-2">Nội dung nhiệm vụ</th>
+                            <th className="border border-slate-300 p-2 w-44">Người phụ trách</th>
+                            <th className="border border-slate-300 p-2 w-28 text-center">Thời hạn</th>
+                            <th className="border border-slate-300 p-2 w-28 text-center">Trạng thái</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {viewingMeeting.tasks.map((t, idx) => (
+                            <tr key={t.id}>
+                              <td className="border border-slate-300 p-2 text-center">{idx + 1}</td>
+                              <td className="border border-slate-300 p-2">{t.task}</td>
+                              <td className="border border-slate-300 p-2">{t.assignee}</td>
+                              <td className="border border-slate-300 p-2 text-center">{t.deadline}</td>
+                              <td className="border border-slate-300 p-2 text-center">
+                                <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                                  t.status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                                }`}>
+                                  {t.status === 'completed' ? 'Đã xong' : 'Đang làm'}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+
+                  {/* Signatures */}
+                  <div className="grid grid-cols-2 gap-8 pt-8 mt-8 border-t border-slate-200 text-center text-xs">
+                    <div className="space-y-16">
+                      <div>
+                        <div className="font-bold uppercase">THƯ KÝ</div>
+                        <div className="italic text-slate-500">(Ký và ghi rõ họ tên)</div>
+                      </div>
+                      <div className="font-bold">{viewingMeeting.secretary}</div>
+                    </div>
+                    <div className="space-y-16">
+                      <div>
+                        <div className="font-bold uppercase">
+                          {viewingMeeting.id.includes('tra-loi') ? 'HIỆU TRƯỞNG' : 'TỔ TRƯỞNG CHUYÊN MÔN'}
+                        </div>
+                        <div className="italic text-slate-500">(Ký và ghi rõ họ tên)</div>
+                      </div>
+                      <div className="font-bold">{viewingMeeting.leader}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
+
           </div>
         </div>
       )}
