@@ -1,3 +1,8 @@
+import { SchoolDocument } from '../types/document';
+import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN } from './inclusiveEducationData';
+import { OFFICIAL_AI_EDUCATION_PLAN } from './aiEducationData';
+import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './qualityManagementData';
+
 export const INITIAL_SCHOOL_DOCUMENTS: SchoolDocument[] = [
   {
       "id": "doc-kh-hbs-18",
