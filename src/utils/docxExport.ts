@@ -345,7 +345,6 @@ export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
     if (isAppendix) {
       docChildren.push(
         new Paragraph({
-          pageBreakBefore: true,
           alignment: AlignmentType.CENTER,
           children: [
             new TextRun({
@@ -428,27 +427,23 @@ export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
           rows: block.rows.map((rowCells, rIdx) => {
             const isHeader = rIdx === 0;
             return new TableRow({
-              tableHeader: isHeader,
-              cantSplit: true,
               children: rowCells.map((cellText, cIdx) => {
-                const isCenter = cIdx === 0 || cellText.length <= 6 || (/^\d/.test(cellText) && cellText.length < 15) || isHeader;
+                const isCenter = cIdx === 0 || cellText.length <= 6 || (/^\d/.test(cellText) && cellText.length < 15);
                 const cleanText = cellText.replace(/\*\*/g, '');
                 return new TableCell({
-                  borders: cellGridBorder,
-                  shading: isHeader ? { fill: 'F1F5F9' } : undefined,
-                  margins: { top: 80, bottom: 80, left: 120, right: 120 },
+                  borders: cellNoBorder,
                   children: [
                     new Paragraph({
-                      alignment: isCenter ? AlignmentType.CENTER : AlignmentType.LEFT,
+                      alignment: isHeader ? AlignmentType.CENTER : isCenter ? AlignmentType.CENTER : AlignmentType.LEFT,
                       children: [
                         new TextRun({
-                          text: cleanText,
+                          text: cleanText || ' ',
                           bold: isHeader || cellText.includes('**'),
                           size: 24, // 12pt
                           font: 'Times New Roman',
                         }),
                       ],
-                      spacing: { line: 240, before: 40, after: 40 },
+                      spacing: { line: 240, before: 60, after: 60 },
                     }),
                   ],
                 });
