@@ -18,6 +18,7 @@ import { UploadDirectiveModal } from './components/UploadDirectiveModal';
 import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN, DIRECTIVE_3326_GDHN, DIRECTIVE_3408_GDHN } from './data/inclusiveEducationData';
 import { OFFICIAL_AI_EDUCATION_PLAN } from './data/aiEducationData';
 import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './data/qualityManagementData';
+import { MidtermAssessmentPlanView } from './components/MidtermAssessmentPlanView';
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
@@ -32,7 +33,7 @@ const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học si
 const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v10';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('editor');
+  const [activeTab, setActiveTab] = useState<string>('midterm_assessment_plan');
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isUploadDirectiveModalOpen, setIsUploadDirectiveModalOpen] = useState(false);
   const [isStudentsModalOpen, setIsStudentsModalOpen] = useState(false);
@@ -185,6 +186,8 @@ export default function App() {
 
   // Current document for Viewing / Editing in Editor
   const [currentDocument, setCurrentDocument] = useState<SchoolDocument>(() => {
+    const midtermPlan = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-ktgk1-2026');
+    if (midtermPlan) return midtermPlan;
     const officialHbs = INITIAL_SCHOOL_DOCUMENTS.find(d => d.id === 'doc-kh-hbs-18' || d.id === 'doc-kh-hbs-43');
     return officialHbs || INITIAL_SCHOOL_DOCUMENTS[0];
   });
@@ -586,9 +589,14 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
-        {/* Tab 1: Builder (Tra cứu & Cụ thể hóa văn bản) */}
+        {/* Tab Featured: Kế hoạch kiểm tra, đánh giá giữa HK1 năm học 2026 - 2027 (Số 45) */}
+        {activeTab === 'midterm_assessment_plan' && (
+          <MidtermAssessmentPlanView />
+        )}
+
+        {/* Tab 1: Document Builder */}
         {activeTab === 'builder' && (
-          <DocumentBuilderTab 
+          <DocumentBuilderTab
             onDocumentGenerated={handleDocumentGenerated}
             prefilledDirective={selectedDirectiveForBuilder}
             onClearPrefilledDirective={() => setSelectedDirectiveForBuilder(null)}
@@ -636,6 +644,7 @@ export default function App() {
             onSelectDocument={handleSelectFromArchive}
             onDeleteDocument={handleDeleteDocument}
             onOpenCreateNew={() => setActiveTab('builder')}
+            onOpenMidtermPlan={() => setActiveTab('midterm_assessment_plan')}
           />
         )}
 

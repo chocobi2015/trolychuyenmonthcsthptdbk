@@ -19,7 +19,8 @@ import {
   Layers,
   Menu,
   HeartHandshake,
-  FileSpreadsheet
+  FileSpreadsheet,
+  CalendarCheck
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -56,6 +57,15 @@ export const Header: React.FC<HeaderProps> = ({
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const TABS: TabItem[] = [
+    {
+      id: 'midterm_assessment_plan',
+      name: '★ Kế Hoạch KT-ĐG Giữa HK1 (Số 45 • Đủ 3 Nguồn File)',
+      shortName: 'Kế Hoạch KT Giữa HK1',
+      icon: <CalendarCheck className="w-4 h-4 text-amber-300" />,
+      desc: 'Toàn văn chi tiết nhất Kế hoạch kiểm tra giữa HK1 (gộp KH 39 ĐBK + Mỹ Quý + năm trước)',
+      badge: 'MỚI BAN HÀNH • SỐ 45',
+      accentColor: 'from-amber-500/20 to-orange-500/20',
+    },
     {
       id: 'builder',
       name: '1. Xây Dựng Văn Bản (Tra Cứu / Cụ Thể Hóa)',
@@ -206,16 +216,19 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Quick Actions */}
         <div className="flex items-center gap-2 self-stretch md:self-auto justify-end flex-wrap">
-          <a
-            href="/api/documents/download/kh-kiem-tra-giua-hk1.docx"
-            download="KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white border border-amber-400/40 shadow-sm transition active:scale-95"
-            title="Tải ngay Kế hoạch Kiểm tra Giữa HK1 năm học 2026-2027 (Số 45) chuẩn Word (.docx) không cần căn chỉnh"
+          <button
+            onClick={() => setActiveTab('midterm_assessment_plan')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition active:scale-95 border ${
+              activeTab === 'midterm_assessment_plan'
+                ? 'bg-amber-500 text-white border-amber-300 shadow-md ring-2 ring-amber-300/40'
+                : 'bg-amber-600 hover:bg-amber-500 text-white border-amber-400/40 shadow-sm'
+            }`}
+            title="Xem và Xuất Kế hoạch Kiểm tra Giữa HK1 năm học 2026-2027 (Số 45) chuẩn Word (.docx) không cần căn chỉnh"
           >
-            <Download className="w-3.5 h-3.5 text-amber-100" />
-            <span>Tải KH KT Giữa HK1 (.docx)</span>
+            <CalendarCheck className="w-3.5 h-3.5 text-amber-100" />
+            <span>Kế Hoạch KT Giữa HK1</span>
             <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-amber-800/80 rounded font-bold text-amber-200">Số 45</span>
-          </a>
+          </button>
 
           {onOpenStudentsModal && (
             <button

@@ -73,7 +73,7 @@ export async function generateMidterm1PlanDocx(outputPath: string): Promise<void
                 spacing: { after: 120 },
                 children: [
                   new TextRun({
-                    text: 'Số: 42/KH-THCS&THPTĐBK',
+                    text: 'Số: 45/KH-THCS&THPTĐBK',
                     size: 24,
                     font: FONT_NAME
                   })

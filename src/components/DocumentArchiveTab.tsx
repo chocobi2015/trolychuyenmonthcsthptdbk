@@ -25,6 +25,7 @@ interface DocumentArchiveTabProps {
   onSelectDocument: (doc: SchoolDocument) => void;
   onDeleteDocument: (id: string) => void;
   onOpenCreateNew: () => void;
+  onOpenMidtermPlan?: () => void;
 }
 
 export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
@@ -32,6 +33,7 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
   onSelectDocument,
   onDeleteDocument,
   onOpenCreateNew,
+  onOpenMidtermPlan,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string>('ALL');
@@ -122,7 +124,6 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
       {/* Featured Banner: Kế hoạch kiểm tra đánh giá giữa học kỳ 1 */}
       {(() => {
         const midtermDoc = documents.find((d) => d.id === 'doc-kh-ktgk1-2026');
-        if (!midtermDoc) return null;
         return (
           <div className="bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50 rounded-xl p-5 border-2 border-amber-300 shadow-sm relative overflow-hidden">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -148,7 +149,13 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
 
               <div className="flex items-center gap-2 shrink-0 flex-wrap">
                 <button
-                  onClick={() => onSelectDocument(midtermDoc)}
+                  onClick={() => {
+                    if (onOpenMidtermPlan) {
+                      onOpenMidtermPlan();
+                    } else if (midtermDoc) {
+                      onSelectDocument(midtermDoc);
+                    }
+                  }}
                   className="px-3.5 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition active:scale-95"
                   title="Xem toàn văn kế hoạch định dạng trang A4"
                 >
