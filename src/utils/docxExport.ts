@@ -15,7 +15,14 @@ import {
 import { SchoolDocument } from '../types/document';
 import { DepartmentMeeting } from '../types/meeting';
 
-export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
+export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
+  const tableBorder = { style: BorderStyle.SINGLE, size: 4, color: '000000' };
+  const cellGridBorder = {
+    top: tableBorder,
+    bottom: tableBorder,
+    left: tableBorder,
+    right: tableBorder,
+  };
   const noBorder = {
     top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
     bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
@@ -291,6 +298,47 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
     );
   }
 
+  // Helper function to format runs with bold support and markdown ** parsing
+  const formatParagraphRuns = (text: string, defaultBold?: boolean): TextRun[] => {
+    const runs: TextRun[] = [];
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    for (const part of parts) {
+      if (!part) continue;
+      if (part.startsWith('**') && part.endsWith('**')) {
+        const inner = part.slice(2, -2);
+        if (inner) {
+          runs.push(
+            new TextRun({
+              text: inner,
+              bold: true,
+              size: 28, // 14pt
+              font: 'Times New Roman',
+            })
+          );
+        }
+      } else {
+        runs.push(
+          new TextRun({
+            text: part,
+            bold: defaultBold,
+            size: 28, // 14pt
+            font: 'Times New Roman',
+          })
+        );
+      }
+    }
+    return runs.length > 0
+      ? runs
+      : [
+          new TextRun({
+            text,
+            bold: defaultBold,
+            size: 28,
+            font: 'Times New Roman',
+          }),
+        ];
+  };
+
   // Helper function to render a section's heading and content/tables
   const renderSection = (sec: { heading: string; content: string }) => {
     const isAppendix = sec.heading.toUpperCase().startsWith('PHỤ LỤC');
@@ -301,7 +349,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
           alignment: AlignmentType.CENTER,
           children: [
             new TextRun({
-              text: sec.heading,
+              text: sec.heading.toUpperCase(),
               bold: true,
               size: 28, // 14pt
               font: 'Times New Roman',
@@ -311,7 +359,7 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
         })
       );
     } else {
-      // Heading: Roman numeral heading bold 14pt (thụt đầu dòng 1.0cm = 567 twips bằng với các mục số; giãn đoạn trên 6pt = 120 twips, dưới 6pt = 120 twips đều nhau)
+      // Heading: Roman numeral heading bold 14pt (thụt đầu dòng 1.0cm = 567 twips theo Nghị định 30; canh đều hai bên)
       docChildren.push(
         new Paragraph({
           alignment: AlignmentType.JUSTIFIED,
@@ -323,8 +371,8 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
               font: 'Times New Roman',
             }),
           ],
-          indent: { firstLine: 567 }, // Thụt đầu dòng 1.0cm bằng với các mục số và đoạn văn
-          spacing: { before: 120, after: 120 },
+          indent: { firstLine: 567 }, // Thụt đầu dòng 1.0cm chuẩn thể thức
+          spacing: { before: 140, after: 100 },
         })
       );
     }
@@ -370,32 +418,37 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
         const contentTable = new Table({
           width: { size: 100, type: WidthType.PERCENTAGE },
           borders: {
-            top: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-            bottom: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-            left: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-            right: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-            insideHorizontal: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
-            insideVertical: { style: BorderStyle.SINGLE, size: 4, color: '000000' },
+            top: tableBorder,
+            bottom: tableBorder,
+            left: tableBorder,
+            right: tableBorder,
+            insideHorizontal: tableBorder,
+            insideVertical: tableBorder,
           },
           rows: block.rows.map((rowCells, rIdx) => {
             const isHeader = rIdx === 0;
             return new TableRow({
+              tableHeader: isHeader,
+              cantSplit: true,
               children: rowCells.map((cellText, cIdx) => {
-                const isCenter = cIdx === 0 || cellText.length <= 6 || (/^\d/.test(cellText) && cellText.length < 15);
+                const isCenter = cIdx === 0 || cellText.length <= 6 || (/^\d/.test(cellText) && cellText.length < 15) || isHeader;
+                const cleanText = cellText.replace(/\*\*/g, '');
                 return new TableCell({
-                  borders: cellNoBorder, // Individual cells don't double border
+                  borders: cellGridBorder,
+                  shading: isHeader ? { fill: 'F1F5F9' } : undefined,
+                  margins: { top: 80, bottom: 80, left: 120, right: 120 },
                   children: [
                     new Paragraph({
-                      alignment: isHeader ? AlignmentType.CENTER : isCenter ? AlignmentType.CENTER : AlignmentType.LEFT,
+                      alignment: isCenter ? AlignmentType.CENTER : AlignmentType.LEFT,
                       children: [
                         new TextRun({
-                          text: cellText,
-                          bold: isHeader,
+                          text: cleanText,
+                          bold: isHeader || cellText.includes('**'),
                           size: 24, // 12pt
                           font: 'Times New Roman',
                         }),
                       ],
-                      spacing: { line: 240, before: 60, after: 60 },
+                      spacing: { line: 240, before: 40, after: 40 },
                     }),
                   ],
                 });
@@ -411,33 +464,22 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
       }
 
       const trimmed = block.text;
-      const isPlusBullet = trimmed.startsWith('+');
-      const isDashBullet = trimmed.startsWith('-');
       const isNumbered = /^\d+(\.\d+)*\./.test(trimmed);
       const isLetterSub = /^[a-zđ]\)/i.test(trimmed);
 
-      let indentConfig;
-      if (isPlusBullet) {
-        indentConfig = { firstLine: 850 }; // 1.5cm first line indent only, subsequent lines align to normal margin
-      } else if (isDashBullet) {
-        indentConfig = { firstLine: 567 }; // 1.0cm first line indent only, subsequent lines align to normal margin
-      } else {
-        indentConfig = { firstLine: 567 }; // 1.0cm indent for paragraphs, numbered items, and letter items
-      }
+      // Thụt đầu dòng 1.0cm (567 twips) thống nhất tuyệt đối theo Nghị định 30/2020/NĐ-CP
+      // Tất cả dòng 2 trở đi thẳng hàng lề trái trang, không bao giờ bị thụt thò lồi lõm
+      const runs = formatParagraphRuns(
+        trimmed,
+        isNumbered ? true : undefined
+      );
 
       docChildren.push(
         new Paragraph({
           alignment: AlignmentType.JUSTIFIED,
-          children: [
-            new TextRun({
-              text: trimmed,
-              size: 28, // 14pt
-              font: 'Times New Roman',
-              bold: isNumbered ? true : undefined, // Numbered items like 1. Mục đích: are bold; a), b)... are normal
-            }),
-          ],
-          indent: indentConfig,
-          spacing: { line: 280, before: isNumbered ? 120 : 40, after: 60 },
+          children: runs,
+          indent: { firstLine: 567 }, // 1.0cm chuẩn chỉ
+          spacing: { line: 280, before: isNumbered ? 100 : 30, after: 50 },
         })
       );
     });
@@ -595,6 +637,11 @@ export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
     ],
   });
 
+  return docxFile;
+}
+
+export async function exportDocumentToDocx(doc: SchoolDocument): Promise<void> {
+  const docxFile = createSchoolDocumentDocx(doc);
   const blob = await Packer.toBlob(docxFile);
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');

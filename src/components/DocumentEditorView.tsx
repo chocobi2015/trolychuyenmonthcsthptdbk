@@ -69,7 +69,12 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
     try {
       setIsDownloading(true);
       if (doc.sourceFileUrl) {
-        window.location.assign(doc.sourceFileUrl);
+        const a = document.createElement('a');
+        a.href = doc.sourceFileUrl;
+        a.download = `${doc.type.toUpperCase()}_${(doc.subTitle || doc.title).replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g, '_').substring(0, 40)}.docx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
         return;
       }
       await exportDocumentToDocx(doc);
