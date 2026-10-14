@@ -119,6 +119,58 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
         </button>
       </div>
 
+      {/* Featured Banner: Kế hoạch kiểm tra đánh giá giữa học kỳ 1 */}
+      {(() => {
+        const midtermDoc = documents.find((d) => d.id === 'doc-kh-ktgk1-2026');
+        if (!midtermDoc) return null;
+        return (
+          <div className="bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50 rounded-xl p-5 border-2 border-amber-300 shadow-sm relative overflow-hidden">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-600 text-white text-[11px] font-bold shadow-xs">
+                    MỚI BAN HÀNH
+                  </span>
+                  <span className="text-xs font-mono font-bold text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded border border-amber-300">
+                    Số: 45/KH-THCS&THPTĐBK
+                  </span>
+                  <span className="text-xs text-amber-800 font-medium">
+                    (Gom đủ 3 file: KH 39 ĐBK + KH Mỹ Quý + KH năm trước ĐBK)
+                  </span>
+                </div>
+                <h3 className="text-base md:text-lg font-bold text-slate-900">
+                  Kế Hoạch Kiểm Tra, Đánh Giá Giữa Học Kỳ I Năm Học 2026 - 2027
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed max-w-3xl">
+                  Áp dụng toàn diện cho <strong>53 lớp với 2.111 học sinh</strong> tại 3 cơ sở (Điểm chính THPT, Điểm THCS Đốc Binh Kiều, Điểm THCS Tân Kiều). Đầy đủ ma trận, bảng đặc tả, tỷ lệ nhận thức 4:3:3, cấu trúc trắc nghiệm mới tiệm cận thi tốt nghiệp 2025, lịch kiểm tra chi tiết theo buổi & môn, quy trình coi - làm phách - chấm 2 vòng - phúc khảo - kiểm tra bù.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0 flex-wrap">
+                <button
+                  onClick={() => onSelectDocument(midtermDoc)}
+                  className="px-3.5 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition active:scale-95"
+                  title="Xem toàn văn kế hoạch định dạng trang A4"
+                >
+                  <Eye className="w-4 h-4" />
+                  <span>Xem Toàn Văn (Chuẩn A4)</span>
+                </button>
+
+                <a
+                  href="/api/documents/download/kh-kiem-tra-giua-hk1.docx"
+                  download="KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
+                  className="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition active:scale-95 border border-amber-400"
+                  title="Tải ngay file Word (.docx) chuẩn thể thức Nghị định 30, không cần căn chỉnh lại"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Xuất File Word (.docx)</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Filter and Search Bar */}
       <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3">
         <div className="flex items-center gap-3 flex-1 flex-wrap">

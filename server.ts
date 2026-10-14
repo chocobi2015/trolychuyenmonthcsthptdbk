@@ -978,6 +978,17 @@ app.get('/api/documents/source/assessment-plan.docx', (req, res) => {
   res.download(ASSESSMENT_PLAN_DOCX_PATH, path.basename(ASSESSMENT_PLAN_DOCX_PATH));
 });
 
+// API: Download Mid-term Exam Plan Word file (KH Kiểm tra giữa HK1 2026-2027)
+app.get(['/api/documents/download/kh-kiem-tra-giua-hk1.docx', '/api/documents/source/kh-kiem-tra-giua-hk1.docx', '/api/documents/download/ktdg-giua-hk1'], (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'downloads', 'KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx');
+  const fallbackPath = path.join(__dirname, 'KIEM TRA DANH GIA', 'KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx');
+  const target = fs.existsSync(filePath) ? filePath : fallbackPath;
+  if (!fs.existsSync(target)) {
+    return res.status(404).json({ success: false, error: 'Không tìm thấy file Kế hoạch kiểm tra giữa HK1' });
+  }
+  res.download(target, 'KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx');
+});
+
 // API: Get all persisted documents from server disk
 app.get('/api/documents', async (req, res) => {
   try {

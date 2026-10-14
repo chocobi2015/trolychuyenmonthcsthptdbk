@@ -206,6 +206,17 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Quick Actions */}
         <div className="flex items-center gap-2 self-stretch md:self-auto justify-end flex-wrap">
+          <a
+            href="/api/documents/download/kh-kiem-tra-giua-hk1.docx"
+            download="KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white border border-amber-400/40 shadow-sm transition active:scale-95"
+            title="Tải ngay Kế hoạch Kiểm tra Giữa HK1 năm học 2026-2027 (Số 45) chuẩn Word (.docx) không cần căn chỉnh"
+          >
+            <Download className="w-3.5 h-3.5 text-amber-100" />
+            <span>Tải KH KT Giữa HK1 (.docx)</span>
+            <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-amber-800/80 rounded font-bold text-amber-200">Số 45</span>
+          </a>
+
           {onOpenStudentsModal && (
             <button
               onClick={onOpenStudentsModal}
