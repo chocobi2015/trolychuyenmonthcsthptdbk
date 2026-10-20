@@ -93,31 +93,29 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 bg-blue-100 text-blue-900 text-xs font-bold rounded flex items-center gap-1">
-              <FolderArchive className="w-3.5 h-3.5" />
-              <span>Kho Văn Bản Quản Lý Trường Học</span>
-            </span>
-            <span className="text-xs text-slate-500">
-              Tổng số {documents.length} văn bản đã cụ thể hóa
-            </span>
+          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+            <span className="text-slate-900 font-semibold">Kho Hồ Sơ & Văn Bản Nhà Trường</span>
+            <span aria-hidden="true">·</span>
+            <span className="tabular-nums">Tổng số {documents.length} văn bản đã ban hành</span>
+            <span aria-hidden="true">·</span>
+            <span>Chuẩn Nghị định 30/2020/NĐ-CP</span>
           </div>
           <h2 className="text-lg font-bold text-slate-900 mt-1">
-            Sổ Lưu Trữ & Quản Lý Văn Bản Ban Hành
+            Sổ Lưu Trữ & Quản Lý Kế Hoạch, Quyết Định Chuyên Môn
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Lưu trữ tập trung các Kế hoạch, Quyết định, Hướng dẫn, Quy chế của Trường THCS & THPT Đốc Binh Kiều.
+          <p className="text-xs text-slate-600 mt-0.5">
+            Lưu trữ tập trung các Kế hoạch giáo dục, Quy chế chuyên môn, Phân phối chương trình của Trường THCS & THPT Đốc Binh Kiều.
           </p>
         </div>
 
         <button
           onClick={onOpenCreateNew}
-          className="px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow transition shrink-0"
+          className="px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition shrink-0"
         >
-          <FileText className="w-4 h-4" />
-          <span>Cụ thể hóa văn bản mới</span>
+          <FileText className="w-3.5 h-3.5" />
+          <span>Soạn thảo văn bản mới</span>
         </button>
       </div>
 

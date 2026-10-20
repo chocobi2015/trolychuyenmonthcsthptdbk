@@ -93,29 +93,23 @@ export const MidtermAssessmentPlanView: React.FC = () => {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-16">
       {/* Top Banner & Control Bar */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm print:hidden">
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs print:hidden">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-3 py-1 rounded-full bg-amber-600 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5" />
-                VĂN BẢN MỚI XÂY DỰNG • ĐÃ GOM ĐỦ 3 NGUỒN FILE
-              </span>
-              <span className="text-xs font-mono font-bold text-blue-900 bg-blue-100 px-2.5 py-1 rounded border border-blue-300">
+            <div className="flex items-center gap-2 text-xs text-slate-600 font-medium flex-wrap">
+              <span className="font-mono font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                 Số: 45/KH-THCS&THPTĐBK
               </span>
-              <span className="text-xs text-slate-500 font-medium">
-                Ban hành: Ngày 16/10/2026
-              </span>
+              <span aria-hidden="true" className="text-slate-400">·</span>
+              <span>Ngày ban hành: 16/10/2026</span>
+              <span aria-hidden="true" className="text-slate-400">·</span>
+              <span className="text-blue-700 font-semibold">Chuẩn thể thức Nghị định 30/2020/NĐ-CP</span>
             </div>
             <h1 className="text-xl lg:text-2xl font-bold text-slate-900 tracking-tight">
               Kế Hoạch Kiểm Tra, Đánh Giá Giữa Học Kỳ I — Năm Học 2026 - 2027
             </h1>
             <p className="text-xs text-slate-600 leading-relaxed max-w-3xl">
-              Xây dựng độc lập, chi tiết và cụ thể nhất cho <strong>Trường THCS và THPT Đốc Binh Kiều</strong>. Tổng hợp đầy đủ từ 3 nguồn tài liệu:
-              <span className="inline-block mx-1 font-semibold text-blue-800">1. Kế hoạch năm số 39 của ĐBK</span> •
-              <span className="inline-block mx-1 font-semibold text-emerald-800">2. Kế hoạch giữa HK1 trường THCS-THPT Mỹ Quý</span> •
-              <span className="inline-block mx-1 font-semibold text-purple-800">3. Kế hoạch KTHK1 năm học trước của ĐBK</span>.
+              Xây dựng độc lập, chi tiết và cụ thể cho <strong>Trường THCS và THPT Đốc Binh Kiều</strong>. Tổng hợp đầy đủ từ 3 nguồn: Kế hoạch số 39 của ĐBK, Kế hoạch giữa HK1 trường THCS-THPT Mỹ Quý và Kế hoạch KTHK1 năm học trước.
             </p>
           </div>
 
@@ -125,19 +119,19 @@ export const MidtermAssessmentPlanView: React.FC = () => {
             <button
               onClick={handleDownloadWord}
               disabled={isDownloading}
-              className={`px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow transition active:scale-95 ${
+              className={`px-4 py-2 rounded-lg font-semibold text-xs flex items-center gap-2 shadow-xs transition active:scale-95 ${
                 downloadSuccess
                   ? 'bg-emerald-600 text-white'
-                  : 'bg-amber-600 hover:bg-amber-700 text-white border border-amber-500 hover:shadow-md'
+                  : 'bg-blue-700 hover:bg-blue-800 text-white border border-blue-800'
               }`}
-              title="Tải ngay file Word (.docx) chuẩn thể thức Nghị định 30/2020/NĐ-CP, mở ra dùng ngay không cần căn chỉnh"
+              title="Tải file Word (.docx) chuẩn thể thức Nghị định 30/2020/NĐ-CP"
             >
-              <Download className={`w-4 h-4 ${isDownloading ? 'animate-bounce' : ''}`} />
+              <Download className={`w-3.5 h-3.5 ${isDownloading ? 'animate-bounce' : ''}`} />
               <span>
                 {isDownloading
                   ? 'Đang chuẩn bị file...'
                   : downloadSuccess
-                  ? '✓ Đã tải xuống file Word!'
+                  ? 'Đã tải file Word!'
                   : 'Xuất File Word (.docx)'}
               </span>
             </button>
@@ -146,89 +140,89 @@ export const MidtermAssessmentPlanView: React.FC = () => {
             <a
               href="/api/documents/download/kh-kiem-tra-giua-hk1.docx"
               download="KH_KIEM_TRA_GIUA_HK1_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
-              className="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold flex items-center gap-1.5 transition"
-              title="Link tải trực tiếp"
+              className="px-3 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium flex items-center gap-1.5 transition"
+              title="Tải link trực tiếp nếu trình duyệt chặn tự động tải"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-slate-600" />
+              <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
               <span>Link dự phòng</span>
             </a>
 
             {/* Copy Button */}
             <button
               onClick={handleCopyText}
-              className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold flex items-center gap-1.5 transition active:scale-95"
+              className="px-3 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium flex items-center gap-1.5 transition active:scale-95"
               title="Sao chép toàn bộ nội dung văn bản để dán vào iDesk hoặc Microsoft Word"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-slate-600" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
               <span>{copied ? 'Đã sao chép' : 'Sao chép toàn văn'}</span>
             </button>
 
             {/* Print Button */}
             <button
               onClick={handlePrint}
-              className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold flex items-center gap-1.5 transition active:scale-95"
+              className="px-3 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium flex items-center gap-1.5 transition active:scale-95"
               title="In trực tiếp hoặc Lưu file PDF chuẩn khổ giấy A4"
             >
-              <Printer className="w-4 h-4 text-slate-600" />
-              <span>In / Lưu PDF</span>
+              <Printer className="w-3.5 h-3.5 text-slate-500" />
+              <span>In / PDF</span>
             </button>
           </div>
         </div>
 
         {/* Feature Highlights Badges */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-100 text-xs">
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-blue-50/70 text-blue-900 border border-blue-200/60">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
             <Building2 className="w-4 h-4 text-blue-700 shrink-0" />
             <div>
-              <p className="font-bold">Quy mô 3 cơ sở</p>
-              <p className="text-[11px] text-blue-700">53 lớp · 2.111 học sinh</p>
+              <p className="font-semibold text-slate-900">Quy mô 3 cơ sở</p>
+              <p className="text-[11px] text-slate-500 tabular-nums">53 lớp · 2.111 học sinh</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-amber-50/70 text-amber-900 border border-amber-200/60">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
             <Clock className="w-4 h-4 text-amber-700 shrink-0" />
             <div>
-              <p className="font-bold">Thời gian kiểm tra</p>
-              <p className="text-[11px] text-amber-700">Tuần 9 (02/11 - 06/11/2026)</p>
+              <p className="font-semibold text-slate-900">Thời gian kiểm tra</p>
+              <p className="text-[11px] text-slate-500 tabular-nums">Tuần 9 (02/11 - 06/11/2026)</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-emerald-50/70 text-emerald-900 border border-emerald-200/60">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
             <FileCheck2 className="w-4 h-4 text-emerald-700 shrink-0" />
             <div>
-              <p className="font-bold">Cấu trúc đề mới</p>
-              <p className="text-[11px] text-emerald-700">Trắc nghiệm 3 phần + Tự luận</p>
+              <p className="font-semibold text-slate-900">Cấu trúc đề mới</p>
+              <p className="text-[11px] text-slate-500">Trắc nghiệm 3 phần + Tự luận</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/70 text-purple-900 border border-purple-200/60">
+          <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
             <ShieldCheck className="w-4 h-4 text-purple-700 shrink-0" />
             <div>
-              <p className="font-bold">Quy trình nghiêm ngặt</p>
-              <p className="text-[11px] text-purple-700">Coi chéo · Làm phách · Chấm 2 vòng</p>
+              <p className="font-semibold text-slate-900">Quy trình chuyên môn</p>
+              <p className="text-[11px] text-slate-500">Coi chéo · Làm phách · Chấm 2 vòng</p>
             </div>
           </div>
         </div>
 
         {/* Quick Jump Bar */}
-        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 overflow-x-auto pb-1">
-          <span className="font-bold text-slate-700 shrink-0">Đi đến mục:</span>
+        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 overflow-x-auto pb-1 scrollbar-none">
+          <span className="font-medium text-slate-500 shrink-0 mr-1">Đi đến mục:</span>
           {[
             { id: 'sec-mucdich', label: 'I. Mục Đích & Yêu Cầu' },
-            { id: 'sec-quymo', label: 'II. Quy Mô 53 Lớp (3 Cơ Sở)' },
-            { id: 'sec-cautruc', label: 'III. Cấu Trúc Đề Các Môn' },
-            { id: 'sec-rade', label: 'IV. Ra Đề & In Sao Bảo Mật' },
-            { id: 'sec-coithi', label: 'V. Tổ Chức Coi & Chấm Thi' },
-            { id: 'sec-tradiem', label: 'VI. Trả Bài & Kiểm Tra Bù' },
-            { id: 'sec-tiendo', label: 'VII. Bảng Tiến Độ Thời Gian' },
-            { id: 'sec-tochuc', label: 'VIII. Phân Công Trách Nhiệm' },
+            { id: 'sec-quymo', label: 'II. Quy Mô 53 Lớp' },
+            { id: 'sec-cautruc', label: 'III. Cấu Trúc Đề' },
+            { id: 'sec-rade', label: 'IV. Ra Đề & In Sao' },
+            { id: 'sec-coithi', label: 'V. Coi & Chấm Thi' },
+            { id: 'sec-tradiem', label: 'VI. Trả Bài' },
+            { id: 'sec-tiendo', label: 'VII. Tiến Độ Thời Gian' },
+            { id: 'sec-tochuc', label: 'VIII. Phân Công' },
             { id: 'sec-lichthpt', label: 'Phụ Lục I: Lịch Thi THPT' },
             { id: 'sec-lichthcs', label: 'Phụ Lục II: Lịch Thi THCS' }
           ].map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 hover:text-blue-900 text-slate-700 shrink-0 transition"
+              className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 shrink-0 transition text-xs font-medium"
             >
               {item.label}
             </button>

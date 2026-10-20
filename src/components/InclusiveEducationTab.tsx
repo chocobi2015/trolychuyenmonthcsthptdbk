@@ -128,97 +128,80 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
   return (
     <div className="space-y-6">
       {/* Hero Banner Header */}
-      <div className="bg-gradient-to-r from-rose-800 via-rose-900 to-red-950 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden border border-rose-700/50">
-        <div className="absolute right-0 top-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
-        <div className="relative z-10">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/30 border border-rose-300/30 text-rose-100 text-xs font-semibold backdrop-blur-sm">
-                <HeartHandshake className="w-4 h-4 text-rose-200" />
-                <span>Giáo Dục Hòa Nhập · Năm học 2026 - 2027</span>
-                <span className="px-1.5 py-0.2 bg-emerald-500/80 text-white rounded text-[10px] font-bold">Chuẩn Phụ lục CV 3408</span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                Kế Hoạch & Quản Lý Giáo Dục Hòa Nhập 25 Học Sinh Khuyết Tật
-              </h1>
-              <p className="text-rose-100/90 text-xs sm:text-sm max-w-3xl leading-relaxed">
-                Thực hiện <strong>Công văn số 3326/SGDĐT-GDPT</strong> và <strong>Công văn số 3408/SGDĐT-GDPT ngày 04/9/2026 của Sở GDĐT Đồng Tháp</strong>. Đã điều chỉnh chuẩn xác cơ cấu phân bổ tại 03 điểm trường: <strong>03 HS cấp THPT (Điểm chính)</strong>, <strong>10 HS cấp THCS (Điểm Đốc Binh Kiều)</strong> và <strong>12 HS cấp THCS (Điểm Tân Kiều cách 11km)</strong>.
-              </p>
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="space-y-1.5 max-w-3xl">
+            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium flex-wrap">
+              <span className="text-slate-900 font-semibold">Giáo Dục Hòa Nhập Nhà Trường</span>
+              <span aria-hidden="true">·</span>
+              <span>Năm học 2026 - 2027</span>
+              <span aria-hidden="true">·</span>
+              <span>Căn cứ Công văn 3326/SGDĐT & 3408/SGDĐT</span>
             </div>
-
-            {/* Quick action buttons */}
-            <div className="flex items-center gap-2.5 flex-wrap shrink-0">
-              <button
-                onClick={() => onOpenDocumentInEditor(OFFICIAL_INCLUSIVE_EDUCATION_PLAN)}
-                className="px-4 py-2.5 rounded-xl bg-white text-rose-900 hover:bg-rose-50 text-xs font-bold flex items-center gap-2 shadow-md transition transform hover:-translate-y-0.5"
-                title="Mở Kế hoạch số 15/KH-THCS&THPTĐBK trong Trình xem A4 Word"
-              >
-                <FileText className="w-4 h-4 text-rose-700" />
-                <span>Xem Kế Hoạch 15/KH</span>
-              </button>
-
-              <button
-                onClick={handleExportPlanWord}
-                disabled={isExportingWord}
-                className="px-4 py-2.5 rounded-xl bg-rose-700/80 hover:bg-rose-600 text-white border border-rose-400/40 text-xs font-semibold flex items-center gap-2 transition"
-                title="Tải file Word Kế hoạch số 15/KH-THCS&THPTĐBK (.docx)"
-              >
-                <Download className="w-4 h-4" />
-                <span>{isExportingWord ? 'Đang xuất Word...' : 'Tải File Word Kế Hoạch 15'}</span>
-              </button>
-
-              <button
-                onClick={() => setIsPrintModalOpen(true)}
-                className="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white border border-amber-400/40 text-xs font-bold flex items-center gap-2 shadow-sm transition"
-                title="Xem & In Báo cáo Phụ lục thống kê 25 học sinh (CV 3408)"
-              >
-                <Printer className="w-4 h-4" />
-                <span>Xem Phụ Lục CV 3408</span>
-              </button>
-            </div>
+            <h1 className="text-xl lg:text-2xl font-bold text-slate-900 tracking-tight">
+              Kế Hoạch & Quản Lý Giáo Dục Hòa Nhập 25 Học Sinh Khuyết Tật
+            </h1>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Thực hiện <strong>Công văn số 3326/SGDĐT-GDPT</strong> và <strong>Công văn số 3408/SGDĐT-GDPT</strong> của Sở GDĐT Đồng Tháp. Quản lý hồ sơ và kế hoạch giáo dục cá nhân cho 25 học sinh khuyết tật tại 3 điểm trường: <strong>03 HS cấp THPT (Điểm chính)</strong>, <strong>10 HS cấp THCS (Điểm Đốc Binh Kiều)</strong> và <strong>12 HS cấp THCS (Điểm Tân Kiều cách 11km)</strong>.
+            </p>
           </div>
 
-          {/* Quick Metrics KPI Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-rose-500/30">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-              <div className="text-rose-200 text-xs font-medium flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5" />
-                <span>Tổng số HSKT hòa nhập</span>
-              </div>
-              <div className="text-2xl font-black mt-1 text-white">25 <span className="text-xs font-normal text-rose-200">em / 2.111 HS</span></div>
-              <div className="text-[11px] text-rose-200 mt-0.5">Tỷ lệ 1,18% (100% không bỏ học)</div>
-            </div>
+          {/* Quick action buttons */}
+          <div className="flex items-center gap-2 flex-wrap shrink-0">
+            <button
+              onClick={() => onOpenDocumentInEditor(OFFICIAL_INCLUSIVE_EDUCATION_PLAN)}
+              className="px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition"
+              title="Mở Kế hoạch số 15/KH-THCS&THPTĐBK trong Trình xem A4 Word"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Xem Kế Hoạch 15/KH</span>
+            </button>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-              <div className="text-rose-200 text-xs font-medium flex items-center gap-1.5">
-                <Building2 className="w-3.5 h-3.5" />
-                <span>Phân bổ 03 Điểm trường</span>
-              </div>
-              <div className="text-xl sm:text-2xl font-black mt-1 text-white">
-                THPT: 3 · ĐBK: 10 · TK: 12
-              </div>
-              <div className="text-[11px] text-amber-200 mt-0.5 font-medium">Tân Kiều (cách 11km): 12 em (48%)</div>
-            </div>
+            <button
+              onClick={handleExportPlanWord}
+              disabled={isExportingWord}
+              className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium flex items-center gap-1.5 transition"
+              title="Tải file Word Kế hoạch số 15/KH-THCS&THPTĐBK (.docx)"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>{isExportingWord ? 'Đang xuất Word...' : 'Tải File Word Kế Hoạch 15'}</span>
+            </button>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-              <div className="text-rose-200 text-xs font-medium flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Phân loại mức độ khuyết tật</span>
-              </div>
-              <div className="text-xl sm:text-2xl font-black mt-1 text-white">
-                Nặng: 06 <span className="text-xs font-normal text-rose-200">| Nhẹ: 19</span>
-              </div>
-              <div className="text-[11px] text-rose-200 mt-0.5">01 ung bướu ác, 01 nhìn, 01 tâm thần</div>
-            </div>
+            <button
+              onClick={() => setIsPrintModalOpen(true)}
+              className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium flex items-center gap-1.5 transition"
+              title="Xem & In Báo cáo Phụ lục thống kê 25 học sinh (CV 3408)"
+            >
+              <Printer className="w-3.5 h-3.5 text-slate-500" />
+              <span>Xem Phụ Lục CV 3408</span>
+            </button>
+          </div>
+        </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-              <div className="text-rose-200 text-xs font-medium flex items-center gap-1.5">
-                <FileCheck className="w-3.5 h-3.5" />
-                <span>Kế hoạch GD cá nhân (KHGDCN)</span>
-              </div>
-              <div className="text-2xl font-black mt-1 text-white">100% <span className="text-xs font-normal text-rose-200">(25/25 em)</span></div>
-              <div className="text-[11px] text-rose-200 mt-0.5">Phó HT Nguyễn Minh Trí phê duyệt</div>
-            </div>
+        {/* Quick Metrics KPI Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-100 text-xs">
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Tổng HSKT Hòa Nhập</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">25 <span className="text-xs font-normal text-slate-500">em / 2.111 HS</span></div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Tỷ lệ 1,18% (100% không bỏ học)</div>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Phân Bổ 3 Điểm Trường</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">THPT: 3 · ĐBK: 10 · TK: 12</div>
+            <div className="text-[11px] text-blue-700 font-medium mt-0.5">Tân Kiều (cách 11km): 12 em (48%)</div>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Mức Độ Khuyết Tật</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">Nặng: 06 · Nhẹ: 19</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Có giấy xác nhận của UBND xã</div>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Kế Hoạch GD Cá Nhân (KHGDCN)</div>
+            <div className="text-lg font-bold text-emerald-700 mt-0.5 tabular-nums">100% <span className="text-xs font-normal text-slate-500">(25/25 em)</span></div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Phó HT Nguyễn Minh Trí phê duyệt</div>
           </div>
         </div>
       </div>

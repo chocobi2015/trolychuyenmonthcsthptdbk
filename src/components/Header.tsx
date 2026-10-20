@@ -1,27 +1,30 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { 
   Building2, 
   FileText, 
   FolderArchive, 
-  Edit3, 
-  School, 
+  BookOpen, 
   Users, 
-  Download,
-  BookOpen,
-  Sparkles,
-  HelpCircle,
-  FolderOpen,
-  Upload,
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  Check,
-  Layers,
-  Menu,
-  HeartHandshake,
-  FileSpreadsheet,
-  CalendarCheck
+  Upload, 
+  HeartHandshake, 
+  FileSpreadsheet, 
+  CalendarCheck,
+  Compass,
+  CheckCircle2,
+  FilePlus2,
+  Eye
 } from 'lucide-react';
+
+export type MainNavTab = 
+  | 'midterm_assessment_plan' 
+  | 'documents' 
+  | 'directives' 
+  | 'department_meetings' 
+  | 'inclusive_education' 
+  | 'school_profile';
+
+export type DocumentSubView = 'archive' | 'builder' | 'editor';
+export type SchoolSubView = 'context' | 'teachers';
 
 interface HeaderProps {
   onOpenLegalModal: () => void;
@@ -30,16 +33,10 @@ interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   hasActiveDocument?: boolean;
-}
-
-interface TabItem {
-  id: string;
-  name: string;
-  shortName: string;
-  icon: React.ReactNode;
-  desc: string;
-  badge?: string;
-  accentColor: string;
+  activeDocTitle?: string;
+  activeDocNumber?: string;
+  schoolSubView?: SchoolSubView;
+  setSchoolSubView?: (view: SchoolSubView) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
@@ -49,422 +46,266 @@ export const Header: React.FC<HeaderProps> = ({
   activeTab, 
   setActiveTab,
   hasActiveDocument = false,
+  activeDocTitle,
+  activeDocNumber,
+  schoolSubView = 'context',
+  setSchoolSubView,
 }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const navScrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  // Determine which main nav pillar is active
+  const isDocumentsGroup = activeTab === 'archive' || activeTab === 'builder' || activeTab === 'editor';
 
-  const TABS: TabItem[] = [
+  const NAV_ITEMS = [
     {
       id: 'midterm_assessment_plan',
-      name: '★ Kế Hoạch KT-ĐG Giữa HK1 (Số 45 • Đủ 3 Nguồn File)',
-      shortName: 'Kế Hoạch KT Giữa HK1',
-      icon: <CalendarCheck className="w-4 h-4 text-amber-300" />,
-      desc: 'Toàn văn chi tiết nhất Kế hoạch kiểm tra giữa HK1 (gộp KH 39 ĐBK + Mỹ Quý + năm trước)',
-      badge: 'MỚI BAN HÀNH • SỐ 45',
-      accentColor: 'from-amber-500/20 to-orange-500/20',
+      label: 'Kiểm tra - Đánh giá',
+      sublabel: 'Kế hoạch HK1 (Số 45)',
+      icon: <CalendarCheck className="w-4 h-4" />,
+      isActive: activeTab === 'midterm_assessment_plan',
+      onClick: () => setActiveTab('midterm_assessment_plan'),
     },
     {
-      id: 'builder',
-      name: '1. Xây Dựng Văn Bản (Tra Cứu / Cụ Thể Hóa)',
-      shortName: '1. Xây Dựng Văn Bản',
-      icon: <Sparkles className="w-4 h-4 text-amber-300" />,
-      desc: 'Tra cứu chỉ đạo Sở, cụ thể hóa thành kế hoạch trường theo chuẩn NĐ 30',
-      accentColor: 'from-amber-500/20 to-blue-500/20',
-    },
-    {
-      id: 'editor',
-      name: '2. Xem & Xuất File (Chuẩn A4 / Word .docx)',
-      shortName: '2. Xem & Xuất File',
-      icon: <FileText className="w-4 h-4 text-sky-300" />,
-      desc: 'Xem trang A4 chuẩn hành chính Nghị định 30, xuất file Word .docx và in PDF',
-      badge: hasActiveDocument ? 'Đang mở văn bản' : undefined,
-      accentColor: 'from-sky-500/20 to-indigo-500/20',
+      id: 'documents',
+      label: 'Hồ sơ & Văn bản trường',
+      sublabel: 'Kho hồ sơ, Soạn thảo & A4',
+      icon: <FolderArchive className="w-4 h-4" />,
+      isActive: isDocumentsGroup,
+      onClick: () => {
+        if (!isDocumentsGroup) {
+          setActiveTab('archive');
+        }
+      },
     },
     {
       id: 'directives',
-      name: '3. Chỉ Đạo Của Sở (Lưu sẵn trên webapp)',
-      shortName: '3. Chỉ Đạo Của Sở',
-      icon: <FolderOpen className="w-4 h-4 text-amber-300" />,
-      desc: 'Kho công văn, hướng dẫn của Sở GDĐT Đồng Tháp đã bóc tách sẵn',
-      accentColor: 'from-yellow-500/20 to-amber-500/20',
-    },
-    {
-      id: 'archive',
-      name: '4. Kho Văn Bản Của Trường',
-      shortName: '4. Kho Văn Bản Trường',
-      icon: <FolderArchive className="w-4 h-4 text-emerald-300" />,
-      desc: 'Lưu trữ toàn bộ các kế hoạch, quyết định chính thức đã ban hành',
-      accentColor: 'from-emerald-500/20 to-teal-500/20',
-    },
-    {
-      id: 'school_profile',
-      name: '5. Dữ Liệu Trường & Đội Ngũ (120 CB-GV-NV)',
-      shortName: '5. Dữ Liệu & Đội Ngũ',
-      icon: <Users className="w-4 h-4 text-purple-300" />,
-      desc: 'Hồ sơ 53 lớp, 3 điểm trường, 102 giáo viên và tổ chuyên môn',
-      accentColor: 'from-purple-500/20 to-pink-500/20',
+      label: 'Chỉ đạo Sở GDĐT',
+      sublabel: 'Văn bản điều hành Đồng Tháp',
+      icon: <BookOpen className="w-4 h-4" />,
+      isActive: activeTab === 'directives',
+      onClick: () => setActiveTab('directives'),
     },
     {
       id: 'department_meetings',
-      name: '6. Tổ Chuyên Môn (Họp Tổ 2 Tuần/Lần & Biên Bản)',
-      shortName: '6. Tổ Chuyên Môn',
-      icon: <Users className="w-4 h-4 text-cyan-300" />,
-      desc: 'Nội dung họp định kỳ 2 tuần/lần, nộp và lưu trữ biên bản của 7 tổ chuyên môn và tổ văn phòng',
-      badge: 'MỚI • 2 TUẦN/LẦN',
-      accentColor: 'from-cyan-500/20 to-blue-500/20',
+      label: 'Tổ chuyên môn',
+      sublabel: 'Họp 2 tuần/lần & Biên bản',
+      icon: <Users className="w-4 h-4" />,
+      isActive: activeTab === 'department_meetings',
+      onClick: () => setActiveTab('department_meetings'),
     },
     {
       id: 'inclusive_education',
-      name: '7. Giáo Dục Hòa Nhập (CV 3326 & Kế Hoạch 25 HSKT)',
-      shortName: '7. Giáo Dục Hòa Nhập',
-      icon: <HeartHandshake className="w-4 h-4 text-rose-300" />,
-      desc: 'Công văn 3326/SGDĐT, Kế hoạch số 15/KH & hồ sơ 25 học sinh khuyết tật học hòa nhập',
-      badge: '25 HSKT',
-      accentColor: 'from-rose-500/20 to-red-500/20',
+      label: 'Giáo dục hòa nhập',
+      sublabel: 'CV 3326 & 25 HS khuyết tật',
+      icon: <HeartHandshake className="w-4 h-4" />,
+      isActive: activeTab === 'inclusive_education',
+      onClick: () => setActiveTab('inclusive_education'),
+    },
+    {
+      id: 'school_profile',
+      label: 'Hồ sơ trường & Nhân sự',
+      sublabel: '53 Lớp & 120 CB-GV-NV',
+      icon: <Building2 className="w-4 h-4" />,
+      isActive: activeTab === 'school_profile',
+      onClick: () => setActiveTab('school_profile'),
     },
   ];
 
-  const currentTabObj = TABS.find((t) => t.id === activeTab) || TABS[0];
-
-  // Check scroll position to show indicators
-  const checkScroll = () => {
-    if (navScrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = navScrollRef.current;
-      setCanScrollLeft(scrollLeft > 10);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  useEffect(() => {
-    checkScroll();
-    window.addEventListener('resize', checkScroll);
-    return () => window.removeEventListener('resize', checkScroll);
-  }, []);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleScrollLeft = () => {
-    if (navScrollRef.current) {
-      navScrollRef.current.scrollBy({ left: -260, behavior: 'smooth' });
-      setTimeout(checkScroll, 250);
-    }
-  };
-
-  const handleScrollRight = () => {
-    if (navScrollRef.current) {
-      navScrollRef.current.scrollBy({ left: 260, behavior: 'smooth' });
-      setTimeout(checkScroll, 250);
-    }
-  };
-
-  const handleSelectTab = (tabId: string) => {
-    setActiveTab(tabId);
-    setIsDropdownOpen(false);
-  };
-
   return (
-    <header className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 text-white shadow-lg sticky top-0 z-40 border-b border-blue-900/60">
-      {/* Top Administrative Bar */}
-      <div className="max-w-7xl mx-auto px-4 py-1.5 flex flex-wrap justify-between items-center text-[11px] border-b border-white/10 text-slate-300">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-amber-300">SỞ GDĐT TỈNH ĐỒNG THÁP</span>
-          <span>·</span>
-          <span className="text-slate-200">UBND HUYỆN THÁP MƯỜI</span>
-        </div>
-        <div className="hidden sm:block font-medium tracking-wide text-slate-300">
-          CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM — Độc lập • Tự do • Hạnh phúc
-        </div>
-        <div className="text-sky-300 font-medium">
-          Chuẩn thể thức Nghị định 30/2020/NĐ-CP & Kế hoạch Giáo dục Nhà trường
+    <header className="bg-slate-900 text-white shadow-md sticky top-0 z-40 border-b border-slate-800">
+      {/* 1. Administrative Top Bar */}
+      <div className="bg-slate-950 border-b border-slate-800/80 text-[11px] text-slate-400 py-1 px-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-slate-200">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP</span>
+            <span className="text-slate-600">·</span>
+            <span className="hidden sm:inline">UBND HUYỆN THÁP MƯỜI</span>
+          </div>
+          <div className="hidden md:flex items-center gap-2 text-slate-400">
+            <span>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</span>
+            <span>—</span>
+            <span className="text-slate-300">Độc lập · Tự do · Hạnh phúc</span>
+          </div>
+          <div className="flex items-center gap-3 text-slate-300">
+            <span className="hidden sm:inline text-slate-400">Nghị định 30/2020/NĐ-CP</span>
+            <span className="text-slate-600 hidden sm:inline">·</span>
+            <span className="text-sky-400 font-medium">Năm học 2026 - 2027</span>
+          </div>
         </div>
       </div>
 
-      {/* Main Header Brand */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+      {/* 2. Main Brand & Quick Actions Row */}
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        {/* Brand identity */}
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-blue-800/80 border border-blue-400/30 flex items-center justify-center shadow-inner text-amber-300 shrink-0">
-            <School className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-lg bg-blue-700 border border-blue-500/30 flex items-center justify-center text-white font-bold shrink-0 shadow-inner">
+            <Compass className="w-5 h-5 text-amber-300" />
           </div>
           <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-lg md:text-xl font-bold tracking-tight text-white">
-                TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU
+            <div className="flex items-center gap-2">
+              <h1 className="text-base sm:text-lg font-bold tracking-tight text-white uppercase">
+                Trường THCS & THPT Đốc Binh Kiều
               </h1>
-              <span className="text-xs px-2 py-0.5 rounded bg-blue-900/80 text-blue-200 border border-blue-700/60 font-medium">
-                53 Lớp · 3 Điểm trường · 120 CB-GV-NV
-              </span>
             </div>
-            <p className="text-xs text-blue-200 mt-0.5 flex items-center gap-1.5 flex-wrap">
-              <span className="text-white font-medium">Hệ Thống Xây Dựng & Cụ Thể Hóa Văn Bản Quản Lý Giáo Dục</span>
-              <span>·</span>
-              <span className="text-sky-300 font-medium">Thầy Phó Hiệu trưởng Nguyễn Minh Trí</span>
+            <p className="text-xs text-slate-300 hidden sm:block">
+              Hệ thống Quản lý Chuyên môn, Kế hoạch Giáo dục & Hồ sơ Kiểm tra Đánh giá
             </p>
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="flex items-center gap-2 self-stretch md:self-auto justify-end flex-wrap">
-          <button
-            onClick={() => setActiveTab('midterm_assessment_plan')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition active:scale-95 border ${
-              activeTab === 'midterm_assessment_plan'
-                ? 'bg-amber-500 text-white border-amber-300 shadow-md ring-2 ring-amber-300/40'
-                : 'bg-amber-600 hover:bg-amber-500 text-white border-amber-400/40 shadow-sm'
-            }`}
-            title="Xem và Xuất Kế hoạch Kiểm tra Giữa HK1 năm học 2026-2027 (Số 45) chuẩn Word (.docx) không cần căn chỉnh"
-          >
-            <CalendarCheck className="w-3.5 h-3.5 text-amber-100" />
-            <span>Kế Hoạch KT Giữa HK1</span>
-            <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-amber-800/80 rounded font-bold text-amber-200">Số 45</span>
-          </button>
-
+        {/* Global Action Buttons */}
+        <div className="flex items-center gap-2 shrink-0">
           {onOpenStudentsModal && (
             <button
               onClick={onOpenStudentsModal}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-700/80 hover:bg-indigo-600 text-white border border-indigo-400/40 shadow-sm transition active:scale-95"
-              title="Xem thống kê chuẩn xác 53 lớp và 2.111 học sinh tại 3 điểm trường từ file Excel"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 transition"
+              title="Tra cứu thống kê 53 lớp, 2.111 học sinh tại 3 điểm trường"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-300" />
-              <span>Số Liệu 53 Lớp (2.111 HS)</span>
-              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 rounded font-bold">Chuẩn Excel</span>
+              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Dữ liệu 53 lớp (2.111 HS)</span>
             </button>
           )}
-
-          <button
-            onClick={() => setActiveTab('school_profile')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition active:scale-95 border ${
-              activeTab === 'school_profile'
-                ? 'bg-purple-600 text-white border-purple-300 shadow-sm'
-                : 'bg-purple-900/60 hover:bg-purple-800 text-purple-100 border-purple-500/40'
-            }`}
-            title="Xem toàn bộ 120 Cán bộ, Giáo viên, Nhân viên từ file Excel NHAN SU TOAN TRUONG"
-          >
-            <Users className="w-3.5 h-3.5 text-purple-300" />
-            <span>Hồ Sơ 120 Nhân Sự</span>
-            <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-200 border border-purple-400/30 rounded font-bold">Chuẩn Excel</span>
-          </button>
 
           {onOpenUploadModal && (
             <button
               onClick={onOpenUploadModal}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm border border-emerald-400/40 transition active:scale-95"
-              title="Tải lên tệp Word/PDF của Sở - Trích xuất tự động không tốn Quota AI"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-emerald-700 hover:bg-emerald-600 border border-emerald-600 shadow-xs transition"
+              title="Tải lên công văn Word hoặc PDF của Sở GDĐT để phân tích và lưu trữ"
             >
-              <Upload className="w-3.5 h-3.5 text-white" />
-              <span>Tải lên văn bản (Word / PDF)</span>
-              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-emerald-700/80 rounded font-normal text-emerald-100">0 Quota AI</span>
+              <Upload className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Tải lên văn bản</span>
+              <span className="sm:hidden">Tải file</span>
             </button>
           )}
 
           <button
             onClick={onOpenLegalModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-900/60 hover:bg-blue-800 text-blue-100 border border-blue-700/50 shadow-sm transition active:scale-95"
-            title="Xem căn cứ pháp lý: Nghị định 30, Thông tư 15, Quyết định 2606 sáp nhập trường..."
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 transition"
+            title="Xem căn cứ pháp lý: Nghị định 30, Thông tư 22, Thông tư 15, Quyết định sáp nhập trường"
           >
-            <BookOpen className="w-3.5 h-3.5 text-amber-300" />
-            <span>Căn cứ pháp lý & Chuẩn thể thức</span>
+            <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden sm:inline">Căn cứ pháp lý</span>
           </button>
         </div>
       </div>
 
-      {/* Navigation Bar with Horizontal Scrolling & Dropdown Tab Selector */}
-      <div className="bg-slate-950/85 border-t border-slate-800/80 backdrop-blur-md relative">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center justify-between gap-1 sm:gap-2">
-          
-          {/* Left Scroll Button */}
-          <button
-            onClick={handleScrollLeft}
-            disabled={!canScrollLeft}
-            title="Cuộn các tab sang trái"
-            className={`p-1.5 rounded-lg border text-slate-300 transition shrink-0 ${
-              canScrollLeft
-                ? 'bg-slate-900/90 hover:bg-blue-600 hover:text-white border-slate-700 cursor-pointer shadow-sm'
-                : 'opacity-30 border-transparent cursor-not-allowed'
-            }`}
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
+      {/* 3. Primary Navigation Bar (6 Clean Scientific Pillars) */}
+      <nav className="bg-slate-950/90 border-t border-slate-800/90 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 flex items-center overflow-x-auto scrollbar-none py-1 gap-1">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={item.onClick}
+              className={`px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 flex items-center gap-2 transition text-left ${
+                item.isActive
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+              }`}
+            >
+              <span className={`shrink-0 ${item.isActive ? 'text-white' : 'text-slate-400'}`}>
+                {item.icon}
+              </span>
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
 
-          {/* Scrollable Tabs Container */}
-          <div 
-            ref={navScrollRef}
-            onScroll={checkScroll}
-            className="flex-1 overflow-x-auto scroll-smooth py-1.5 flex space-x-1.5 no-scrollbar scrollbar-none"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {TABS.map((tab) => {
-              const isActive = activeTab === tab.id;
-              const isInclusive = tab.id === 'inclusive_education';
-              return (
+      {/* 4. Sub-Navigation Ribbon (For Contextual Workspaces) */}
+      {isDocumentsGroup && (
+        <div className="bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-400 font-medium">Phân hệ văn bản:</span>
+              <div className="inline-flex rounded-md p-0.5 bg-slate-950 border border-slate-800">
                 <button
-                  key={tab.id}
-                  onClick={() => handleSelectTab(tab.id)}
-                  className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg flex items-center gap-1.5 sm:gap-2 whitespace-nowrap transition text-xs font-semibold shrink-0 group ${
-                    isActive
-                      ? isInclusive
-                        ? 'bg-rose-600 text-white shadow-md ring-2 ring-rose-400'
-                        : 'bg-blue-600 text-white shadow-md ring-1 ring-blue-400/40'
-                      : isInclusive
-                      ? 'text-rose-200 bg-rose-950/50 hover:bg-rose-900/70 hover:text-white border border-rose-500/50 shadow-sm'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/90'
+                  onClick={() => setActiveTab('archive')}
+                  className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-1.5 transition ${
+                    activeTab === 'archive'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:text-white'
                   }`}
-                  title={tab.desc}
                 >
-                  <span className="shrink-0">{tab.icon}</span>
-                  {/* Hiển thị tiêu đề gọn gàng để cả 6 tab hiển thị trọn vẹn trên thanh tiêu đề */}
-                  <span className="hidden 2xl:inline">{tab.name}</span>
-                  <span className="2xl:hidden">{tab.shortName}</span>
-                  {isInclusive && (
-                    <span className="px-1.5 py-0.2 text-[10px] font-bold rounded bg-rose-500 text-white tracking-wider shadow-xs animate-pulse">
-                      MỚI
-                    </span>
-                  )}
-                  {tab.id === 'editor' && hasActiveDocument && (
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Đang có văn bản đang mở"></span>
+                  <FolderArchive className="w-3.5 h-3.5" />
+                  <span>Kho văn bản trường</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('builder')}
+                  className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-1.5 transition ${
+                    activeTab === 'builder'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <FilePlus2 className="w-3.5 h-3.5" />
+                  <span>Soạn thảo văn bản mới</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('editor')}
+                  className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-1.5 transition ${
+                    activeTab === 'editor'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>Trình xem A4 & Xuất Word</span>
+                  {hasActiveDocument && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block ml-0.5"></span>
                   )}
                 </button>
-              );
-            })}
-          </div>
+              </div>
+            </div>
 
-          {/* Right Scroll Button */}
-          <button
-            onClick={handleScrollRight}
-            disabled={!canScrollRight}
-            title="Cuộn các tab sang phải"
-            className={`p-1.5 rounded-lg border text-slate-300 transition shrink-0 ${
-              canScrollRight
-                ? 'bg-slate-900/90 hover:bg-blue-600 hover:text-white border-slate-700 cursor-pointer shadow-sm'
-                : 'opacity-30 border-transparent cursor-not-allowed'
-            }`}
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          {/* Quick Dropdown Tab Selector Button */}
-          <div className="relative shrink-0" ref={dropdownRef}>
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border shadow-sm ${
-                isDropdownOpen
-                  ? 'bg-blue-700 text-white border-blue-400'
-                  : 'bg-slate-900 hover:bg-slate-800 text-amber-300 border-amber-500/40 hover:border-amber-400'
-              }`}
-              title="Xổ xuống chọn tab nhanh không cần kéo cuộn"
-            >
-              <Layers className="w-3.5 h-3.5 text-amber-300" />
-              <span className="hidden md:inline">Xổ xuống chọn tab:</span>
-              <span className="text-white max-w-[110px] sm:max-w-[140px] truncate">
-                {currentTabObj.shortName}
-              </span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Floating Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 bg-slate-900/95 border border-slate-700 rounded-xl shadow-2xl backdrop-blur-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                  <span className="font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5" />
-                    Chuyển nhanh danh mục tab
-                  </span>
-                  <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 font-medium">
-                    6 phân hệ quản lý
-                  </span>
-                </div>
-
-                <div className="py-1 space-y-1">
-                  {TABS.map((tab, idx) => {
-                    const isActive = activeTab === tab.id;
-                    const isInclusive = tab.id === 'inclusive_education';
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => handleSelectTab(tab.id)}
-                        className={`w-full text-left px-3 py-2.5 rounded-lg flex items-start gap-3 transition group ${
-                          isActive
-                            ? isInclusive
-                              ? 'bg-rose-700/90 text-white shadow-sm'
-                              : 'bg-blue-600/90 text-white shadow-sm'
-                            : isInclusive
-                            ? 'bg-rose-950/30 hover:bg-rose-900/50 text-rose-100 border border-rose-500/30'
-                            : 'hover:bg-slate-800/80 text-slate-200'
-                        }`}
-                      >
-                        <div className="mt-0.5 p-1.5 rounded-md bg-slate-950/60 border border-white/10 shrink-0">
-                          {tab.icon}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="text-xs font-bold truncate flex items-center gap-1.5">
-                              {tab.name}
-                              {isInclusive && (
-                                <span className="px-1.5 py-0.2 text-[9px] font-bold rounded bg-rose-500 text-white uppercase">
-                                  Mới
-                                </span>
-                              )}
-                            </span>
-                            {isActive && (
-                              <Check className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                            )}
-                          </div>
-                          <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5 group-hover:text-slate-300">
-                            {tab.desc}
-                          </p>
-                          {tab.badge && (
-                            <span className="inline-block mt-1 text-[10px] px-1.5 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded font-medium">
-                              ● {tab.badge}
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Bottom Quick Tools */}
-                <div className="pt-2 mt-1 border-t border-slate-800 flex items-center justify-between gap-2 px-1">
-                  {onOpenUploadModal && (
-                    <button
-                      onClick={() => {
-                        setIsDropdownOpen(false);
-                        onOpenUploadModal();
-                      }}
-                      className="flex-1 px-2.5 py-1.5 bg-emerald-700/80 hover:bg-emerald-600 text-white rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1.5 transition"
-                    >
-                      <Upload className="w-3 h-3" />
-                      <span>Tải file Word/PDF</span>
-                    </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      setIsDropdownOpen(false);
-                      onOpenLegalModal();
-                    }}
-                    className="flex-1 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1.5 transition"
-                  >
-                    <BookOpen className="w-3 h-3 text-amber-300" />
-                    <span>Căn cứ pháp lý</span>
-                  </button>
-                </div>
+            {activeTab === 'editor' && activeDocNumber && (
+              <div className="text-xs text-slate-300 flex items-center gap-2 truncate">
+                <span className="text-slate-500">Đang mở:</span>
+                <span className="font-semibold text-sky-300 font-mono">{activeDocNumber}</span>
+                {activeDocTitle && (
+                  <span className="text-slate-400 truncate max-w-xs">— {activeDocTitle}</span>
+                )}
               </div>
             )}
           </div>
         </div>
-      </div>
+      )}
+
+      {activeTab === 'school_profile' && (
+        <div className="bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-400 font-medium">Chế độ xem dữ liệu:</span>
+              <div className="inline-flex rounded-md p-0.5 bg-slate-950 border border-slate-800">
+                <button
+                  onClick={() => setSchoolSubView && setSchoolSubView('context')}
+                  className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-1.5 transition ${
+                    schoolSubView === 'context'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>Tổng quan trường & 53 Lớp (2.111 HS)</span>
+                </button>
+                <button
+                  onClick={() => setSchoolSubView && setSchoolSubView('teachers')}
+                  className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-1.5 transition ${
+                    schoolSubView === 'teachers'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Users className="w-3.5 h-3.5" />
+                  <span>Đội ngũ 120 CB-GV-NV & Phân công chuyên môn</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="text-xs text-slate-400 flex items-center gap-2">
+              <span className="text-slate-300 font-medium">3 Điểm trường:</span>
+              <span>Điểm chính (THPT) · Đốc Binh Kiều (THCS) · Tân Kiều (THCS)</span>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
-

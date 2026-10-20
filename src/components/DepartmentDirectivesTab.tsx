@@ -233,22 +233,20 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="px-2.5 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded flex items-center gap-1">
-              <Building2 className="w-3.5 h-3.5" />
-              <span>Văn Bản Chỉ Đạo Của Sở GDĐT & Cấp Trên</span>
-            </span>
-            <span className="text-xs px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded font-medium">
-              ✓ Đã đồng bộ 6 chuyên đề từ thư mục VAN-BAN-DEN
-            </span>
+          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium flex-wrap">
+            <span className="text-slate-900 font-semibold">Chỉ Đạo Của Sở GDĐT Đồng Tháp</span>
+            <span aria-hidden="true">·</span>
+            <span>Kho công văn và hướng dẫn điều hành chuyên môn</span>
+            <span aria-hidden="true">·</span>
+            <span>Năm học 2026 - 2027</span>
           </div>
           <h2 className="text-lg font-bold text-slate-900 mt-1.5">
-            Kho Chỉ Đạo Của Sở & Cụ Thể Hóa Thành Kế Hoạch Của Trường
+            Kho Văn Bản Chỉ Đạo Của Sở & Cụ Thể Hóa Cho Nhà Trường
           </h2>
           <p className="text-xs text-slate-600 mt-0.5 max-w-3xl">
-            Các văn bản chỉ đạo của Sở GDĐT Đồng Tháp và Bộ GDĐT được số hóa sẵn theo từng nội dung. Khi Thầy/Cô bấm <strong>"Xây dựng kế hoạch cho trường"</strong>, hệ thống tự động đưa đúng tinh thần chỉ đạo của Sở vào mẫu văn bản chuẩn Nghị định 30 của trường THCS & THPT Đốc Binh Kiều.
+            Các văn bản chỉ đạo của Sở GDĐT Đồng Tháp và Bộ GDĐT được số hóa sẵn theo từng nội dung. Khi bấm <strong>"Xây dựng kế hoạch cho trường"</strong>, hệ thống tự động đưa đúng tinh thần chỉ đạo của Sở vào mẫu văn bản chuẩn Nghị định 30 của trường THCS & THPT Đốc Binh Kiều.
           </p>
         </div>
 
@@ -256,20 +254,20 @@ export const DepartmentDirectivesTab: React.FC<DepartmentDirectivesTabProps> = (
           {onOpenUploadModal && (
             <button
               onClick={onOpenUploadModal}
-              className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-2 shadow-sm transition"
-              title="Tải lên Word/PDF bóc tách trực tiếp không tốn token AI"
+              className="px-4 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-2 shadow-xs transition"
+              title="Tải lên tệp Word hoặc PDF của Sở"
             >
-              <Upload className="w-4 h-4" />
-              <span>Tải lên file (Word / PDF) - 0 Token AI</span>
+              <Upload className="w-3.5 h-3.5" />
+              <span>Tải lên văn bản (Word / PDF)</span>
             </button>
           )}
 
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold flex items-center gap-2 shadow-sm transition"
+            className="px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold flex items-center gap-2 shadow-xs transition"
           >
-            <Plus className="w-4 h-4" />
-            <span>Thêm văn bản của Sở</span>
+            <Plus className="w-3.5 h-3.5" />
+            <span>Thêm văn bản</span>
           </button>
         </div>
       </div>

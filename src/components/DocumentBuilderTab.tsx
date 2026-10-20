@@ -408,22 +408,20 @@ Cụ thể hóa văn bản chỉ đạo sau đây thành một [KẾ HOẠCH / Q
   return (
     <div className="space-y-6">
       {/* Introduction Card */}
-      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="px-2.5 py-1 bg-blue-100 text-blue-900 text-xs font-bold rounded flex items-center gap-1">
-              <Building2 className="w-3.5 h-3.5" />
-              <span>Trợ Lý Xây Dựng Văn Bản Quản Lý Giáo Dục</span>
-            </span>
-            <span className="text-xs text-slate-500">
-              Trường THCS & THPT Đốc Binh Kiều · Chuẩn Nghị định 30/2020/NĐ-CP
-            </span>
+          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium flex-wrap">
+            <span className="text-slate-900 font-semibold">Công Cụ Soạn Thảo & Cụ Thể Hóa Kế Hoạch Giáo Dục</span>
+            <span aria-hidden="true">·</span>
+            <span>Trường THCS & THPT Đốc Binh Kiều</span>
+            <span aria-hidden="true">·</span>
+            <span>Chuẩn Nghị định 30/2020/NĐ-CP</span>
           </div>
           <h2 className="text-lg font-bold text-slate-900 mt-1">
-            Xây Dựng Văn Bản Quản Lý Cho Trường Đốc Binh Kiều
+            Soạn Thảo & Xây Dựng Văn Bản Quản Lý Giáo Dục
           </h2>
           <p className="text-xs text-slate-600 mt-0.5 max-w-3xl">
-            Tự động tra cứu quy định pháp luật trên Internet hoặc đọc văn bản của Sở/Bộ để xây dựng Kế hoạch, Quyết định, Hướng dẫn, Quy chế bám sát 53 lớp, 3 điểm trường và 101 giáo viên.
+            Tự động tra cứu quy định pháp luật và bóc tách văn bản của Sở GDĐT để xây dựng Kế hoạch, Quyết định, Quy chế bám sát 53 lớp, 3 điểm trường và đội ngũ cán bộ, giáo viên.
           </p>
         </div>
 

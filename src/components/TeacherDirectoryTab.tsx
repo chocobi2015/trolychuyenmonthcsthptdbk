@@ -170,25 +170,20 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded flex items-center gap-1 border border-emerald-300/40">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Dữ Liệu Nhân Sự Gốc Đã Lưu Lên Webapp</span>
-            </span>
-            <span className="px-2.5 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded">
-              120 CB-GV-NV • 85 Đảng viên • 09 Thạc sĩ
-            </span>
-            <span className="text-xs text-slate-500 font-medium">
-              Nguồn: NHAN SU TOAN TRUONG.xlsx
-            </span>
+          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium flex-wrap">
+            <span className="text-slate-900 font-semibold">Đội Ngũ Sư Phạm & Nhân Sự Nhà Trường</span>
+            <span aria-hidden="true">·</span>
+            <span className="tabular-nums">120 CB-GV-NV · 85 Đảng viên · 09 Thạc sĩ</span>
+            <span aria-hidden="true">·</span>
+            <span>07 Tổ (06 Tổ chuyên môn & 01 Tổ văn phòng)</span>
           </div>
           <h2 className="text-lg font-bold text-slate-900 mt-1">
-            Hồ Sơ Nhân Sự Toàn Trường & Phân Công Chuyên Môn (120 CB-GV-NV)
+            Hồ Sơ Nhân Sự Toàn Trường & Phân Công Chuyên Môn
           </h2>
           <p className="text-xs text-slate-600 mt-0.5">
-            Đầy đủ họ và tên, chức danh trước & sau sáp nhập, trình độ đào tạo, đảng viên, lý luận chính trị và chuyên môn phục vụ công tác báo cáo.
+            Quản lý thông tin 120 nhân sự, trình độ đào tạo, phân công chuyên môn, giảng dạy tại 3 điểm trường phục vụ công tác báo cáo và xếp lịch.
           </p>
         </div>
 

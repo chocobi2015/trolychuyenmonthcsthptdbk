@@ -34,6 +34,7 @@ const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v10';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('midterm_assessment_plan');
+  const [schoolSubView, setSchoolSubView] = useState<'context' | 'teachers'>('context');
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isUploadDirectiveModalOpen, setIsUploadDirectiveModalOpen] = useState(false);
   const [isStudentsModalOpen, setIsStudentsModalOpen] = useState(false);
@@ -585,6 +586,10 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         hasActiveDocument={!!currentDocument}
+        activeDocTitle={currentDocument?.title}
+        activeDocNumber={currentDocument?.documentNumber}
+        schoolSubView={schoolSubView}
+        setSchoolSubView={setSchoolSubView}
       />
 
       {/* Main Content */}
@@ -648,30 +653,32 @@ export default function App() {
           />
         )}
 
-        {/* Tab 5: School Profile & Staff (Dữ liệu trường & 120 CB-GV-NV) */}
+        {/* Tab 5: School Profile & Staff (Tách biệt rõ ràng giữa Dữ liệu trường 53 lớp & Đội ngũ 120 nhân sự) */}
         {activeTab === 'school_profile' && (
-          <div className="space-y-6">
-            <SchoolContextPanel
-              customFacts={customFacts}
-              onUpdateCustomFacts={setCustomFacts}
-              onOpenStudentsModal={() => setIsStudentsModalOpen(true)}
-              onViewSchoolPlanDoc={() => {
-                const plan34 = documentsList.find((d) => d.id === 'doc-kh-gd-34') || INITIAL_SCHOOL_DOCUMENTS[0];
-                if (plan34) {
-                  setCurrentDocument(plan34);
-                  setActiveTab('editor');
-                }
-              }}
-            />
-
-            <TeacherDirectoryTab
-              onSelectTeacherForLessonPlan={() => {
-                setActiveTab('builder');
-              }}
-              onSelectDepartmentForPlan={() => {
-                setActiveTab('builder');
-              }}
-            />
+          <div>
+            {schoolSubView === 'context' ? (
+              <SchoolContextPanel
+                customFacts={customFacts}
+                onUpdateCustomFacts={setCustomFacts}
+                onOpenStudentsModal={() => setIsStudentsModalOpen(true)}
+                onViewSchoolPlanDoc={() => {
+                  const plan34 = documentsList.find((d) => d.id === 'doc-kh-gd-34') || INITIAL_SCHOOL_DOCUMENTS[0];
+                  if (plan34) {
+                    setCurrentDocument(plan34);
+                    setActiveTab('editor');
+                  }
+                }}
+              />
+            ) : (
+              <TeacherDirectoryTab
+                onSelectTeacherForLessonPlan={() => {
+                  setActiveTab('builder');
+                }}
+                onSelectDepartmentForPlan={() => {
+                  setActiveTab('builder');
+                }}
+              />
+            )}
           </div>
         )}
 

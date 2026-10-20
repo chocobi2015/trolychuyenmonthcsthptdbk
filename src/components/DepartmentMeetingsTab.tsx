@@ -397,62 +397,64 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
   return (
     <div className="space-y-6">
       {/* Banner & Intro */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-indigo-800/40 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold tracking-wide uppercase">
-              <Users className="w-3.5 h-3.5 text-indigo-300" />
-              <span>Hồ Sơ Chuyên Môn • Sinh Hoạt Tổ 2 Tuần/Lần</span>
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div className="space-y-1.5 max-w-3xl">
+            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium flex-wrap">
+              <span className="text-slate-900 font-semibold">Tổ Chuyên Môn Nhà Trường</span>
+              <span aria-hidden="true">·</span>
+              <span>Sinh hoạt định kỳ 2 tuần/lần</span>
+              <span aria-hidden="true">·</span>
+              <span>07 Tổ (06 Tổ chuyên môn & 01 Tổ văn phòng)</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              Tổ Chuyên Môn & Biên Bản Họp Định Kỳ
+            <h1 className="text-xl lg:text-2xl font-bold text-slate-900 tracking-tight">
+              Quản Lý Sinh Hoạt Tổ Chuyên Môn & Biên Bản Định Kỳ
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Nơi cập nhật toàn bộ nội dung sinh hoạt tổ chuyên môn mỗi 2 tuần, biên bản họp tổ của 07 tổ chuyên môn và tổ văn phòng trường THCS & THPT Đốc Binh Kiều. Dữ liệu này cung cấp <strong className="text-indigo-200">ngữ cảnh thực tế sâu sắc nhất</strong> để BGH và AI hiểu rõ công việc, tiến độ và vướng mắc của từng tổ khi xây dựng các kế hoạch triển khai của nhà trường.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Theo dõi và quản lý toàn bộ nội dung sinh hoạt tổ chuyên môn mỗi 2 tuần, biên bản họp và kiến nghị của các tổ bộ môn trường THCS & THPT Đốc Binh Kiều. Cung cấp dữ liệu thực tế giúp Ban Giám hiệu nắm bắt tiến độ và giải đáp kịp thời các khó khăn chuyên môn.
             </p>
           </div>
 
-          <div className="flex flex-wrap sm:flex-nowrap gap-3 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 flex-wrap">
             <button
               onClick={() => handleOpenCreateModal()}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-semibold text-xs shadow-xs transition"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5" />
               <span>Thêm / Nộp Biên Bản Mới</span>
             </button>
             <button
               onClick={() => setShowAiContextModal(true)}
-              className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/15 font-semibold text-sm transition-all cursor-pointer backdrop-blur-sm"
-              title="Xem ngữ cảnh chuyên môn tổng hợp cho AI"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium text-xs transition"
+              title="Xem ngữ cảnh chuyên môn tổng hợp"
             >
-              <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Ngữ Cảnh Chuyên Môn Cho AI</span>
+              <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+              <span>Ngữ Cảnh Chuyên Môn</span>
             </button>
           </div>
         </div>
 
         {/* Quick Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-indigo-800/60">
-          <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-            <div className="text-xs text-slate-400 font-medium">Tổ Chuyên Môn</div>
-            <div className="text-xl font-bold text-white mt-1">7 Tổ + 1 VP</div>
-            <div className="text-[11px] text-emerald-400 mt-0.5">102 GV & 18 NV</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-100 text-xs">
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Tổ Chuyên Môn</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">7 Tổ + 1 VP</div>
+            <div className="text-[11px] text-slate-500 mt-0.5 tabular-nums">102 GV & 14 NV</div>
           </div>
-          <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-            <div className="text-xs text-slate-400 font-medium">Hồ Sơ & Văn Bản</div>
-            <div className="text-xl font-bold text-white mt-1">{meetings.length} Văn bản</div>
-            <div className="text-[11px] text-indigo-300 mt-0.5">2 Hướng dẫn + 2 Trả lời họp tổ (Lần 2 & 3)</div>
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Hồ Sơ & Biên Bản</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">{meetings.length} Văn bản</div>
+            <div className="text-[11px] text-slate-500 mt-0.5 truncate">Biên bản họp & Trả lời ý kiến</div>
           </div>
-          <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-            <div className="text-xs text-slate-400 font-medium">Nhiệm Vụ 2 Tuần</div>
-            <div className="text-xl font-bold text-white mt-1">{totalTasks} Nhiệm vụ</div>
-            <div className="text-[11px] text-emerald-400 mt-0.5">Đã hoàn thành {completedTasks}/{totalTasks}</div>
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Nhiệm Vụ 2 Tuần</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">{totalTasks} Nhiệm vụ</div>
+            <div className="text-[11px] text-emerald-700 font-medium mt-0.5 tabular-nums">Đã hoàn thành {completedTasks}/{totalTasks}</div>
           </div>
-          <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-            <div className="text-xs text-slate-400 font-medium">Chu kỳ Sinh Hoạt</div>
-            <div className="text-xl font-bold text-white mt-1">2 Tuần / Lần</div>
-            <div className="text-[11px] text-amber-300 mt-0.5">Theo Điều lệ trường học</div>
+          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+            <div className="text-[11px] text-slate-500 font-medium">Chu Kỳ Sinh Hoạt</div>
+            <div className="text-lg font-bold text-slate-900 mt-0.5">2 Tuần / Lần</div>
+            <div className="text-[11px] text-blue-700 font-medium mt-0.5">Theo Điều lệ trường học</div>
           </div>
         </div>
       </div>
