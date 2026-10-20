@@ -1,5 +1,5 @@
 {
-  "fileName": "NHAN SU TOAN TRUONG.xlsx",
+  "fileName": "NHÂN SỰ MỚI.xlsx",
   "academicYear": "2026 - 2027",
   "totalStaff": 120,
   "femaleCount": 63,
@@ -999,7 +999,7 @@
       "roleBeforeMerge": "Giáo viên",
       "roleAfterMerge": "Giáo viên",
       "highestDegree": "Thạc sỹ",
-      "major": "Thạc sỹ \nLLPB Văn học",
+      "major": "Thạc sỹ \r\nLLPB Văn học",
       "politicalTheory": "Sơ cấp",
       "itLevel": "UD CNTT cơ bản",
       "foreignLanguage": "Cơ bản",
@@ -1445,7 +1445,7 @@
       "foreignLanguage": "",
       "eduManagement": "",
       "stateManagement": "",
-      "notes": "Phụ trách\n Đoàn"
+      "notes": "Phụ trách\r\n Đoàn"
     },
     {
       "id": "staff-58",
@@ -1659,7 +1659,7 @@
       "roleBeforeMerge": "Tổ trưởng",
       "roleAfterMerge": "TỔ TRƯỞNG",
       "highestDegree": "ĐHSP",
-      "major": "ĐHSP\nSinh - KTNN",
+      "major": "ĐHSP\r\nSinh - KTNN",
       "politicalTheory": "Trung cấp",
       "itLevel": "A",
       "foreignLanguage": "C",
@@ -1703,7 +1703,7 @@
       "roleBeforeMerge": "Tổ trưởng",
       "roleAfterMerge": "TỔ PHÓ",
       "highestDegree": "Thạc sỹ",
-      "major": "Thạc sỹ\nQuang Học",
+      "major": "Thạc sỹ\r\nQuang Học",
       "politicalTheory": "Trung cấp",
       "itLevel": "CNTT cơ bản",
       "foreignLanguage": "B1",

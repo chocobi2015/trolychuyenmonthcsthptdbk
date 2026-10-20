@@ -468,7 +468,7 @@ export const InternalInspectionTab: React.FC = () => {
                   Ban Kiểm Tra Nội Bộ Trường Học Năm Học 2026 - 2027
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Thành lập theo <strong>Quyết định số 49/QĐ-THCS-THPTĐBK</strong> ngày 15/10/2026 của Hiệu trưởng Lê Thanh Cường
+                  Thành lập theo <strong>Quyết định số 49/QĐ-THCS-THPTĐBK</strong> ngày 15/10/2026 của Hiệu trưởng Lê Thanh Cường · Danh sách nhân sự chuẩn 100% theo tệp <strong>NHÂN SỰ MỚI.xlsx</strong>
                 </p>
               </div>
               <a
@@ -482,7 +482,7 @@ export const InternalInspectionTab: React.FC = () => {
             </div>
 
             {/* Committee Leadership Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold text-lg shadow-sm">
@@ -504,14 +504,14 @@ export const InternalInspectionTab: React.FC = () => {
               <div className="bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-200 rounded-xl p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
-                    NT
+                    MT
                   </div>
                   <div>
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-200 text-sky-900 uppercase">
                       Phó Trưởng ban TT
                     </span>
                     <h4 className="text-sm font-bold text-slate-900 mt-1">Nguyễn Minh Trí</h4>
-                    <p className="text-xs text-slate-600">Phó Hiệu trưởng (Chuyên môn THPT)</p>
+                    <p className="text-xs text-slate-600">Phó Hiệu trưởng (Chuyên môn toàn trường & THPT)</p>
                   </div>
                 </div>
                 <p className="text-xs text-slate-600 mt-3 border-t border-sky-200/80 pt-2.5 leading-relaxed">
@@ -519,29 +519,52 @@ export const InternalInspectionTab: React.FC = () => {
                 </p>
               </div>
 
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                    PT
+                  </div>
+                  <div>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-200 text-amber-900 uppercase">
+                      Phó Trưởng ban
+                    </span>
+                    <h4 className="text-sm font-bold text-slate-900 mt-1">Phan Thanh Thảo</h4>
+                    <p className="text-xs text-slate-600">Phó Hiệu trưởng (Phụ trách Điểm THCS Đốc Binh Kiều)</p>
+                  </div>
+                </div>
+                <p className="text-xs text-slate-600 mt-3 border-t border-amber-200/80 pt-2.5 leading-relaxed">
+                  Phụ trách kiểm tra tại Điểm trường THCS Đốc Binh Kiều (24 lớp, 980 HS); kiểm tra cơ sở vật chất, thiết bị, an toàn trường học và giáo dục hòa nhập học sinh khuyết tật.
+                </p>
+              </div>
+
               <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
-                    TH
+                    TT
                   </div>
                   <div>
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-200 text-emerald-900 uppercase">
                       Phó Trưởng ban
                     </span>
-                    <h4 className="text-sm font-bold text-slate-900 mt-1">Trần Minh Hậu</h4>
-                    <p className="text-xs text-slate-600">Phó Hiệu trưởng (THCS & Điểm Tân Kiều)</p>
+                    <h4 className="text-sm font-bold text-slate-900 mt-1">Nguyễn Thanh Tòng</h4>
+                    <p className="text-xs text-slate-600">Phó Hiệu trưởng (Phụ trách Điểm THCS Tân Kiều)</p>
                   </div>
                 </div>
                 <p className="text-xs text-slate-600 mt-3 border-t border-emerald-200/80 pt-2.5 leading-relaxed">
-                  Phụ trách kiểm tra các Điểm trường cấp THCS (Điểm Đốc Binh Kiều và Điểm Tân Kiều cách 11km); kiểm tra cơ sở vật chất, thiết bị, an toàn trường học và giáo dục hòa nhập 25 HS khuyết tật.
+                  Phụ trách kiểm tra tại Điểm trường THCS Tân Kiều cách 11km (15 lớp, 602 HS); kiểm tra thực hiện CT GDPT 2018, bảo quản thiết bị dạy học và hoạt động bán trú.
                 </p>
               </div>
             </div>
 
-            {/* Full 12 Members Table */}
-            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-3">
-              Danh sách chi tiết 12 thành viên & Phân công nhiệm vụ cụ thể:
-            </h4>
+            {/* Full Members Table */}
+            <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                Danh sách chi tiết {SCHOOL_INSPECTION_COMMITTEE.length} thành viên & Phân công nhiệm vụ cụ thể (Chuẩn từ file Excel "NHÂN SỰ MỚI"):
+              </h4>
+              <span className="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-medium">
+                ✓ 100% Khớp tệp NHÂN SỰ MỚI.xlsx
+              </span>
+            </div>
             <div className="overflow-x-auto rounded-lg border border-slate-200">
               <table className="w-full text-left text-xs divide-y divide-slate-200">
                 <thead className="bg-slate-100 font-bold text-slate-800 uppercase text-[11px]">

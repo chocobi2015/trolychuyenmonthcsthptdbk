@@ -76,7 +76,7 @@ export const SCHOOL_OFFICIAL_PROFILE = {
   partyMembers: 85,
   masterDegreeCount: 9,
 
-  // Ban Giám hiệu (04 cán bộ quản lý: Hiệu trưởng Lê Thanh Cường phụ trách chung, Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn, và 02 Phó Hiệu trưởng phụ trách các điểm trường)
+  // Ban Giám hiệu (04 cán bộ quản lý: Hiệu trưởng Lê Thanh Cường phụ trách chung, Phó Hiệu trưởng Nguyễn Minh Trí phụ trách chuyên môn toàn trường, Phó Hiệu trưởng Phan Thanh Thảo phụ trách Điểm THCS Đốc Binh Kiều, Phó Hiệu trưởng Nguyễn Thanh Tòng phụ trách Điểm THCS Tân Kiều)
   leadership: {
     id: 'bgh',
     name: 'Ban Giám hiệu',
@@ -84,7 +84,13 @@ export const SCHOOL_OFFICIAL_PROFILE = {
     female: 0,
     partyMembers: 4,
     masters: 1,
-    leader: 'Lê Thanh Cường (Hiệu trưởng phụ trách chung), Nguyễn Minh Trí (Phó Hiệu trưởng trực tiếp phụ trách chuyên môn)',
+    principalsList: [
+      { name: 'Lê Thanh Cường', role: 'Hiệu trưởng', assignment: 'Phụ trách chung toàn trường, cơ sở vật chất, tài chính & Điểm chính THPT', phone: '', degree: 'Thạc sỹ QLGD' },
+      { name: 'Nguyễn Minh Trí', role: 'Phó Hiệu trưởng', assignment: 'Trực tiếp phụ trách chuyên môn toàn trường, thi cử, kiểm tra đánh giá & Điểm chính THPT', phone: '', degree: 'ĐHSP GDCT, Vật lý' },
+      { name: 'Phan Thanh Thảo', role: 'Phó Hiệu trưởng', assignment: 'Phụ trách công tác quản lý điều hành tại Điểm trường THCS Đốc Binh Kiều', phone: '', degree: 'Đại học Lịch sử' },
+      { name: 'Nguyễn Thanh Tòng', role: 'Phó Hiệu trưởng', assignment: 'Phụ trách công tác quản lý điều hành tại Điểm trường THCS Tân Kiều (cách 11km)', phone: '', degree: 'Đại học Sinh học' },
+    ],
+    leader: 'Lê Thanh Cường (Hiệu trưởng phụ trách chung), Nguyễn Minh Trí (Phó Hiệu trưởng chuyên môn), Phan Thanh Thảo (Phó Hiệu trưởng điểm THCS Đốc Binh Kiều), Nguyễn Thanh Tòng (Phó Hiệu trưởng điểm THCS Tân Kiều)',
   },
 
   // Cơ cấu 07 tổ trong nhà trường (chuẩn quy định: 06 tổ chuyên môn và 01 tổ văn phòng)

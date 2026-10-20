@@ -133,7 +133,7 @@ export const TeacherDirectoryTab: React.FC<TeacherDirectoryTabProps> = ({
   const handleCopyStaffSummary = () => {
     const summary = `BÁO CÁO NHÂN SỰ & ĐỘI NGŨ CÁN BỘ - GIÁO VIÊN - NHÂN VIÊN
 TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
-(Căn cứ tệp dữ liệu NHAN SU TOAN TRUONG.xlsx chuẩn 100%)
+(Căn cứ tệp dữ liệu NHÂN SỰ MỚI.xlsx chuẩn 100% - 120 CB-GV-NV, 85 Đảng viên)
 
 1. TỔNG QUY MÔ ĐỘI NGŨ:
 - Tổng số: 120 người (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên).
@@ -188,6 +188,16 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
         </div>
 
         <div className="flex items-center gap-2 shrink-0 flex-wrap">
+          <a
+            href="/downloads/NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
+            download="NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
+            className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center gap-1.5 transition shadow-2xs"
+            title="Tải tệp Excel NHÂN SỰ MỚI.xlsx chính thức"
+          >
+            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-700" />
+            <span>Tải Excel "NHÂN SỰ MỚI"</span>
+          </a>
+
           <button
             onClick={handleCopyStaffSummary}
             className="px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-100 text-slate-800 text-xs font-semibold flex items-center gap-1.5 transition shadow-2xs"
@@ -220,7 +230,7 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
           }`}
         >
           <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
-          <span>1. Danh Sách 120 CB-GV-NV (File Excel Nhân Sự Gốc)</span>
+          <span>1. Danh Sách 120 CB-GV-NV (File Excel "NHÂN SỰ MỚI" Cập Nhật)</span>
           <span className="px-1.5 py-0.2 bg-emerald-600 text-white text-[10px] rounded-full font-bold">120</span>
         </button>
 
