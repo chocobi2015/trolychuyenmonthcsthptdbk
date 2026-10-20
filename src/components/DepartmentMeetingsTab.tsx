@@ -33,6 +33,58 @@ import { DEPARTMENT_FEEDBACKS_MEETING_3, DepartmentFeedbackGroup } from '../data
 import { exportMeetingToDocx } from '../utils/docxExport';
 import { extractTextFromFile } from '../utils/fileReader';
 
+// Normalize meetings loaded from API or localStorage to guarantee full schema integrity
+export const normalizeMeeting = (m: any): DepartmentMeeting => {
+  if (!m) return m;
+  const isMeeting3 = m.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026';
+  
+  const attendees = m.attendees && typeof m.attendees === 'object'
+    ? {
+        present: Number(m.attendees.present) || 0,
+        total: Number(m.attendees.total) || 0,
+        absent: m.attendees.absent || 'Không',
+        list: Array.isArray(m.attendees.list) ? m.attendees.list : []
+      }
+    : {
+        present: Number(m.presentCount) || Number(m.totalAttendees) || 68,
+        total: Number(m.totalAttendees) || 68,
+        absent: 'Không',
+        list: []
+      };
+
+  const rawTasks = Array.isArray(m.tasks) ? m.tasks : [];
+  const tasks: DepartmentTask[] = rawTasks.map((t: any, idx: number) => ({
+    id: t.id || `task-${idx}`,
+    task: t.task || t.title || 'Nhiệm vụ chuyên môn',
+    assignee: t.assignee || t.assignedTo || 'Thành viên tổ',
+    deadline: t.deadline || 'Trong kỳ',
+    status: t.status === 'completed' ? 'completed' : (t.status === 'pending' ? 'pending' : 'in_progress'),
+  }));
+
+  const rawResolutions = Array.isArray(m.resolutions) ? m.resolutions : [];
+
+  return {
+    id: m.id || `meeting-${Date.now()}`,
+    departmentId: m.departmentId || 'all',
+    departmentName: m.departmentName || (isMeeting3 ? 'Toàn trường (BGH trả lời 06 Tổ Chuyên môn)' : 'Tổ Chuyên Môn'),
+    meetingNumber: m.meetingNumber || (isMeeting3 ? 'Số: 186/TB-THCS-THPT' : 'Số: 01/BB-CM'),
+    week: m.week || (isMeeting3 ? 'Tuần 5 - 6' : 'Tuần 1 - 2'),
+    semester: m.semester || 'Học kỳ I',
+    schoolYear: m.schoolYear || '2026 - 2027',
+    meetingDate: m.meetingDate || m.date || 'Tháng 10 năm 2026',
+    location: m.location || 'Trường THCS và THPT Đốc Binh Kiều',
+    leader: m.leader || m.presidedBy || 'Ban Giám hiệu nhà trường',
+    secretary: m.secretary || 'Văn phòng nhà trường',
+    attendees,
+    topic: m.topic || (isMeeting3 ? 'Thông báo số 186/TB-THCS-THPT: Kết luận tiếp thu, giải đáp và chỉ đạo thực hiện ý kiến, kiến nghị của các tổ chuyên môn tại kỳ họp định kỳ lần 3' : 'Sinh hoạt chuyên môn định kỳ'),
+    content: m.content || '',
+    resolutions: rawResolutions,
+    tasks,
+    createdAt: m.createdAt || new Date().toISOString(),
+    updatedAt: m.updatedAt || new Date().toISOString(),
+  };
+};
+
 export const DepartmentMeetingsTab: React.FC = () => {
   const [meetings, setMeetings] = useState<DepartmentMeeting[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,9 +131,10 @@ export const DepartmentMeetingsTab: React.FC = () => {
         if (res.ok) {
           const json = await res.json();
           if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-            setMeetings(json.data);
+            const normalized = json.data.map(normalizeMeeting);
+            setMeetings(normalized);
             try {
-              localStorage.setItem('dbk_department_meetings', JSON.stringify(json.data));
+              localStorage.setItem('dbk_department_meetings', JSON.stringify(normalized));
             } catch (e) {}
             setIsLoading(false);
             return;
@@ -96,11 +149,15 @@ export const DepartmentMeetingsTab: React.FC = () => {
         const local = localStorage.getItem('dbk_department_meetings');
         if (local) {
           const parsed = JSON.parse(local);
-          // If local has the old mock meetings (length > 3 or has meeting-toan-t1-2), prefer INITIAL_DEPARTMENT_MEETINGS
-          const hasOldMock = parsed.some((m: any) => m.id === 'meeting-toan-t1-2' || m.id === 'meeting-tin-t1-2');
-          const hasMeeting3 = parsed.some((m: any) => m.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026');
+          const hasOldMock = Array.isArray(parsed) && parsed.some((m: any) => m.id === 'meeting-toan-t1-2' || m.id === 'meeting-tin-t1-2');
+          const hasMeeting3 = Array.isArray(parsed) && parsed.some((m: any) => m.id === 'tra-loi-hop-to-cm-lan-3-08-10-2026');
           if (Array.isArray(parsed) && parsed.length > 0 && !hasOldMock && hasMeeting3) {
-            setMeetings(parsed);
+            const normalized = parsed.map(normalizeMeeting);
+            setMeetings(normalized);
+            // Re-save clean normalized version
+            try {
+              localStorage.setItem('dbk_department_meetings', JSON.stringify(normalized));
+            } catch (e) {}
             setIsLoading(false);
             return;
           }
@@ -110,9 +167,10 @@ export const DepartmentMeetingsTab: React.FC = () => {
       }
 
       // Default initial meetings
-      setMeetings(INITIAL_DEPARTMENT_MEETINGS);
+      const normalizedInitial = INITIAL_DEPARTMENT_MEETINGS.map(normalizeMeeting);
+      setMeetings(normalizedInitial);
       try {
-        localStorage.setItem('dbk_department_meetings', JSON.stringify(INITIAL_DEPARTMENT_MEETINGS));
+        localStorage.setItem('dbk_department_meetings', JSON.stringify(normalizedInitial));
       } catch (e) {}
       setIsLoading(false);
     };
@@ -229,13 +287,13 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
     setFormMeetingDate(meeting.meetingDate);
     setFormLocation(meeting.location);
     setFormLeader(meeting.leader);
-    setFormSecretary(meeting.secretary);
-    setFormAttendeesTotal(meeting.attendees.total);
-    setFormAttendeesPresent(meeting.attendees.present);
-    setFormAttendeesAbsent(meeting.attendees.absent || 'Không');
-    setFormTopic(meeting.topic);
-    setFormContent(meeting.content);
-    setFormResolutionsText(meeting.resolutions.join('\n'));
+    setFormSecretary(meeting.secretary || 'Thư ký');
+    setFormAttendeesTotal(meeting.attendees?.total ?? (meeting as any).totalAttendees ?? 14);
+    setFormAttendeesPresent(meeting.attendees?.present ?? (meeting as any).presentCount ?? 14);
+    setFormAttendeesAbsent(meeting.attendees?.absent || 'Không');
+    setFormTopic(meeting.topic || '');
+    setFormContent(meeting.content || '');
+    setFormResolutionsText((meeting.resolutions || []).join('\n'));
     setFormTasks(meeting.tasks || []);
     setActiveFormTab('form');
     setIsEditorModalOpen(true);
@@ -369,7 +427,13 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
   };
 
   const handleCopyMeetingText = (m: DepartmentMeeting) => {
-    const text = `CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM\nĐộc lập - Tự do - Hạnh phúc\n\nTRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU\n${m.departmentName.toUpperCase()}\n${m.meetingNumber}\n\nBIÊN BẢN HỌP TỔ CHUYÊN MÔN (${m.week} - ${m.semester})\n1. Thời gian: ${m.meetingDate}\n2. Địa điểm: ${m.location}\n3. Chủ trì: ${m.leader}\n4. Thư ký: ${m.secretary}\n5. Thành phần: ${m.attendees.present}/${m.attendees.total} thành viên (Vắng: ${m.attendees.absent || '0'})\n\nCHỦ ĐỀ: ${m.topic}\n\nNỘI DUNG CUỘC HỌP:\n${m.content}\n\nKẾT LUẬN & NGHỊ QUYẾT:\n${m.resolutions.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nPHÂN CÔNG NHIỆM VỤ:\n${m.tasks.map(t => `- [${t.status === 'completed' ? 'Đã xong' : 'Đang làm'}] ${t.task} (Phụ trách: ${t.assignee}, Hạn: ${t.deadline})`).join('\n')}`;
+    const present = m.attendees?.present ?? (m as any).presentCount ?? 0;
+    const total = m.attendees?.total ?? (m as any).totalAttendees ?? 0;
+    const absent = m.attendees?.absent || '0';
+    const resolutions = (m.resolutions || []).map((r, i) => `${i + 1}. ${r}`).join('\n');
+    const tasks = (m.tasks || []).map(t => `- [${t.status === 'completed' ? 'Đã xong' : 'Đang làm'}] ${t.task || (t as any).title} (Phụ trách: ${t.assignee || (t as any).assignedTo}, Hạn: ${t.deadline})`).join('\n');
+
+    const text = `CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM\nĐộc lập - Tự do - Hạnh phúc\n\nTRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU\n${(m.departmentName || '').toUpperCase()}\n${m.meetingNumber || ''}\n\nBIÊN BẢN HỌP TỔ CHUYÊN MÔN (${m.week || ''} - ${m.semester || ''})\n1. Thời gian: ${m.meetingDate || ''}\n2. Địa điểm: ${m.location || ''}\n3. Chủ trì: ${m.leader || ''}\n4. Thư ký: ${m.secretary || ''}\n5. Thành phần: ${present}/${total} thành viên (Vắng: ${absent})\n\nCHỦ ĐỀ: ${m.topic || ''}\n\nNỘI DUNG CUỘC HỌP:\n${m.content || ''}\n\nKẾT LUẬN & NGHỊ QUYẾT:\n${resolutions}\n\nPHÂN CÔNG NHIỆM VỤ:\n${tasks}`;
 
     navigator.clipboard.writeText(text);
     setCopiedId(m.id);
@@ -379,13 +443,17 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
   // Filter meetings
   const filteredMeetings = meetings.filter(m => {
     const matchDept = selectedDeptId === 'all' || m.departmentId === selectedDeptId;
-    const matchWeek = selectedWeek === 'all' || m.week.includes(selectedWeek);
+    const matchWeek = selectedWeek === 'all' || (m.week || '').includes(selectedWeek);
+    const searchLower = searchTerm.toLowerCase();
     const matchSearch = !searchTerm || 
-      m.topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      m.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      m.departmentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      m.leader.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      m.tasks.some(t => t.task.toLowerCase().includes(searchTerm.toLowerCase()) || t.assignee.toLowerCase().includes(searchTerm.toLowerCase()));
+      (m.topic || '').toLowerCase().includes(searchLower) ||
+      (m.content || '').toLowerCase().includes(searchLower) ||
+      (m.departmentName || '').toLowerCase().includes(searchLower) ||
+      (m.leader || '').toLowerCase().includes(searchLower) ||
+      (m.tasks || []).some(t => 
+        (t.task || (t as any).title || '').toLowerCase().includes(searchLower) || 
+        (t.assignee || (t as any).assignedTo || '').toLowerCase().includes(searchLower)
+      );
     return matchDept && matchWeek && matchSearch;
   });
 
@@ -634,10 +702,10 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                         Chủ trì: <strong className="text-slate-800">{meeting.leader}</strong>
                       </span>
                       <span className="flex items-center gap-1">
-                        Thư ký: <strong className="text-slate-800">{meeting.secretary}</strong>
+                        Thư ký: <strong className="text-slate-800">{meeting.secretary || 'Thư ký cuộc họp'}</strong>
                       </span>
                       <span className="flex items-center gap-1">
-                        Tham dự: <strong className="text-emerald-700">{meeting.attendees.present}/{meeting.attendees.total}</strong>
+                        Tham dự: <strong className="text-emerald-700">{meeting.attendees?.present ?? (meeting as any).presentCount ?? 0}/{meeting.attendees?.total ?? (meeting as any).totalAttendees ?? 0}</strong>
                       </span>
                     </div>
                   </div>
@@ -704,7 +772,7 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                       <span>Tóm tắt diễn biến & thảo luận chuyên môn:</span>
                     </div>
                     <p className="text-slate-600 leading-relaxed line-clamp-3 bg-white p-3 rounded-lg border border-slate-200/80">
-                      {meeting.content.replace(/^I\..*?\n/, '').substring(0, 320)}...
+                      {(meeting.content || '').replace(/^I\..*?\n/, '').substring(0, 320)}...
                     </p>
                   </div>
 
@@ -741,15 +809,15 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                               ? 'bg-emerald-50 text-emerald-800 border-emerald-200 line-through'
                               : 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
                           }`}
-                          title={`Bấm để chuyển trạng thái (Người nhận: ${task.assignee}, Hạn: ${task.deadline})`}
+                          title={`Bấm để chuyển trạng thái (Người nhận: ${task.assignee || (task as any).assignedTo}, Hạn: ${task.deadline})`}
                         >
                           {task.status === 'completed' ? (
                             <CheckSquare className="w-3 h-3 text-emerald-600 shrink-0" />
                           ) : (
                             <Square className="w-3 h-3 text-amber-600 shrink-0" />
                           )}
-                          <span className="font-medium truncate max-w-xs">{task.task}</span>
-                          <span className="text-[10px] opacity-75 font-mono">({task.assignee})</span>
+                          <span className="font-medium truncate max-w-xs">{task.task || (task as any).title}</span>
+                          <span className="text-[10px] opacity-75 font-mono">({task.assignee || (task as any).assignedTo})</span>
                         </div>
                       ))}
                     </div>

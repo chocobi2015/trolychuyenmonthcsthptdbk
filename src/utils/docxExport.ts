@@ -907,7 +907,7 @@ export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<v
           }),
         ],
       }),
-      ...meeting.tasks.map((t, idx) =>
+      ...(meeting.tasks || []).map((t, idx) =>
         new TableRow({
           children: [
             new TableCell({
@@ -918,17 +918,17 @@ export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<v
             new TableCell({
               width: { size: 4400, type: WidthType.DXA },
               borders: taskBorder,
-              children: [new Paragraph({ children: [new TextRun({ text: t.task, font: 'Times New Roman', size: 22 })] })],
+              children: [new Paragraph({ children: [new TextRun({ text: t.task || (t as any).title || '', font: 'Times New Roman', size: 22 })] })],
             }),
             new TableCell({
               width: { size: 2200, type: WidthType.DXA },
               borders: taskBorder,
-              children: [new Paragraph({ children: [new TextRun({ text: t.assignee, font: 'Times New Roman', size: 22 })] })],
+              children: [new Paragraph({ children: [new TextRun({ text: t.assignee || (t as any).assignedTo || '', font: 'Times New Roman', size: 22 })] })],
             }),
             new TableCell({
               width: { size: 2069, type: WidthType.DXA },
               borders: taskBorder,
-              children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: t.deadline, font: 'Times New Roman', size: 22 })] })],
+              children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: t.deadline || '', font: 'Times New Roman', size: 22 })] })],
             }),
           ],
         })
@@ -970,7 +970,7 @@ export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<v
               new Paragraph({ spacing: { before: 900 } }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                children: [new TextRun({ text: meeting.secretary, bold: true, font: 'Times New Roman', size: 26 })],
+                children: [new TextRun({ text: meeting.secretary || 'Thư ký', bold: true, font: 'Times New Roman', size: 26 })],
               }),
             ],
           }),
@@ -990,7 +990,7 @@ export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<v
               new Paragraph({ spacing: { before: 900 } }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                children: [new TextRun({ text: meeting.leader, bold: true, font: 'Times New Roman', size: 26 })],
+                children: [new TextRun({ text: meeting.leader || 'Tổ trưởng chuyên môn', bold: true, font: 'Times New Roman', size: 26 })],
               }),
             ],
           }),
@@ -1023,7 +1023,9 @@ export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<v
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
   anchor.href = url;
-  const safeFilename = `BIEN_BAN_HOP_${meeting.departmentName.replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g, '_')}_${meeting.week.replace(/[^a-zA-Z0-9]/g, '_')}.docx`;
+  const safeDept = (meeting.departmentName || 'TO_CHUYEN_MON').replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g, '_');
+  const safeWeek = (meeting.week || 'TUAN').replace(/[^a-zA-Z0-9]/g, '_');
+  const safeFilename = `BIEN_BAN_HOP_${safeDept}_${safeWeek}.docx`;
   anchor.download = safeFilename;
   document.body.appendChild(anchor);
   anchor.click();
