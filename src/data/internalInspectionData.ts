@@ -23,6 +23,19 @@ export interface InspectionDirective {
   keyPoints: string[];
   deadlines?: { task: string; dueDate: string; status: 'completed' | 'in_progress' | 'upcoming' }[];
   contactOfficer?: { name: string; phone: string; email: string; department: string };
+  isReferenceDoc?: boolean;
+  fileFormat?: 'pdf' | 'docx' | 'doc';
+}
+
+export interface InspectionPillar {
+  id: string;
+  orderNumber: number;
+  title: string;
+  target: string;
+  force: string;
+  standardsAndCriteria: string[];
+  frequency: string;
+  sourceRef: string; // e.g. "Kế hoạch 134 & KH 76 & HD 1134"
 }
 
 export interface InspectionScheduleItem {
@@ -62,7 +75,7 @@ export interface InspectionFormTemplate {
   };
 }
 
-// 1. Văn bản chỉ đạo chính thức từ Sở GDĐT Đồng Tháp
+// 1. Văn bản chỉ đạo chính thức từ Sở GDĐT & Văn bản tham khảo năm trước
 export const OFFICIAL_INSPECTION_DIRECTIVES: InspectionDirective[] = [
   {
     id: 'cv-3953-2026',
@@ -74,6 +87,8 @@ export const OFFICIAL_INSPECTION_DIRECTIVES: InspectionDirective[] = [
     summary: 'Sở GDĐT Đồng Tháp chỉ đạo các đơn vị trực thuộc tiếp tục thực hiện công tác kiểm tra nội bộ năm học 2026 - 2027 theo Công văn hướng dẫn số 1134/SGDĐT-TCCB ngày 17/10/2025; quy định rõ trách nhiệm người đứng đầu và 3 mốc thời hạn báo cáo bắt buộc.',
     fullPdfUrl: '/downloads/3953_CV_THUC_HIEN_CONG_TAC_KIEM_TRA_NOI_BO_2026_2027.pdf',
     pdfFilename: '3953_CV_THUC_HIEN_CONG_TAC_KIEM_TRA_NOI_BO_2026_2027.pdf',
+    fileFormat: 'pdf',
+    isReferenceDoc: false,
     keyPoints: [
       'Năm học 2026 - 2027, Thủ trưởng các đơn vị trực thuộc tiếp tục thực hiện công tác KTNB bám sát Công văn hướng dẫn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở GDĐT.',
       'Căn cứ nhiệm vụ năm học và điều kiện thực tế (nhất là sau sáp nhập 3 điểm trường), xây dựng Kế hoạch kiểm tra nội bộ bảo đảm chủ động, linh hoạt, tập trung khắc phục những hạn chế, vướng mắc.',
@@ -114,12 +129,223 @@ export const OFFICIAL_INSPECTION_DIRECTIVES: InspectionDirective[] = [
     summary: 'Văn bản quy định chi tiết toàn diện về mục đích, yêu cầu, 4 nhóm nội dung kiểm tra, thẩm quyền thành lập Ban KTNB, quy trình tiến hành 3 bước (chuẩn bị, tiến hành, kết thúc), xử lý sau kiểm tra, quy cách lưu trữ hồ sơ và trọn bộ 06 biểu mẫu chuẩn.',
     fullPdfUrl: '/downloads/1134_HD_KIEM_TRA_NOI_BO_2025_2026_SGDDT_DONG_THAP.pdf',
     pdfFilename: '1134_HD_KIEM_TRA_NOI_BO_2025_2026_SGDDT_DONG_THAP.pdf',
+    fileFormat: 'pdf',
+    isReferenceDoc: false,
     keyPoints: [
       'Bốn nhóm nội dung kiểm tra trọng tâm: 1) Việc thực hiện nhiệm vụ của Thủ trưởng đơn vị (chiến lược, tài chính, tài sản, CSDL Đúng - Đủ - Sạch - Sống, an toàn trường học); 2) Hoạt động sư phạm của giáo viên & nhân viên; 3) Hoạt động của tổ chuyên môn & bộ phận thư viện, thiết bị, tài chính; 4) Quản lý chất lượng giáo dục.',
       'Ban KTNB trường học do Hiệu trưởng ra quyết định thành lập: Hiệu trưởng (hoặc Phó Hiệu trưởng) làm Trưởng ban, Phó Hiệu trưởng làm Phó Trưởng ban, thành viên là các tổ trưởng chuyên môn, giáo viên cốt cán, thanh tra nhân dân.',
       'Quy trình kiểm tra chuẩn 3 bước: 1. Ban hành Quyết định kiểm tra & Kế hoạch tiến hành kiểm tra (Mẫu 03); 2. Kiểm tra hồ sơ minh chứng, kiểm tra thực tế, lập Biên bản kiểm tra (Mẫu 04); 3. Lập Báo cáo kết quả kiểm tra (Mẫu 05) và ban hành Thông báo kết luận kiểm tra (Mẫu 06).',
       'Hồ sơ mỗi cuộc kiểm tra phải bàn giao cho văn thư lưu trữ đầy đủ theo Nghị định 30/2020/NĐ-CP và Thông tư số 08/2025/TT-BGDĐT.'
     ],
+  },
+  {
+    id: 'kh-76-thptdbk-2025',
+    number: 'Số: 76/KH-THPTĐBK',
+    title: 'Kế hoạch công tác kiểm tra nội bộ năm học 2025 - 2026 (Trường THPT Đốc Binh Kiều cũ)',
+    issuer: 'TRƯỜNG THPT ĐỐC BINH KIỀU',
+    issueDate: 'Đồng Tháp, ngày 20 tháng 10 năm 2025',
+    signBy: 'HIỆU TRƯỞNG Lê Thanh Cường & PHT Nguyễn Minh Trí',
+    summary: 'Kế hoạch kiểm tra nội bộ cấp THPT của trường năm trước, quy định chi tiết kiểm tra toàn diện 4 tổ CM, kiểm tra dạy 2 buổi/ngày, kiểm tra ôn thi tốt nghiệp THPT, hồ sơ ĐKDT, quản lý tài chính, nề nếp học sinh và các ban ngoài giờ.',
+    fullPdfUrl: '/downloads/76_KH_THPTDBK_KTNB_2025_2026.doc',
+    pdfFilename: '76_KH_THPTDBK_KTNB_2025_2026.doc',
+    fileFormat: 'doc',
+    isReferenceDoc: true,
+    keyPoints: [
+      'Kiểm tra toàn diện 4 tổ chuyên môn: Tổ Ngữ văn, Toán, Vật lý-CN-TD-GDQPAN; kiểm tra chuyên đề 3 tổ còn lại (Sinh-Công nghệ-Hóa, Sử-Địa-GDKTPL, Tin học-Ngoại ngữ).',
+      'Kiểm tra dạy học 2 buổi/ngày, dạy thêm học thêm: Ban điều hành và tổ kiểm tra thường xuyên hàng ngày.',
+      'Trọng tâm khối THPT: Công tác ôn tập thi tốt nghiệp THPT, hồ sơ ĐKDT tốt nghiệp, kiểm tra học kỳ 2 và xét duyệt thi đua, sáng kiến kinh nghiệm.',
+      'Kế hoạch xuyên suốt cả các tháng hè 6, 7, 8: Chuẩn bị thi tuyển sinh lớp 10, kiểm tra cơ sở vật chất, thiết bị, thư viện hè và chuẩn bị năm học mới.'
+    ],
+  },
+  {
+    id: 'kh-134-thcstk-2025',
+    number: 'Số: 134/KH-THCSTK',
+    title: 'Kế hoạch kiểm tra nội bộ năm học 2025 - 2026 (Trường THCS Tân Kiều cũ)',
+    issuer: 'TRƯỜNG THCS TÂN KIỀU',
+    issueDate: 'Tân Kiều, ngày 05 tháng 9 năm 2025',
+    signBy: 'HIỆU TRƯỞNG Nguyễn Thanh Tòng',
+    summary: 'Kế hoạch kiểm tra nội bộ rất chi tiết với 11 nhóm nội dung kiểm tra, chỉ tiêu kiểm tra toàn diện 70% giáo viên, 100% chuyên đề HSSS, kiểm tra ứng dụng CNTT và công nghệ AI trong dạy học, quản lý cấp phát văn bằng chứng chỉ và dự trù kinh phí theo quy chế chi tiêu nội bộ.',
+    fullPdfUrl: '/downloads/134_KH_THCSTK_KTNB_2025_2026.docx',
+    pdfFilename: '134_KH_THCSTK_KTNB_2025_2026.docx',
+    fileFormat: 'docx',
+    isReferenceDoc: true,
+    keyPoints: [
+      'Cấu trúc mẫu mực với 11 nhóm nội dung kiểm tra cụ thể hóa đầy đủ đối tượng, lực lượng, hình thức, chỉ tiêu và nội dung chi tiết.',
+      'Chỉ tiêu cụ thể: Kiểm tra toàn diện 70% giáo viên; 100% chuyên đề HSSS; kiểm tra nề nếp tổ chủ nhiệm 3 lần/năm; kiểm tra văn bằng chứng chỉ 2 lần/năm.',
+      'Đột phá công nghệ: Kiểm tra việc ứng dụng CNTT và ứng dụng công nghệ trí tuệ nhân tạo (AI) trong soạn giảng và sử dụng thiết bị dạy học.',
+      'Quy định rõ dự trù kinh phí thực hiện kiểm tra trích từ kinh phí hoạt động đơn vị theo Quy chế chi tiêu nội bộ.'
+    ],
+  },
+];
+
+// 2. Mười một (11) Trụ cột Kiểm tra Nội bộ Toàn diện (Kết hợp hoàn chỉnh KH 76 & KH 134)
+export const SCHOOL_INSPECTION_PILLARS: InspectionPillar[] = [
+  {
+    id: 'pillar-01',
+    orderNumber: 1,
+    title: 'Hoạt động của các tổ chuyên môn, bộ phận thư viện, thiết bị, thực hành và phòng máy vi tính',
+    target: '06 Tổ chuyên môn, nhân viên thư viện (Nguyễn Thị Xuyến, Hồ Văn Hữu, Trần Thị Ngọc Tý), nhân viên thiết bị (Phạm Thị Lệ Huyên, Nguyễn Văn Chữ, Trần Hoàng Yến Ngọc) và giáo viên phụ trách phòng Tin học tại cả 3 điểm trường.',
+    force: 'Hiệu trưởng, 03 Phó Hiệu trưởng và các Tổ trưởng chuyên môn.',
+    standardsAndCriteria: [
+      'Xây dựng kế hoạch năm, tháng của tổ chuyên môn phù hợp Kế hoạch giáo dục số 34/KH của nhà trường theo Chương trình GDPT 2018.',
+      'Chất lượng sinh hoạt tổ chuyên môn định kỳ 2 tuần/lần, đổi mới phương pháp dạy học, ma trận và bảng đặc tả đề kiểm tra theo định hướng phát triển năng lực.',
+      'Bộ phận Thư viện: Quản lý kho sách, phòng đọc, phần mềm thư viện điện tử, thống kê lượt mượn đọc hàng tháng và luân chuyển sách giữa 3 điểm trường.',
+      'Bộ phận Thiết bị - Thực hành - Vi tính: Quản lý phòng bộ môn Lý, Hóa, Sinh, Tin học; sổ nhật ký mượn trả thiết bị; an toàn hóa chất thí nghiệm.',
+      'Ứng dụng CNTT và ứng dụng công nghệ trí tuệ nhân tạo (AI) trong soạn giảng, kiểm tra đánh giá và chuyển đổi số (kế thừa KH 134).'
+    ],
+    frequency: 'Kiểm tra toàn diện 100% các tổ và bộ phận (2 lần/năm); kiểm tra chuyên đề định kỳ hàng tháng; kiểm tra đột xuất 2 lần/năm.',
+    sourceRef: 'Kết hợp Kế hoạch 134/KH-THCSTK (Mục III.1) và Kế hoạch 76/KH-THPTĐBK (Phụ lục)',
+  },
+  {
+    id: 'pillar-02',
+    orderNumber: 2,
+    title: 'Kiểm tra hoạt động sư phạm và thực hiện nhiệm vụ của giáo viên',
+    target: 'Tất cả 102 giáo viên thuộc 06 tổ chuyên môn đang giảng dạy tại 3 điểm trường (53 lớp).',
+    force: 'Hiệu trưởng, 03 Phó Hiệu trưởng, Tổ trưởng, Tổ phó chuyên môn và giáo viên cốt cán.',
+    standardsAndCriteria: [
+      'Phẩm chất chính trị, đạo đức, lối sống, ý thức tổ chức kỷ luật, văn hóa công vụ và quan hệ đồng nghiệp, học sinh.',
+      'Thực hiện quy chế chuyên môn: Kế hoạch bài dạy theo Công văn 5512, kế hoạch dạy học cá nhân, chuẩn bị đồ dùng dạy học trước khi lên lớp.',
+      'Đổi mới phương pháp dạy học, dự giờ học tập kinh nghiệm (tối thiểu 1 tiết/tuần đối với GV trẻ, 2 tiết/tháng đối với GV khác).',
+      'Đánh giá học sinh: Soạn ma trận, bảng đặc tả, đáp án chi tiết thang điểm 0,25đ; chấm chữa bài, vào điểm phần mềm CSDL đúng hạn.',
+      'Chỉ tiêu: Kiểm tra toàn diện tối thiểu 70% giáo viên trong năm; 100% giáo viên được kiểm tra chuyên đề hồ sơ sổ sách; 30% kiểm tra đột xuất dự giờ không báo trước.'
+    ],
+    frequency: 'Thực hiện hàng tháng từ tháng 9/2026 đến tháng 5/2027.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.2) và Kế hoạch 76/KH-THPTĐBK (Mục B.II)',
+  },
+  {
+    id: 'pillar-03',
+    orderNumber: 3,
+    title: 'Kiểm tra nề nếp học tập, rèn luyện của học sinh và công tác giáo viên chủ nhiệm',
+    target: 'Giáo viên chủ nhiệm 53 lớp, Tổ trưởng tổ chủ nhiệm, Đoàn Thanh niên, Tổng phụ trách Đội, lực lượng Bảo vệ và 2.111 học sinh.',
+    force: 'Ban Giám hiệu, Bí thư Đoàn trường Ngô Anh Tuấn, Tổ trưởng Văn phòng và Ban Đại diện CMHS.',
+    standardsAndCriteria: [
+      'Tổ chủ nhiệm và GVCN: Triển khai nội quy trường lớp, sổ chủ nhiệm, theo dõi sĩ số chuyên cần, phối hợp phụ huynh học sinh.',
+      'Quản lý học bạ số, sổ gọi tên ghi điểm điện tử, quy trình nhận xét đánh giá sự tiến bộ của học sinh.',
+      'Tổ chức Đoàn, Hội, Đội: Tổ chức các phong trào thi đua nền nếp, hoạt động trải nghiệm, giáo dục kỹ năng sống và phòng chống bạo lực học đường.',
+      'Lực lượng Bảo vệ: Trực cổng trường, giám sát học sinh ra vào, phát hiện kịp thời các vi phạm nội quy, an toàn giao thông trước cổng trường.',
+      'Hoạt động của các Tiểu ban ngoài giờ: Ban tư vấn tâm lý học sinh, Ban phòng chống ma túy, Ban an toàn giao thông.'
+    ],
+    frequency: 'Kiểm tra tổ chủ nhiệm 3 lần/năm; kiểm tra Đoàn - Đội 2 lần/năm; kiểm tra hồ sơ lớp 2 lần/năm; bảo vệ 3 lần/năm; đột xuất khi cần.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.3) và Kế hoạch 76/KH-THPTĐBK (Mục B.III & Phụ lục)',
+  },
+  {
+    id: 'pillar-04',
+    orderNumber: 4,
+    title: 'Kiểm tra việc dạy học 2 buổi/ngày; quản lý dạy thêm, học thêm trong và ngoài nhà trường',
+    target: 'Toàn thể giáo viên tham gia dạy học 2 buổi/ngày, dạy phụ đạo, bồi dưỡng và các hoạt động giáo dục có thu tiền.',
+    force: 'Ban Điều hành dạy 2 buổi/ngày, Tổ kiểm tra dạy thêm học thêm, Ban Giám hiệu.',
+    standardsAndCriteria: [
+      'Chấp hành Thông tư quy định về dạy thêm học thêm của Bộ GDĐT và Công văn số 738/SGDĐT-TTr của Sở GDĐT Đồng Tháp.',
+      'Việc phân công giáo viên, thời khóa biểu dạy 2 buổi/ngày bảo đảm đúng kế hoạch giáo dục, không gây quá tải cho học sinh.',
+      'Tổ chức dạy phụ đạo miễn phí cho học sinh yếu kém và bồi dưỡng học sinh giỏi; nghiêm cấm ép buộc học sinh học thêm dưới mọi hình thức.',
+      'Giáo viên ký cam kết không vi phạm quy định dạy thêm học thêm ngoài nhà trường; giải quyết kịp thời phản ánh của phụ huynh.'
+    ],
+    frequency: 'Kiểm tra thường xuyên hàng ngày tại trường (100% GV dạy); kiểm tra hồ sơ sổ sách 2 lần/năm; kiểm tra đột xuất khi có phản ánh.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.4) và Kế hoạch 76/KH-THPTĐBK (Mục B.IV)',
+  },
+  {
+    id: 'pillar-05',
+    orderNumber: 5,
+    title: 'Kiểm tra hoạt động của Tổ Văn phòng, công tác tài chính, kế toán và quản lý tài sản công',
+    target: 'Tổ trưởng Văn phòng Trần Văn Út; nhân viên Kế toán (Nguyễn Văn Quân, Nguyễn Thị Thúy Huỳnh); Văn thư (Nguyễn Thị Kim Ngọc, Huỳnh Thị Thu Ngoan, Nguyễn Thị Kim Kha); Y tế (Minh Tho, Trần Thị Bích Hạnh); Thủ quỹ và Bảo vệ.',
+    force: 'Hiệu trưởng Lê Thanh Cường, Đảng ủy, Ban Thanh tra nhân dân và Kế toán kiểm tra chéo.',
+    standardsAndCriteria: [
+      'Công tác hành chính - văn thư: Tiếp nhận, luân chuyển văn bản đi/đến trên hệ thống iDesk Sở; quản lý con dấu; lưu trữ hồ sơ theo Nghị định 30/2020/NĐ-CP và Thông tư 08/2025/TT-BGDĐT.',
+      'Công tác tài chính - kế toán: Lập dự toán, chấp hành ngân sách nhà nước, các khoản thu hộ (BHYT học sinh), quản lý quỹ Ban đại diện CMHS theo Thông tư 55, công khai tài chính theo Thông tư 36.',
+      'Công tác y tế học đường: Tủ thuốc sơ cấp cứu, khám sức khỏe ban đầu cho học sinh đầu năm học, đảm bảo nguồn nước uống tinh khiết tại 3 điểm trường.',
+      'Bảo vệ và PCCC: Bảo quản tài sản công, hệ thống camera an ninh, 2 máy bơm chữa cháy, 11 tủ chữa cháy, kiểm tra định kỳ bình chữa cháy.'
+    ],
+    frequency: 'Kiểm tra toàn diện Tổ Văn phòng 2 lần/năm; kiểm tra chuyên đề tài chính kế toán 2 lần/năm (tháng 10 và tháng 5); đột xuất khi cần.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.5) và Kế hoạch 76/KH-THPTĐBK (Mục B.V)',
+  },
+  {
+    id: 'pillar-06',
+    orderNumber: 6,
+    title: 'Kiểm tra công tác quản lý của Thủ trưởng đơn vị (Hiệu trưởng và các Phó Hiệu trưởng)',
+    target: 'Hiệu trưởng Lê Thanh Cường và 03 Phó Hiệu trưởng (Nguyễn Minh Trí, Phan Thanh Thảo, Nguyễn Thanh Tòng).',
+    force: 'Thành viên Ban Kiểm tra nội bộ được phân công, đại diện Cấp ủy Đảng và Ban Thanh tra nhân dân.',
+    standardsAndCriteria: [
+      'Xây dựng và tổ chức thực hiện kế hoạch năm học, học kỳ, hàng tháng; cụ thể hóa các chỉ đạo của Sở GDĐT Đồng Tháp.',
+      'Công tác quản lý, thực hiện chế độ chính sách, tiền lương, phụ cấp cho 120 cán bộ, giáo viên, nhân viên sau sáp nhập.',
+      'Thực hiện Quy chế dân chủ cơ sở theo Thông tư số 11/2020/TT-BGDĐT và Luật Thực hiện dân chủ ở cơ sở năm 2022.',
+      'Công tác chỉ đạo xây dựng trường đạt chuẩn quốc gia, kiểm định chất lượng giáo dục và kiểm tra đánh giá theo chuẩn nghề nghiệp giáo viên, cán bộ quản lý.'
+    ],
+    frequency: 'Kiểm tra toàn diện 2 lần/năm (Học kỳ 1 vào tháng 12/2026; Học kỳ 2 vào tháng 05/2027).',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.6) và Kế hoạch 76/KH-THPTĐBK (Mục B.VI)',
+  },
+  {
+    id: 'pillar-07',
+    orderNumber: 7,
+    title: 'Kiểm tra công tác tiếp công dân, giải quyết khiếu nại, giải quyết tố cáo',
+    target: 'Bộ phận tiếp công dân, cán bộ phụ trách tiếp nhận đơn thư, Hiệu trưởng và Ban Giám hiệu.',
+    force: 'Ban Kiểm tra nội bộ, Ban Thanh tra nhân dân trường học.',
+    standardsAndCriteria: [
+      'Niêm yết công khai lịch tiếp công dân định kỳ của Hiệu trưởng, nội quy phòng tiếp dân, hòm thư góp ý.',
+      'Mở sổ theo dõi tiếp công dân, ghi chép đầy đủ nội dung khiếu nại, kiến nghị, phản ánh của công dân, giáo viên, cha mẹ học sinh.',
+      'Quy trình xử lý đơn thư khiếu nại, tố cáo đúng thời hạn, đúng thẩm quyền pháp luật quy định, không để tồn đọng khiếu kiện kéo dài.'
+    ],
+    frequency: 'Kiểm tra toàn diện 1 lần/năm (vào tháng 04/2027); kiểm tra đột xuất ngay khi có phát sinh đơn thư khiếu nại, tố cáo.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.7) và Kế hoạch 76/KH-THPTĐBK (Mục B.VII)',
+  },
+  {
+    id: 'pillar-08',
+    orderNumber: 8,
+    title: 'Giám sát, kiểm tra công tác phòng, chống tham nhũng, lãng phí và thực hành tiết kiệm',
+    target: 'Hiệu trưởng, 03 Phó Hiệu trưởng, Kế toán, Thủ quỹ và các bộ phận mua sắm, quản lý tài sản, cơ sở vật chất.',
+    force: 'Hiệu trưởng, Cấp ủy Đảng, Công đoàn cơ sở, Ban Thanh tra nhân dân.',
+    standardsAndCriteria: [
+      'Thành lập Ban chỉ đạo phòng chống tham nhũng và ban hành Kế hoạch phòng chống tham nhũng, lãng phí năm học 2026 - 2027.',
+      'Kê khai minh bạch tài sản, thu nhập của các chức danh theo quy định của pháp luật.',
+      'Tích hợp nội dung phòng chống tham nhũng vào giảng dạy môn GDCD (cấp THCS) và GDKT&PL (cấp THPT) theo chỉ đạo của Sở GDĐT.',
+      'Giám sát các khoản chi tiêu công, đấu thầu mua sắm thiết bị, văn phòng phẩm, quản lý điện nước, tài sản công không để thất thoát, lãng phí.'
+    ],
+    frequency: 'Giám sát thường xuyên hàng tháng; báo cáo định kỳ vào tháng 01/2027 (sơ kết HK1) và tháng 05/2027 (tổng kết năm học); kiểm tra khi có dấu hiệu.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.8) và Kế hoạch 76/KH-THPTĐBK (Mục B.VIII)',
+  },
+  {
+    id: 'pillar-09',
+    orderNumber: 9,
+    title: 'Kiểm tra việc thực hiện các cuộc vận động và phong trào thi đua của ngành',
+    target: 'Toàn thể 120 cán bộ quản lý, giáo viên, nhân viên và học sinh toàn trường.',
+    force: 'Hiệu trưởng, 03 Phó Hiệu trưởng, Cấp ủy Đảng, Ban Chấp hành Công đoàn và Đoàn Thanh niên.',
+    standardsAndCriteria: [
+      'Thực hiện Kết luận số 01-KL/TW về tiếp tục học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh.',
+      'Cuộc vận động "Mỗi thầy cô giáo là một tấm gương đạo đức, tự học và sáng tạo", xây dựng trường học hạnh phúc, an toàn, thân thiện.',
+      'Phong trào thi đua đổi mới sáng tạo trong dạy và học, phong trào tự làm thiết bị dạy học và nghiên cứu khoa học kỹ thuật, viết SKKN.',
+      'Thực hiện kỷ luật kỷ cương hành chính, chuẩn mực đạo đức nhà giáo, chống tiêu cực và bệnh thành tích trong giáo dục.'
+    ],
+    frequency: 'Giám sát thường xuyên qua các đợt thi đua 20/11, 26/03, sơ kết học kỳ và tổng kết năm học.',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.9)',
+  },
+  {
+    id: 'pillar-10',
+    orderNumber: 10,
+    title: 'Kiểm tra công tác quản lý, cấp phát và sử dụng văn bằng, chứng chỉ (tốt nghiệp THCS & THPT)',
+    target: 'Cán bộ Văn thư phụ trách quản lý văn bằng, chứng chỉ và hồ sơ tốt nghiệp.',
+    force: 'Phó Hiệu trưởng phụ trách chuyên môn Nguyễn Minh Trí, Tổ trưởng Văn phòng Trần Văn Út, Ban Thanh tra nhân dân.',
+    standardsAndCriteria: [
+      'Công tác tiếp nhận phôi bằng tốt nghiệp THCS và THPT từ Sở GDĐT Đồng Tháp; bảo quản an toàn phôi bằng chưa cấp phát.',
+      'Sổ cấp phát văn bằng: Ghi chép đầy đủ số hiệu bằng, số vào sổ, ngày cấp, chữ ký người nhận hoặc giấy ủy quyền hợp pháp nếu nhận thay.',
+      'Lưu trữ hồ sơ xét công nhận tốt nghiệp THCS, danh sách học sinh tốt nghiệp THPT qua các khóa theo quy định lưu trữ vĩnh viễn.',
+      'Thông báo công khai trên website trường để học sinh các khóa về nhận bằng tốt nghiệp đúng thời hạn.'
+    ],
+    frequency: 'Kiểm tra chuyên đề định kỳ 2 lần/năm (vào tháng 12/2026 và tháng 05/2027; kiểm tra hè tháng 07/2027).',
+    sourceRef: 'Kế hoạch 134/KH-THCSTK (Mục III.10) và Kế hoạch 76/KH-THPTĐBK (Phụ lục tháng 6, 7)',
+  },
+  {
+    id: 'pillar-11',
+    orderNumber: 11,
+    title: 'Kiểm tra các nhiệm vụ trọng tâm đặc thù của năm học sáp nhập 2026 - 2027',
+    target: 'Các Điểm trường THCS Đốc Binh Kiều, Điểm Tân Kiều (11km), Khối 9, Khối 12 và 25 học sinh khuyết tật học hòa nhập.',
+    force: 'Ban Giám hiệu (Hiệu trưởng và 3 Phó Hiệu trưởng), Tổ trưởng chuyên môn, Tổ tư vấn tâm lý.',
+    standardsAndCriteria: [
+      'Thực hiện Công văn số 3326/SGDĐT-GDTrH: Lập hồ sơ Kế hoạch giáo dục cá nhân cho 25 HS khuyết tật, điều chỉnh đề kiểm tra và đánh giá học sinh hòa nhập.',
+      'Công tác ôn tập thi tốt nghiệp THPT năm 2027 cho học sinh Khối 12 và ôn thi tuyển sinh vào lớp 10 cho học sinh Khối 9.',
+      'Kiểm tra điều kiện cơ sở vật chất, luân chuyển giáo viên dạy liên điểm tại Điểm trường Tân Kiều (cách 11km).',
+      'Vận hành cơ sở dữ liệu ngành "Đúng - Đủ - Sạch - Sống", số hóa 100% học bạ số và chữ ký số giáo viên.'
+    ],
+    frequency: 'Kiểm tra chuyên đề định kỳ xuyên suốt năm học và cao điểm tháng 11/2026, tháng 3/2027, tháng 4/2027.',
+    sourceRef: 'Kế hoạch giáo dục số 34/KH, CV 3326/SGDĐT-GDTrH và Kế hoạch 76/KH-THPTĐBK (Tháng 4, 5, 6)',
   },
 ];
 

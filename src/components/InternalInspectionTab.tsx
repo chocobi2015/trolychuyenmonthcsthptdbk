@@ -21,21 +21,25 @@ import {
   Sparkles,
   Phone,
   Mail,
-  UserCheck
+  UserCheck,
+  Layers,
+  FileSpreadsheet
 } from 'lucide-react';
 import {
   OFFICIAL_INSPECTION_DIRECTIVES,
+  SCHOOL_INSPECTION_PILLARS,
   SCHOOL_INSPECTION_COMMITTEE,
   SCHOOL_INSPECTION_SCHEDULE,
   OFFICIAL_INSPECTION_TEMPLATES,
   INSPECTION_ARCHIVE_CHECKLIST,
   InspectionScheduleItem,
   InspectionFormTemplate,
-  InspectionDirective
+  InspectionDirective,
+  InspectionPillar
 } from '../data/internalInspectionData';
 import { SCHOOL_OFFICIAL_PROFILE } from '../data/schoolOfficialData';
 
-type SubTab = 'plan' | 'committee' | 'directives' | 'templates' | 'compliance';
+type SubTab = 'plan' | 'pillars' | 'committee' | 'directives' | 'templates' | 'compliance';
 
 export const InternalInspectionTab: React.FC = () => {
   const [activeSubTab, setActiveSubTab] = useState<SubTab>('plan');
@@ -74,41 +78,46 @@ export const InternalInspectionTab: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-400 text-slate-950 uppercase tracking-wide flex items-center gap-1.5 shadow-sm">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Chuyên đề trọng tâm
+                Kế hoạch hợp nhất hoàn chỉnh
               </span>
               <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-800/80 text-blue-200 border border-blue-700/60">
                 Năm học 2026 - 2027
               </span>
               <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-950 text-emerald-300 border border-emerald-800/60">
-                CV 3953 & HD 1134 Sở GDĐT
+                Kết hợp KH 76 + KH 134 + HD 1134
+              </span>
+              <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-indigo-950 text-indigo-200 border border-indigo-800/60">
+                Chuẩn 120 CB-GV-NV từ "NHÂN SỰ MỚI"
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase">
-              Công Tác Kiểm Tra Nội Bộ Nhà Trường
+              Kế Hoạch Kiểm Tra Nội Bộ Trường Học
             </h1>
             <p className="text-sm text-slate-300 leading-relaxed">
               Kế hoạch kiểm tra nội bộ toàn diện năm học 2026 - 2027 của <strong>Trường THCS & THPT Đốc Binh Kiều</strong>.
-              Thực hiện theo Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 và Hướng dẫn số 1134/SGDĐT-TCCB của Sở GDĐT Đồng Tháp;
+              Kết hợp hoàn chỉnh từ <strong>Kế hoạch 76/KH-THPT ĐBK</strong> (cấp THPT) và <strong>Kế hoạch 134/KH-THCS.TK</strong> (cấp THCS) năm trước,
+              thực hiện đúng <strong>Hướng dẫn số 1134/SGDĐT-TCCB</strong> của Sở GDĐT Đồng Tháp;
               bao quát <strong>53 lớp, 2.111 học sinh và 120 cán bộ, giáo viên</strong> tại <strong>3 điểm trường</strong>.
             </p>
           </div>
 
           {/* Quick Download Buttons */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-2 shrink-0 w-full lg:w-auto">
+          <div className="flex flex-col gap-2 shrink-0 w-full lg:w-auto">
             <a
               href="/downloads/KE_HOACH_KIEM_TRA_NOI_BO_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
               download
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-md hover:shadow-lg transition active:scale-95 border border-blue-400/30"
-              title="Tải về Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 file Word (.docx) chuẩn Nghị định 30/2020"
+              title="Tải về Kế hoạch kiểm tra nội bộ hoàn chỉnh file Word (.docx) chuẩn Nghị định 30/2020"
             >
               <Download className="w-4 h-4 text-amber-300" />
-              <span>Tải Kế hoạch KTNB (.docx)</span>
+              <span>Tải Kế hoạch KTNB Hoàn Chỉnh (.docx)</span>
             </a>
-            <div className="flex gap-2">
+            
+            <div className="grid grid-cols-2 gap-2">
               <a
                 href="/downloads/QUYET_DINH_BAN_KIEM_TRA_NOI_BO_2026_2027.docx"
                 download
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition"
+                className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition"
                 title="Tải Quyết định thành lập Ban Kiểm tra nội bộ (Mẫu 02)"
               >
                 <Download className="w-3.5 h-3.5 text-sky-400" />
@@ -117,11 +126,41 @@ export const InternalInspectionTab: React.FC = () => {
               <a
                 href="/downloads/TRON_BO_6_BIEU_MAU_KIEM_TRA_NOI_BO_HD1134.docx"
                 download
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition"
+                className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition"
                 title="Tải trọn bộ 06 Biểu mẫu nghiệp vụ Phụ lục HD 1134"
               >
                 <Download className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Trọn bộ 06 Mẫu</span>
+              </a>
+            </div>
+
+            <div className="grid grid-cols-3 gap-1.5 pt-1 border-t border-blue-800/60">
+              <a
+                href="/downloads/NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
+                download="NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
+                className="flex items-center justify-center gap-1 px-2 py-1 rounded bg-emerald-900/60 hover:bg-emerald-800/80 text-[11px] font-medium text-emerald-200 border border-emerald-700/50 transition"
+                title="Tải tệp Excel NHÂN SỰ MỚI (120 CB-GV-NV)"
+              >
+                <FileSpreadsheet className="w-3 h-3 text-emerald-400" />
+                <span>Nhân sự mới</span>
+              </a>
+              <a
+                href="/downloads/76_KH_THPTDBK_KTNB_2025_2026.doc"
+                download="76_KH_THPTDBK_KTNB_2025_2026.doc"
+                className="flex items-center justify-center gap-1 px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-medium text-slate-300 border border-slate-700 transition"
+                title="Tải Kế hoạch 76/KH-THPTĐBK (THPT năm trước - .doc)"
+              >
+                <Download className="w-3 h-3 text-amber-400" />
+                <span>KH 76 (.doc)</span>
+              </a>
+              <a
+                href="/downloads/134_KH_THCSTK_KTNB_2025_2026.docx"
+                download="134_KH_THCSTK_KTNB_2025_2026.docx"
+                className="flex items-center justify-center gap-1 px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-medium text-slate-300 border border-slate-700 transition"
+                title="Tải Kế hoạch 134/KH-THCSTK (THCS năm trước - .docx)"
+              >
+                <Download className="w-3 h-3 text-teal-400" />
+                <span>KH 134 (.docx)</span>
               </a>
             </div>
           </div>
@@ -139,20 +178,19 @@ export const InternalInspectionTab: React.FC = () => {
           </div>
 
           <div className="bg-slate-800/60 backdrop-blur rounded-lg p-3 border border-blue-700/30">
-            <div className="text-xs text-slate-400 font-medium">Ban Kiểm tra nội bộ</div>
-            <div className="text-xl font-bold text-white flex items-center gap-1.5 mt-0.5">
-              <span>12 Thành viên</span>
+            <div className="text-xs text-slate-400 font-medium">Trụ cột kiểm tra hợp nhất</div>
+            <div className="text-xl font-bold text-amber-300 flex items-center gap-1.5 mt-0.5">
+              <span>11 Trụ Cột</span>
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">HT Lê Thanh Cường làm Trưởng ban</div>
+            <div className="text-[11px] text-slate-400 mt-1">Kết hợp toàn diện KH 76 & KH 134</div>
           </div>
 
           <div className="bg-slate-800/60 backdrop-blur rounded-lg p-3 border border-blue-700/30">
-            <div className="text-xs text-slate-400 font-medium">Mốc báo cáo Sở GDĐT</div>
-            <div className="text-xl font-bold text-amber-300 flex items-center gap-1.5 mt-0.5">
-              <span>03 Mốc</span>
-              <span className="text-xs font-normal text-amber-400/80">31/10, 20/01, 18/05</span>
+            <div className="text-xs text-slate-400 font-medium">Ban Kiểm tra nội bộ</div>
+            <div className="text-xl font-bold text-white flex items-center gap-1.5 mt-0.5">
+              <span>{SCHOOL_INSPECTION_COMMITTEE.length} Thành viên</span>
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">Qua Phòng TCCB Sở GDĐT</div>
+            <div className="text-[11px] text-slate-400 mt-1">100% chuẩn từ NHÂN SỰ MỚI</div>
           </div>
 
           <div className="bg-slate-800/60 backdrop-blur rounded-lg p-3 border border-blue-700/30">
@@ -184,7 +222,20 @@ export const InternalInspectionTab: React.FC = () => {
           }`}
         >
           <Calendar className="w-4 h-4" />
-          <span>Kế hoạch kiểm tra năm học (14 cuộc)</span>
+          <span>Lịch 14 cuộc kiểm tra chi tiết</span>
+        </button>
+
+        <button
+          onClick={() => setActiveSubTab('pillars')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition ${
+            activeSubTab === 'pillars'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+          }`}
+        >
+          <Layers className="w-4 h-4 text-amber-500" />
+          <span>11 Trụ cột kiểm tra (Kết hợp Cũ & Mới)</span>
+          <span className="px-1.5 py-0.2 bg-amber-500 text-slate-950 font-bold rounded-full text-[10px]">11</span>
         </button>
 
         <button
@@ -196,7 +247,7 @@ export const InternalInspectionTab: React.FC = () => {
           }`}
         >
           <Users className="w-4 h-4" />
-          <span>Ban Kiểm tra nội bộ (12 thành viên)</span>
+          <span>Ban KTNB ({SCHOOL_INSPECTION_COMMITTEE.length} thành viên)</span>
         </button>
 
         <button
@@ -208,7 +259,7 @@ export const InternalInspectionTab: React.FC = () => {
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>Văn bản chỉ đạo Sở GDĐT (CV 3953 & HD 1134)</span>
+          <span>4 Văn bản chỉ đạo & Tham khảo (Cũ & Mới)</span>
         </button>
 
         <button
@@ -458,7 +509,153 @@ export const InternalInspectionTab: React.FC = () => {
         </div>
       )}
 
-      {/* ==================== SUBTAB 2: BAN KIỂM TRA NỘI BỘ ==================== */}
+      {/* ==================== SUBTAB 2: 11 TRỤ CỘT KIỂM TRA (KẾT HỢP CŨ & MỚI) ==================== */}
+      {activeSubTab === 'pillars' && (
+        <div className="space-y-6">
+          {/* Overview Banner for Combination */}
+          <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-emerald-50 border border-blue-200 rounded-xl p-5 shadow-sm">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-4 border-b border-blue-200/80">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded text-xs font-bold bg-blue-700 text-white uppercase">
+                    Kế thừa & Phát triển
+                  </span>
+                  <span className="text-xs text-slate-600 font-medium">
+                    Hợp nhất Kế hoạch 76 (THPT) + Kế hoạch 134 (THCS) + Hướng dẫn 1134 Sở GDĐT
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mt-1">
+                  11 Trụ Cột Kiểm Tra Nội Bộ Toàn Diện Cho Trường Sau Sáp Nhập
+                </h3>
+                <p className="text-xs text-slate-600 mt-1 max-w-4xl leading-relaxed">
+                  Bản tổng hợp tích hợp toàn bộ các nội dung kiểm tra xuất sắc từ <strong>Kế hoạch 76/KH-THPT ĐBK</strong> (cấp THPT: ôn thi tốt nghiệp, tuyển sinh 10, quản lý dạy thêm, nề nếp kỷ cương 3 khối THPT)
+                  và <strong>Kế hoạch 134/KH-THCS.TK</strong> (cấp THCS: 11 nội dung chi tiết, chỉ tiêu kiểm tra 70% GV, quản lý bằng tốt nghiệp THCS, ứng dụng CNTT và AI, cơ chế tài chính nội bộ),
+                  được thiết kế cho quy mô trường liên cấp <strong>53 lớp, 2.111 học sinh và 120 CB-GV-NV</strong> theo danh sách nhân sự mới.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <a
+                  href="/downloads/KE_HOACH_KIEM_TRA_NOI_BO_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
+                  download
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Xuất Kế hoạch (.docx)</span>
+                </a>
+              </div>
+            </div>
+
+            {/* 3 Pillars Comparison Highlights */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+              <div className="bg-white/80 p-3.5 rounded-lg border border-blue-200">
+                <div className="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Kế thừa từ Kế hoạch 76 (THPT ĐBK)</span>
+                </div>
+                <ul className="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                  <li>Kiểm tra toàn diện & chuyên đề các tổ THPT (Văn, Toán, Lý-Hóa-Sinh, Sử-Địa, NN-Tin).</li>
+                  <li>Trọng tâm ôn thi tốt nghiệp THPT, hồ sơ ĐKDT, xét tốt nghiệp Khối 12.</li>
+                  <li>Kiểm tra hoạt động dạy 2 buổi/ngày & Ban tư vấn tâm lý học sinh.</li>
+                  <li>Kế hoạch kéo dài qua tháng hè 6, 7, 8 chuẩn bị tuyển sinh vào lớp 10.</li>
+                </ul>
+              </div>
+
+              <div className="bg-white/80 p-3.5 rounded-lg border border-teal-200">
+                <div className="text-xs font-bold text-teal-900 flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5 text-teal-600" />
+                  <span>Kế thừa từ Kế hoạch 134 (THCS Tân Kiều)</span>
+                </div>
+                <ul className="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                  <li>Cấu trúc mẫu mực 11 nhóm nội dung với đối tượng, lực lượng, hình thức, chỉ tiêu rõ ràng.</li>
+                  <li>Chỉ tiêu: kiểm tra toàn diện 70% giáo viên, 100% chuyên đề HSSS, 30% đột xuất.</li>
+                  <li>Kiểm tra công tác quản lý cấp phát văn bằng, chứng chỉ tốt nghiệp THCS.</li>
+                  <li>Kiểm tra việc ứng dụng CNTT và công nghệ trí tuệ nhân tạo (AI) trong dạy học.</li>
+                </ul>
+              </div>
+
+              <div className="bg-white/80 p-3.5 rounded-lg border border-emerald-200">
+                <div className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Nâng cấp đơn vị sáp nhập 2026 - 2027</span>
+                </div>
+                <ul className="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                  <li>Bao quát cả 3 điểm trường (Điểm chính THPT, THCS ĐBK, THCS Tân Kiều cách 11km).</li>
+                  <li>Phân công đích danh Ban Giám hiệu 4 thầy cô và 120 CB-GV-NV từ "NHÂN SỰ MỚI".</li>
+                  <li>Kiểm tra chuyên đề giáo dục hòa nhập cho 25 học sinh khuyết tật theo CV 3326.</li>
+                  <li>Số hóa 100% học bạ điện tử, chữ ký số và đồng bộ CSDL ngành Đúng - Đủ - Sạch - Sống.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* 11 Pillars Detailed Cards */}
+          <div className="space-y-4">
+            {SCHOOL_INSPECTION_PILLARS.map((pillar) => (
+              <div
+                key={pillar.id}
+                className="bg-white rounded-xl shadow-sm border border-slate-200 hover:border-blue-300 transition overflow-hidden"
+              >
+                <div className="p-4 bg-slate-50/80 border-b border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-lg bg-blue-600 text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-sm">
+                      {pillar.orderNumber}
+                    </span>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 leading-snug">
+                        {pillar.title}
+                      </h4>
+                      <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                        <span className="text-[11px] text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded font-medium">
+                          {pillar.sourceRef}
+                        </span>
+                        <span className="text-[11px] text-slate-500 font-medium">
+                          Tần suất: {pillar.frequency}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80">
+                      <span className="font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                        Đối tượng kiểm tra:
+                      </span>
+                      <p className="text-slate-700 leading-relaxed">{pillar.target}</p>
+                    </div>
+
+                    <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80">
+                      <span className="font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                        Lực lượng kiểm tra:
+                      </span>
+                      <p className="text-slate-700 leading-relaxed">{pillar.force}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      Tiêu chí, nội dung & chuẩn kiểm tra chi tiết:
+                    </h5>
+                    <div className="space-y-1.5">
+                      {pillar.standardsAndCriteria.map((std, sIdx) => (
+                        <div key={sIdx} className="flex items-start gap-2 text-xs text-slate-700 bg-slate-50/50 p-2 rounded border border-slate-100">
+                          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5" />
+                          <span className="leading-relaxed">{std}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ==================== SUBTAB 3: BAN KIỂM TRA NỘI BỘ ==================== */}
       {activeSubTab === 'committee' && (
         <div className="space-y-6">
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
@@ -627,37 +824,52 @@ export const InternalInspectionTab: React.FC = () => {
         </div>
       )}
 
-      {/* ==================== SUBTAB 3: VĂN BẢN CHỈ ĐẠO SỞ GDĐT ==================== */}
+      {/* ==================== SUBTAB 4: 4 VĂN BẢN CHỈ ĐẠO & THAM KHẢO ==================== */}
       {activeSubTab === 'directives' && (
         <div className="space-y-6">
           {/* Directive Selector Bar */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {OFFICIAL_INSPECTION_DIRECTIVES.map((dir) => (
               <div
                 key={dir.id}
                 onClick={() => setSelectedDirective(dir)}
-                className={`p-4 rounded-xl border cursor-pointer transition ${
+                className={`p-4 rounded-xl border cursor-pointer transition flex flex-col justify-between ${
                   selectedDirective.id === dir.id
                     ? 'bg-blue-50/80 border-blue-500 shadow-sm ring-2 ring-blue-500/20'
                     : 'bg-white border-slate-200 hover:border-blue-300 hover:bg-slate-50'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                    dir.id === 'cv-3953-2026'
-                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
-                      : 'bg-blue-100 text-blue-800 border border-blue-200'
-                  }`}>
-                    {dir.id === 'cv-3953-2026' ? 'Năm học 2026 - 2027 (Mới nhất)' : 'Văn bản gốc quy định chi tiết'}
-                  </span>
-                  <span className="text-[11px] text-slate-500 font-medium">{dir.issueDate}</span>
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                      dir.id === 'cv-3953-2026'
+                        ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                        : dir.id === 'hd-1134-2025'
+                        ? 'bg-blue-100 text-blue-800 border border-blue-200'
+                        : dir.id === 'kh-76-thptdbk-2025'
+                        ? 'bg-amber-100 text-amber-900 border border-amber-200'
+                        : 'bg-teal-100 text-teal-900 border border-teal-200'
+                    }`}>
+                      {dir.id === 'cv-3953-2026'
+                        ? 'Năm mới (2026-2027)'
+                        : dir.id === 'hd-1134-2025'
+                        ? 'Hướng dẫn Sở GDĐT'
+                        : dir.id === 'kh-76-thptdbk-2025'
+                        ? 'Tham khảo THPT cũ'
+                        : 'Tham khảo THCS cũ'}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-700">
+                      .{dir.fileFormat?.toUpperCase() || 'PDF'}
+                    </span>
+                  </div>
+                  <div className="font-bold text-slate-900 text-sm leading-snug">{dir.number}</div>
+                  <div className="text-xs text-slate-600 mt-1 line-clamp-2">{dir.title}</div>
                 </div>
-                <div className="font-bold text-slate-900 text-sm leading-snug">{dir.number}</div>
-                <div className="text-xs text-slate-600 mt-1 line-clamp-2">{dir.title}</div>
+
                 <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-200/80 text-xs">
-                  <span className="font-semibold text-slate-700">{dir.signBy}</span>
-                  <span className="text-blue-600 font-medium flex items-center gap-1">
-                    Xem toàn văn <ChevronRight className="w-3.5 h-3.5" />
+                  <span className="font-semibold text-slate-700 truncate max-w-[120px]">{dir.signBy}</span>
+                  <span className="text-blue-600 font-medium flex items-center gap-1 shrink-0">
+                    Xem chi tiết <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </div>
@@ -684,10 +896,10 @@ export const InternalInspectionTab: React.FC = () => {
                   href={selectedDirective.fullPdfUrl}
                   download={selectedDirective.pdfFilename}
                   className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm"
-                  title="Tải tệp PDF chính thức của Sở Giáo dục và Đào tạo Đồng Tháp"
+                  title={`Tải tệp ${selectedDirective.fileFormat?.toUpperCase() || 'PDF'} gốc`}
                 >
                   <Download className="w-4 h-4" />
-                  <span>Tải văn bản gốc PDF</span>
+                  <span>Tải tệp gốc (.{selectedDirective.fileFormat?.toUpperCase() || 'PDF'})</span>
                 </a>
                 <button
                   onClick={() => handleCopyText(selectedDirective.summary + '\n\n' + selectedDirective.keyPoints.join('\n'), selectedDirective.number)}
