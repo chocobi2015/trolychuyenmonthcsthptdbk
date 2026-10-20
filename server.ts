@@ -87,6 +87,8 @@ function savePersistedDepartmentMeetings(meetings: any[]) {
 
 const DEFAULT_CATEGORIES = [
   { id: 'all', name: 'Tất cả chuyên đề', label: 'Tất cả chuyên đề' },
+  { id: 'Kiểm tra nội bộ', name: 'Kiểm tra nội bộ', label: 'Kiểm tra nội bộ (CV 3953 & HD 1134)' },
+  { id: 'Giáo dục hòa nhập', name: 'Giáo dục hòa nhập', label: 'Giáo dục hòa nhập (CV 3326 & 3408)' },
   { id: 'Hồ sơ sổ sách điện tử', name: 'Hồ sơ sổ sách điện tử', label: 'Hồ sơ sổ sách điện tử' },
   { id: '2 buổi / ngày', name: '2 buổi / ngày', label: '2 buổi / ngày' },
   { id: 'Khung năng lực số & AI', name: 'Khung năng lực số & AI', label: 'Khung năng lực số & AI' },

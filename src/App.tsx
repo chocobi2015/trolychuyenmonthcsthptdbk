@@ -9,6 +9,7 @@ import { SchoolContextPanel } from './components/SchoolContextPanel';
 import { TeacherDirectoryTab } from './components/TeacherDirectoryTab';
 import { InclusiveEducationTab } from './components/InclusiveEducationTab';
 import { DepartmentMeetingsTab } from './components/DepartmentMeetingsTab';
+import { InternalInspectionTab } from './components/InternalInspectionTab';
 import { SchoolStudentsModal } from './components/SchoolStudentsModal';
 import { SchoolDocument, DepartmentDirective } from './types/document';
 import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
@@ -597,6 +598,11 @@ export default function App() {
         {/* Tab Featured: Kế hoạch kiểm tra, đánh giá giữa HK1 năm học 2026 - 2027 (Số 45) */}
         {activeTab === 'midterm_assessment_plan' && (
           <MidtermAssessmentPlanView />
+        )}
+
+        {/* Tab Chuyên đề: Kiểm tra nội bộ (CV 3953 & HD 1134 Sở GDĐT Đồng Tháp) */}
+        {activeTab === 'internal_inspection' && (
+          <InternalInspectionTab />
         )}
 
         {/* Tab 1: Document Builder */}

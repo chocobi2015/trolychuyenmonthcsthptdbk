@@ -12,11 +12,13 @@ import {
   Compass,
   CheckCircle2,
   FilePlus2,
-  Eye
+  Eye,
+  ShieldCheck
 } from 'lucide-react';
 
 export type MainNavTab = 
   | 'midterm_assessment_plan' 
+  | 'internal_inspection'
   | 'documents' 
   | 'directives' 
   | 'department_meetings' 
@@ -62,6 +64,14 @@ export const Header: React.FC<HeaderProps> = ({
       icon: <CalendarCheck className="w-4 h-4" />,
       isActive: activeTab === 'midterm_assessment_plan',
       onClick: () => setActiveTab('midterm_assessment_plan'),
+    },
+    {
+      id: 'internal_inspection',
+      label: 'Kiểm tra nội bộ',
+      sublabel: 'CV 3953 & HD 1134',
+      icon: <ShieldCheck className="w-4 h-4 text-amber-400" />,
+      isActive: activeTab === 'internal_inspection',
+      onClick: () => setActiveTab('internal_inspection'),
     },
     {
       id: 'documents',
