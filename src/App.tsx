@@ -20,6 +20,7 @@ import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN, DIRECTIVE_3326_GDHN, DIRECTIVE_3408_
 import { OFFICIAL_AI_EDUCATION_PLAN } from './data/aiEducationData';
 import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './data/qualityManagementData';
 import { MidtermAssessmentPlanView } from './components/MidtermAssessmentPlanView';
+import { PartyWorkTab } from './components/PartyWorkTab';
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
@@ -603,6 +604,11 @@ export default function App() {
         {/* Tab Chuyên đề: Kiểm tra nội bộ (CV 3953 & HD 1134 Sở GDĐT Đồng Tháp) */}
         {activeTab === 'internal_inspection' && (
           <InternalInspectionTab />
+        )}
+
+        {/* Tab Công tác Đảng bộ (04 Văn kiện mới & BCH 10 đồng chí) */}
+        {activeTab === 'party_work' && (
+          <PartyWorkTab />
         )}
 
         {/* Tab 1: Document Builder */}

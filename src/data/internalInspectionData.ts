@@ -24,7 +24,7 @@ export interface InspectionDirective {
   deadlines?: { task: string; dueDate: string; status: 'completed' | 'in_progress' | 'upcoming' }[];
   contactOfficer?: { name: string; phone: string; email: string; department: string };
   isReferenceDoc?: boolean;
-  fileFormat?: 'pdf' | 'docx' | 'doc';
+  fileFormat?: 'pdf' | 'docx' | 'doc' | 'xlsx';
 }
 
 export interface InspectionPillar {
@@ -174,6 +174,25 @@ export const OFFICIAL_INSPECTION_DIRECTIVES: InspectionDirective[] = [
       'Chỉ tiêu cụ thể: Kiểm tra toàn diện 70% giáo viên; 100% chuyên đề HSSS; kiểm tra nề nếp tổ chủ nhiệm 3 lần/năm; kiểm tra văn bằng chứng chỉ 2 lần/năm.',
       'Đột phá công nghệ: Kiểm tra việc ứng dụng CNTT và ứng dụng công nghệ trí tuệ nhân tạo (AI) trong soạn giảng và sử dụng thiết bị dạy học.',
       'Quy định rõ dự trù kinh phí thực hiện kiểm tra trích từ kinh phí hoạt động đơn vị theo Quy chế chi tiêu nội bộ.'
+    ],
+  },
+  {
+    id: 'nhan-su-moi-2026',
+    number: 'Tệp Excel: NHÂN SỰ MỚI.xlsx',
+    title: 'Danh sách nhân sự chính thức 120 CB-GV-NV Trường THCS & THPT Đốc Binh Kiều sau sáp nhập',
+    issuer: 'HỘI ĐỒNG SÁP NHẬP & BAN GIÁM HIỆU',
+    issueDate: 'Tháp Mười, tháng 10 năm 2026',
+    signBy: 'HIỆU TRƯỞNG Lê Thanh Cường',
+    summary: 'Danh sách nhân sự chính thức của trường sau khi sáp nhập 3 trường/điểm trường cũ (THPT Đốc Binh Kiều, THCS Đốc Binh Kiều, THCS Tân Kiều). Gồm 120 cán bộ, giáo viên, nhân viên được phân bổ vào 8 tổ chuyên môn và Ban Giám hiệu, là căn cứ nhân sự tuyệt đối để phân công Ban kiểm tra nội bộ và các đoàn kiểm tra.',
+    fullPdfUrl: '/downloads/NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx',
+    pdfFilename: 'NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx',
+    fileFormat: 'xlsx',
+    isReferenceDoc: true,
+    keyPoints: [
+      'Quy mô toàn trường: 120 CB-GV-NV (63 nữ, 57 nam, 85 đảng viên chiếm 70.8%, 9 thạc sĩ).',
+      'Ban Giám hiệu: 04 thành viên (Thầy Lê Thanh Cường - Hiệu trưởng; Thầy Nguyễn Minh Trí - PHT Thường trực; Cô Phan Thanh Thảo - PHT; Thầy Nguyễn Thanh Tòng - PHT).',
+      '07 Tổ chuyên môn liên cấp: Toán (15), Ngữ văn - TV - TB (17), KHTN - Công nghệ (26), Lịch sử - Địa lý - GDCD (16), Ngoại ngữ - Tin học (16), GDTC - GDQP-AN - Nghệ thuật (12) và Tổ Văn phòng (14).',
+      'Toàn bộ danh sách 22 thành viên Ban Kiểm tra nội bộ và các đoàn kiểm tra theo từng chuyên đề đều lấy chuẩn 100% từ tệp này.'
     ],
   },
 ];

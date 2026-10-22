@@ -13,12 +13,14 @@ import {
   CheckCircle2,
   FilePlus2,
   Eye,
-  ShieldCheck
+  ShieldCheck,
+  Flag
 } from 'lucide-react';
 
 export type MainNavTab = 
   | 'midterm_assessment_plan' 
   | 'internal_inspection'
+  | 'party_work'
   | 'documents' 
   | 'directives' 
   | 'department_meetings' 
@@ -72,6 +74,14 @@ export const Header: React.FC<HeaderProps> = ({
       icon: <ShieldCheck className="w-4 h-4 text-amber-400" />,
       isActive: activeTab === 'internal_inspection',
       onClick: () => setActiveTab('internal_inspection'),
+    },
+    {
+      id: 'party_work',
+      label: 'Công tác Đảng bộ',
+      sublabel: 'BCH 10 Đ/c & 4 Văn kiện',
+      icon: <Flag className="w-4 h-4 text-red-500" />,
+      isActive: activeTab === 'party_work',
+      onClick: () => setActiveTab('party_work'),
     },
     {
       id: 'documents',

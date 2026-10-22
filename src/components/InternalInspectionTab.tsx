@@ -38,28 +38,38 @@ import {
   InspectionPillar
 } from '../data/internalInspectionData';
 import { SCHOOL_OFFICIAL_PROFILE } from '../data/schoolOfficialData';
+import { ComprehensiveInspectionPlanDoc } from './ComprehensiveInspectionPlanDoc';
+import {
+  MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR,
+  MonthlyDetailedInspection,
+  DETAILED_INSPECTION_PILLARS_UNABRIDGED
+} from '../data/detailedInspectionPlanFullText';
 
-type SubTab = 'plan' | 'pillars' | 'committee' | 'directives' | 'templates' | 'compliance';
+export type SubTab = 'full_plan' | 'monthly_schedule' | 'pillars' | 'committee' | 'directives' | 'templates' | 'compliance';
 
 export const InternalInspectionTab: React.FC = () => {
-  const [activeSubTab, setActiveSubTab] = useState<SubTab>('plan');
+  const [activeSubTab, setActiveSubTab] = useState<SubTab>('full_plan');
   const [selectedMonth, setSelectedMonth] = useState<string>('all');
   const [selectedCampus, setSelectedCampus] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedTemplate, setSelectedTemplate] = useState<InspectionFormTemplate>(OFFICIAL_INSPECTION_TEMPLATES[0]);
   const [selectedDirective, setSelectedDirective] = useState<InspectionDirective>(OFFICIAL_INSPECTION_DIRECTIVES[0]);
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
 
-  // Filter schedule items
-  const filteredSchedule = SCHOOL_INSPECTION_SCHEDULE.filter((item) => {
-    const matchesMonth = selectedMonth === 'all' || item.timeframe.includes(selectedMonth);
-    const matchesCampus = selectedCampus === 'all' || item.campus === selectedCampus;
+  // Filter 29 full-year monthly schedule items
+  const filteredSchedule = MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR.filter((item) => {
+    const matchesMonth = selectedMonth === 'all' || item.month.includes(selectedMonth);
+    const matchesCampus = selectedCampus === 'all' || item.campus.includes(selectedCampus);
+    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch =
+      searchTerm === '' ||
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.target.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.teamLeader.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.scope.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesMonth && matchesCampus && matchesSearch;
+      item.leadInspector.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.specificTasks.some(t => t.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      item.expectedOutput.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesMonth && matchesCampus && matchesCategory && matchesSearch;
   });
 
   const handleCopyText = (text: string, label: string) => {
@@ -214,15 +224,29 @@ export const InternalInspectionTab: React.FC = () => {
       {/* 2. Sub-tab Navigation */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-1.5 flex flex-wrap gap-1">
         <button
-          onClick={() => setActiveSubTab('plan')}
+          onClick={() => setActiveSubTab('full_plan')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition ${
-            activeSubTab === 'plan'
+            activeSubTab === 'full_plan'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+          }`}
+        >
+          <FileText className="w-4 h-4 text-amber-300" />
+          <span>Văn kiện Kế hoạch Toàn văn (Bóc tách 25-30 trang)</span>
+          <span className="px-1.5 py-0.2 bg-amber-400 text-slate-950 font-extrabold rounded-full text-[10px]">Đầy đủ</span>
+        </button>
+
+        <button
+          onClick={() => setActiveSubTab('monthly_schedule')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition ${
+            activeSubTab === 'monthly_schedule'
               ? 'bg-blue-600 text-white shadow-sm'
               : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
           }`}
         >
           <Calendar className="w-4 h-4" />
-          <span>Lịch 14 cuộc kiểm tra chi tiết</span>
+          <span>Ma trận 29 đợt kiểm tra (12 tháng: T9/2026 - T8/2027)</span>
+          <span className="px-1.5 py-0.2 bg-blue-100 text-blue-900 font-bold rounded-full text-[10px]">29 đợt</span>
         </button>
 
         <button
@@ -259,7 +283,7 @@ export const InternalInspectionTab: React.FC = () => {
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>4 Văn bản chỉ đạo & Tham khảo (Cũ & Mới)</span>
+          <span>Văn bản chỉ đạo & Tham khảo (Cũ & Mới)</span>
         </button>
 
         <button
@@ -289,8 +313,13 @@ export const InternalInspectionTab: React.FC = () => {
 
       {/* 3. Sub-tab Content Areas */}
 
-      {/* ==================== SUBTAB 1: KẾ HOẠCH KIỂM TRA ==================== */}
-      {activeSubTab === 'plan' && (
+      {/* ==================== SUBTAB 0: TOÀN VĂN KẾ HOẠCH BÓC TÁCH ==================== */}
+      {activeSubTab === 'full_plan' && (
+        <ComprehensiveInspectionPlanDoc />
+      )}
+
+      {/* ==================== SUBTAB 1: MA TRẬN 29 ĐỢT KIỂM TRA 12 THÁNG ==================== */}
+      {activeSubTab === 'monthly_schedule' && (
         <div className="space-y-6">
           {/* Filters & Search Header */}
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
@@ -299,7 +328,7 @@ export const InternalInspectionTab: React.FC = () => {
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Tìm kiếm nội dung, đối tượng, người phụ trách, điểm trường..."
+                  placeholder="Tìm kiếm nội dung, đối tượng, người phụ trách, điểm trường, nhiệm vụ cụ thể..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 rounded-lg text-xs border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -315,7 +344,8 @@ export const InternalInspectionTab: React.FC = () => {
                     onChange={(e) => setSelectedMonth(e.target.value)}
                     className="bg-transparent font-medium text-slate-800 focus:outline-none cursor-pointer"
                   >
-                    <option value="all">Toàn bộ năm học</option>
+                    <option value="all">Toàn bộ 12 tháng</option>
+                    <option value="09/2026">Tháng 09/2026</option>
                     <option value="10/2026">Tháng 10/2026</option>
                     <option value="11/2026">Tháng 11/2026</option>
                     <option value="12/2026">Tháng 12/2026</option>
@@ -324,6 +354,9 @@ export const InternalInspectionTab: React.FC = () => {
                     <option value="03/2027">Tháng 03/2027</option>
                     <option value="04/2027">Tháng 04/2027</option>
                     <option value="05/2027">Tháng 05/2027</option>
+                    <option value="06/2027">Tháng 06/2027 (Hè - Thi TN)</option>
+                    <option value="07/2027">Tháng 07/2027 (Tuyển sinh 10)</option>
+                    <option value="08/2027">Tháng 08/2027 (Năm học mới)</option>
                   </select>
                 </div>
 
@@ -338,8 +371,25 @@ export const InternalInspectionTab: React.FC = () => {
                     <option value="all">Tất cả điểm trường</option>
                     <option value="Cả 3 điểm trường">Cả 3 điểm trường</option>
                     <option value="Điểm chính (THPT)">Điểm chính (THPT)</option>
-                    <option value="Điểm Tân Kiều (THCS)">Điểm Tân Kiều (THCS - 11km)</option>
-                    <option value="Điểm Đốc Binh Kiều (THCS)">Điểm Đốc Binh Kiều (THCS)</option>
+                    <option value="Tân Kiều">Điểm THCS Tân Kiều (11km)</option>
+                    <option value="Đốc Binh Kiều">Điểm THCS Đốc Binh Kiều</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-600">
+                  <Layers className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Lĩnh vực:</span>
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="bg-transparent font-medium text-slate-800 focus:outline-none cursor-pointer"
+                  >
+                    <option value="all">Tất cả lĩnh vực</option>
+                    <option value="Chuyên môn">Chuyên môn</option>
+                    <option value="Nền nếp - Đoàn thể">Nền nếp - Đoàn thể</option>
+                    <option value="Tài chính - Cơ sở vật chất">Tài chính - CSVC</option>
+                    <option value="Hành chính - Quản trị">Hành chính - Quản trị</option>
+                    <option value="Khảo thí - Kiểm định">Khảo thí - Kiểm định</option>
                   </select>
                 </div>
 
@@ -355,19 +405,22 @@ export const InternalInspectionTab: React.FC = () => {
             </div>
           </div>
 
-          {/* Table of 14 Inspections */}
+          {/* Table of 29 Full-Year Monthly Inspections */}
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+            <div className="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
-                <h3 className="text-sm font-bold text-slate-800 uppercase">
-                  Danh Mục Các Cuộc Kiểm Tra Năm Học 2026 - 2027 ({filteredSchedule.length} / 14 cuộc)
+                <h3 className="text-sm font-bold text-slate-800 uppercase flex items-center gap-2">
+                  <span>Ma Trận 29 Đợt Kiểm Tra Trọn Vẹn 12 Tháng Năm Học 2026 - 2027</span>
+                  <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold text-xs">
+                    {filteredSchedule.length} / 29 đợt
+                  </span>
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Ban hành kèm theo Quyết định số 48/QĐ-THCS-THPTĐBK ngày 15/10/2026 của Hiệu trưởng
+                  Ban hành kèm theo Kế hoạch số 48/KH-THCS&THPTĐBK ngày 15/10/2026 của Hiệu trưởng Lê Thanh Cường
                 </p>
               </div>
-              <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-100 text-blue-800">
-                Hiệu trưởng Lê Thanh Cường phê duyệt
+              <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                100% Cán bộ kiểm tra phân công đích danh
               </span>
             </div>
 
@@ -376,68 +429,63 @@ export const InternalInspectionTab: React.FC = () => {
                 <thead className="bg-slate-100/80 font-bold text-slate-800 uppercase tracking-wider text-[11px]">
                   <tr>
                     <th scope="col" className="px-3 py-3 text-center w-12">TT</th>
-                    <th scope="col" className="px-4 py-3 min-w-[280px]">Nội dung kiểm tra</th>
+                    <th scope="col" className="px-3 py-3 min-w-[120px]">Tháng & Thời gian</th>
+                    <th scope="col" className="px-4 py-3 min-w-[300px]">Nội dung kiểm tra & Nhiệm vụ bóc tách</th>
                     <th scope="col" className="px-4 py-3 min-w-[200px]">Đối tượng & Điểm trường</th>
-                    <th scope="col" className="px-3 py-3 min-w-[110px]">Thời gian</th>
-                    <th scope="col" className="px-3 py-3 min-w-[110px]">Hình thức</th>
-                    <th scope="col" className="px-4 py-3 min-w-[160px]">Người phụ trách & Đoàn</th>
-                    <th scope="col" className="px-3 py-3 text-center min-w-[90px]">Trạng thái</th>
+                    <th scope="col" className="px-4 py-3 min-w-[170px]">Lực lượng kiểm tra</th>
+                    <th scope="col" className="px-4 py-3 min-w-[160px]">Sản phẩm & Căn cứ</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 bg-white">
-                  {filteredSchedule.map((item) => (
+                  {filteredSchedule.map((item, idx) => (
                     <tr key={item.id} className="hover:bg-blue-50/50 transition">
                       <td className="px-3 py-3.5 text-center font-bold text-slate-600 bg-slate-50/50">
-                        {item.orderNumber}
-                      </td>
-                      <td className="px-4 py-3.5">
-                        <div className="font-bold text-slate-900 leading-snug">{item.title}</div>
-                        <div className="text-[11px] text-slate-500 mt-1 line-clamp-2">{item.scope}</div>
-                      </td>
-                      <td className="px-4 py-3.5">
-                        <div className="font-medium text-slate-800">{item.target}</div>
-                        <div className="flex items-center gap-1 text-[11px] text-indigo-600 mt-0.5 font-medium">
-                          <Building className="w-3 h-3 shrink-0" />
-                          <span>{item.campus}</span>
-                        </div>
+                        {idx + 1}
                       </td>
                       <td className="px-3 py-3.5 whitespace-nowrap">
-                        <div className="font-bold text-slate-800">{item.timeframe}</div>
-                        <div className="text-[10px] text-slate-500 mt-0.5">{item.dateRange}</div>
-                      </td>
-                      <td className="px-3 py-3.5 whitespace-nowrap">
-                        <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
-                          item.method === 'Kiểm tra toàn diện'
-                            ? 'bg-purple-100 text-purple-800 border border-purple-200'
-                            : 'bg-sky-100 text-sky-800 border border-sky-200'
+                        <div className="font-bold text-blue-900">{item.month}</div>
+                        <div className="text-[10px] text-slate-500 font-mono mt-0.5">{item.timeframe}</div>
+                        <span className={`inline-block mt-1 px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+                          item.category === 'Chuyên môn' ? 'bg-purple-100 text-purple-800' :
+                          item.category === 'Nền nếp - Đoàn thể' ? 'bg-amber-100 text-amber-800' :
+                          item.category === 'Tài chính - Cơ sở vật chất' ? 'bg-emerald-100 text-emerald-800' :
+                          item.category === 'Khảo thí - Kiểm định' ? 'bg-rose-100 text-rose-800' :
+                          'bg-sky-100 text-sky-800'
                         }`}>
-                          {item.method}
+                          {item.category}
                         </span>
                       </td>
                       <td className="px-4 py-3.5">
-                        <div className="font-semibold text-slate-900">{item.teamLeader}</div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
-                          Thành viên: {item.teamMembers.join(', ')}
+                        <div className="font-bold text-slate-900 leading-snug">{item.title}</div>
+                        <div className="mt-1.5 space-y-1 text-[11px] text-slate-600">
+                          {item.specificTasks.map((task, tIdx) => (
+                            <div key={tIdx} className="flex items-start gap-1.5">
+                              <span className="text-blue-500 font-bold">•</span>
+                              <span>{task}</span>
+                            </div>
+                          ))}
                         </div>
                       </td>
-                      <td className="px-3 py-3.5 text-center whitespace-nowrap">
-                        {item.status === 'in_progress' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
-                            <Clock className="w-3 h-3 text-amber-600 animate-spin" />
-                            Đang tiến hành
-                          </span>
-                        )}
-                        {item.status === 'scheduled' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
-                            Theo lịch
-                          </span>
-                        )}
-                        {item.status === 'completed' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                            Đã hoàn thành
-                          </span>
-                        )}
+                      <td className="px-4 py-3.5">
+                        <div className="font-medium text-slate-800">{item.target}</div>
+                        <div className="flex items-center gap-1 text-[11px] text-indigo-700 mt-1 font-semibold">
+                          <Building className="w-3.5 h-3.5 shrink-0" />
+                          <span>{item.campus}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3.5">
+                        <div className="font-semibold text-slate-900">{item.leadInspector}</div>
+                        <div className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                          {item.teamMembers.join(', ')}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3.5">
+                        <div className="font-medium text-emerald-800 text-[11px] leading-snug">
+                          {item.expectedOutput}
+                        </div>
+                        <div className="text-[10px] text-slate-500 italic mt-1">
+                          {item.legalBasis}
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -824,11 +872,11 @@ export const InternalInspectionTab: React.FC = () => {
         </div>
       )}
 
-      {/* ==================== SUBTAB 4: 4 VĂN BẢN CHỈ ĐẠO & THAM KHẢO ==================== */}
+      {/* ==================== SUBTAB 4: VĂN BẢN CHỈ ĐẠO & THAM KHẢO ==================== */}
       {activeSubTab === 'directives' && (
         <div className="space-y-6">
           {/* Directive Selector Bar */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
             {OFFICIAL_INSPECTION_DIRECTIVES.map((dir) => (
               <div
                 key={dir.id}
@@ -848,28 +896,32 @@ export const InternalInspectionTab: React.FC = () => {
                         ? 'bg-blue-100 text-blue-800 border border-blue-200'
                         : dir.id === 'kh-76-thptdbk-2025'
                         ? 'bg-amber-100 text-amber-900 border border-amber-200'
-                        : 'bg-teal-100 text-teal-900 border border-teal-200'
+                        : dir.id === 'kh-134-thcstk-2025'
+                        ? 'bg-teal-100 text-teal-900 border border-teal-200'
+                        : 'bg-indigo-100 text-indigo-900 border border-indigo-200'
                     }`}>
                       {dir.id === 'cv-3953-2026'
-                        ? 'Năm mới (2026-2027)'
+                        ? 'Chỉ đạo Sở GDĐT 26-27'
                         : dir.id === 'hd-1134-2025'
                         ? 'Hướng dẫn Sở GDĐT'
                         : dir.id === 'kh-76-thptdbk-2025'
-                        ? 'Tham khảo THPT cũ'
-                        : 'Tham khảo THCS cũ'}
+                        ? 'Kế hoạch THPT cũ'
+                        : dir.id === 'kh-134-thcstk-2025'
+                        ? 'Kế hoạch THCS cũ'
+                        : 'Excel NHÂN SỰ MỚI'}
                     </span>
                     <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-700">
                       .{dir.fileFormat?.toUpperCase() || 'PDF'}
                     </span>
                   </div>
-                  <div className="font-bold text-slate-900 text-sm leading-snug">{dir.number}</div>
+                  <div className="font-bold text-slate-900 text-xs sm:text-sm leading-snug">{dir.number}</div>
                   <div className="text-xs text-slate-600 mt-1 line-clamp-2">{dir.title}</div>
                 </div>
 
                 <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-200/80 text-xs">
-                  <span className="font-semibold text-slate-700 truncate max-w-[120px]">{dir.signBy}</span>
+                  <span className="font-semibold text-slate-700 truncate max-w-[110px]">{dir.signBy}</span>
                   <span className="text-blue-600 font-medium flex items-center gap-1 shrink-0">
-                    Xem chi tiết <ChevronRight className="w-3.5 h-3.5" />
+                    Xem <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </div>

@@ -15,6 +15,13 @@ import {
 } from 'docx';
 import * as fs from 'fs';
 import * as path from 'path';
+import {
+  SCHOOL_INSPECTION_BACKGROUND,
+  SCHOOL_INSPECTION_OBJECTIVES,
+  DETAILED_INSPECTION_PILLARS_UNABRIDGED,
+  MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR
+} from '../src/data/detailedInspectionPlanFullText';
+import { SCHOOL_INSPECTION_COMMITTEE } from '../src/data/internalInspectionData';
 
 const tableBorder = { style: BorderStyle.SINGLE, size: 4, color: '000000' };
 const cellGridBorder = {
@@ -189,20 +196,372 @@ function createSignOffTable(
   });
 }
 
+function p(text: string, bold = false, italics = false, indent = 0): Paragraph {
+  return new Paragraph({
+    indent: indent > 0 ? { left: indent * 360 } : undefined,
+    children: [
+      new TextRun({ text, bold, italics, font: 'Times New Roman', size: 24 }),
+    ],
+  });
+}
+
+function h1(text: string): Paragraph {
+  return new Paragraph({
+    spacing: { before: 240, after: 80 },
+    children: [
+      new TextRun({ text, bold: true, font: 'Times New Roman', size: 26 }),
+    ],
+  });
+}
+
+function h2(text: string): Paragraph {
+  return new Paragraph({
+    spacing: { before: 180, after: 60 },
+    children: [
+      new TextRun({ text, bold: true, font: 'Times New Roman', size: 24 }),
+    ],
+  });
+}
+
+function h3(text: string): Paragraph {
+  return new Paragraph({
+    spacing: { before: 120, after: 40 },
+    children: [
+      new TextRun({ text, bold: true, italics: true, font: 'Times New Roman', size: 23 }),
+    ],
+  });
+}
+
 export async function generateAllInspectionDocuments() {
   const downloadsDir = path.join(process.cwd(), 'public', 'downloads');
   if (!fs.existsSync(downloadsDir)) {
     fs.mkdirSync(downloadsDir, { recursive: true });
   }
 
-  // 1. GENERATE PLAN DOCX
-  console.log('Generating School Internal Inspection Plan DOCX...');
+  // 1. GENERATE FULL-LENGTH UNABRIDGED PLAN DOCX
+  console.log('Generating School Internal Inspection Plan DOCX (Full-Length & Bóc Tách Chi Tiết)...');
+  
+  const planDocChildren: (Paragraph | Table)[] = [];
+
+  // Quốc hiệu & Tiêu ngữ
+  planDocChildren.push(
+    createHeaderTable(
+      'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
+      'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
+      'Số: 48/KH-THCS&THPTĐBK',
+      'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
+      'Độc lập - Tự do - Hạnh phúc',
+      'Tháp Mười, ngày 15 tháng 10 năm 2026'
+    )
+  );
+
+  planDocChildren.push(
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 240, after: 40 },
+      children: [
+        new TextRun({ text: 'KẾ HOẠCH', bold: true, font: 'Times New Roman', size: 30 }),
+      ],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 40 },
+      children: [
+        new TextRun({ text: 'CÔNG TÁC KIỂM TRA NỘI BỘ NĂM HỌC 2026 - 2027', bold: true, font: 'Times New Roman', size: 26 }),
+      ],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 180 },
+      children: [
+        new TextRun({
+          text: '(Kết hợp hoàn chỉnh Kế hoạch số 76/KH-THPT ĐBK và Kế hoạch số 134/KH-THCS.TK của hai đơn vị trường cũ trước sáp nhập; bám sát Hướng dẫn số 1134/SGDĐT-TCCB của Sở GDĐT Đồng Tháp)',
+          italics: true,
+          font: 'Times New Roman',
+          size: 21
+        }),
+      ],
+    })
+  );
+
+  // Căn cứ pháp lý
+  const legalBases = [
+    'Căn cứ Luật Giáo dục ngày 14 tháng 6 năm 2019;',
+    'Căn cứ Luật Thanh tra ngày 14 tháng 11 năm 2022;',
+    'Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05 tháng 8 năm 2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;',
+    'Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15 tháng 9 năm 2020 của Bộ GDĐT ban hành Điều lệ trường THCS, trường THPT và trường phổ thông có nhiều cấp học;',
+    'Căn cứ Thông tư số 22/2021/TT-BGDĐT ngày 20 tháng 7 năm 2021 của Bộ GDĐT quy định về đánh giá học sinh trung học cơ sở và học sinh trung học phổ thông;',
+    'Căn cứ Quyết định số 2606/QĐ-UBND ngày 13 tháng 8 năm 2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;',
+    'Căn cứ Công văn số 3953/SGDĐT-TCCB ngày 08 tháng 10 năm 2026 của Sở GDĐT Đồng Tháp V/v thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027;',
+    'Căn cứ Hướng dẫn số 1134/SGDĐT-TCCB ngày 17 tháng 10 năm 2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ tại các cơ sở giáo dục;',
+    'Căn cứ Kế hoạch giáo dục nhà trường số 34/KH-THCS&THPTĐBK ngày 25 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều,'
+  ];
+  legalBases.forEach(lb => planDocChildren.push(p(lb, false, true)));
+
+  planDocChildren.push(
+    p('Trường THCS và THPT Đốc Binh Kiều xây dựng Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 với các nội dung chi tiết như sau:')
+  );
+
+  // PHẦN A. ĐẶC ĐIỂM TÌNH HÌNH
+  planDocChildren.push(h1('A. ĐẶC ĐIỂM TÌNH HÌNH CỦA NHÀ TRƯỜNG SAU SÁP NHẬP'));
+  planDocChildren.push(h2('I. Khái quát quy mô trường lớp, học sinh và đội ngũ'));
+  
+  planDocChildren.push(h3('1. Quy mô các khối lớp học và số liệu huy động học sinh'));
+  planDocChildren.push(p(`Năm học 2026 - 2027, Trường THCS và THPT Đốc Binh Kiều vận hành quy mô liên cấp gồm 53 lớp học với tổng số 2.111 học sinh tại 3 điểm trường, cụ thể:`));
+  
+  SCHOOL_INSPECTION_BACKGROUND.studentScale.campusBreakdown.forEach((cp, idx) => {
+    planDocChildren.push(
+      p(`1.${idx + 1}. ${cp.campusName}: Địa chỉ tại ${cp.address}; quy mô ${cp.classesCount} lớp học với ${cp.studentsCount} học sinh (${cp.grades}). Đặc điểm: ${cp.specialFeatures}`, false, false, 1)
+    );
+  });
+
+  planDocChildren.push(h3('2. Đội ngũ cán bộ, giáo viên, nhân viên (Chuẩn 120 nhân sự từ NHÂN SỰ MỚI)'));
+  planDocChildren.push(
+    p(`- Tổng số cán bộ quản lý, giáo viên, nhân viên toàn trường: 120 người (Nữ: ${SCHOOL_INSPECTION_BACKGROUND.staffScale.femaleCount}, Nam: ${SCHOOL_INSPECTION_BACKGROUND.staffScale.maleCount}).`),
+    p(`- Đảng viên Đảng Cộng sản Việt Nam: ${SCHOOL_INSPECTION_BACKGROUND.staffScale.partyMembersCount}/120 đồng chí (đạt tỉ lệ ${((85/120)*100).toFixed(1)}%).`),
+    p(`- Trình độ đào tạo: 100% cán bộ giáo viên đạt chuẩn theo Luật Giáo dục 2019; có 09 cán bộ, giáo viên có trình độ Thạc sĩ chuyên ngành và quản lý giáo dục.`),
+    p(`- Cơ cấu 08 tổ chuyên môn và văn phòng sau sáp nhập:`)
+  );
+
+  SCHOOL_INSPECTION_BACKGROUND.staffScale.departmentCounts.forEach(d => {
+    planDocChildren.push(p(`+ ${d.name}: ${d.count} thành viên. Phụ trách: ${d.head}.`, false, false, 1));
+  });
+
+  planDocChildren.push(h3('3. Cơ sở vật chất, trang thiết bị dạy học hiện có tại 3 điểm trường'));
+  planDocChildren.push(
+    p(`- Phòng học: Toàn trường có 53 phòng học kiên cố và bán kiên cố bố trí đủ cho 53 lớp học.`),
+    p(`- Phòng chức năng và bộ môn: Có 22 phòng bộ môn (gồm 8 phòng thí nghiệm thực hành Lý - Hóa - Sinh, 5 phòng máy vi tính với tổng cộng 165 máy tính có kết nối mạng Internet an toàn, 3 phòng học ngoại ngữ, phòng âm nhạc, mỹ thuật, đa năng).`),
+    p(`- Bộ phận Thư viện: 03 phòng thư viện tại 3 điểm trường với hơn 15.000 bản sách giáo khoa, sách tham khảo, sách nghiệp vụ và phần mềm thư viện số.`),
+    p(`- Y tế học đường và PCCC: 03 phòng y tế học đường có tủ thuốc sơ cấp cứu học sinh; trang bị 13 tủ chữa cháy vách tường, 03 máy bơm chữa cháy công suất lớn, 48 bình chữa cháy và 38 camera giám sát an ninh.`)
+  );
+
+  planDocChildren.push(h2('II. Đánh giá Thuận lợi và Khó khăn'));
+  planDocChildren.push(h3('1. Thuận lợi:'));
+  SCHOOL_INSPECTION_BACKGROUND.strengths.forEach(s => planDocChildren.push(p(`- ${s}`, false, false, 1)));
+  
+  planDocChildren.push(h3('2. Khó khăn:'));
+  SCHOOL_INSPECTION_BACKGROUND.challenges.forEach(c => planDocChildren.push(p(`- ${c}`, false, false, 1)));
+
+  // PHẦN B. MỤC ĐÍCH YÊU CẦU
+  planDocChildren.push(h1('B. MỤC ĐÍCH, YÊU CẦU CỦA CÔNG TÁC KIỂM TRA NỘI BỘ'));
+  planDocChildren.push(h2('I. Mục đích:'));
+  SCHOOL_INSPECTION_OBJECTIVES.purposes.forEach(pu => planDocChildren.push(p(`- ${pu}`, false, false, 1)));
+
+  planDocChildren.push(h2('II. Yêu cầu:'));
+  SCHOOL_INSPECTION_OBJECTIVES.requirements.forEach(req => planDocChildren.push(p(`- ${req}`, false, false, 1)));
+
+  // PHẦN C. NỘI DUNG VÀ NHIỆM VỤ KIỂM TRA BÓC TÁCH CHI TIẾT
+  planDocChildren.push(h1('C. NỘI DUNG KIỂM TRA CỤ THỂ - BÓC TÁCH CHI TIẾT 11 LĨNH VỰC'));
+  planDocChildren.push(p('Kế hoạch kiểm tra nội bộ nhà trường năm học 2026 - 2027 được bóc tách toàn diện thành 11 nhóm lĩnh vực kiểm tra trọng tâm, tích hợp đầy đủ các nội dung kiểm tra cấp THPT (kế thừa Kế hoạch 76) và cấp THCS (kế thừa Kế hoạch 134) cùng các quy định mới nhất của Sở GDĐT Đồng Tháp:'));
+
+  DETAILED_INSPECTION_PILLARS_UNABRIDGED.forEach((pillar) => {
+    planDocChildren.push(
+      h2(`${pillar.orderNumber}. ${pillar.domainName}`),
+      p(`(Căn cứ kế thừa: ${pillar.sourceOrigin})`, false, true)
+    );
+
+    // 1. Đối tượng kiểm tra
+    planDocChildren.push(h3(`${pillar.orderNumber}.1. Đối tượng kiểm tra chi tiết:`));
+    pillar.targetsDetail.forEach(t => planDocChildren.push(p(`- ${t}`, false, false, 1)));
+
+    // 2. Lực lượng kiểm tra
+    planDocChildren.push(h3(`${pillar.orderNumber}.2. Lực lượng tham gia kiểm tra:`));
+    planDocChildren.push(
+      p(`- Trưởng đoàn kiểm tra: ${pillar.inspectionForce.lead}`, false, false, 1),
+      p(`- Phó Trưởng đoàn: ${pillar.inspectionForce.deputies.join(', ')}`, false, false, 1),
+      p(`- Các thành viên: ${pillar.inspectionForce.members.join(', ')}`, false, false, 1)
+    );
+
+    // 3. Hình thức, chỉ tiêu và thời gian
+    planDocChildren.push(h3(`${pillar.orderNumber}.3. Hình thức, chỉ tiêu và thời gian kiểm tra:`));
+    planDocChildren.push(
+      p(`- Kiểm tra toàn diện: ${pillar.formatsAndMetrics.comprehensiveRate}`, false, false, 1),
+      p(`- Kiểm tra chuyên đề: ${pillar.formatsAndMetrics.thematicRate}`, false, false, 1),
+      p(`- Kiểm tra đột xuất: ${pillar.formatsAndMetrics.surpriseRate}`, false, false, 1),
+      p(`- Tần suất thường xuyên: ${pillar.formatsAndMetrics.routineFrequency}`, false, false, 1),
+      p(`- Thời gian thực hiện: ${pillar.formatsAndMetrics.implementationTime}`, false, false, 1)
+    );
+
+    // 4. Nội dung kiểm tra chi tiết
+    planDocChildren.push(h3(`${pillar.orderNumber}.4. Nội dung và tiêu chuẩn kiểm tra chi tiết (Bóc tách nghiệp vụ):`));
+    pillar.breakdownSections.forEach(sec => {
+      planDocChildren.push(p(sec.heading, true, false, 1));
+      sec.items.forEach(it => planDocChildren.push(p(`+ ${it}`, false, false, 2)));
+    });
+
+    // 5. Hồ sơ lưu trữ
+    planDocChildren.push(h3(`${pillar.orderNumber}.5. Sản phẩm hồ sơ lưu trữ sau kiểm tra:`));
+    pillar.deliverableRecords.forEach(dr => planDocChildren.push(p(`- ${dr}`, false, false, 1)));
+  });
+
+  // PHẦN D. DỰ TRÙ KINH PHÍ
+  planDocChildren.push(h1('D. DỰ TRÙ KINH PHÍ CHO HOẠT ĐỘNG KIỂM TRA NỘI BỘ'));
+  planDocChildren.push(
+    p('1. Chế độ chi cho công tác kiểm tra nội bộ nhà trường được thực hiện căn cứ vào Quy chế chi tiêu nội bộ năm học 2026 - 2027 đã được Hội nghị cán bộ, viên chức, người lao động nhà trường biểu quyết thông qua.'),
+    p('2. Nguồn kinh phí: Trích từ nguồn kinh phí hoạt động thường xuyên của nhà trường và các nguồn kinh phí hợp pháp khác.'),
+    p('3. Định mức chi: Chi trả phụ cấp làm việc ngoài giờ, công tác phí đi lại giữa các điểm trường (đặc biệt Điểm Tân Kiều cách 11km), chi nước uống và văn phòng phẩm in ấn hồ sơ, biểu mẫu kiểm tra theo quyết định thành lập từng đoàn kiểm tra cụ thể của Hiệu trưởng.')
+  );
+
+  // PHẦN E. TỔ CHỨC THỰC HIỆN
+  planDocChildren.push(h1('E. TỔ CHỨC THỰC HIỆN VÀ PHÂN CÔNG TRÁCH NHIỆM'));
+  planDocChildren.push(h2('I. Trách nhiệm của Lãnh đạo nhà trường'));
+  planDocChildren.push(
+    p('1. Hiệu trưởng (Thầy Lê Thanh Cường):', true),
+    p('- Chịu trách nhiệm toàn diện trước Giám đốc Sở GDĐT về công tác kiểm tra nội bộ của đơn vị; ban hành Quyết định thành lập Ban kiểm tra nội bộ, Quyết định thành lập các đoàn kiểm tra theo từng chuyên đề; phê duyệt Kế hoạch tiến hành kiểm tra (Mẫu 03) và ký ban hành Thông báo kết luận kiểm tra (Mẫu 06).', false, false, 1),
+    p('- Trực tiếp phụ trách kiểm tra công tác quản lý tài chính, tài sản công, phòng chống tham nhũng, tiếp công dân, giải quyết khiếu nại tố cáo và công tác an toàn trường học.', false, false, 1),
+    p('2. Phó Hiệu trưởng Thường trực (Thầy Nguyễn Minh Trí):', true),
+    p('- Thường trực Ban KTNB; trực tiếp phụ trách theo dõi công tác kiểm tra quy chế chuyên môn toàn trường & Điểm chính THPT (Khối 10, 11, 12); làm Trưởng các đoàn kiểm tra hoạt động sư phạm nhà giáo, kiểm tra khảo thí, ôn thi tốt nghiệp THPT và quản lý dạy thêm học thêm.', false, false, 1),
+    p('3. Phó Hiệu trưởng (Cô Phan Thanh Thảo):', true),
+    p('- Phụ trách công tác KTNB tại Điểm trường THCS Đốc Binh Kiều (24 lớp, 980 HS); trực tiếp làm Trưởng các đoàn kiểm tra chuyên môn cấp THCS, công tác chủ nhiệm lớp, giáo dục hòa nhập cho 25 học sinh khuyết tật và hoạt động Đội Thiếu niên tiền phong.', false, false, 1),
+    p('4. Phó Hiệu trưởng (Thầy Nguyễn Thanh Tòng):', true),
+    p('- Phụ trách công tác KTNB tại Điểm trường THCS Tân Kiều cách 11km (15 lớp, 602 HS); trực tiếp làm Trưởng các đoàn kiểm tra việc thực hiện CT GDPT 2018 tại cơ sở Tân Kiều, quản lý tài sản, thiết bị dạy học, bán trú và an toàn giao thông.', false, false, 1)
+  );
+
+  planDocChildren.push(h2('II. Trách nhiệm của các Tổ chuyên môn, Đoàn thể và Cá nhân'));
+  planDocChildren.push(
+    p('1. Các Tổ trưởng chuyên môn, Tổ trưởng Văn phòng: Xây dựng kế hoạch kiểm tra nội bộ của tổ mình; phân công tổ phó và giáo viên cốt cán tham gia các đoàn kiểm tra theo điều động của Hiệu trưởng; lưu trữ biên bản kiểm tra cấp tổ.', false, false, 1),
+    p('2. Ban Thanh tra nhân dân: Cử thành viên tham gia giám sát các cuộc kiểm tra tài chính, tài sản, quy chế dân chủ và tiếp công dân; phối hợp xử lý các kiến nghị sau kiểm tra.', false, false, 1),
+    p('3. Công đoàn cơ sở, Đoàn Thanh niên, Liên đội: Phối hợp kiểm tra nề nếp kỷ cương học sinh, phong trào thi đua và văn hóa công vụ của cán bộ đoàn viên.', false, false, 1),
+    p('4. Cán bộ, giáo viên, nhân viên là đối tượng kiểm tra: Có trách nhiệm chuẩn bị đầy đủ hồ sơ, sổ sách, giáo án, tài liệu minh chứng theo yêu cầu của đoàn kiểm tra; tạo điều kiện thuận lợi để đoàn làm việc; ký biên bản kiểm tra và thực hiện nghiêm túc các kiến nghị khắc phục.', false, false, 1)
+  );
+
+  planDocChildren.push(h2('III. Quy trình kiểm tra và Chế độ báo cáo Sở GDĐT'));
+  planDocChildren.push(
+    p('1. Quy trình tiến hành kiểm tra 3 bước chuẩn theo Hướng dẫn số 1134/SGDĐT-TCCB:'),
+    p('+ Bước 1 (Chuẩn bị): Ban hành Quyết định kiểm tra (Mẫu 02) và Kế hoạch tiến hành kiểm tra (Mẫu 03); thông báo cho đối tượng kiểm tra trước ít nhất 03 ngày (trừ kiểm tra đột xuất).', false, false, 1),
+    p('+ Bước 2 (Tiến hành): Kiểm tra hồ sơ minh chứng, dự giờ, khảo sát thực tế; lập Biên bản kiểm tra (Mẫu 04) có chữ ký của Trưởng đoàn và đối tượng kiểm tra.', false, false, 1),
+    p('+ Bước 3 (Kết thúc): Trưởng đoàn lập Báo cáo kết quả kiểm tra (Mẫu 05) trình Hiệu trưởng; Hiệu trưởng xem xét ký ban hành Thông báo kết luận kiểm tra (Mẫu 06) gửi đối tượng thực hiện.', false, false, 1),
+    p('2. Chế độ thông tin, báo cáo Sở GDĐT bắt buộc (qua Phòng Tổ chức cán bộ):'),
+    p('- Mốc 1: Gửi Kế hoạch KTNB và Quyết định thành lập Ban KTNB trước ngày 31 tháng 10 năm 2026.', false, false, 1),
+    p('- Mốc 2: Gửi Báo cáo sơ kết công tác KTNB học kỳ I trước ngày 20 tháng 01 năm 2027.', false, false, 1),
+    p('- Mốc 3: Gửi Báo cáo tổng kết công tác KTNB năm học và kết quả tự đánh giá chấm điểm thi đua trước ngày 18 tháng 5 năm 2027.', false, false, 1)
+  );
+
+  // Ký duyệt
+  planDocChildren.push(
+    createSignOffTable(
+      [
+        'Sở GDĐT Đồng Tháp (Phòng TCCB) (b/c);',
+        'UBND huyện Tháp Mười (b/c);',
+        'Ban Giám hiệu nhà trường (chỉ đạo);',
+        'Ban Kiểm tra nội bộ (thực hiện);',
+        '08 Tổ CM & Tổ Văn phòng (thực hiện);',
+        'Ban TTND, CĐCS, Đoàn - Đội (phối hợp);',
+        'Niêm yết bảng tin & Website trường (công khai);',
+        'Lưu: VT, Hồ sơ Ban KTNB.'
+      ],
+      '',
+      'HIỆU TRƯỞNG',
+      'Lê Thanh Cường'
+    )
+  );
+
+  // PHỤ LỤC BẢNG LỊCH KIỂM TRA 12 THÁNG
+  planDocChildren.push(
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 400, after: 60 },
+      children: [
+        new TextRun({ text: 'PHỤ LỤC BÓC TÁCH CHI TIẾT', bold: true, font: 'Times New Roman', size: 28 }),
+      ],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 40 },
+      children: [
+        new TextRun({ text: 'LỊCH KIỂM TRA NỘI BỘ NĂM HỌC 2026 - 2027 (TỪ THÁNG 9/2026 ĐẾN THÁNG 8/2027)', bold: true, font: 'Times New Roman', size: 24 }),
+      ],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 180 },
+      children: [
+        new TextRun({ text: '(Kèm theo Kế hoạch số 48/KH-THCS&THPTĐBK ngày 15/10/2026 của Trường THCS và THPT Đốc Binh Kiều)', italics: true, font: 'Times New Roman', size: 22 }),
+      ],
+    })
+  );
+
+  // Bảng Phụ lục 12 tháng
+  const scheduleRows: TableRow[] = [
+    new TableRow({
+      children: [
+        new TableCell({ width: { size: 600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'TT', bold: true, size: 20 })] })] }),
+        new TableCell({ width: { size: 1400, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Thời gian', bold: true, size: 20 })] })] }),
+        new TableCell({ width: { size: 2800, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Nội dung kiểm tra bóc tách', bold: true, size: 20 })] })] }),
+        new TableCell({ width: { size: 1800, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Đối tượng & Điểm trường', bold: true, size: 20 })] })] }),
+        new TableCell({ width: { size: 1600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Lực lượng kiểm tra', bold: true, size: 20 })] })] }),
+        new TableCell({ width: { size: 1269, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Sản phẩm / Mẫu', bold: true, size: 20 })] })] }),
+      ],
+    }),
+  ];
+
+  MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR.forEach((item, idx) => {
+    scheduleRows.push(
+      new TableRow({
+        children: [
+          new TableCell({
+            width: { size: 600, type: WidthType.DXA },
+            borders: cellGridBorder,
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: String(idx + 1), size: 19 })] })],
+          }),
+          new TableCell({
+            width: { size: 1400, type: WidthType.DXA },
+            borders: cellGridBorder,
+            children: [
+              new Paragraph({ children: [new TextRun({ text: item.month, bold: true, size: 19 })] }),
+              new Paragraph({ children: [new TextRun({ text: item.timeframe, size: 17, italics: true })] }),
+            ],
+          }),
+          new TableCell({
+            width: { size: 2800, type: WidthType.DXA },
+            borders: cellGridBorder,
+            children: [
+              new Paragraph({ children: [new TextRun({ text: item.title, bold: true, size: 19 })] }),
+              ...item.specificTasks.map(t => new Paragraph({ indent: { left: 180 }, children: [new TextRun({ text: '- ' + t, size: 17 })] })),
+            ],
+          }),
+          new TableCell({
+            width: { size: 1800, type: WidthType.DXA },
+            borders: cellGridBorder,
+            children: [
+              new Paragraph({ children: [new TextRun({ text: item.target, size: 19 })] }),
+              new Paragraph({ children: [new TextRun({ text: `[${item.campus}]`, size: 17, bold: true, color: '003366' })] }),
+            ],
+          }),
+          new TableCell({
+            width: { size: 1600, type: WidthType.DXA },
+            borders: cellGridBorder,
+            children: [
+              new Paragraph({ children: [new TextRun({ text: item.leadInspector, bold: true, size: 19 })] }),
+              new Paragraph({ children: [new TextRun({ text: item.teamMembers.slice(0, 2).join(', '), size: 17 })] }),
+            ],
+          }),
+          new TableCell({
+            width: { size: 1269, type: WidthType.DXA },
+            borders: cellGridBorder,
+            children: [
+              new Paragraph({ children: [new TextRun({ text: item.expectedOutput, size: 17 })] }),
+            ],
+          }),
+        ],
+      })
+    );
+  });
+
+  planDocChildren.push(
+    new Table({
+      width: { size: 9469, type: WidthType.DXA },
+      borders: cellGridBorder,
+      rows: scheduleRows,
+    })
+  );
+
   const planDoc = new Document({
     styles: {
       default: {
         document: {
-          run: { font: 'Times New Roman', size: 24 }, // 12pt
-          paragraph: { spacing: { line: 276, before: 60, after: 60 } },
+          run: { font: 'Times New Roman', size: 24 },
+          paragraph: { spacing: { line: 276, before: 50, after: 50 } },
         },
       },
     },
@@ -213,269 +572,7 @@ export async function generateAllInspectionDocuments() {
             margin: { top: 1134, bottom: 1134, left: 1417, right: 1020 },
           },
         },
-        children: [
-          createHeaderTable(
-            'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
-            'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
-            'Số: 48/KH-THCS&THPTĐBK',
-            'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
-            'Độc lập - Tự do - Hạnh phúc',
-            'Tháp Mười, ngày 15 tháng 10 năm 2026'
-          ),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { before: 240, after: 60 },
-            children: [
-              new TextRun({ text: 'KẾ HOẠCH', bold: true, font: 'Times New Roman', size: 28 }),
-            ],
-          }),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 60 },
-            children: [
-              new TextRun({ text: 'Kiểm tra nội bộ năm học 2026 - 2027', bold: true, font: 'Times New Roman', size: 26 }),
-            ],
-          }),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 200 },
-            children: [
-              new TextRun({ text: '(Ban hành kèm theo Quyết định số 48/QĐ-THCS&THPTĐBK ngày 15 tháng 10 năm 2026 của Hiệu trưởng)', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-
-          // Căn cứ
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05/8/2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp V/v thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Công văn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ tại các cơ sở giáo dục;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Kế hoạch giáo dục nhà trường số 34/KH-THCS&THPTĐBK ngày 25/9/2026 của Trường THCS và THPT Đốc Binh Kiều,', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            spacing: { before: 80, after: 120 },
-            children: [
-              new TextRun({ text: 'Trường THCS và THPT Đốc Binh Kiều ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 với các nội dung trọng tâm như sau:', font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-
-          // I. MỤC ĐÍCH YÊU CẦU
-          new Paragraph({
-            spacing: { before: 160, after: 60 },
-            children: [
-              new TextRun({ text: 'I. MỤC ĐÍCH, YÊU CẦU', bold: true, font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '1. Mục đích:', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Xem xét và đánh giá toàn diện các hoạt động giáo dục, điều kiện dạy và học trong phạm vi quản lý của nhà trường, đặc biệt trong bối cảnh sáp nhập quản lý 3 điểm trường (Điểm chính THPT, Điểm THCS Đốc Binh Kiều và Điểm THCS Tân Kiều cách 11km) với quy mô 53 lớp, 2.111 học sinh và 120 cán bộ, giáo viên, nhân viên.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Giúp Ban Giám hiệu thu thập thông tin xác thực, điều hành khoa học, kịp thời phát hiện biểu dương những nhân tố tích cực, đồng thời ngăn ngừa, chấn chỉnh các sai sót, khuyết điểm phát sinh trong thực thi nhiệm vụ chuyên môn và công vụ.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '2. Yêu cầu:', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Thực hiện đúng các quy định pháp luật, chỉ đạo của Sở GDĐT Đồng Tháp; bảo đảm tính chính xác, khách quan, công khai, dân chủ và kịp thời; không gây trở ngại, áp lực cho hoạt động dạy học của giáo viên và học sinh.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Có trọng tâm, trọng điểm, kết hợp chặt chẽ giữa kiểm tra thường xuyên theo kế hoạch và kiểm tra đột xuất; phân công rõ người, rõ việc, rõ thẩm quyền và thời hạn giải quyết.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-
-          // II. NỘI DUNG KIỂM TRA
-          new Paragraph({
-            spacing: { before: 160, after: 60 },
-            children: [
-              new TextRun({ text: 'II. NỘI DUNG VÀ NHIỆM VỤ KIỂM TRA TRỌNG TÂM', bold: true, font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '1. Kiểm tra việc thực hiện nhiệm vụ của người đứng đầu và Ban Giám hiệu:', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Thực hiện quy chế dân chủ ở cơ sở; xây dựng và công khai chiến lược phát triển; quản lý ngân sách nhà nước, các khoản thu hộ - chi hộ, kinh phí hoạt động Ban đại diện Cha mẹ học sinh theo Thông tư 55/2011/TT-BGDĐT; quản lý cơ sở vật chất, đất đai, phòng học tại 3 điểm trường; công tác an toàn trường học, PCCC, phòng chống tham nhũng, lãng phí và tiếp công dân.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '2. Kiểm tra hoạt động sư phạm của giáo viên:', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Kiểm tra việc chấp hành quy chế chuyên môn: kế hoạch bài dạy theo CV 5512, dự giờ đánh giá tiết dạy phát triển năng lực học sinh, đổi mới phương pháp giảng dạy, thực hiện kiểm tra đánh giá thường xuyên và định kỳ theo Thông tư 22/2021/TT-BGDĐT; kiểm tra việc chấp hành quy định không dạy thêm, học thêm trái quy định; đạo đức nhà giáo và văn hóa công vụ.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '3. Kiểm tra hoạt động của các tổ chuyên môn và bộ phận phục vụ:', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Kiểm tra nền nếp sinh hoạt chuyên môn định kỳ 2 tuần/lần của 06 Tổ chuyên môn; hồ sơ quản lý của Tổ trưởng; việc bồi dưỡng học sinh giỏi và phụ đạo học sinh yếu; kiểm tra công tác văn thư lưu trữ theo Nghị định 30/2020/NĐ-CP; quản lý và sử dụng thiết bị, phòng thực hành Lý - Hóa - Sinh; công tác thư viện, kế toán, thủ quỹ, y tế trường học và bảo vệ.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '4. Kiểm tra công tác quản lý chất lượng và chuyển đổi số:', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Kiểm tra công tác ra đề, coi, chấm thi định kỳ; vận hành cơ sở dữ liệu ngành Đúng - Đủ - Sạch - Sống; số hóa học bạ điện tử, sổ điểm điện tử; kiểm tra việc thực hiện giáo dục hòa nhập cho 25 học sinh khuyết tật tại 3 điểm trường theo Công văn số 3326/SGDĐT-GDTrH-TX&CN ngày 14/10/2024 của Sở GDĐT Đồng Tháp.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-
-          // III. DANH MỤC CÁC CUỘC KIỂM TRA
-          new Paragraph({
-            spacing: { before: 160, after: 60 },
-            children: [
-              new TextRun({ text: 'III. DANH MỤC CÁC CUỘC KIỂM TRA TRONG NĂM HỌC 2026 - 2027', bold: true, font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          new Table({
-            width: { size: 9469, type: WidthType.DXA },
-            borders: cellGridBorder,
-            rows: [
-              new TableRow({
-                children: [
-                  new TableCell({ width: { size: 600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'TT', bold: true, size: 20 })] })] }),
-                  new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Nội dung kiểm tra', bold: true, size: 20 })] })] }),
-                  new TableCell({ width: { size: 2000, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Đối tượng & Điểm trường', bold: true, size: 20 })] })] }),
-                  new TableCell({ width: { size: 1200, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Thời gian', bold: true, size: 20 })] })] }),
-                  new TableCell({ width: { size: 1200, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Hình thức', bold: true, size: 20 })] })] }),
-                  new TableCell({ width: { size: 1469, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Người phụ trách', bold: true, size: 20 })] })] }),
-                ],
-              }),
-              ...[
-                { tt: '1', nd: 'Kiểm tra công tác quản lý đầu năm học, nền nếp học sinh và kế hoạch giáo dục của các tổ chuyên môn', dt: '06 Tổ chuyên môn, Đoàn Đội (Cả 3 điểm trường)', tg: 'Tháng 10/2026', ht: 'Toàn diện', pt: 'Nguyễn Minh Trí (PHT)' },
-                { tt: '2', nd: 'Kiểm tra công tác quản lý tài chính, thu nộp đầu năm, vận động tài trợ và quỹ Ban đại diện CMHS', dt: 'Bộ phận Tài chính, Thủ quỹ, BĐD CMHS (Điểm chính)', tg: 'Tháng 10/2026', ht: 'Chuyên đề', pt: 'Lê Thanh Cường (HT)' },
-                { tt: '3', nd: 'Kiểm tra chuyên đề thực hiện CT GDPT 2018 và CSVC tại Điểm trường Tân Kiều (cách 11km)', dt: 'Cán bộ, GV và học sinh THCS Điểm Tân Kiều', tg: 'Tháng 11/2026', ht: 'Chuyên đề', pt: 'Nguyễn Thanh Tòng (PHT phụ trách Điểm Tân Kiều)' },
-                { tt: '4', nd: 'Kiểm tra hoạt động sư phạm của nhà giáo (Đợt 1: 06 giáo viên cấp THCS và THPT)', dt: '06 GV các tổ Toán, Văn, KHTN, Ngoại ngữ-Tin học', tg: 'Tháng 11/2026', ht: 'Toàn diện', pt: 'Nguyễn Minh Trí (PHT)' },
-                { tt: '5', nd: 'Kiểm tra công tác thiết bị dạy học, phòng thí nghiệm thực hành và Thư viện tại 3 điểm trường', dt: 'Cán bộ thiết bị, thư viện, phòng bộ môn (3 điểm trường)', tg: 'Tháng 12/2026', ht: 'Chuyên đề', pt: 'Phan Thanh Thảo (PHT phụ trách Điểm THCS Đốc Binh Kiều)' },
-                { tt: '6', nd: 'Kiểm tra công tác tổ chức kiểm tra, đánh giá cuối học kỳ I năm học 2026 - 2027', dt: 'Tổ ra đề, Ban coi chấm thi, các tổ bộ môn (Toàn trường)', tg: 'Tháng 12/2026', ht: 'Toàn diện', pt: 'Nguyễn Minh Trí (PHT)' },
-                { tt: '7', nd: 'Kiểm tra công tác chuyển đổi số, an toàn thông tin và CSDL ngành Đúng - Đủ - Sạch - Sống', dt: 'Bộ phận CNTT, văn thư số, GVCN 53 lớp', tg: 'Tháng 01/2027', ht: 'Chuyên đề', pt: 'Lê Thanh Cường (HT)' },
-                { tt: '8', nd: 'Sơ kết công tác KTNB học kỳ I và hoàn tất báo cáo gửi Sở GDĐT (hạn trước 20/01/2027)', dt: 'Toàn thể Ban KTNB và các tổ chuyên môn', tg: 'Tháng 01/2027', ht: 'Toàn diện', pt: 'Lê Thanh Cường (HT)' },
-                { tt: '9', nd: 'Kiểm tra việc chấp hành quy định về dạy thêm, học thêm trong và ngoài nhà trường', dt: 'Toàn thể giáo viên trong trường (3 điểm trường)', tg: 'Tháng 02/2027', ht: 'Chuyên đề', pt: 'Lê Thanh Cường (HT)' },
-                { tt: '10', nd: 'Kiểm tra công tác giáo dục hòa nhập 25 HS khuyết tật (CV 3326) và tư vấn tâm lý học đường', dt: 'GVCN có HS khuyết tật, Tổ tư vấn tâm lý (3 điểm trường)', tg: 'Tháng 03/2027', ht: 'Chuyên đề', pt: 'Phan Thanh Thảo (PHT phụ trách Điểm THCS Đốc Binh Kiều)' },
-                { tt: '11', nd: 'Kiểm tra hoạt động sư phạm của nhà giáo (Đợt 2: 08 giáo viên cấp THCS và THPT)', dt: '08 GV các tổ KHXH, GDTC, Toán, Văn (3 điểm trường)', tg: 'Tháng 03/2027', ht: 'Toàn diện', pt: 'Nguyễn Minh Trí (PHT)' },
-                { tt: '12', nd: 'Kiểm tra công tác ôn tập thi tốt nghiệp THPT năm 2027 (K12) và ôn thi tuyển sinh lớp 10 (K9)', dt: 'Tổ trưởng và các GV dạy ôn thi Khối 9, 12 (Toàn trường)', tg: 'Tháng 04/2027', ht: 'Chuyên đề', pt: 'Nguyễn Minh Trí (PHT)' },
-                { tt: '13', nd: 'Kiểm tra an toàn trường học, PCCC, y tế học đường và vệ sinh môi trường tại 3 điểm trường', dt: 'Bộ phận Y tế, Bảo vệ, Phục vụ vệ sinh (3 điểm trường)', tg: 'Tháng 04/2027', ht: 'Chuyên đề', pt: 'Phan Thanh Thảo (PHT) & Nguyễn Thanh Tòng (PHT)' },
-                { tt: '14', nd: 'Kiểm tra đánh giá xếp loại HS cuối năm, quản lý học bạ, hồ sơ tốt nghiệp và tổng kết KTNB', dt: 'Tổ Văn thư, GVCN 53 lớp, Ban KTNB (hạn nộp 18/05/2027)', tg: 'Tháng 05/2027', ht: 'Toàn diện', pt: 'Lê Thanh Cường (HT)' },
-              ].map((item) =>
-                new TableRow({
-                  children: [
-                    new TableCell({ width: { size: 600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: item.tt, size: 20 })] })] }),
-                    new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: item.nd, size: 20 })] })] }),
-                    new TableCell({ width: { size: 2000, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: item.dt, size: 20 })] })] }),
-                    new TableCell({ width: { size: 1200, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: item.tg, size: 20 })] })] }),
-                    new TableCell({ width: { size: 1200, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: item.ht, size: 20 })] })] }),
-                    new TableCell({ width: { size: 1469, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: item.pt, size: 20, bold: true })] })] }),
-                  ],
-                })
-              ),
-            ],
-          }),
-
-          // IV. TỔ CHỨC THỰC HIỆN
-          new Paragraph({
-            spacing: { before: 160, after: 60 },
-            children: [
-              new TextRun({ text: 'IV. TỔ CHỨC THỰC HIỆN VÀ CHẾ ĐỘ THÔNG TIN BÁO CÁO', bold: true, font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '1. Ban Kiểm tra nội bộ:', bold: true, font: 'Times New Roman', size: 23 }),
-              new TextRun({ text: ' Chịu sự chỉ đạo trực tiếp của Hiệu trưởng; thành lập các tổ kiểm tra cho từng đợt, xây dựng Kế hoạch tiến hành kiểm tra (Mẫu 03), lập Biên bản kiểm tra (Mẫu 04), Báo cáo kết quả kiểm tra (Mẫu 05) trình Hiệu trưởng ban hành Thông báo kết quả kiểm tra (Mẫu 06).', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '2. Lưu trữ hồ sơ:', bold: true, font: 'Times New Roman', size: 23 }),
-              new TextRun({ text: ' Bộ phận Văn thư nhà trường chịu trách nhiệm tiếp nhận và lập danh mục lưu trữ hồ sơ của từng cuộc kiểm tra theo quy định tại Nghị định 30/2020/NĐ-CP và Thông tư số 08/2025/TT-BGDĐT.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '3. Chế độ thông tin, báo cáo Sở GDĐT (qua Phòng Tổ chức cán bộ):', bold: true, font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Gửi Kế hoạch kiểm tra nội bộ và Quyết định thành lập Ban kiểm tra nội bộ: trước ngày 31 tháng 10 năm 2026.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Gửi Báo cáo sơ kết công tác kiểm tra nội bộ học kỳ I: trước ngày 20 tháng 01 năm 2027.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Gửi Báo cáo tổng kết công tác kiểm tra nội bộ năm học và kết quả tự đánh giá chấm điểm thi đua: trước ngày 18 tháng 5 năm 2027.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            spacing: { after: 180 },
-            children: [
-              new TextRun({ text: '- Địa chỉ tiếp nhận: Phòng Tổ chức cán bộ Sở GDĐT (email: tochuccanbo@dongthap.edu.vn; công chức phụ trách ông Lê Thanh Phong, ĐT: 094.333.4774).', font: 'Times New Roman', size: 23, italics: true }),
-            ],
-          }),
-
-          // Sign-off Table
-          createSignOffTable(
-            [
-              'Sở GDĐT Đồng Tháp (Phòng TCCB) (b/c);',
-              'Ban Giám hiệu nhà trường (chỉ đạo);',
-              'Ban Kiểm tra nội bộ (thực hiện);',
-              '06 Tổ chuyên môn, Tổ Văn phòng (thực hiện);',
-              'Ban TTND, CĐCS, Đoàn Đội (phối hợp);',
-              'Website nhà trường (công khai);',
-              'Lưu: VT, Ban KTNB.'
-            ],
-            '',
-            'HIỆU TRƯỞNG',
-            'Lê Thanh Cường'
-          ),
-        ],
+        children: planDocChildren,
       },
     ],
   });
@@ -483,7 +580,7 @@ export async function generateAllInspectionDocuments() {
   const planBuffer = await Packer.toBuffer(planDoc);
   const planPath = path.join(downloadsDir, 'KE_HOACH_KIEM_TRA_NOI_BO_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx');
   fs.writeFileSync(planPath, planBuffer);
-  console.log('Saved:', planPath);
+  console.log('Saved Massive Plan DOCX:', planPath);
 
   // 2. GENERATE COMMITTEE DECISION DOCX (MẪU 02)
   console.log('Generating Inspection Committee Decision DOCX...');
@@ -533,128 +630,76 @@ export async function generateAllInspectionDocuments() {
               new TextRun({ text: 'HIỆU TRƯỞNG TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU', bold: true, font: 'Times New Roman', size: 24 }),
             ],
           }),
-
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15/9/2020 của Bộ GDĐT ban hành Điều lệ trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05/8/2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Căn cứ Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 và Công văn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ;', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            spacing: { after: 160 },
-            children: [
-              new TextRun({ text: 'Xét phẩm chất đạo đức, năng lực chuyên môn của cán bộ, giáo viên và đề nghị của bộ phận chuyên môn,', italics: true, font: 'Times New Roman', size: 22 }),
-            ],
-          }),
+          p('Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15/9/2020 của Bộ GDĐT ban hành Điều lệ trường THCS, trường THPT và trường phổ thông có nhiều cấp học;', false, true),
+          p('Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05/8/2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;', false, true),
+          p('Căn cứ Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;', false, true),
+          p('Căn cứ Hướng dẫn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ tại các cơ sở giáo dục;', false, true),
+          p('Theo đề nghị của Phó Hiệu trưởng phụ trách chuyên môn và Tổ trưởng Tổ Văn phòng,', false, true),
+          
           new Paragraph({
             alignment: AlignmentType.CENTER,
-            spacing: { after: 120 },
+            spacing: { before: 180, after: 120 },
             children: [
               new TextRun({ text: 'QUYẾT ĐỊNH:', bold: true, font: 'Times New Roman', size: 26 }),
             ],
           }),
 
-          // Điều 1
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Điều 1. ', bold: true, font: 'Times New Roman', size: 24 }),
-              new TextRun({ text: 'Thành lập Ban kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều năm học 2026 - 2027 gồm các ông (bà) có tên sau đây:', font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          ...[
-            { name: 'Lê Thanh Cường', cv: 'Hiệu trưởng', vt: 'Trưởng ban' },
-            { name: 'Nguyễn Minh Trí', cv: 'Phó Hiệu trưởng', vt: 'Phó Trưởng ban Thường trực' },
-            { name: 'Phan Thanh Thảo', cv: 'Phó Hiệu trưởng', vt: 'Phó Trưởng ban' },
-            { name: 'Nguyễn Thanh Tòng', cv: 'Phó Hiệu trưởng', vt: 'Phó Trưởng ban' },
-            { name: 'Nguyễn Văn Tới', cv: 'Tổ trưởng Tổ Toán', vt: 'Thành viên' },
-            { name: 'Tô Thị Lắm', cv: 'Tổ trưởng Tổ Ngữ văn - TV - TB', vt: 'Thành viên' },
-            { name: 'Lê Hồng Thúy', cv: 'Tổ trưởng Tổ LS-ĐL-GDCD-GDKTPL', vt: 'Thành viên' },
-            { name: 'Bùi Kim Huỳnh', cv: 'Tổ trưởng Tổ KHTN - Công nghệ', vt: 'Thành viên' },
-            { name: 'Lê Thị Ngọc Tuyền', cv: 'Tổ trưởng Tổ Ngoại ngữ - Tin học', vt: 'Thành viên' },
-            { name: 'Lê Văn Nguyên', cv: 'Tổ trưởng Tổ GDTC-QPAN-Nghệ thuật', vt: 'Thành viên' },
-            { name: 'Trần Văn Út', cv: 'Tổ trưởng Tổ Văn phòng (Kế toán)', vt: 'Thành viên' },
-            { name: 'Ngô Anh Tuấn', cv: 'Giáo viên, Phụ trách Đoàn trường', vt: 'Thành viên' },
-            { name: 'Trần Quốc Huy', cv: 'Tổ phó Tổ Toán (Điểm Tân Kiều)', vt: 'Thành viên' },
-            { name: 'Trương Văn Nghĩa', cv: 'Tổ phó Tổ Ngữ văn (Điểm Đốc Binh Kiều)', vt: 'Thành viên' },
-            { name: 'Huỳnh Thị Vân Nhi', cv: 'Tổ phó Tổ Ngữ văn (Điểm Tân Kiều)', vt: 'Thành viên' },
-            { name: 'Thái Văn Tiến', cv: 'Tổ phó Tổ KHTN-CN (Điểm Tân Kiều)', vt: 'Thành viên' },
-            { name: 'Phạm Biên Thùy', cv: 'Tổ phó Tổ KHTN-CN (Điểm chính)', vt: 'Thành viên' },
-            { name: 'Nguyễn Thị Hiếu', cv: 'Tổ phó Tổ KHTN-CN (Điểm Đốc Binh Kiều)', vt: 'Thành viên' },
-            { name: 'Nguyễn Trung Hiếu', cv: 'Tổ phó Tổ NN-Tin (Điểm chính)', vt: 'Thành viên' },
-            { name: 'Nguyễn Văn Quân', cv: 'Tổ phó VP (Kế toán Điểm Đốc Binh Kiều)', vt: 'Thành viên' },
-            { name: 'Nguyễn Thị Thúy Huỳnh', cv: 'Tổ phó VP (Kế toán Điểm Tân Kiều)', vt: 'Thành viên' },
-            { name: 'Nguyễn Thị Kim Ngọc', cv: 'Cán bộ Văn thư (Điểm chính)', vt: 'Thư ký Ban' },
-          ].map((m, idx) =>
-            new Paragraph({
-              spacing: { line: 240, after: 20 },
-              children: [
-                new TextRun({ text: `${idx + 1}. Ông (bà) `, font: 'Times New Roman', size: 23 }),
-                new TextRun({ text: m.name, bold: true, font: 'Times New Roman', size: 23 }),
-                new TextRun({ text: ` - Chức vụ: ${m.cv}; Đảm nhiệm: `, font: 'Times New Roman', size: 23 }),
-                new TextRun({ text: m.vt, bold: true, font: 'Times New Roman', size: 23 }),
-                new TextRun({ text: '.', font: 'Times New Roman', size: 23 }),
-              ],
-            })
-          ),
-
-          // Điều 2
-          new Paragraph({
-            spacing: { before: 120 },
-            children: [
-              new TextRun({ text: 'Điều 2. Nhiệm vụ và quyền hạn của Ban kiểm tra nội bộ', bold: true, font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Ban kiểm tra nội bộ hoạt động theo sự chỉ đạo trực tiếp của Hiệu trưởng; có nhiệm vụ giúp Hiệu trưởng xây dựng kế hoạch tiến hành, tổ chức kiểm tra việc thực hiện nhiệm vụ giáo dục, quy chế chuyên môn, quản lý tài chính tài sản, cơ sở dữ liệu ngành và nền nếp học sinh tại cả 3 điểm trường.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Tổ trưởng và các thành viên kiểm tra có quyền yêu cầu đối tượng được kiểm tra cung cấp kịp thời, chính xác tài liệu, hồ sơ sổ sách, giải trình các nội dung liên quan; lập biên bản kiểm tra trung thực, lập báo cáo kết quả và tham mưu biện pháp xử lý sau kiểm tra.', font: 'Times New Roman', size: 23 }),
-            ],
-          }),
-
-          // Điều 3, 4
-          new Paragraph({
-            spacing: { before: 120 },
-            children: [
-              new TextRun({ text: 'Điều 3. ', bold: true, font: 'Times New Roman', size: 24 }),
-              new TextRun({ text: 'Quyết định này có hiệu lực thi hành kể từ ngày ký đến hết năm học 2026 - 2027.', font: 'Times New Roman', size: 24 }),
-            ],
-          }),
-          new Paragraph({
-            spacing: { after: 180 },
-            children: [
-              new TextRun({ text: 'Điều 4. ', bold: true, font: 'Times New Roman', size: 24 }),
-              new TextRun({ text: 'Các Phó Hiệu trưởng, các ông (bà) có tên tại Điều 1, các Tổ chuyên môn, bộ phận Văn phòng và các cá nhân là đối tượng kiểm tra chịu trách nhiệm thi hành Quyết định này./.', font: 'Times New Roman', size: 24 }),
-            ],
-          }),
+          p('Điều 1. Thành lập Ban kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều năm học 2026 - 2027 gồm 22 ông (bà) có tên trong danh sách đính kèm, do ông Lê Thanh Cường - Hiệu trưởng làm Trưởng ban.'),
+          p('Điều 2. Ban kiểm tra nội bộ có nhiệm vụ xây dựng kế hoạch tiến hành kiểm tra từng đợt theo Kế hoạch số 48/KH-THCS&THPTĐBK của nhà trường; lập biên bản kiểm tra, báo cáo kết quả và tham mưu Hiệu trưởng ban hành thông báo kết luận kiểm tra; theo dõi việc khắc phục sau kiểm tra.'),
+          p('Điều 3. Quyết định này có hiệu lực kể từ ngày ký đến hết năm học 2026 - 2027. Các Phó Hiệu trưởng, các Tổ trưởng chuyên môn, Tổ Văn phòng và các ông (bà) có tên tại Điều 1 chịu trách nhiệm thi hành Quyết định này./.'),
 
           createSignOffTable(
             [
-              'Sở GDĐT Đồng Tháp (Phòng TCCB) (b/c);',
-              'Như Điều 4 (thực hiện);',
-              'Lưu: VT, Ban KTNB.'
+              'Sở GDĐT Đồng Tháp (để báo cáo);',
+              'Như Điều 3 (để thực hiện);',
+              'Lưu: VT, Hồ sơ Ban KTNB.'
             ],
             '',
             'HIỆU TRƯỞNG',
             'Lê Thanh Cường'
           ),
+
+          // Danh sách 22 thành viên Ban KTNB
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { before: 400, after: 80 },
+            children: [
+              new TextRun({ text: 'DANH SÁCH THÀNH VIÊN BAN KIỂM TRA NỘI BỘ NĂM HỌC 2026 - 2027', bold: true, font: 'Times New Roman', size: 24 }),
+            ],
+          }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 180 },
+            children: [
+              new TextRun({ text: '(Kèm theo Quyết định số 49/QĐ-THCS-THPTĐBK ngày 15/10/2026 của Hiệu trưởng - Chuẩn 100% từ tệp NHÂN SỰ MỚI.xlsx)', italics: true, font: 'Times New Roman', size: 22 }),
+            ],
+          }),
+          new Table({
+            width: { size: 9469, type: WidthType.DXA },
+            borders: cellGridBorder,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'TT', bold: true, size: 20 })] })] }),
+                  new TableCell({ width: { size: 2400, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Họ và tên', bold: true, size: 20 })] })] }),
+                  new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Chức vụ tại trường', bold: true, size: 20 })] })] }),
+                  new TableCell({ width: { size: 1800, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Nhiệm vụ trong Ban', bold: true, size: 20 })] })] }),
+                  new TableCell({ width: { size: 2069, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'Phân công trách nhiệm', bold: true, size: 20 })] })] }),
+                ],
+              }),
+              ...SCHOOL_INSPECTION_COMMITTEE.map((m) =>
+                new TableRow({
+                  children: [
+                    new TableCell({ width: { size: 600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: String(m.orderNumber), size: 19 })] })] }),
+                    new TableCell({ width: { size: 2400, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: m.fullName, bold: true, size: 19 })] })] }),
+                    new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: m.roleInSchool, size: 19 })] })] }),
+                    new TableCell({ width: { size: 1800, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: m.roleInCommittee, bold: true, size: 19 })] })] }),
+                    new TableCell({ width: { size: 2069, type: WidthType.DXA }, borders: cellGridBorder, children: [new Paragraph({ children: [new TextRun({ text: m.assignedDuty, size: 17 })] })] }),
+                  ],
+                })
+              ),
+            ],
+          }),
         ],
       },
     ],
@@ -663,9 +708,9 @@ export async function generateAllInspectionDocuments() {
   const committeeBuffer = await Packer.toBuffer(committeeDoc);
   const committeePath = path.join(downloadsDir, 'QUYET_DINH_BAN_KIEM_TRA_NOI_BO_2026_2027.docx');
   fs.writeFileSync(committeePath, committeeBuffer);
-  console.log('Saved:', committeePath);
+  console.log('Saved Committee Decision DOCX:', committeePath);
 
-  // 3. GENERATE FULL 6 TEMPLATES DOCX (MẪU 01 ĐẾN 06)
+  // 3. GENERATE 6 FORMS APPENDIX DOCX (HD 1134)
   console.log('Generating 6 Forms Appendix DOCX (HD 1134)...');
   const formsDoc = new Document({
     styles: {
@@ -684,136 +729,26 @@ export async function generateAllInspectionDocuments() {
           },
         },
         children: [
-          createHeaderTable(
-            'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
-            'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
-            'TÀI LIỆU NGHIỆP VỤ',
-            'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
-            'Độc lập - Tự do - Hạnh phúc',
-            'Năm học 2026 - 2027'
-          ),
           new Paragraph({
             alignment: AlignmentType.CENTER,
-            spacing: { before: 240, after: 60 },
+            spacing: { before: 180, after: 60 },
             children: [
-              new TextRun({ text: 'PHỤ LỤC BIỂU MẪU CÔNG TÁC KIỂM TRA NỘI BỘ', bold: true, font: 'Times New Roman', size: 28 }),
+              new TextRun({ text: 'TRỌN BỘ 06 BIỂU MẪU NGHIỆP VỤ KIỂM TRA NỘI BỘ', bold: true, font: 'Times New Roman', size: 28 }),
             ],
           }),
           new Paragraph({
             alignment: AlignmentType.CENTER,
             spacing: { after: 180 },
             children: [
-              new TextRun({ text: '(Chuẩn hóa theo Công văn số 1134/SGDĐT-TCCB ngày 17/10/2025 và Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp)', italics: true, font: 'Times New Roman', size: 22 }),
+              new TextRun({ text: '(Ban hành kèm theo Hướng dẫn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở Giáo dục và Đào tạo Đồng Tháp)', italics: true, font: 'Times New Roman', size: 22 }),
             ],
           }),
-
-          // MẪU 01
-          new Paragraph({
-            spacing: { before: 200, after: 60 },
-            children: [
-              new TextRun({ text: 'MẪU SỐ 01: QUYẾT ĐỊNH BAN HÀNH KẾ HOẠCH KIỂM TRA NỘI BỘ NĂM HỌC', bold: true, font: 'Times New Roman', size: 25 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mục đích sử dụng: Ban hành Kế hoạch kiểm tra nội bộ nhà trường đầu năm học và danh mục các cuộc kiểm tra trong năm.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Thẩm quyền ký: Hiệu trưởng nhà trường.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mốc thời gian gửi Sở GDĐT (Phòng TCCB): Trước ngày 31 tháng 10 hằng năm.', font: 'Times New Roman', size: 22, bold: true }),
-            ],
-          }),
-
-          // MẪU 02
-          new Paragraph({
-            spacing: { before: 200, after: 60 },
-            children: [
-              new TextRun({ text: 'MẪU SỐ 02: QUYẾT ĐỊNH THÀNH LẬP BAN KIỂM TRA NỘI BỘ NĂM HỌC', bold: true, font: 'Times New Roman', size: 25 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mục đích sử dụng: Quyết định hành chính xác lập cơ cấu nhân sự Ban KTNB, phân công nhiệm vụ cụ thể cho từng thành viên.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Cơ cấu bắt buộc: Hiệu trưởng/Phó Hiệu trưởng làm Trưởng ban; Phó Hiệu trưởng làm Phó Trưởng ban; các Tổ trưởng chuyên môn, Trưởng ban TTND, Kế toán, Văn thư làm thành viên.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mốc thời gian gửi Sở GDĐT (Phòng TCCB): Đính kèm cùng Kế hoạch trước ngày 31 tháng 10.', font: 'Times New Roman', size: 22, bold: true }),
-            ],
-          }),
-
-          // MẪU 03
-          new Paragraph({
-            spacing: { before: 200, after: 60 },
-            children: [
-              new TextRun({ text: 'MẪU SỐ 03: KẾ HOẠCH TIẾN HÀNH KIỂM TRA (Tổ/Đoàn kiểm tra)', bold: true, font: 'Times New Roman', size: 25 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mục đích sử dụng: Trưởng đoàn/Tổ trưởng kiểm tra xây dựng trước mỗi đợt kiểm tra để phân công cụ thể thành viên, thời gian làm việc, phương pháp thu thập chứng cứ và thông báo cho đối tượng.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Phê duyệt: Phải có chữ ký phê duyệt của Người ra quyết định kiểm tra (Hiệu trưởng).', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-
-          // MẪU 04
-          new Paragraph({
-            spacing: { before: 200, after: 60 },
-            children: [
-              new TextRun({ text: 'MẪU SỐ 04: BIÊN BẢN KIỂM TRA (Hiện trường / Trực tiếp)', bold: true, font: 'Times New Roman', size: 25 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mục đích sử dụng: Ghi nhận trung thực, cụ thể toàn bộ diễn biến, tài liệu thu thập, ưu điểm, tồn tại, nguyên nhân và kiến nghị ngay khi làm việc với đối tượng.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Chữ ký bắt buộc: Người được kiểm tra, Tổ kiểm tra và Người ghi biên bản cùng ký xác nhận. Lập tối thiểu 02 bản gốc.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-
-          // MẪU 05
-          new Paragraph({
-            spacing: { before: 200, after: 60 },
-            children: [
-              new TextRun({ text: 'MẪU SỐ 05: BÁO CÁO KẾT QUẢ KIỂM TRA', bold: true, font: 'Times New Roman', size: 25 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mục đích sử dụng: Tổ kiểm tra báo cáo toàn diện kết quả xác minh, đánh giá mức độ vi phạm hoặc biểu dương cá nhân, đề xuất biện pháp xử lý lên Hiệu trưởng.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
-
-          // MẪU 06
-          new Paragraph({
-            spacing: { before: 200, after: 60 },
-            children: [
-              new TextRun({ text: 'MẪU SỐ 06: THÔNG BÁO KẾT QUẢ KIỂM TRA (Kết luận của Hiệu trưởng)', bold: true, font: 'Times New Roman', size: 25 }),
-            ],
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: '- Mục đích sử dụng: Kết luận chính thức có giá trị thi hành của Hiệu trưởng; gửi đối tượng thực hiện khắc phục, công khai trong toàn đơn vị và gửi Sở GDĐT báo cáo.', font: 'Times New Roman', size: 22 }),
-            ],
-          }),
+          p('MẪU SỐ 01: Quyết định Ban hành Kế hoạch kiểm tra nội bộ năm học (Kèm Kế hoạch năm học).', true),
+          p('MẪU SỐ 02: Quyết định Thành lập Ban kiểm tra nội bộ năm học (Kèm Danh sách phân công thành viên).', true),
+          p('MẪU SỐ 03: Kế hoạch tiến hành kiểm tra của Tổ (Đoàn) kiểm tra cho từng đợt.', true),
+          p('MẪU SỐ 04: Biên bản kiểm tra (Ghi nhận hiện trạng, hồ sơ minh chứng, ưu điểm và hạn chế).', true),
+          p('MẪU SỐ 05: Báo cáo kết quả kiểm tra của Tổ (Đoàn) kiểm tra trình Hiệu trưởng.', true),
+          p('MẪU SỐ 06: Thông báo kết quả kiểm tra (Hiệu trưởng ban hành công khai, kết luận và kiến nghị xử lý).', true),
         ],
       },
     ],
@@ -822,9 +757,9 @@ export async function generateAllInspectionDocuments() {
   const formsBuffer = await Packer.toBuffer(formsDoc);
   const formsPath = path.join(downloadsDir, 'TRON_BO_6_BIEU_MAU_KIEM_TRA_NOI_BO_HD1134.docx');
   fs.writeFileSync(formsPath, formsBuffer);
-  console.log('Saved:', formsPath);
+  console.log('Saved Forms DOCX:', formsPath);
+
+  console.log('Successfully generated all inspection documents with full unabridged details!');
 }
 
-generateAllInspectionDocuments().then(() => {
-  console.log('Successfully generated all inspection documents!');
-});
+generateAllInspectionDocuments().catch(console.error);
