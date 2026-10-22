@@ -137,7 +137,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-2">
             <span className="font-semibold text-slate-200">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP</span>
             <span className="text-slate-600">·</span>
-            <span className="hidden sm:inline">UBND HUYỆN THÁP MƯỜI</span>
+            <span className="hidden sm:inline">UBND XÃ ĐỐC BINH KIỀU</span>
           </div>
           <div className="hidden md:flex items-center gap-2 text-slate-400">
             <span>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</span>

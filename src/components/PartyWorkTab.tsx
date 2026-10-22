@@ -42,7 +42,7 @@ const PARTY_MEMBERS_BCH: PartyCommitteeMember[] = [
     oldSchool: 'THPT Đốc Binh Kiều',
     politicalTheory: 'Cao cấp LLCT',
     qualification: 'Thạc sỹ QLGD',
-    duties: 'Phụ trách chung toàn Đảng bộ và nhà trường; trực tiếp phụ trách công tác tổ chức cán bộ, quy hoạch, bảo vệ chính trị nội bộ, tài chính tài sản; chủ trì các hội nghị Đảng ủy; giám sát chung 3 chi bộ.',
+    duties: 'Phụ trách chung toàn Đảng bộ và nhà trường; chịu trách nhiệm cao nhất trước Đảng ủy xã Đốc Binh Kiều và Sở GDĐT Đồng Tháp; trực tiếp phụ trách công tác tổ chức cán bộ, quy hoạch, bảo vệ chính trị nội bộ, tài chính tài sản; chủ trì các hội nghị Đảng ủy; giám sát chung 3 chi bộ.',
     highlightTag: 'Chủ trì toàn diện',
   },
   {
@@ -81,7 +81,7 @@ const PARTY_MEMBERS_BCH: PartyCommitteeMember[] = [
     oldSchool: 'THCS Tân Kiều',
     politicalTheory: 'Trung cấp LLCT',
     qualification: 'Đại học',
-    duties: 'Bí thư Chi bộ 2 (Khối THCS Điểm Tân Kiều, 15 lớp, 602 HS); quản lý điều hành cơ sở vật chất, chuyên môn, nề nếp tại Điểm trường Tân Kiều (cách 11km); đầu mối đối ngoại với Đảng ủy, UBND xã Tân Kiều.',
+    duties: 'Bí thư Chi bộ 2 (Khối THCS Điểm Tân Kiều, 15 lớp, 602 HS); quản lý điều hành cơ sở vật chất, chuyên môn, nề nếp tại Điểm trường Tân Kiều (thuộc địa bàn xã Đốc Binh Kiều, cách điểm chính 11km); đầu mối quan hệ với Đảng ủy, UBND xã Đốc Binh Kiều.',
     highlightTag: 'Bí thư Chi bộ 2',
   },
   {
@@ -107,7 +107,7 @@ const PARTY_MEMBERS_BCH: PartyCommitteeMember[] = [
     oldSchool: 'THCS Tân Kiều',
     politicalTheory: 'Trung cấp LLCT',
     qualification: 'Thạc sĩ Ngôn ngữ',
-    duties: 'Phụ trách công tác Tổ chức Đảng: Thẩm tra hồ sơ kết nạp Đảng, chuyển chính thức; quản lý quy hoạch cấp ủy Đảng bộ và chi bộ; theo dõi, bồi dưỡng đoàn viên ưu tú; chỉ tiêu kết nạp năm 2026 từ 03 - 04 đồng chí.',
+    duties: 'Phụ trách công tác Tổ chức Đảng: Thẩm tra hồ sơ kết nạp Đảng, chuyển chính thức trình Đảng ủy xã Đốc Binh Kiều; quản lý quy hoạch cấp ủy Đảng bộ và chi bộ; theo dõi, bồi dưỡng đoàn viên ưu tú; chỉ tiêu kết nạp năm 2026 từ 03 - 04 đồng chí.',
     highlightTag: 'Công tác Tổ chức Đảng',
   },
   {
@@ -146,7 +146,7 @@ const PARTY_MEMBERS_BCH: PartyCommitteeMember[] = [
     oldSchool: 'THCS Tân Kiều',
     politicalTheory: 'Sơ cấp LLCT',
     qualification: 'Đại học Sư phạm',
-    duties: 'Phụ trách công tác Tuyên giáo: Tổ chức học tập, quán triệt nghị quyết Đảng; bảo vệ nền tảng tư tưởng Đảng theo NQ 35-NQ/TW; nắm bắt diễn biến tư tưởng của 120 CB-GV-NV và 2.111 HS; phụ trách công tác dân vận, phối hợp Công đoàn và Đoàn thanh niên.',
+    duties: 'Phụ trách công tác Tuyên giáo: Tổ chức học tập, quán triệt nghị quyết của Đảng ủy xã và cấp trên; bảo vệ nền tảng tư tưởng Đảng theo NQ 35-NQ/TW; nắm bắt diễn biến tư tưởng của 120 CB-GV-NV và 2.111 HS; phụ trách công tác dân vận, phối hợp Công đoàn và Đoàn thanh niên.',
     highlightTag: 'Công tác Tuyên giáo',
   },
   {
@@ -159,7 +159,7 @@ const PARTY_MEMBERS_BCH: PartyCommitteeMember[] = [
     oldSchool: 'THPT Đốc Binh Kiều',
     politicalTheory: 'Trung cấp LLCT',
     qualification: 'ĐHSP Tiếng Anh',
-    duties: 'Phụ trách công tác Đảng phí và Hồ sơ sổ sách Đảng: Quản lý, thu, trích nộp đảng phí của 85 đảng viên 3 chi bộ về Huyện ủy Tháp Mười; quản trị Phần mềm Cơ sở dữ liệu đảng viên 3.0; quản lý sổ đảng tịch, phát thẻ Đảng viên, thủ tục chuyển sinh hoạt Đảng.',
+    duties: 'Phụ trách công tác Đảng phí và Hồ sơ sổ sách Đảng: Quản lý, thu, trích nộp đảng phí của 85 đảng viên 3 chi bộ về Đảng ủy xã Đốc Binh Kiều; quản trị Phần mềm Cơ sở dữ liệu đảng viên 3.0; quản lý sổ đảng tịch, phát thẻ Đảng viên, thủ tục chuyển sinh hoạt Đảng.',
     highlightTag: 'Đảng phí & Sổ sách Đảng',
   },
 ];
@@ -181,12 +181,12 @@ const PARTY_DOCUMENTS_META: DocumentMeta[] = [
     id: 'doc-1',
     code: '01-QC/ĐU',
     title: 'Quy chế làm việc của Ban Chấp hành Đảng bộ Trường THCS và THPT Đốc Binh Kiều khóa I, nhiệm kỳ 2025 – 2030',
-    subtitle: 'Quy định chi tiết thẩm quyền của tập thể BCH, chức trách 10 đồng chí Đảng ủy viên và nguyên tắc làm việc',
+    subtitle: 'Trực thuộc Đảng ủy xã Đốc Binh Kiều · Quy định chi tiết thẩm quyền BCH, chức trách 10 ĐUV và nguyên tắc làm việc',
     date: '16/09/2026',
     fileName: '01_QC_DU_Quy_che_lam_viec_BCH_Dang_bo_2025_2030.docx',
     downloadUrl: '/downloads/01_QC_DU_Quy_che_lam_viec_BCH_Dang_bo_2025_2030.docx',
     category: 'Quy chế làm việc toàn khóa',
-    summary: 'Gồm 5 Chương, 23 Điều bóc tách nhiệm vụ tập thể BCH Đảng bộ, thẩm quyền Bí thư Cường, Phó Bí thư Trí, 3 Bí thư Chi bộ và 5 Đảng ủy viên phụ trách nghiệp vụ (Tổ chức, Kiểm tra, Văn thư, Tuyên giáo, Đảng phí), nguyên tắc tập trung dân chủ và quan hệ công tác với Huyện ủy, Sở GDĐT và địa phương.',
+    summary: 'Gồm 5 Chương, 23 Điều bóc tách nhiệm vụ tập thể BCH Đảng bộ, thẩm quyền Bí thư Cường, Phó Bí thư Trí, 3 Bí thư Chi bộ và 5 Đảng ủy viên phụ trách nghiệp vụ (Tổ chức, Kiểm tra, Văn thư, Tuyên giáo, Đảng phí), nguyên tắc tập trung dân chủ và quan hệ công tác trực thuộc Đảng ủy xã Đốc Binh Kiều và Sở GDĐT Đồng Tháp.',
   },
   {
     id: 'doc-2',
@@ -208,18 +208,18 @@ const PARTY_DOCUMENTS_META: DocumentMeta[] = [
     fileName: '03_CTr_Hanh_dong_toan_khoa_2025_2030.docx',
     downloadUrl: '/downloads/03_CTr_Hanh_dong_toan_khoa_2025_2030.docx',
     category: 'Chương trình hành động toàn khóa',
-    summary: 'Chiến lược phát triển Đảng bộ và nhà trường giai đoạn 2025 - 2030 sau sáp nhập 3 trường: Xây dựng trường chuẩn quốc gia, liên thông chất lượng 2 cấp THCS - THPT, 17 chỉ tiêu cụ thể (HSG 60-80 giải, tốt nghiệp trên 99.5%, kết nạp 15-20 đảng viên, 100% BHYT, giáo dục hòa nhập 25 HS khuyết tật) và 3 khâu đột phá chuyển đổi số - văn hóa nhà trường.',
+    summary: 'Chiến lược phát triển Đảng bộ và nhà trường giai đoạn 2025 - 2030 sau sáp nhập: Xây dựng trường chuẩn quốc gia, liên thông chất lượng 2 cấp THCS - THPT, 17 chỉ tiêu cụ thể (HSG 60-80 giải, tốt nghiệp trên 99.5%, kết nạp 15-20 đảng viên, 100% BHYT, giáo dục hòa nhập 25 HS khuyết tật) và 3 khâu đột phá chuyển đổi số - văn hóa nhà trường trên địa bàn xã Đốc Binh Kiều.',
   },
   {
     id: 'doc-4',
     code: '04-CTr/ĐU',
     title: 'Chương trình hành động năm 2026 của Ban Chấp hành Đảng bộ sau sáp nhập 3 trường',
-    subtitle: 'Nhiệm vụ trọng tâm, 10 chỉ tiêu hành động năm 2026 và kế hoạch vận hành đồng bộ 3 điểm trường',
+    subtitle: 'Mô hình chính quyền địa phương 2 cấp · 10 chỉ tiêu hành động năm 2026 và kế hoạch vận hành đồng bộ 3 điểm trường',
     date: '22/09/2026',
     fileName: '04_CTr_Hanh_dong_nam_2026_sau_sap_nhap.docx',
     downloadUrl: '/downloads/04_CTr_Hanh_dong_nam_2026_sau_sap_nhap.docx',
     category: 'Chương trình hành động năm 2026',
-    summary: 'Chương trình hành động năm bản lề 2026 sau khi hoàn tất sáp nhập 3 trường, chuẩn bị Đại hội Đảng toàn quốc lần thứ XIV. Tập trung 10 chỉ tiêu trọng tâm: Đảng bộ HTTNV trở lên, kết nạp 3-4 đảng viên, 15 giải HSG văn hóa, hội thảo chuyên môn, giảm bỏ học dưới 0.4%, tốt nghiệp trên 99.8%, 100% giáo viên kỹ năng số, 100% BHYT.',
+    summary: 'Chương trình hành động năm bản lề 2026 sau khi sáp nhập 3 trường và xã Tân Kiều vào xã Đốc Binh Kiều. Tập trung 10 chỉ tiêu trọng tâm: Đảng bộ HTTNV trở lên, kết nạp 3-4 đảng viên, 15 giải HSG văn hóa, hội thảo chuyên môn, giảm bỏ học dưới 0.4%, tốt nghiệp trên 99.8%, 100% giáo viên kỹ năng số, 100% BHYT.',
   },
 ];
 
@@ -238,29 +238,29 @@ export const PartyWorkTab: React.FC = () => {
         </div>
         <div className="relative z-10 max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/20 backdrop-blur-sm rounded-full text-amber-200 text-xs font-semibold uppercase tracking-wider mb-3 border border-amber-300/30">
-            <Flag className="w-3.5 h-3.5" /> Đảng bộ Trường THCS và THPT Đốc Binh Kiều · Khóa I (2025 - 2030)
+            <Flag className="w-3.5 h-3.5" /> Đảng ủy xã Đốc Binh Kiều · Đảng bộ Trường THCS và THPT Đốc Binh Kiều
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
             HỒ SƠ CÔNG TÁC ĐẢNG BỘ SAU SÁP NHẬP
           </h1>
           <p className="text-red-100 text-sm leading-relaxed mb-4">
-            Hệ thống 04 văn kiện chính thức đã được tùy biến toàn diện theo cơ cấu mới của Trường THCS và THPT Đốc Binh Kiều 
-            (sáp nhập từ 3 trường: THPT Đốc Binh Kiều, THCS Đốc Binh Kiều, THCS Tân Kiều). Dữ liệu nhân sự 120 CB-GV-NV, 
-            85 Đảng viên, 03 Chi bộ trực thuộc, 53 lớp, 2.111 học sinh và Ban Chấp hành gồm 10 đồng chí.
+            Căn cứ mô hình <strong>chính quyền địa phương 02 cấp</strong> (Tỉnh Đồng Tháp - Xã Đốc Binh Kiều sau khi sáp nhập xã Tân Kiều vào xã Đốc Binh Kiều). 
+            Đảng bộ Trường THCS và THPT Đốc Binh Kiều trực thuộc Đảng ủy xã Đốc Binh Kiều. Dữ liệu thực tế: 120 CB-GV-NV, 
+            85 Đảng viên, 03 Chi bộ trực thuộc, 53 lớp, 2.111 học sinh tại 03 điểm trường và Ban Chấp hành gồm 10 đồng chí.
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <div className="bg-black/20 backdrop-blur-sm rounded-lg p-2.5 border border-white/10">
+              <span className="text-red-200 block text-[11px]">Cấp ủy cấp trên trực tiếp</span>
+              <strong className="text-sm sm:text-base text-amber-300">Đảng ủy xã Đốc Binh Kiều</strong>
+            </div>
+            <div className="bg-black/20 backdrop-blur-sm rounded-lg p-2.5 border border-white/10">
               <span className="text-red-200 block text-[11px]">Ban Chấp hành Đảng bộ</span>
-              <strong className="text-base text-amber-300">10 Đồng chí</strong>
+              <strong className="text-base text-white">10 Đồng chí</strong>
             </div>
             <div className="bg-black/20 backdrop-blur-sm rounded-lg p-2.5 border border-white/10">
               <span className="text-red-200 block text-[11px]">Tổng số Đảng viên</span>
-              <strong className="text-base text-white">85 Đảng viên</strong> <span className="text-[10px] text-red-200">(70.8%)</span>
-            </div>
-            <div className="bg-black/20 backdrop-blur-sm rounded-lg p-2.5 border border-white/10">
-              <span className="text-red-200 block text-[11px]">Chi bộ trực thuộc</span>
-              <strong className="text-base text-amber-300">03 Chi bộ</strong> <span className="text-[10px] text-red-200">(3 Điểm trường)</span>
+              <strong className="text-base text-amber-300">85 Đảng viên</strong> <span className="text-[10px] text-red-200">(70.8%)</span>
             </div>
             <div className="bg-black/20 backdrop-blur-sm rounded-lg p-2.5 border border-white/10">
               <span className="text-red-200 block text-[11px]">Văn kiện ban hành mới</span>
@@ -301,13 +301,15 @@ export const PartyWorkTab: React.FC = () => {
                 : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >
-            <Shield className="w-4 h-4" /> Cơ Cấu 3 Chi Bộ & Quy Mô
+            <Shield className="w-4 h-4" /> Cơ Cấu 3 Chi Bộ & Điểm Trường
           </button>
         </div>
 
-        {/* Quick Batch Download Button */}
+        {/* Quick Batch Download Info */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500 hidden sm:inline">Thư mục tải về: <code className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-mono">public/downloads/</code> & <code className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-mono">ĐẢNG BỘ/</code></span>
+          <span className="text-xs text-slate-500 hidden sm:inline">
+            Thư mục lưu trữ: <code className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-mono">public/downloads/</code> & <code className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-mono">ĐẢNG BỘ/</code>
+          </span>
         </div>
       </div>
 
@@ -369,18 +371,11 @@ export const PartyWorkTab: React.FC = () => {
             {/* Batch Download Box */}
             <div className="bg-amber-50 rounded-xl p-4 border border-amber-200 text-xs text-amber-900">
               <h4 className="font-bold mb-1 flex items-center gap-1.5 text-amber-800">
-                <FileCheck className="w-4 h-4 text-amber-600" /> Lưu trữ sẵn sàng trong hệ thống
+                <FileCheck className="w-4 h-4 text-amber-600" /> Tải nhanh 04 Văn kiện chuẩn Đảng ủy xã
               </h4>
               <p className="text-amber-800/80 mb-3 leading-relaxed">
-                Tất cả 04 file DOCX đã được tạo và lưu trữ đồng thời ở 2 vị trí thư mục của dự án:
+                Đã cập nhật đúng thể thức: Cấp trên là <strong>ĐẢNG BỘ XÃ ĐỐC BINH KIỀU</strong>, chính quyền địa phương 2 cấp, không còn cấp huyện, xã Tân Kiều đã sáp nhập vào xã Đốc Binh Kiều.
               </p>
-              <ul className="space-y-1 font-mono text-[11px] text-slate-700 mb-3">
-                <li>• /public/downloads/01_QC_DU_...docx</li>
-                <li>• /public/downloads/02_TB_Phan_cong_...docx</li>
-                <li>• /public/downloads/03_CTr_Hanh_dong_...docx</li>
-                <li>• /public/downloads/04_CTr_Hanh_dong_...docx</li>
-                <li className="text-red-700 font-semibold">• ĐẢNG BỘ/ (chứa cả 4 file mới cùng file gốc)</li>
-              </ul>
               <div className="grid grid-cols-2 gap-2">
                 <a
                   href="/downloads/01_QC_DU_Quy_che_lam_viec_BCH_Dang_bo_2025_2030.docx"
@@ -422,7 +417,7 @@ export const PartyWorkTab: React.FC = () => {
                   {selectedDoc.category} · Số {selectedDoc.code}
                 </span>
                 <h3 className="text-lg font-bold text-slate-900">{selectedDoc.title}</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Ngày ban hành: {selectedDoc.date} · Đơn vị: Đảng bộ Trường THCS và THPT Đốc Binh Kiều</p>
+                <p className="text-xs text-slate-500 mt-0.5">Ngày ban hành: {selectedDoc.date} · Đơn vị: Đảng bộ Trường THCS và THPT Đốc Binh Kiều (trực thuộc Đảng ủy xã Đốc Binh Kiều)</p>
               </div>
               <a
                 href={selectedDoc.downloadUrl}
@@ -438,8 +433,8 @@ export const PartyWorkTab: React.FC = () => {
               {/* Header block */}
               <div className="grid grid-cols-2 text-center pb-4 border-b border-slate-300">
                 <div>
-                  <p className="font-bold uppercase text-xs">ĐẢNG BỘ HUYỆN THÁP MƯỜI</p>
-                  <p className="font-bold uppercase text-xs text-red-700">ĐẢNG ỦY TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</p>
+                  <p className="font-bold uppercase text-xs text-red-700">ĐẢNG BỘ XÃ ĐỐC BINH KIỀU</p>
+                  <p className="font-bold uppercase text-xs text-slate-900">ĐẢNG ỦY TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</p>
                   <p className="text-xs text-slate-500">* * *</p>
                   <p className="font-bold text-xs mt-1">Số: {selectedDoc.code}</p>
                 </div>
@@ -470,32 +465,32 @@ export const PartyWorkTab: React.FC = () => {
               {selectedDoc.id === 'doc-1' && (
                 <div className="space-y-3 font-sans text-xs">
                   <div className="bg-amber-50 p-3 rounded-lg border border-amber-200 text-amber-900">
-                    <strong>Tóm tắt cấu trúc:</strong> Văn bản gồm 05 Chương, 23 Điều bóc tách nhiệm vụ tập thể Ban chấp hành và chi tiết thẩm quyền của 10 đồng chí trong Đảng ủy mới, điều chỉnh hoàn toàn tình trạng khuyết Bí thư trước đây, quy định mối quan hệ công tác giữa Đảng ủy với 03 Chi bộ và chính quyền 2 xã Đốc Binh Kiều, Tân Kiều.
+                    <strong>Tóm tắt cấu trúc:</strong> Văn bản gồm 05 Chương, 23 Điều bóc tách nhiệm vụ tập thể Ban chấp hành và chi tiết thẩm quyền của 10 đồng chí trong Đảng ủy mới, trực thuộc <strong>Đảng ủy xã Đốc Binh Kiều</strong>, quy định mối quan hệ công tác giữa Đảng ủy với 03 Chi bộ và HĐND, UBND xã Đốc Binh Kiều.
                   </div>
                   <h4 className="font-bold text-red-800 uppercase mt-3">Chương I: Nhiệm vụ, quyền hạn của tập thể BCH Đảng bộ</h4>
-                  <p className="text-justify text-slate-700">Lãnh đạo toàn diện 3 điểm trường (THPT Đốc Binh Kiều, THCS Đốc Binh Kiều, THCS Tân Kiều) với 120 cán bộ giáo viên nhân viên, 85 đảng viên, 53 lớp và 2.111 học sinh. Cụ thể hóa đường lối của Đảng và chỉ đạo của Sở GDĐT Đồng Tháp; ban hành nghị quyết chuyên đề về nâng cao chất lượng dạy học và chuyển đổi số.</p>
+                  <p className="text-justify text-slate-700">Lãnh đạo toàn diện 3 điểm trường (Điểm chính THPT Đốc Binh Kiều, Điểm THCS Đốc Binh Kiều, Điểm THCS Tân Kiều trên địa bàn xã Đốc Binh Kiều) với 120 cán bộ giáo viên nhân viên, 85 đảng viên, 53 lớp và 2.111 học sinh. Cụ thể hóa đường lối của Đảng bộ xã Đốc Binh Kiều và chỉ đạo của Sở GDĐT Đồng Tháp.</p>
                   <h4 className="font-bold text-red-800 uppercase mt-3">Chương II: Nhiệm vụ, quyền hạn của 10 đồng chí Đảng ủy viên</h4>
                   <ul className="space-y-1.5 pl-4 list-disc text-slate-700">
-                    <li><strong>Điều 3:</strong> Bí thư Đảng ủy - Đồng chí Lê Thanh Cường (Hiệu trưởng): Lãnh đạo toàn diện, công tác cán bộ, quy hoạch, tài chính tài sản, chủ trì hội nghị Đảng ủy.</li>
+                    <li><strong>Điều 3:</strong> Bí thư Đảng ủy - Đồng chí Lê Thanh Cường (Hiệu trưởng): Lãnh đạo toàn diện, công tác cán bộ, quy hoạch, tài chính tài sản, giữ mối liên hệ với Thường trực Đảng ủy xã Đốc Binh Kiều và Sở GDĐT Đồng Tháp.</li>
                     <li><strong>Điều 4:</strong> Phó Bí thư Đảng ủy - Đồng chí Nguyễn Minh Trí (PHT Thường trực): Thường trực Đảng ủy, phụ trách công tác xây dựng Đảng, giám sát Chi bộ 1 và Chi bộ 3, phụ trách chuyên môn THPT.</li>
                     <li><strong>Điều 5:</strong> ĐUV, Bí thư Chi bộ 1 - Đồng chí Trịnh Văn Sơn: Lãnh đạo Chi bộ 1 (Khối THPT & BGH), bồi dưỡng HSG môn KHXH, ôn thi tốt nghiệp THPT, phát triển đảng học sinh lớp 12.</li>
-                    <li><strong>Điều 6:</strong> ĐUV, Bí thư Chi bộ 2 - Đồng chí Nguyễn Thanh Tòng (PHT): Lãnh đạo Chi bộ 2 (Khối THCS Tân Kiều, 15 lớp, 602 HS), điều hành điểm trường Tân Kiều cách 11km.</li>
+                    <li><strong>Điều 6:</strong> ĐUV, Bí thư Chi bộ 2 - Đồng chí Nguyễn Thanh Tòng (PHT): Lãnh đạo Chi bộ 2 (Khối THCS Tân Kiều, 15 lớp, 602 HS), điều hành điểm trường Tân Kiều (thuộc xã Đốc Binh Kiều, cách 11km).</li>
                     <li><strong>Điều 7:</strong> ĐUV, Bí thư Chi bộ 3 - Đồng chí Lê Văn Nguyên: Lãnh đạo Chi bộ 3 (Khối THCS ĐBK, 24 lớp, 980 HS), phụ trách phong trào TDTT, HKPĐ, GDQP-AN toàn trường.</li>
-                    <li><strong>Điều 8:</strong> ĐUV phụ trách Tổ chức Đảng - Đồng chí Lê Thị Ngọc Tuyền: Thẩm tra hồ sơ kết nạp Đảng, chuyển chính thức, quy hoạch cấp ủy.</li>
+                    <li><strong>Điều 8:</strong> ĐUV phụ trách Tổ chức Đảng - Đồng chí Lê Thị Ngọc Tuyền: Thẩm tra hồ sơ kết nạp Đảng, chuyển chính thức, trình Đảng ủy xã Đốc Binh Kiều quyết định.</li>
                     <li><strong>Điều 9:</strong> ĐUV phụ trách Kiểm tra, Giám sát Đảng - Đồng chí Bùi Kim Huỳnh: Chương trình kiểm tra giám sát năm, kỷ luật Đảng, giải quyết khiếu nại.</li>
                     <li><strong>Điều 10:</strong> ĐUV phụ trách Văn thư, Lưu trữ Đảng - Đồng chí Lê Hồng Thúy: Thư ký cuộc họp BCH, biên bản nghị quyết, quản lý con dấu và số hóa lưu trữ hồ sơ Đảng.</li>
                     <li><strong>Điều 11:</strong> ĐUV phụ trách Tuyên giáo - Đồng chí Thái Văn Tiến: Công tác tư tưởng, học tập nghị quyết, NQ 35-NQ/TW, nắm bắt dư luận 3 điểm trường, dân vận đoàn thể.</li>
-                    <li><strong>Điều 12:</strong> ĐUV phụ trách Đảng phí & Hồ sơ sổ sách - Đồng chí Nguyễn Trung Hiếu: Quản lý CSDL Đảng viên 3.0, thu trích nộp đảng phí của 85 đồng chí, thẻ Đảng, sổ sách.</li>
+                    <li><strong>Điều 12:</strong> ĐUV phụ trách Đảng phí & Hồ sơ sổ sách - Đồng chí Nguyễn Trung Hiếu: Quản lý CSDL Đảng viên 3.0, thu trích nộp đảng phí của 85 đồng chí về Đảng ủy xã Đốc Binh Kiều, thẻ Đảng, sổ sách.</li>
                   </ul>
                   <h4 className="font-bold text-red-800 uppercase mt-3">Chương III, IV & V: Nguyên tắc, chế độ làm việc và quan hệ công tác</h4>
-                  <p className="text-justify text-slate-700">Nguyên tắc tập trung dân chủ; họp định kỳ 1 tháng/lần; quy định đi thực tế 3 điểm trường; phối hợp với Huyện ủy Tháp Mười, Sở GDĐT Đồng Tháp, Đảng ủy xã Đốc Binh Kiều và xã Tân Kiều.</p>
+                  <p className="text-justify text-slate-700">Nguyên tắc tập trung dân chủ; họp định kỳ 1 tháng/lần; quy định đi thực tế 3 điểm trường; phục vụ trực tiếp sự lãnh đạo của Đảng ủy xã Đốc Binh Kiều và Sở GDĐT Đồng Tháp.</p>
                 </div>
               )}
 
               {selectedDoc.id === 'doc-2' && (
                 <div className="space-y-3 font-sans text-xs">
                   <div className="bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-emerald-900">
-                    <strong>Phân công nhiệm vụ cụ thể năm 2026:</strong> Bóc tách chi tiết trách nhiệm, quyền hạn và phạm vi công tác của từng đồng chí trong Ban Chấp hành Đảng bộ khóa I theo đúng thông tin phê duyệt mới, bảo đảm không chồng chéo, không bỏ trống bất kỳ cơ sở nào trong 3 điểm trường.
+                    <strong>Phân công nhiệm vụ cụ thể năm 2026:</strong> Bóc tách chi tiết trách nhiệm, quyền hạn và phạm vi công tác của từng đồng chí trong Ban Chấp hành Đảng bộ khóa I theo mô hình chính quyền địa phương 2 cấp, trực thuộc Đảng ủy xã Đốc Binh Kiều.
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse border border-slate-300 text-[11px]">
@@ -528,14 +523,14 @@ export const PartyWorkTab: React.FC = () => {
               {selectedDoc.id === 'doc-3' && (
                 <div className="space-y-3 font-sans text-xs">
                   <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 text-blue-900">
-                    <strong>Chương trình toàn khóa 2025 - 2030:</strong> Xác lập tầm nhìn chiến lược, 17 chỉ tiêu định lượng toàn khóa và 3 khâu đột phá nhằm đưa trường đạt chuẩn quốc gia, liên thông chuyên môn 2 cấp học và xây dựng tập thể đoàn kết.
+                    <strong>Chương trình toàn khóa 2025 - 2030:</strong> Xác lập tầm nhìn chiến lược, 17 chỉ tiêu định lượng toàn khóa và 3 khâu đột phá nhằm đưa trường đạt chuẩn quốc gia, liên thông chuyên môn 2 cấp học trên địa bàn xã Đốc Binh Kiều.
                   </div>
                   <h4 className="font-bold text-red-800 uppercase mt-2">Hệ thống 17 chỉ tiêu chủ yếu toàn khóa:</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
                     <div className="bg-white p-2.5 rounded border border-slate-200">
                       <strong className="text-slate-800 block mb-1">Xây dựng Đảng & Đoàn thể:</strong>
                       <p>• Đảng bộ xếp loại Hoàn thành tốt nhiệm vụ trở lên (ít nhất 2 năm HTXSNV).</p>
-                      <p>• Kết nạp 15 - 20 đảng viên mới trong nhiệm kỳ.</p>
+                      <p>• Kết nạp 15 - 20 đảng viên mới trong nhiệm kỳ (trình Đảng ủy xã).</p>
                       <p>• 100% chi bộ đạt HTTNV; 100% đảng viên hoàn thành nhiệm vụ.</p>
                       <p>• Đoàn trường & Công đoàn đạt Hoàn thành xuất sắc 5 năm liền.</p>
                     </div>
@@ -550,7 +545,7 @@ export const PartyWorkTab: React.FC = () => {
                   </div>
                   <h4 className="font-bold text-red-800 uppercase mt-2">3 Khâu đột phá toàn khóa:</h4>
                   <ol className="list-decimal pl-4 space-y-1 text-slate-700">
-                    <li><strong>Đột phá 1:</strong> Chuyển đổi số liên cơ sở và quản trị số học đường (họp không giấy tờ, sổ điểm và học bạ điện tử).</li>
+                    <li><strong>Đột phá 1:</strong> Chuyển đổi số liên cơ sở trên địa bàn xã Đốc Binh Kiều (xóa nhòa cự ly 11km giữa điểm chính và Tân Kiều).</li>
                     <li><strong>Đột phá 2:</strong> Liên thông chất lượng dạy và học giữa 2 cấp THCS và THPT, chiến lược bồi dưỡng HSG từ lớp 9 lên THPT.</li>
                     <li><strong>Đột phá 3:</strong> Xây dựng văn hóa nhà trường đoàn kết, nhân ái sau sáp nhập, phát huy tinh thần gương mẫu của 85 đảng viên.</li>
                   </ol>
@@ -560,7 +555,7 @@ export const PartyWorkTab: React.FC = () => {
               {selectedDoc.id === 'doc-4' && (
                 <div className="space-y-3 font-sans text-xs">
                   <div className="bg-purple-50 p-3 rounded-lg border border-purple-200 text-purple-900">
-                    <strong>Chương trình năm 2026:</strong> Xác định nhiệm vụ then chốt trong năm đầu tiên vận hành sau sáp nhập, ổn định ngay tư tưởng của 120 CB-GV-NV và nề nếp học tập của 2.111 học sinh.
+                    <strong>Chương trình năm 2026:</strong> Năm đầu tiên vận hành sau khi sáp nhập 3 trường và sáp nhập xã Tân Kiều vào xã Đốc Binh Kiều, thực hiện mô hình chính quyền 2 cấp.
                   </div>
                   <h4 className="font-bold text-red-800 uppercase mt-2">10 Chỉ tiêu hành động năm 2026:</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
@@ -579,13 +574,6 @@ export const PartyWorkTab: React.FC = () => {
                       <p><strong>(10)</strong> Đoàn thể: Công đoàn & Đoàn trường Hoàn thành xuất sắc.</p>
                     </div>
                   </div>
-                  <h4 className="font-bold text-red-800 uppercase mt-2">Lộ trình triển khai 4 quý năm 2026:</h4>
-                  <p className="text-slate-700 leading-normal">
-                    <strong>Quý I:</strong> Ban hành quy chế làm việc, ổn định bộ máy, kiểm tra nề nếp sau Tết.<br/>
-                    <strong>Quý II:</strong> Ôn thi tốt nghiệp THPT, xét tốt nghiệp THCS, sơ kết 6 tháng đầu năm.<br/>
-                    <strong>Quý III:</strong> Khai giảng năm học 2026-2027 đồng loạt tại 3 điểm trường, rà soát phòng ốc thiết bị.<br/>
-                    <strong>Quý IV:</strong> Kiểm tra chuyên đề các chi bộ, đánh giá phân loại đảng viên, tổng kết năm 2026.
-                  </p>
                 </div>
               )}
 
@@ -593,7 +581,7 @@ export const PartyWorkTab: React.FC = () => {
               <div className="pt-6 border-t border-slate-300 grid grid-cols-2 text-xs">
                 <div>
                   <p className="font-bold italic">Nơi nhận:</p>
-                  <p className="text-[11px] text-slate-600">- Ban Thường vụ Huyện ủy Tháp Mười (b/c);<br/>- Sở GDĐT Đồng Tháp (b/c);<br/>- 03 Chi bộ trực thuộc;<br/>- Ban Giám hiệu nhà trường;<br/>- Lưu Đảng ủy.</p>
+                  <p className="text-[11px] text-slate-600">- Ban Thường vụ Đảng ủy xã Đốc Binh Kiều (để báo cáo);<br/>- Sở GDĐT Đồng Tháp (để báo cáo);<br/>- HĐND, UBND xã Đốc Binh Kiều (để phối hợp);<br/>- 03 Chi bộ trực thuộc;<br/>- Ban Giám hiệu nhà trường;<br/>- Lưu: Đảng ủy.</p>
                 </div>
                 <div className="text-center">
                   <p className="font-bold uppercase">T/M ĐẢNG ỦY</p>
@@ -619,7 +607,7 @@ export const PartyWorkTab: React.FC = () => {
                 <Users className="w-5 h-5 text-red-600" /> BAN CHẤP HÀNH ĐẢNG BỘ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (10 ĐỒNG CHÍ)
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Chỉ định bởi Ban Thường vụ Huyện ủy Tháp Mười theo cơ cấu sau sáp nhập 3 trường. Đầy đủ các đồng chí Bí thư, Phó Bí thư, 3 Bí thư Chi bộ và 5 Đảng ủy viên phụ trách nghiệp vụ.
+                Chỉ định bởi Ban Thường vụ Đảng ủy xã Đốc Binh Kiều theo cơ cấu sau sáp nhập. Đầy đủ các đồng chí Bí thư, Phó Bí thư, 3 Bí thư Chi bộ và 5 Đảng ủy viên phụ trách nghiệp vụ.
               </p>
             </div>
             <a
@@ -740,7 +728,7 @@ export const PartyWorkTab: React.FC = () => {
                   Chi bộ 2 trực thuộc
                 </span>
                 <h3 className="text-base font-bold text-slate-900 mt-2">CHI BỘ ĐIỂM TÂN KIỀU</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Điểm Tân Kiều (cách 11km) · 15 lớp · 602 Học sinh</p>
+                <p className="text-xs text-slate-500 mt-0.5">Khu vực Tân Kiều (xã Đốc Binh Kiều, cách 11km) · 15 lớp · 602 Học sinh</p>
 
                 <div className="mt-4 space-y-2 text-xs">
                   <div className="flex justify-between border-b border-slate-100 pb-1.5">
@@ -810,7 +798,7 @@ export const PartyWorkTab: React.FC = () => {
                     <th className="p-2.5 border border-slate-200 text-center">HS khuyết tật hòa nhập</th>
                     <th className="p-2.5 border border-slate-200 text-center">Cán bộ GV-NV</th>
                     <th className="p-2.5 border border-slate-200 text-center">Đảng viên</th>
-                    <th className="p-2.5 border border-slate-200">Ghi chú vị trí & khoảng cách</th>
+                    <th className="p-2.5 border border-slate-200">Ghi chú vị trí & địa bàn</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200">
@@ -823,7 +811,7 @@ export const PartyWorkTab: React.FC = () => {
                     <td className="p-2.5 border border-slate-200 text-center font-semibold text-amber-700">05 HS</td>
                     <td className="p-2.5 border border-slate-200 text-center">45 người</td>
                     <td className="p-2.5 border border-slate-200 text-center font-bold text-red-700">34 ĐV</td>
-                    <td className="p-2.5 border border-slate-200 text-slate-600">Trụ sở Đảng ủy & Ban Giám hiệu</td>
+                    <td className="p-2.5 border border-slate-200 text-slate-600">Trụ sở Đảng ủy & Ban Giám hiệu (xã Đốc Binh Kiều)</td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-2.5 border border-slate-200 font-medium">
@@ -834,7 +822,7 @@ export const PartyWorkTab: React.FC = () => {
                     <td className="p-2.5 border border-slate-200 text-center font-semibold text-amber-700">12 HS</td>
                     <td className="p-2.5 border border-slate-200 text-center">44 người</td>
                     <td className="p-2.5 border border-slate-200 text-center font-bold text-red-700">29 ĐV</td>
-                    <td className="p-2.5 border border-slate-200 text-slate-600">Cơ sở THCS Đốc Binh Kiều cũ</td>
+                    <td className="p-2.5 border border-slate-200 text-slate-600">Cơ sở THCS Đốc Binh Kiều cũ (xã Đốc Binh Kiều)</td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-2.5 border border-slate-200 font-medium">
@@ -845,7 +833,7 @@ export const PartyWorkTab: React.FC = () => {
                     <td className="p-2.5 border border-slate-200 text-center font-semibold text-amber-700">08 HS</td>
                     <td className="p-2.5 border border-slate-200 text-center">31 người</td>
                     <td className="p-2.5 border border-slate-200 text-center font-bold text-red-700">22 ĐV</td>
-                    <td className="p-2.5 border border-slate-200 text-slate-600">Cơ sở Tân Kiều cũ (cách 11km)</td>
+                    <td className="p-2.5 border border-slate-200 text-slate-600">Khu vực Tân Kiều đã sáp nhập vào xã Đốc Binh Kiều (cách 11km)</td>
                   </tr>
                   <tr className="bg-red-50/70 font-bold text-slate-900">
                     <td className="p-2.5 border border-slate-200">
@@ -856,7 +844,7 @@ export const PartyWorkTab: React.FC = () => {
                     <td className="p-2.5 border border-slate-200 text-center text-amber-800">25 HS</td>
                     <td className="p-2.5 border border-slate-200 text-center text-slate-900">120 CB-GV-NV</td>
                     <td className="p-2.5 border border-slate-200 text-center text-red-800">85 ĐẢNG VIÊN (70.8%)</td>
-                    <td className="p-2.5 border border-slate-200 text-slate-800">03 Chi bộ trực thuộc</td>
+                    <td className="p-2.5 border border-slate-200 text-slate-800">Trực thuộc Đảng bộ xã Đốc Binh Kiều</td>
                   </tr>
                 </tbody>
               </table>
