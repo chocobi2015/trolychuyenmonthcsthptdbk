@@ -17,7 +17,6 @@ import {
   Sparkles
 } from 'lucide-react';
 import { TeacherDayBackgroundOverlay } from './TeacherDayBackgroundOverlay';
-import { TeacherDayMusicWidget } from './TeacherDayMusicWidget';
 
 export type MainNavTab = 
   | 'midterm_assessment_plan' 
@@ -168,10 +167,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Global Action Buttons + 20/11 Music Widget */}
+        {/* Global Action Buttons */}
         <div className="flex items-center gap-2 shrink-0">
-          {/* Nhạc Melody 20/11 (Web Audio API - 0 KB) */}
-          <TeacherDayMusicWidget />
 
           {onOpenStudentsModal && (
             <button
