@@ -13,8 +13,11 @@ import {
   FilePlus2,
   Eye,
   ShieldCheck,
-  Flag
+  Flag,
+  Sparkles
 } from 'lucide-react';
+import { TeacherDayBackgroundOverlay } from './TeacherDayBackgroundOverlay';
+import { TeacherDayMusicWidget } from './TeacherDayMusicWidget';
 
 export type MainNavTab = 
   | 'midterm_assessment_plan' 
@@ -129,12 +132,15 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 text-white shadow-md sticky top-0 z-40 border-b border-slate-800/90">
-      {/* 1. Main Brand & Quick Actions Row (Hàng tiêu đề chính tinh gọn, sang trọng) */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <header className="relative bg-gradient-to-r from-slate-950 via-[#10172e] to-[#1e1329] text-white shadow-md sticky top-0 z-40 border-b border-rose-900/40 overflow-hidden">
+      {/* 20/11 Festive Animated Background Overlay ("Bụi phấn rơi rơi" & Cánh hoa tri ân) */}
+      <TeacherDayBackgroundOverlay />
+
+      {/* 1. Main Brand & Quick Actions Row */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         {/* Brand identity */}
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-white p-1 border border-slate-700/60 flex items-center justify-center shadow-md shadow-black/20 shrink-0 overflow-hidden ring-1 ring-white/10">
+          <div className="w-11 h-11 rounded-xl bg-white p-1 border border-rose-500/30 flex items-center justify-center shadow-md shadow-black/30 shrink-0 overflow-hidden ring-1 ring-amber-400/30">
             <img 
               src="/logo-doc-binh-kieu.png" 
               alt="Logo Trường THCS & THPT Đốc Binh Kiều" 
@@ -143,9 +149,12 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-base sm:text-lg font-bold tracking-tight text-white uppercase">
+              <h1 className="text-base sm:text-lg font-bold tracking-tight text-white uppercase drop-shadow-xs">
                 Trường THCS & THPT Đốc Binh Kiều
               </h1>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-gradient-to-r from-rose-950/90 via-rose-900/80 to-amber-950/80 text-amber-200 border border-rose-500/50 shadow-xs">
+                <Sparkles className="w-2.5 h-2.5 text-amber-300 animate-pulse" /> 20/11 Tri Ân Thầy Cô
+              </span>
               <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-950/80 text-blue-200 border border-blue-700/50">
                 Năm học 2026 - 2027
               </span>
@@ -153,18 +162,21 @@ export const Header: React.FC<HeaderProps> = ({
                 <Building2 className="w-3 h-3 text-emerald-400" /> 3 Điểm trường · 53 Lớp (2.111 HS)
               </span>
             </div>
-            <p className="text-xs text-slate-300 hidden sm:block mt-0.5">
+            <p className="text-xs text-rose-100/80 hidden sm:block mt-0.5">
               Hệ thống Quản lý Chuyên môn, Kế hoạch Giáo dục & Văn kiện Đảng bộ
             </p>
           </div>
         </div>
 
-        {/* Global Action Buttons */}
+        {/* Global Action Buttons + 20/11 Music Widget */}
         <div className="flex items-center gap-2 shrink-0">
+          {/* Nhạc Melody 20/11 (Web Audio API - 0 KB) */}
+          <TeacherDayMusicWidget />
+
           {onOpenStudentsModal && (
             <button
               onClick={onOpenStudentsModal}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 hover:border-slate-600 transition shadow-xs"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 hover:text-white border border-slate-700/80 hover:border-slate-600 transition shadow-xs"
               title="Tra cứu thống kê 53 lớp, 2.111 học sinh tại 3 điểm trường"
             >
               <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
@@ -186,7 +198,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenLegalModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 hover:text-amber-300 border border-slate-700 hover:border-slate-600 transition shadow-xs"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 hover:text-amber-300 border border-slate-700/80 hover:border-slate-600 transition shadow-xs"
             title="Xem căn cứ pháp lý: Nghị định 30, Thông tư 22, Thông tư 15, Quyết định sáp nhập trường"
           >
             <BookOpen className="w-3.5 h-3.5 text-amber-400" />
@@ -196,7 +208,7 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* 2. Primary Navigation Bar (Thanh điều hướng phân hệ hiện đại, trực quan) */}
-      <nav className="bg-slate-950/85 border-t border-slate-800 backdrop-blur-sm">
+      <nav className="relative z-10 bg-slate-950/85 border-t border-slate-800/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 flex items-center overflow-x-auto scrollbar-none py-1.5 gap-1.5">
           {NAV_ITEMS.map((item) => (
             <button
@@ -219,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* 3. Sub-Navigation Ribbon (Dành cho phân hệ Văn bản) */}
       {isDocumentsGroup && (
-        <div className="bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
+        <div className="relative z-10 bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-2">
               <span className="text-slate-400 font-medium">Phân hệ văn bản:</span>
@@ -278,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* 4. Sub-Navigation Ribbon (Dành cho phân hệ Hồ sơ trường) */}
       {activeTab === 'school_profile' && (
-        <div className="bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
+        <div className="relative z-10 bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-2">
               <span className="text-slate-400 font-medium">Chế độ xem dữ liệu:</span>
