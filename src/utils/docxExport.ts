@@ -14,6 +14,7 @@ import {
 } from 'docx';
 import { SchoolDocument } from '../types/document';
 import { DepartmentMeeting } from '../types/meeting';
+import { DOCX_PAGE_SETUP, FONT_SIZES, INDENT_FIRST_LINE, PARAGRAPH_SPACING } from './docxStandards';
 
 export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
   const tableBorder = { style: BorderStyle.SINGLE, size: 4, color: '000000' };
@@ -39,15 +40,12 @@ export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
     right: { style: BorderStyle.NONE, size: 0, color: 'auto' },
   };
 
-  // Trang A4 = 210mm = 11906 twips.
-  // Lề: Trái 25mm (1417 twips), Phải 18mm (1020 twips), Trên 20mm (1134 twips), Dưới 20mm (1134 twips)
-  // Chiều rộng khả dụng của trang in = 11906 - 1417 - 1020 = 9469 twips.
-  // Cột trái: 4100 twips (~43.3%), Cột phải: 5369 twips (~56.7%)
-  // Đảm bảo "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM" không bao giờ rớt chữ "NAM",
-  // "Độc lập - Tự do - Hạnh phúc" cân đối ngay ngắn và địa danh ngày tháng cùng hàng số ký hiệu.
-  const colLeftWidth = 4100;
-  const colRightWidth = 5369;
-  const totalHeaderWidth = colLeftWidth + colRightWidth;
+  // Trang A4 chuẩn Nghị định 30/2020/NĐ-CP:
+  // Lề: Trái 30mm (1701 dxa - chuẩn đóng gáy), Phải 15mm (850 dxa), Trên 20mm (1134 dxa), Dưới 20mm (1134 dxa)
+  // Chiều rộng khả dụng của trang in = 9355 dxa.
+  const colLeftWidth = DOCX_PAGE_SETUP.colLeftWidth;
+  const colRightWidth = DOCX_PAGE_SETUP.colRightWidth;
+  const totalHeaderWidth = DOCX_PAGE_SETUP.contentWidth;
 
   // Header 2-column table conforming to Vietnamese State Administration Standards & Decree 30/2020/NĐ-CP
   const headerTable = new Table({
@@ -292,7 +290,7 @@ export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
             font: 'Times New Roman',
           }),
         ],
-        indent: { firstLine: 720 },
+        indent: { firstLine: 567 },
         spacing: { line: 280, after: 120 },
       })
     );
@@ -609,22 +607,32 @@ export function createSchoolDocumentDocx(doc: SchoolDocument): Document {
     appendixSections.forEach(renderSection);
   }
 
-  // Document setup: Standard A4 margins according to Nghị định 30/2020/NĐ-CP
-  // Lề trên: 20mm (1134 twips)
-  // Lề dưới: 20mm (1134 twips)
-  // Lề trái: 25mm (1417 twips - chuẩn 25-30mm của Nghị định 30)
-  // Lề phải: 18mm (1020 twips - chuẩn 15-20mm của Nghị định 30)
+  // Document setup: Chuẩn Nghị định 30/2020/NĐ-CP
   const docxFile = new Document({
+    styles: {
+      default: {
+        document: {
+          run: {
+            font: 'Times New Roman',
+            size: FONT_SIZES.BODY,
+            color: '000000',
+          },
+          paragraph: {
+            spacing: {
+              line: PARAGRAPH_SPACING.line,
+              before: PARAGRAPH_SPACING.before,
+              after: PARAGRAPH_SPACING.after,
+            },
+          },
+        },
+      },
+    },
     sections: [
       {
         properties: {
           page: {
-            margin: {
-              top: 1134, // 20mm (2 cm)
-              bottom: 1134, // 20mm (2 cm)
-              left: 1417, // 25mm (2.5 cm - lề trái)
-              right: 1020, // 18mm (1.8 cm - lề phải)
-            },
+            size: DOCX_PAGE_SETUP.size,
+            margin: DOCX_PAGE_SETUP.margin,
           },
         },
         children: docChildren,
@@ -1002,16 +1010,30 @@ export async function exportMeetingToDocx(meeting: DepartmentMeeting): Promise<v
   children.push(sigTable);
 
   const docxFile = new Document({
+    styles: {
+      default: {
+        document: {
+          run: {
+            font: 'Times New Roman',
+            size: FONT_SIZES.BODY,
+            color: '000000',
+          },
+          paragraph: {
+            spacing: {
+              line: PARAGRAPH_SPACING.line,
+              before: PARAGRAPH_SPACING.before,
+              after: PARAGRAPH_SPACING.after,
+            },
+          },
+        },
+      },
+    },
     sections: [
       {
         properties: {
           page: {
-            margin: {
-              top: 1134,
-              bottom: 1134,
-              left: 1417,
-              right: 1020,
-            },
+            size: DOCX_PAGE_SETUP.size,
+            margin: DOCX_PAGE_SETUP.margin,
           },
         },
         children,

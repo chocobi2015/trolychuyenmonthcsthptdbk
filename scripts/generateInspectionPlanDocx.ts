@@ -46,7 +46,7 @@ function createHeaderTable(
   locationDate: string
 ): Table {
   return new Table({
-    width: { size: 9469, type: WidthType.DXA },
+    width: { size: 9355, type: WidthType.DXA },
     borders: {
       top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
       bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
@@ -59,61 +59,67 @@ function createHeaderTable(
       new TableRow({
         children: [
           new TableCell({
-            width: { size: 4200, type: WidthType.DXA },
+            width: { size: 4100, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 spacing: { after: 20 },
                 children: [
-                  new TextRun({ text: agencyTop.toUpperCase(), font: 'Times New Roman', size: 21 }),
+                  new TextRun({ text: agencyTop.toUpperCase(), font: 'Times New Roman', size: 24 }),
                 ],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { after: 60 },
+                spacing: { after: 20 },
                 children: [
-                  new TextRun({ text: agencyName.toUpperCase(), bold: true, font: 'Times New Roman', size: 22 }),
+                  new TextRun({ text: agencyName.toUpperCase(), bold: true, font: 'Times New Roman', size: 24 }),
                 ],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: '————————', color: '666666', font: 'Times New Roman', size: 18 }),
+                  new TextRun({ text: '───────', font: 'Times New Roman', size: 14 }),
                 ],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 spacing: { before: 40 },
                 children: [
-                  new TextRun({ text: docNumber, font: 'Times New Roman', size: 22, bold: true }),
+                  new TextRun({ text: docNumber, font: 'Times New Roman', size: 24 }),
                 ],
               }),
             ],
           }),
           new TableCell({
-            width: { size: 5269, type: WidthType.DXA },
+            width: { size: 5255, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 spacing: { after: 20 },
                 children: [
-                  new TextRun({ text: countryTitle1.toUpperCase(), bold: true, font: 'Times New Roman', size: 21 }),
+                  new TextRun({ text: countryTitle1.toUpperCase(), bold: true, font: 'Times New Roman', size: 24 }),
                 ],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { after: 60 },
+                spacing: { after: 20 },
                 children: [
-                  new TextRun({ text: countryTitle2, bold: true, font: 'Times New Roman', size: 22, underline: {} }),
+                  new TextRun({ text: countryTitle2, bold: true, font: 'Times New Roman', size: 26 }),
                 ],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { before: 80 },
                 children: [
-                  new TextRun({ text: locationDate, italics: true, font: 'Times New Roman', size: 22 }),
+                  new TextRun({ text: '────────────────', font: 'Times New Roman', size: 14 }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 40 },
+                children: [
+                  new TextRun({ text: locationDate, italics: true, font: 'Times New Roman', size: 26 }),
                 ],
               }),
             ],
@@ -131,7 +137,7 @@ function createSignOffTable(
   signerName: string
 ): Table {
   return new Table({
-    width: { size: 9469, type: WidthType.DXA },
+    width: { size: 9355, type: WidthType.DXA },
     borders: {
       top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
       bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
@@ -144,48 +150,48 @@ function createSignOffTable(
       new TableRow({
         children: [
           new TableCell({
-            width: { size: 4800, type: WidthType.DXA },
+            width: { size: 4100, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               new Paragraph({
                 spacing: { before: 120, after: 40 },
                 children: [
-                  new TextRun({ text: 'Nơi nhận:', bold: true, italics: true, font: 'Times New Roman', size: 22 }),
+                  new TextRun({ text: 'Nơi nhận:', bold: true, italics: true, font: 'Times New Roman', size: 24 }),
                 ],
               }),
               ...recipients.map((r) =>
                 new Paragraph({
-                  spacing: { line: 240, after: 20 },
+                  spacing: { line: 220, after: 20 },
                   children: [
-                    new TextRun({ text: '- ' + r, font: 'Times New Roman', size: 20 }),
+                    new TextRun({ text: '- ' + r, font: 'Times New Roman', size: 22 }),
                   ],
                 })
               ),
             ],
           }),
           new TableCell({
-            width: { size: 4669, type: WidthType.DXA },
+            width: { size: 5255, type: WidthType.DXA },
             borders: cellNoBorder,
             children: [
               ...(authorityTitle ? [
                 new Paragraph({
                   alignment: AlignmentType.CENTER,
                   children: [
-                    new TextRun({ text: authorityTitle.toUpperCase(), bold: true, font: 'Times New Roman', size: 22 }),
+                    new TextRun({ text: authorityTitle.toUpperCase(), bold: true, font: 'Times New Roman', size: 28 }),
                   ],
                 })
               ] : []),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
-                spacing: { after: 1200 },
+                spacing: { after: 800 },
                 children: [
-                  new TextRun({ text: signerRole.toUpperCase(), bold: true, font: 'Times New Roman', size: 22 }),
+                  new TextRun({ text: signerRole.toUpperCase(), bold: true, font: 'Times New Roman', size: 28 }),
                 ],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({ text: signerName, bold: true, font: 'Times New Roman', size: 24 }),
+                  new TextRun({ text: signerName, bold: true, font: 'Times New Roman', size: 28 }),
                 ],
               }),
             ],
@@ -198,36 +204,44 @@ function createSignOffTable(
 
 function p(text: string, bold = false, italics = false, indent = 0): Paragraph {
   return new Paragraph({
-    indent: indent > 0 ? { left: indent * 360 } : undefined,
+    alignment: AlignmentType.JUSTIFIED,
+    indent: { firstLine: 567, left: indent > 0 ? indent * 360 : 0 },
+    spacing: { line: 280, before: 40, after: 40 },
     children: [
-      new TextRun({ text, bold, italics, font: 'Times New Roman', size: 24 }),
+      new TextRun({ text, bold, italics, font: 'Times New Roman', size: 28 }),
     ],
   });
 }
 
 function h1(text: string): Paragraph {
   return new Paragraph({
-    spacing: { before: 240, after: 80 },
+    alignment: AlignmentType.JUSTIFIED,
+    indent: { firstLine: 567 },
+    spacing: { before: 200, after: 80 },
     children: [
-      new TextRun({ text, bold: true, font: 'Times New Roman', size: 26 }),
+      new TextRun({ text, bold: true, font: 'Times New Roman', size: 28 }),
     ],
   });
 }
 
 function h2(text: string): Paragraph {
   return new Paragraph({
-    spacing: { before: 180, after: 60 },
+    alignment: AlignmentType.JUSTIFIED,
+    indent: { firstLine: 567 },
+    spacing: { before: 160, after: 60 },
     children: [
-      new TextRun({ text, bold: true, font: 'Times New Roman', size: 24 }),
+      new TextRun({ text, bold: true, font: 'Times New Roman', size: 28 }),
     ],
   });
 }
 
 function h3(text: string): Paragraph {
   return new Paragraph({
+    alignment: AlignmentType.JUSTIFIED,
+    indent: { firstLine: 567 },
     spacing: { before: 120, after: 40 },
     children: [
-      new TextRun({ text, bold: true, italics: true, font: 'Times New Roman', size: 23 }),
+      new TextRun({ text, bold: true, italics: true, font: 'Times New Roman', size: 28 }),
     ],
   });
 }
@@ -251,7 +265,7 @@ export async function generateAllInspectionDocuments() {
       'Số: 48/KH-THCS&THPTĐBK',
       'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
       'Độc lập - Tự do - Hạnh phúc',
-      'Tháp Mười, ngày 15 tháng 10 năm 2026'
+      'Đốc Binh Kiều, ngày 15 tháng 10 năm 2026'
     )
   );
 
@@ -560,8 +574,8 @@ export async function generateAllInspectionDocuments() {
     styles: {
       default: {
         document: {
-          run: { font: 'Times New Roman', size: 24 },
-          paragraph: { spacing: { line: 276, before: 50, after: 50 } },
+          run: { font: 'Times New Roman', size: 28, color: '000000' },
+          paragraph: { spacing: { line: 280, before: 60, after: 60 } },
         },
       },
     },
@@ -569,7 +583,7 @@ export async function generateAllInspectionDocuments() {
       {
         properties: {
           page: {
-            margin: { top: 1134, bottom: 1134, left: 1417, right: 1020 },
+            margin: { top: 1134, bottom: 1134, left: 1701, right: 850 },
           },
         },
         children: planDocChildren,
@@ -588,8 +602,8 @@ export async function generateAllInspectionDocuments() {
     styles: {
       default: {
         document: {
-          run: { font: 'Times New Roman', size: 24 },
-          paragraph: { spacing: { line: 276, before: 60, after: 60 } },
+          run: { font: 'Times New Roman', size: 28, color: '000000' },
+          paragraph: { spacing: { line: 280, before: 60, after: 60 } },
         },
       },
     },
@@ -597,7 +611,7 @@ export async function generateAllInspectionDocuments() {
       {
         properties: {
           page: {
-            margin: { top: 1134, bottom: 1134, left: 1417, right: 1020 },
+            margin: { top: 1134, bottom: 1134, left: 1701, right: 850 },
           },
         },
         children: [
@@ -607,7 +621,7 @@ export async function generateAllInspectionDocuments() {
             'Số: 49/QĐ-THCS-THPTĐBK',
             'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
             'Độc lập - Tự do - Hạnh phúc',
-            'Tháp Mười, ngày 15 tháng 10 năm 2026'
+            'Đốc Binh Kiều, ngày 15 tháng 10 năm 2026'
           ),
           new Paragraph({
             alignment: AlignmentType.CENTER,
@@ -716,8 +730,8 @@ export async function generateAllInspectionDocuments() {
     styles: {
       default: {
         document: {
-          run: { font: 'Times New Roman', size: 24 },
-          paragraph: { spacing: { line: 276, before: 60, after: 60 } },
+          run: { font: 'Times New Roman', size: 28, color: '000000' },
+          paragraph: { spacing: { line: 280, before: 60, after: 60 } },
         },
       },
     },
@@ -725,7 +739,7 @@ export async function generateAllInspectionDocuments() {
       {
         properties: {
           page: {
-            margin: { top: 1134, bottom: 1134, left: 1417, right: 1020 },
+            margin: { top: 1134, bottom: 1134, left: 1701, right: 850 },
           },
         },
         children: [
