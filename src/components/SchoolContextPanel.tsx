@@ -46,20 +46,29 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
     <div className="space-y-6">
       {/* Top Banner */}
       <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-            <span className="text-slate-900 font-semibold">Hồ Sơ & Chỉ Tiêu Chuyên Môn Nhà Trường</span>
-            <span aria-hidden="true">·</span>
-            <span>Kế hoạch số 34/KH-THCS&THPTĐBK (25/9/2026)</span>
-            <span aria-hidden="true">·</span>
-            <span>Quyết định số 2606/QĐ-UBND</span>
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-xl bg-slate-50 border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-xs">
+            <img 
+              src="/logo-doc-binh-kieu.png" 
+              alt="Logo Trường THCS & THPT Đốc Binh Kiều" 
+              className="w-full h-full object-contain" 
+            />
           </div>
-          <h2 className="text-lg font-bold text-slate-900 mt-1">
-            Trường THCS & THPT Đốc Binh Kiều (Sở GDĐT tỉnh Đồng Tháp)
-          </h2>
-          <p className="text-xs text-slate-600 mt-0.5 max-w-3xl">
-            Sáp nhập từ 3 trường: THCS Đốc Binh Kiều, THCS Tân Kiều và THPT Đốc Binh Kiều. Quy mô 53 lớp, 2.111 học sinh, 120 CB-GV-NV tại 3 điểm trường.
-          </p>
+          <div>
+            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+              <span className="text-slate-900 font-semibold">Hồ Sơ & Chỉ Tiêu Chuyên Môn Nhà Trường</span>
+              <span aria-hidden="true">·</span>
+              <span>Kế hoạch số 34/KH-THCS&THPTĐBK (25/9/2026)</span>
+              <span aria-hidden="true">·</span>
+              <span>Quyết định số 2606/QĐ-UBND</span>
+            </div>
+            <h2 className="text-lg font-bold text-slate-900 mt-1">
+              Trường THCS & THPT Đốc Binh Kiều (Sở GDĐT tỉnh Đồng Tháp)
+            </h2>
+            <p className="text-xs text-slate-600 mt-0.5 max-w-3xl">
+              Sáp nhập từ 3 trường: THCS Đốc Binh Kiều, THCS Tân Kiều và THPT Đốc Binh Kiều. Quy mô 53 lớp, 2.111 học sinh, 120 CB-GV-NV tại 3 điểm trường.
+            </p>
+          </div>
         </div>
 
         {onViewSchoolPlanDoc && (

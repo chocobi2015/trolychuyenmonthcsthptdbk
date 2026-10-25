@@ -9,8 +9,7 @@ import {
   HeartHandshake, 
   FileSpreadsheet, 
   CalendarCheck,
-  Compass,
-  CheckCircle2,
+  GraduationCap,
   FilePlus2,
   Eye,
   ShieldCheck,
@@ -63,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'midterm_assessment_plan',
       label: 'Kiểm tra - Đánh giá',
       sublabel: 'Kế hoạch HK1 (Số 45)',
-      icon: <CalendarCheck className="w-4 h-4" />,
+      icon: <CalendarCheck className="w-4 h-4 text-emerald-400" />,
       isActive: activeTab === 'midterm_assessment_plan',
       onClick: () => setActiveTab('midterm_assessment_plan'),
     },
@@ -87,7 +86,7 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'documents',
       label: 'Hồ sơ & Văn bản trường',
       sublabel: 'Kho hồ sơ, Soạn thảo & A4',
-      icon: <FolderArchive className="w-4 h-4" />,
+      icon: <FolderArchive className="w-4 h-4 text-sky-400" />,
       isActive: isDocumentsGroup,
       onClick: () => {
         if (!isDocumentsGroup) {
@@ -99,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'directives',
       label: 'Chỉ đạo Sở GDĐT',
       sublabel: 'Văn bản điều hành Đồng Tháp',
-      icon: <BookOpen className="w-4 h-4" />,
+      icon: <BookOpen className="w-4 h-4 text-indigo-400" />,
       isActive: activeTab === 'directives',
       onClick: () => setActiveTab('directives'),
     },
@@ -107,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'department_meetings',
       label: 'Tổ chuyên môn',
       sublabel: 'Họp 2 tuần/lần & Biên bản',
-      icon: <Users className="w-4 h-4" />,
+      icon: <Users className="w-4 h-4 text-teal-400" />,
       isActive: activeTab === 'department_meetings',
       onClick: () => setActiveTab('department_meetings'),
     },
@@ -115,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'inclusive_education',
       label: 'Giáo dục hòa nhập',
       sublabel: 'CV 3326 & 25 HS khuyết tật',
-      icon: <HeartHandshake className="w-4 h-4" />,
+      icon: <HeartHandshake className="w-4 h-4 text-rose-400" />,
       isActive: activeTab === 'inclusive_education',
       onClick: () => setActiveTab('inclusive_education'),
     },
@@ -123,50 +122,39 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'school_profile',
       label: 'Hồ sơ trường & Nhân sự',
       sublabel: '53 Lớp & 120 CB-GV-NV',
-      icon: <Building2 className="w-4 h-4" />,
+      icon: <Building2 className="w-4 h-4 text-amber-300" />,
       isActive: activeTab === 'school_profile',
       onClick: () => setActiveTab('school_profile'),
     },
   ];
 
   return (
-    <header className="bg-slate-900 text-white shadow-md sticky top-0 z-40 border-b border-slate-800">
-      {/* 1. Administrative Top Bar */}
-      <div className="bg-slate-950 border-b border-slate-800/80 text-[11px] text-slate-400 py-1 px-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-200">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP</span>
-            <span className="text-slate-600">·</span>
-            <span className="hidden sm:inline">UBND XÃ ĐỐC BINH KIỀU</span>
-          </div>
-          <div className="hidden md:flex items-center gap-2 text-slate-400">
-            <span>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</span>
-            <span>—</span>
-            <span className="text-slate-300">Độc lập · Tự do · Hạnh phúc</span>
-          </div>
-          <div className="flex items-center gap-3 text-slate-300">
-            <span className="hidden sm:inline text-slate-400">Nghị định 30/2020/NĐ-CP</span>
-            <span className="text-slate-600 hidden sm:inline">·</span>
-            <span className="text-sky-400 font-medium">Năm học 2026 - 2027</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Main Brand & Quick Actions Row */}
+    <header className="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 text-white shadow-md sticky top-0 z-40 border-b border-slate-800/90">
+      {/* 1. Main Brand & Quick Actions Row (Hàng tiêu đề chính tinh gọn, sang trọng) */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         {/* Brand identity */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-blue-700 border border-blue-500/30 flex items-center justify-center text-white font-bold shrink-0 shadow-inner">
-            <Compass className="w-5 h-5 text-amber-300" />
+          <div className="w-11 h-11 rounded-xl bg-white p-1 border border-slate-700/60 flex items-center justify-center shadow-md shadow-black/20 shrink-0 overflow-hidden ring-1 ring-white/10">
+            <img 
+              src="/logo-doc-binh-kieu.png" 
+              alt="Logo Trường THCS & THPT Đốc Binh Kiều" 
+              className="w-full h-full object-contain"
+            />
           </div>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-base sm:text-lg font-bold tracking-tight text-white uppercase">
                 Trường THCS & THPT Đốc Binh Kiều
               </h1>
+              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-950/80 text-blue-200 border border-blue-700/50">
+                Năm học 2026 - 2027
+              </span>
+              <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-950/70 text-emerald-300 border border-emerald-700/40">
+                <Building2 className="w-3 h-3 text-emerald-400" /> 3 Điểm trường · 53 Lớp (2.111 HS)
+              </span>
             </div>
-            <p className="text-xs text-slate-300 hidden sm:block">
-              Hệ thống Quản lý Chuyên môn, Kế hoạch Giáo dục & Hồ sơ Kiểm tra Đánh giá
+            <p className="text-xs text-slate-300 hidden sm:block mt-0.5">
+              Hệ thống Quản lý Chuyên môn, Kế hoạch Giáo dục & Văn kiện Đảng bộ
             </p>
           </div>
         </div>
@@ -176,7 +164,7 @@ export const Header: React.FC<HeaderProps> = ({
           {onOpenStudentsModal && (
             <button
               onClick={onOpenStudentsModal}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 transition"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 hover:border-slate-600 transition shadow-xs"
               title="Tra cứu thống kê 53 lớp, 2.111 học sinh tại 3 điểm trường"
             >
               <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
@@ -187,7 +175,7 @@ export const Header: React.FC<HeaderProps> = ({
           {onOpenUploadModal && (
             <button
               onClick={onOpenUploadModal}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-emerald-700 hover:bg-emerald-600 border border-emerald-600 shadow-xs transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 border border-emerald-500/50 shadow-xs transition"
               title="Tải lên công văn Word hoặc PDF của Sở GDĐT để phân tích và lưu trữ"
             >
               <Upload className="w-3.5 h-3.5" />
@@ -198,7 +186,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenLegalModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 hover:text-amber-300 border border-slate-700 hover:border-slate-600 transition shadow-xs"
             title="Xem căn cứ pháp lý: Nghị định 30, Thông tư 22, Thông tư 15, Quyết định sáp nhập trường"
           >
             <BookOpen className="w-3.5 h-3.5 text-amber-400" />
@@ -207,20 +195,20 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* 3. Primary Navigation Bar (6 Clean Scientific Pillars) */}
-      <nav className="bg-slate-950/90 border-t border-slate-800/90 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 flex items-center overflow-x-auto scrollbar-none py-1 gap-1">
+      {/* 2. Primary Navigation Bar (Thanh điều hướng phân hệ hiện đại, trực quan) */}
+      <nav className="bg-slate-950/85 border-t border-slate-800 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 flex items-center overflow-x-auto scrollbar-none py-1.5 gap-1.5">
           {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
               onClick={item.onClick}
-              className={`px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 flex items-center gap-2 transition text-left ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 flex items-center gap-2 transition text-left ${
                 item.isActive
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
               }`}
             >
-              <span className={`shrink-0 ${item.isActive ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`shrink-0 ${item.isActive ? 'text-white' : ''}`}>
                 {item.icon}
               </span>
               <span>{item.label}</span>
@@ -229,7 +217,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </nav>
 
-      {/* 4. Sub-Navigation Ribbon (For Contextual Workspaces) */}
+      {/* 3. Sub-Navigation Ribbon (Dành cho phân hệ Văn bản) */}
       {isDocumentsGroup && (
         <div className="bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
@@ -288,6 +276,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       )}
 
+      {/* 4. Sub-Navigation Ribbon (Dành cho phân hệ Hồ sơ trường) */}
       {activeTab === 'school_profile' && (
         <div className="bg-slate-900/95 border-t border-slate-800 px-4 py-2 text-xs">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">

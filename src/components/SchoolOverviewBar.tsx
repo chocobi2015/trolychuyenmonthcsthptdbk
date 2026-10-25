@@ -8,8 +8,12 @@ export const SchoolOverviewBar: React.FC = () => {
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         {/* Left: General Stats */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center shrink-0">
-            <Building2 className="w-5 h-5" />
+          <div className="w-11 h-11 rounded-lg bg-white border border-slate-200 p-1 flex items-center justify-center shrink-0 shadow-xs">
+            <img 
+              src="/logo-doc-binh-kieu.png" 
+              alt="Logo Trường THCS & THPT Đốc Binh Kiều" 
+              className="w-full h-full object-contain" 
+            />
           </div>
           <div>
             <div className="flex items-center gap-2">
