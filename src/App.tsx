@@ -21,6 +21,10 @@ import { OFFICIAL_AI_EDUCATION_PLAN } from './data/aiEducationData';
 import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './data/qualityManagementData';
 import { MidtermAssessmentPlanView } from './components/MidtermAssessmentPlanView';
 import { PartyWorkTab } from './components/PartyWorkTab';
+import { SchoolDeadline } from './types/deadline';
+import { INITIAL_SCHOOL_DEADLINES } from './data/initialDeadlines';
+import { DeadlineManagementModal } from './components/DeadlineManagementModal';
+import { extractDeadlinesFromDirective, extractDeadlinesFromSchoolDoc } from './utils/deadlineExtractor';
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
@@ -40,6 +44,23 @@ export default function App() {
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isUploadDirectiveModalOpen, setIsUploadDirectiveModalOpen] = useState(false);
   const [isStudentsModalOpen, setIsStudentsModalOpen] = useState(false);
+  const [isDeadlineModalOpen, setIsDeadlineModalOpen] = useState(false);
+
+  // School Deadlines Repository (Lưu trữ và đồng bộ deadline hạn chót)
+  const [deadlines, setDeadlines] = useState<SchoolDeadline[]>(() => {
+    try {
+      const saved = localStorage.getItem('dbk_school_deadlines');
+      if (saved) {
+        const parsed: SchoolDeadline[] = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return INITIAL_SCHOOL_DEADLINES;
+  });
 
   // Department Directives Repository (Lưu trữ sẵn trên webapp)
   const [directivesList, setDirectivesList] = useState<DepartmentDirective[]>(() => {
@@ -421,6 +442,62 @@ export default function App() {
       }
       return [newDirective, ...prev];
     });
+
+    // Tự động quét và cập nhật Deadline từ văn bản mới của Sở GDĐT
+    try {
+      const newDeadlines = extractDeadlinesFromDirective(newDirective);
+      if (newDeadlines.length > 0) {
+        setDeadlines((prev) => {
+          const merged = [...newDeadlines, ...prev];
+          localStorage.setItem('dbk_school_deadlines', JSON.stringify(merged));
+          return merged;
+        });
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // Handlers for School Deadlines
+  const handleAddDeadline = (dl: Omit<SchoolDeadline, 'id' | 'createdAt'>) => {
+    const newDl: SchoolDeadline = {
+      ...dl,
+      id: 'dl-manual-' + Date.now(),
+      createdAt: new Date().toISOString().split('T')[0],
+    };
+    setDeadlines((prev) => {
+      const updated = [newDl, ...prev];
+      try {
+        localStorage.setItem('dbk_school_deadlines', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+      return updated;
+    });
+  };
+
+  const handleUpdateDeadline = (id: string, updates: Partial<SchoolDeadline>) => {
+    setDeadlines((prev) => {
+      const updated = prev.map((d) => (d.id === id ? { ...d, ...updates } : d));
+      try {
+        localStorage.setItem('dbk_school_deadlines', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+      return updated;
+    });
+  };
+
+  const handleDeleteDeadline = (id: string) => {
+    setDeadlines((prev) => {
+      const updated = prev.filter((d) => d.id !== id);
+      try {
+        localStorage.setItem('dbk_school_deadlines', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+      return updated;
+    });
   };
 
   // Handler: Delete directive
@@ -455,6 +532,20 @@ export default function App() {
         })
       );
       setSelectedDirectiveForBuilder(null);
+    }
+
+    // Tự động quét và cập nhật Deadline từ Kế hoạch/Quyết định mới của trường
+    try {
+      const docDeadlines = extractDeadlinesFromSchoolDoc(doc);
+      if (docDeadlines.length > 0) {
+        setDeadlines((prev) => {
+          const merged = [...docDeadlines, ...prev];
+          localStorage.setItem('dbk_school_deadlines', JSON.stringify(merged));
+          return merged;
+        });
+      }
+    } catch (e) {
+      console.error(e);
     }
 
     setCurrentDocument(doc);
@@ -592,6 +683,8 @@ export default function App() {
         activeDocNumber={currentDocument?.documentNumber}
         schoolSubView={schoolSubView}
         setSchoolSubView={setSchoolSubView}
+        deadlines={deadlines}
+        onOpenDeadlineModal={() => setIsDeadlineModalOpen(true)}
       />
 
       {/* Main Content */}
@@ -736,6 +829,16 @@ export default function App() {
       <SchoolStudentsModal
         isOpen={isStudentsModalOpen}
         onClose={() => setIsStudentsModalOpen(false)}
+      />
+
+      {/* School Deadlines & Reporting Management Modal */}
+      <DeadlineManagementModal
+        isOpen={isDeadlineModalOpen}
+        onClose={() => setIsDeadlineModalOpen(false)}
+        deadlines={deadlines}
+        onAddDeadline={handleAddDeadline}
+        onUpdateDeadline={handleUpdateDeadline}
+        onDeleteDeadline={handleDeleteDeadline}
       />
     </div>
   );

@@ -14,9 +14,12 @@ import {
   Eye,
   ShieldCheck,
   Flag,
-  Sparkles
+  Sparkles,
+  BellRing
 } from 'lucide-react';
 import { TeacherDayBackgroundOverlay } from './TeacherDayBackgroundOverlay';
+import { DeadlineTickerBanner } from './DeadlineTickerBanner';
+import { SchoolDeadline, calculateDaysRemaining } from '../types/deadline';
 
 export type MainNavTab = 
   | 'midterm_assessment_plan' 
@@ -42,6 +45,9 @@ interface HeaderProps {
   activeDocNumber?: string;
   schoolSubView?: SchoolSubView;
   setSchoolSubView?: (view: SchoolSubView) => void;
+  deadlines?: SchoolDeadline[];
+  onOpenDeadlineModal?: () => void;
+  onSelectDeadline?: (dl: SchoolDeadline) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
@@ -55,7 +61,13 @@ export const Header: React.FC<HeaderProps> = ({
   activeDocNumber,
   schoolSubView = 'context',
   setSchoolSubView,
+  deadlines = [],
+  onOpenDeadlineModal,
+  onSelectDeadline,
 }) => {
+  const urgentCount = deadlines.filter(
+    (d) => d.status !== 'completed' && calculateDaysRemaining(d.deadlineDate) <= 3
+  ).length;
   // Determine which main nav pillar is active
   const isDocumentsGroup = activeTab === 'archive' || activeTab === 'builder' || activeTab === 'editor';
 
@@ -169,6 +181,27 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Global Action Buttons */}
         <div className="flex items-center gap-2 shrink-0">
+          {/* Quick Deadline Status Button */}
+          {onOpenDeadlineModal && (
+            <button
+              onClick={onOpenDeadlineModal}
+              className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-xs ${
+                urgentCount > 0
+                  ? 'bg-rose-950/90 hover:bg-rose-900 text-rose-100 border border-rose-500/80 ring-1 ring-rose-500/40 shadow-rose-950/50'
+                  : 'bg-slate-800/90 hover:bg-slate-700 hover:text-white text-slate-200 border border-slate-700/80'
+              }`}
+              title="Xem danh sách hạn chót báo cáo & quản lý deadline"
+            >
+              <BellRing className={`w-3.5 h-3.5 ${urgentCount > 0 ? 'text-rose-400 animate-bounce' : 'text-slate-400'}`} />
+              <span className="hidden sm:inline">Hạn chót:</span>
+              <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${urgentCount > 0 ? 'bg-rose-600 text-white animate-pulse' : 'bg-slate-700 text-slate-200'}`}>
+                {urgentCount > 0 ? `${urgentCount} KHẨN` : `${deadlines.length} việc`}
+              </span>
+              {urgentCount > 0 && (
+                <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping absolute -top-0.5 -right-0.5"></span>
+              )}
+            </button>
+          )}
 
           {onOpenStudentsModal && (
             <button
@@ -225,6 +258,15 @@ export const Header: React.FC<HeaderProps> = ({
           ))}
         </div>
       </nav>
+
+      {/* 2.5 Running Marquee Deadline Ticker Banner (Hàng chữ chạy thông báo hạn chót theo yêu cầu) */}
+      {deadlines && deadlines.length > 0 && onOpenDeadlineModal && (
+        <DeadlineTickerBanner
+          deadlines={deadlines}
+          onOpenManagementModal={onOpenDeadlineModal}
+          onSelectDeadline={onSelectDeadline}
+        />
+      )}
 
       {/* 3. Sub-Navigation Ribbon (Dành cho phân hệ Văn bản) */}
       {isDocumentsGroup && (
