@@ -196,13 +196,13 @@ export async function generateAllInspectionDocuments() {
   planDocChildren.push(
     p('- Phòng học: Toàn trường có 53 phòng học kiên cố và bán kiên cố bố trí đủ cho 53 lớp học.'),
     p(
-      '- Phòng chức năng và bộ môn: Có 22 phòng bộ môn (gồm 08 phòng thí nghiệm thực hành Lý - Hóa - Sinh, 05 phòng máy vi tính với tổng cộng 165 máy tính có kết nối mạng Internet an toàn, 03 phòng học ngoại ngữ, phòng âm nhạc, mỹ thuật, đa năng).'
+      '- Phòng chức năng và bộ môn: Hệ thống các phòng bộ môn, phòng thí nghiệm thực hành Lý - Hóa - Sinh, phòng máy vi tính có kết nối mạng Internet an toàn, phòng học ngoại ngữ, âm nhạc, mỹ thuật và phòng đa năng phục vụ dạy học tại 03 điểm trường.'
     ),
     p(
-      '- Bộ phận Thư viện: 03 phòng thư viện tại 03 điểm trường với hơn 15.000 bản sách giáo khoa, sách tham khảo, sách nghiệp vụ và phần mềm thư viện số.'
+      '- Bộ phận Thư viện: 03 phòng thư viện tại 03 điểm trường với hệ thống sách giáo khoa, sách tham khảo, sách nghiệp vụ và phần mềm thư viện số.'
     ),
     p(
-      '- Y tế học đường và phòng cháy chữa cháy: 03 phòng y tế học đường có tủ thuốc sơ cấp cứu học sinh; trang bị 13 tủ chữa cháy vách tường, 03 máy bơm chữa cháy công suất lớn, 48 bình chữa cháy và 38 camera giám sát an ninh.'
+      '- Y tế học đường và phòng cháy chữa cháy: 03 phòng y tế học đường có tủ thuốc sơ cấp cứu học sinh; được trang bị hệ thống phòng cháy chữa cháy và camera giám sát an ninh tại các điểm trường.'
     )
   );
 
@@ -286,9 +286,9 @@ export async function generateAllInspectionDocuments() {
     p(
       '- Trực tiếp phụ trách kiểm tra công tác quản lý tài chính, tài sản công, phòng chống tham nhũng, tiếp công dân, giải quyết khiếu nại, tố cáo và công tác an toàn trường học.'
     ),
-    p('2. Phó Hiệu trưởng Thường trực (Ông Nguyễn Minh Trí):', true),
+    p('2. Phó Hiệu trưởng (Ông Nguyễn Minh Trí):', true),
     p(
-      '- Thường trực Ban Kiểm tra nội bộ; trực tiếp phụ trách theo dõi công tác kiểm tra quy chế chuyên môn toàn trường và Điểm chính THPT (Khối 10, 11, 12); làm Trưởng các đoàn kiểm tra hoạt động sư phạm nhà giáo, kiểm tra khảo thí, ôn thi tốt nghiệp THPT và quản lý dạy thêm, học thêm.'
+      '- Trực tiếp phụ trách theo dõi công tác kiểm tra quy chế chuyên môn toàn trường và Điểm chính (Khối THPT: Khối 10, 11, 12); làm Trưởng các đoàn kiểm tra hoạt động sư phạm nhà giáo, kiểm tra khảo thí, ôn thi tốt nghiệp THPT và quản lý dạy thêm, học thêm.'
     ),
     p('3. Phó Hiệu trưởng (Ông Phan Thanh Thảo):', true),
     p(

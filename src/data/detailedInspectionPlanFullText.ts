@@ -64,8 +64,8 @@ export const SCHOOL_INSPECTION_BACKGROUND = {
     totalStudents: 2111,
     campusBreakdown: [
       {
-        campusName: 'Điểm chính (Khối THPT Đốc Binh Kiều)',
-        address: 'Ấp 1, xã Đốc Binh Kiều, tỉnh Đồng Tháp',
+        campusName: 'Điểm chính (Khối THPT)',
+        address: 'Ấp 3, xã Đốc Binh Kiều, tỉnh Đồng Tháp',
         classesCount: 14,
         studentsCount: 529,
         grades: 'Khối 10, Khối 11, Khối 12',
@@ -73,7 +73,7 @@ export const SCHOOL_INSPECTION_BACKGROUND = {
       },
       {
         campusName: 'Điểm trường THCS Đốc Binh Kiều',
-        address: 'Trung tâm xã Đốc Binh Kiều, tỉnh Đồng Tháp',
+        address: 'Ấp 1, xã Đốc Binh Kiều, tỉnh Đồng Tháp',
         classesCount: 24,
         studentsCount: 980,
         grades: 'Khối 6, Khối 7, Khối 8, Khối 9 (từ lớp A1 đến A6)',
@@ -117,7 +117,7 @@ export const SCHOOL_INSPECTION_BACKGROUND = {
     classroomsCount: 53,
     subjectRoomsCount: 22, // Gồm Lý, Hóa, Sinh, Tin học, Tiếng Anh, Đa năng, Mỹ thuật, Âm nhạc
     laboratoriesCount: 8,
-    computerLabsCount: 5,  // Tổng 165 máy vi tính kết nối mạng cáp quang an toàn
+    computerLabsCount: 3,  // Hệ thống phòng máy vi tính tại 03 điểm trường kết nối mạng cáp quang an toàn
     librariesCount: 3,     // 01 thư viện chuẩn xuất sắc tại Điểm chính, 02 thư viện tại 2 điểm THCS
     infirmariesCount: 3,   // 3 phòng y tế học đường có tủ thuốc sơ cấp cứu
     fireProtectionEquipment: '13 tủ chữa cháy vách tường, 03 máy bơm chữa cháy công suất lớn, 48 bình chữa cháy CO2 và bột MFZ4 định kỳ kiểm định áp suất',
@@ -165,10 +165,10 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
       '07 Tổ chuyên môn: Toán, Ngữ văn - TV - TB, KHTN - Công nghệ, Lịch sử - Địa lý - GDCD, Ngoại ngữ - Tin học, GDTC - QPAN - Nghệ thuật, Tổ Văn phòng.',
       'Bộ phận Thư viện: 03 viên chức/nhân viên (Bà Nguyễn Thị Xuyến tại THPT, Bà Trần Thị Ngọc Tý tại THCS ĐBK, Ông Hồ Văn Hữu tại THCS Tân Kiều).',
       'Bộ phận Thiết bị - Thực hành: 03 nhân viên (Bà Phạm Thị Lệ Huyên tại THPT, Bà Trần Hoàng Yến Ngọc tại THCS ĐBK, Ông Nguyễn Văn Chữ tại THCS Tân Kiều).',
-      'Phòng máy vi tính: 05 phòng máy và các giáo viên phụ trách phòng Tin học (Thầy Nguyễn Trung Hiếu, Thầy Mai Phước Lộc, Cô Đỗ Thị Thu Thảo).'
+      'Phòng máy vi tính: Hệ thống phòng máy vi tính tại 03 điểm trường và các giáo viên Tin học phụ trách phòng máy (Thầy Nguyễn Trung Hiếu, Thầy Mai Phước Lộc, Thầy Lê Phước Hậu).'
     ],
     inspectionForce: {
-      lead: 'Thầy Lê Thanh Cường (Hiệu trưởng) & Thầy Nguyễn Minh Trí (PHT Thường trực)',
+      lead: 'Thầy Lê Thanh Cường (Hiệu trưởng) & Thầy Nguyễn Minh Trí (PHT)',
       deputies: ['Thầy Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
       members: ['Nguyễn Văn Tới (TT Toán)', 'Tô Thị Lắm (TT Ngữ văn)', 'Bùi Kim Huỳnh (TT KHTN)', 'Lê Hồng Thúy (TT KHXH)', 'Lê Thị Ngọc Tuyền (TT Ngoại ngữ)', 'Lê Văn Nguyên (TT GDTC)', 'Trần Văn Út (TT Văn phòng)']
     },
@@ -204,7 +204,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
         items: [
           'Kiểm tra sổ theo dõi mượn - trả thiết bị dạy học: Đối chiếu giữa số tiết thực hành trong phân phối chương trình môn KHTN, Vật lý, Hóa học, Sinh học, Công nghệ với số lượt mượn thiết bị thực tế của giáo viên.',
           'Kiểm tra an toàn phòng thí nghiệm: Quy trình bảo quản hóa chất độc hại, bình dập lửa tại chỗ, hệ thống bồn rửa khử độc, tủ hút khí độc và nội quy phòng thí nghiệm.',
-          'Kiểm tra phòng máy vi tính: Tình trạng kỹ thuật của 165 máy tính tại 5 phòng máy; việc giáo viên Tin học cài đặt phần mềm học tập, an toàn an ninh mạng và nhật ký sử dụng phòng máy.',
+          'Kiểm tra phòng máy vi tính: Tình trạng kỹ thuật hệ thống máy vi tính tại các phòng máy ở 03 điểm trường; việc giáo viên Tin học cài đặt phần mềm học tập, an toàn an ninh mạng và nhật ký sử dụng phòng máy.',
           'Kiểm tra việc ứng dụng công nghệ trí tuệ nhân tạo (AI): Kiểm tra giáo viên khai thác công cụ AI hỗ trợ soạn giáo án, tạo hình ảnh minh họa, thiết kế bài giảng tương tác và kiểm tra đánh giá (kế thừa điểm sáng từ Kế hoạch 134/KH-THCSTK).'
         ]
       }
@@ -225,7 +225,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
       'Giáo viên mới tiếp nhận sau sáp nhập, giáo viên giảng dạy liên điểm trường và giáo viên dạy các môn khối 9, khối 12.'
     ],
     inspectionForce: {
-      lead: 'Thầy Nguyễn Minh Trí (PHT Thường trực - Phụ trách chuyên môn)',
+      lead: 'Thầy Nguyễn Minh Trí (PHT - Phụ trách chuyên môn)',
       deputies: ['Thầy Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
       members: ['Các Tổ trưởng, Tổ phó chuyên môn tương ứng', 'Giáo viên cốt cán môn học', 'Đại diện Ban Thanh tra nhân dân']
     },
@@ -883,7 +883,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Chuyên môn',
     campus: 'Cả 3 điểm trường',
     target: '35 giáo viên thuộc các tổ Toán, Ngữ văn, KHTN, Ngoại ngữ-Tin học, KHXH, GDTC',
-    leadInspector: 'Thầy Nguyễn Minh Trí (PHT Thường trực)',
+    leadInspector: 'Thầy Nguyễn Minh Trí (PHT)',
     teamMembers: ['Nguyễn Văn Tới (TT Toán)', 'Tô Thị Lắm (TT Ngữ văn)', 'Bùi Kim Huỳnh (TT KHTN)', 'Lê Hồng Thúy (TT KHXH)', 'Lê Thị Ngọc Tuyền (TT Ngoại ngữ)', 'Lê Văn Nguyên (TT GDTC)'],
     specificTasks: [
       'Dự giờ đánh giá từ 2-3 tiết dạy đối với từng giáo viên (kết hợp báo trước và đột xuất).',
@@ -928,7 +928,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     specificTasks: [
       'Kiểm tra sổ theo dõi mượn trả thiết bị thí nghiệm của giáo viên các môn KHTN, Lý, Hóa, Sinh.',
       'Kiểm tra việc sử dụng phần mềm thư viện số và luân chuyển sách giữa 3 điểm trường.',
-      'Kiểm tra an toàn hóa chất thí nghiệm và tình trạng hoạt động của 165 máy vi tính.'
+      'Kiểm tra an toàn hóa chất thí nghiệm và tình trạng hoạt động của hệ thống máy vi tính tại các điểm trường.'
     ],
     expectedOutput: 'Biên bản kiểm tra hoạt động thư viện - thiết bị học kỳ 1; kiến nghị bảo trì máy tính.',
     legalBasis: 'Quyết định 01/2003/QĐ-BGDĐT và quy chuẩn phòng bộ môn'
@@ -942,7 +942,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Khảo thí - Kiểm định',
     campus: 'Cả 3 điểm trường',
     target: 'Tổ ra đề in sao đề thi, Ban coi thi, Ban chấm thi và các Tổ chuyên môn toàn trường',
-    leadInspector: 'Thầy Nguyễn Minh Trí (PHT Thường trực)',
+    leadInspector: 'Thầy Nguyễn Minh Trí (PHT)',
     teamMembers: ['Nguyễn Văn Tới (TT Toán)', 'Tô Thị Lắm (TT Ngữ văn)', 'Bùi Kim Huỳnh (TT KHTN)', 'Lê Hồng Thúy (TT KHXH)', 'Lê Thị Ngọc Tuyền (TT Ngoại ngữ)', 'Nguyễn Thị Kim Ngọc (Thư ký)'],
     specificTasks: [
       'Kiểm tra quy trình bảo mật in sao đề thi cuối kỳ I theo quy chế.',
@@ -1081,7 +1081,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Chuyên môn',
     campus: 'Cả 3 điểm trường',
     target: '36 giáo viên các tổ chuyên môn (hoàn thành chỉ tiêu 70% GV toàn trường được kiểm tra toàn diện)',
-    leadInspector: 'Thầy Nguyễn Minh Trí (PHT Thường trực)',
+    leadInspector: 'Thầy Nguyễn Minh Trí (PHT)',
     teamMembers: ['Nguyễn Văn Tới (TT Toán)', 'Tô Thị Lắm (TT Ngữ văn)', 'Bùi Kim Huỳnh (TT KHTN)', 'Lê Hồng Thúy (TT KHXH)', 'Lê Thị Ngọc Tuyền (TT Ngoại ngữ)', 'Lê Văn Nguyên (TT GDTC)'],
     specificTasks: [
       'Dự giờ đánh giá tiết dạy phát triển năng lực; kiểm tra kế hoạch bài dạy CV 5512.',

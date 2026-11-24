@@ -343,7 +343,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
                 3. Cơ sở vật chất, trang thiết bị dạy học hiện có tại 3 điểm trường:
               </h4>
               <p className="text-slate-700 leading-relaxed">
-                Hệ thống cơ sở vật chất tích hợp từ 3 đơn vị trường cũ gồm: <strong>53 phòng học</strong> kiên cố và bán kiên cố; <strong>22 phòng bộ môn</strong> (gồm 8 phòng thí nghiệm Lý - Hóa - Sinh, 5 phòng máy vi tính với <strong>165 máy tính</strong> kết nối Internet an toàn, phòng Ngoại ngữ, phòng Đa năng, Âm nhạc, Mỹ thuật); <strong>03 thư viện</strong> chuẩn với trên 15.000 bản sách; <strong>03 phòng y tế học đường</strong> có trang thiết bị sơ cấp cứu; 13 tủ chữa cháy vách tường, 03 máy bơm chữa cháy công suất lớn, 48 bình chữa cháy và 38 camera giám sát an ninh.
+                Hệ thống cơ sở vật chất tích hợp từ 3 đơn vị trường cũ gồm: <strong>53 phòng học</strong> kiên cố và bán kiên cố; hệ thống <strong>phòng bộ môn</strong> (phòng thí nghiệm thực hành Lý - Hóa - Sinh, phòng máy vi tính kết nối Internet an toàn, phòng Ngoại ngữ, phòng Đa năng, Âm nhạc, Mỹ thuật); <strong>03 thư viện</strong> tại 03 điểm trường và <strong>03 phòng y tế học đường</strong> có trang thiết bị sơ cấp cứu, cùng hệ thống phòng cháy chữa cháy và camera giám sát an ninh.
               </p>
             </div>
 
@@ -794,7 +794,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
             <div>
               <strong>2. Trách nhiệm của các Phó Hiệu trưởng (Phó Trưởng ban):</strong>
               <div className="mt-1 pl-4 border-l-2 border-indigo-600 space-y-1">
-                <div>- <em>Thầy Nguyễn Minh Trí (PHT Thường trực):</em> Phụ trách công tác kiểm tra chuyên môn cấp THPT, quy trình khảo thí, ôn thi tốt nghiệp THPT và quản lý 07 Tổ chuyên môn.</div>
+                <div>- <em>Thầy Nguyễn Minh Trí (PHT):</em> Phụ trách công tác kiểm tra chuyên môn cấp THPT, quy trình khảo thí, ôn thi tốt nghiệp THPT và quản lý các Tổ chuyên môn.</div>
                 <div>- <em>Thầy Phan Thanh Thảo (PHT):</em> Phụ trách trực tiếp công tác kiểm tra nội bộ tại Điểm trường THCS Đốc Binh Kiều (24 lớp, 980 học sinh), công tác nề nếp học sinh, hoạt động của GVCN, Thư viện - Thiết bị và giáo dục hòa nhập cho 25 học sinh khuyết tật.</div>
                 <div>- <em>Thầy Nguyễn Thanh Tòng (PHT):</em> Phụ trách trực tiếp công tác kiểm tra và quản lý vận hành tại Điểm trường THCS Tân Kiều.</div>
               </div>

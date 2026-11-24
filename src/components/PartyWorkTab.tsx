@@ -472,7 +472,7 @@ export const PartyWorkTab: React.FC = () => {
                   <h4 className="font-bold text-red-800 uppercase mt-3">Chương II: Nhiệm vụ, quyền hạn của 10 đồng chí Đảng ủy viên</h4>
                   <ul className="space-y-1.5 pl-4 list-disc text-slate-700">
                     <li><strong>Điều 3:</strong> Bí thư Đảng ủy - Đồng chí Lê Thanh Cường (Hiệu trưởng): Lãnh đạo toàn diện, công tác cán bộ, quy hoạch, tài chính tài sản, giữ mối liên hệ với Thường trực Đảng ủy xã Đốc Binh Kiều và Sở GDĐT Đồng Tháp.</li>
-                    <li><strong>Điều 4:</strong> Phó Bí thư Đảng ủy - Đồng chí Nguyễn Minh Trí (PHT Thường trực): Thường trực Đảng ủy, phụ trách công tác xây dựng Đảng, giám sát Chi bộ 1 và Chi bộ 3, phụ trách chuyên môn THPT.</li>
+                    <li><strong>Điều 4:</strong> Phó Bí thư Đảng ủy - Đồng chí Nguyễn Minh Trí (PHT): Thường trực Đảng ủy, phụ trách công tác xây dựng Đảng, giám sát Chi bộ 1 và Chi bộ 3, phụ trách chuyên môn THPT.</li>
                     <li><strong>Điều 5:</strong> ĐUV, Bí thư Chi bộ 1 - Đồng chí Trịnh Văn Sơn: Lãnh đạo Chi bộ 1 (Khối THPT & BGH), bồi dưỡng HSG môn KHXH, ôn thi tốt nghiệp THPT, phát triển đảng học sinh lớp 12.</li>
                     <li><strong>Điều 6:</strong> ĐUV, Bí thư Chi bộ 2 - Đồng chí Nguyễn Thanh Tòng (PHT): Lãnh đạo Chi bộ 2 (Khối THCS Tân Kiều, 15 lớp, 602 HS), điều hành điểm trường Tân Kiều (thuộc xã Đốc Binh Kiều).</li>
                     <li><strong>Điều 7:</strong> ĐUV, Bí thư Chi bộ 3 - Đồng chí Lê Văn Nguyên: Lãnh đạo Chi bộ 3 (Khối THCS ĐBK, 24 lớp, 980 HS), phụ trách phong trào TDTT, HKPĐ, GDQP-AN toàn trường.</li>

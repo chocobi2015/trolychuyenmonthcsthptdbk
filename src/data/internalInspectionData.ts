@@ -190,7 +190,7 @@ export const OFFICIAL_INSPECTION_DIRECTIVES: InspectionDirective[] = [
     isReferenceDoc: true,
     keyPoints: [
       'Quy mô toàn trường: 120 CB-GV-NV (63 nữ, 57 nam, 85 đảng viên chiếm 70.8%, 9 thạc sĩ).',
-      'Ban Giám hiệu: 04 thành viên (Thầy Lê Thanh Cường - Hiệu trưởng; Thầy Nguyễn Minh Trí - PHT Thường trực; Thầy Phan Thanh Thảo - PHT phụ trách Điểm THCS Đốc Binh Kiều; Thầy Nguyễn Thanh Tòng - PHT phụ trách Điểm THCS Tân Kiều).',
+      'Ban Giám hiệu: 04 thành viên (Thầy Lê Thanh Cường - Hiệu trưởng; Thầy Nguyễn Minh Trí - PHT; Thầy Phan Thanh Thảo - PHT phụ trách Điểm THCS Đốc Binh Kiều; Thầy Nguyễn Thanh Tòng - PHT phụ trách Điểm THCS Tân Kiều).',
       '07 Tổ chuyên môn liên cấp: Toán (15), Ngữ văn - TV - TB (17), KHTN - Công nghệ (26), Lịch sử - Địa lý - GDCD (16), Ngoại ngữ - Tin học (16), GDTC - GDQP-AN - Nghệ thuật (12) và Tổ Văn phòng (14).',
       'Toàn bộ danh sách 22 thành viên Ban Kiểm tra nội bộ và các đoàn kiểm tra theo từng chuyên đề đều lấy chuẩn 100% từ tệp này.'
     ],
@@ -385,8 +385,8 @@ export const SCHOOL_INSPECTION_COMMITTEE: InspectionCommitteeMember[] = [
     orderNumber: 2,
     fullName: 'Nguyễn Minh Trí',
     roleInSchool: 'Phó Hiệu trưởng',
-    roleInCommittee: 'Phó Trưởng ban Thường trực',
-    assignedDuty: 'Thường trực Ban KTNB; phụ trách theo dõi công tác KTNB chuyên môn toàn trường & cấp THPT (Khối 10, 11, 12 tại Điểm chính); trực tiếp làm Trưởng các đoàn kiểm tra quy chế chuyên môn, kiểm tra đánh giá định kỳ, ôn thi tốt nghiệp THPT và quản lý dạy thêm học thêm.',
+    roleInCommittee: 'Phó Trưởng ban',
+    assignedDuty: 'Phó Trưởng ban KTNB; phụ trách theo dõi công tác KTNB chuyên môn toàn trường & cấp THPT (Khối 10, 11, 12 tại Điểm chính); trực tiếp làm Trưởng các đoàn kiểm tra quy chế chuyên môn, kiểm tra đánh giá định kỳ, ôn thi tốt nghiệp THPT và quản lý dạy thêm học thêm.',
   },
   {
     id: 'mbr-3',

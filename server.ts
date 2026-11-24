@@ -270,9 +270,9 @@ HỒ SƠ VÀ DỮ LIỆU THỰC TẾ CHUẨN XÁC CỦA TRƯỜNG (Từ Kế ho�
      * 06 Tổ chuyên môn (102 giáo viên): Tổ Toán (15), Tổ Ngữ văn - TV - TB (17), Tổ Lịch sử - Địa lý - GDCD - GDKTPL (16), Tổ Vật lý - Hóa học - Sinh học - CN (26), Tổ Ngoại ngữ - Tin học (16), Tổ GDTC - QPAN - Nghệ thuật (12).
    - 100% giáo viên đạt chuẩn đào tạo theo Luật Giáo dục; 85 Đảng viên; 09 Thạc sĩ.
 4. Phân bổ cơ sở vật chất tại 03 điểm trường (Tổng diện tích: 35.380,5 m²):
-   - Điểm chính (THPT Đốc Binh Kiều cũ): 15.683 m², khối 10-12 (14 lớp, 529 HS gồm Khối 10: 203 HS, Khối 11: 141 HS, Khối 12: 185 HS), 14 phòng học (9 kiên cố, 3 lắp ghép), 09 phòng bộ môn, PCCC 2 máy bơm, 11 tủ chữa cháy.
-   - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp - 6 lớp đầu mỗi khối 6-9, 980 HS gồm K6: 245, K7: 234, K8: 251, K9: 250), 22 phòng học, 05 phòng chức năng, sân bóng mini.
-   - Điểm Tân Kiều (THCS Tân Kiều cũ): 8.570,8 m², khối 6-9 (15 lớp - các lớp từ A7 trở đi, 602 HS gồm K6: 166, K7: 133, K8: 147, K9: 156), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
+   - Điểm chính (Khối THPT, Ấp 3, xã Đốc Binh Kiều): 15.683 m², khối 10-12 (14 lớp, 529 HS gồm Khối 10: 203 HS, Khối 11: 141 HS, Khối 12: 185 HS), 14 phòng học, 09 phòng bộ môn.
+   - Điểm trường THCS Đốc Binh Kiều (Ấp 1, xã Đốc Binh Kiều): 11.126,7 m², khối 6-9 (24 lớp - 6 lớp đầu mỗi khối 6-9, 980 HS gồm K6: 245, K7: 234, K8: 251, K9: 250), 22 phòng học, 05 phòng chức năng, sân bóng mini.
+   - Điểm trường THCS Tân Kiều (Ấp Tân Kiều, xã Đốc Binh Kiều): 8.570,8 m², khối 6-9 (15 lớp - các lớp từ A7 trở đi, 602 HS gồm K6: 166, K7: 133, K8: 147, K9: 156), 09 phòng học, 10 phòng bộ môn, phòng làm việc Ban Giám hiệu.
 5. KHUNG THỜI GIAN HOẠT ĐỘNG TRONG NGÀY (ÁP DỤNG THỐNG NHẤT 3 ĐIỂM TRƯỜNG - MỖI BUỔI ĐỦ 5 TIẾT):
    - BUỔI SÁNG (6h30 - 11h30): Khối 8, 9, 10, 11, 12 học chính khóa & 2 buổi/ngày; Khối 6, 7 học trải nghiệm, bồi dưỡng HSG, phụ đạo yếu, sinh hoạt CLB:
      * 6h30 - 6h45 (15 phút): Vệ sinh trường, lớp
