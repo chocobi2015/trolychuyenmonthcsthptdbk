@@ -764,6 +764,10 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
       title: 'QUYẾT ĐỊNH Về việc ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027',
       sections: [
         {
+          heading: 'Căn cứ pháp lý',
+          content: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT; Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp về việc thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027; Hướng dẫn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở GDĐT Đồng Tháp.',
+        },
+        {
           heading: 'Điều 1. Ban hành Kế hoạch',
           content: 'Ban hành kèm theo Quyết định này Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 của Trường THCS và THPT Đốc Binh Kiều.',
         },
@@ -773,7 +777,7 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
         },
         {
           heading: 'Nội dung Kế hoạch kiểm tra nội bộ (Kèm theo)',
-          content: 'Bao gồm: I. Mục đích yêu cầu; II. Nội dung kiểm tra (4 nhóm trọng tâm); III. Tổ chức thực hiện; IV. Danh mục 14 cuộc kiểm tra chi tiết theo các tháng trong năm học.',
+          content: 'Bao gồm: I. Mục đích yêu cầu; II. Nội dung kiểm tra (4 nhóm trọng tâm); III. Tổ chức thực hiện; IV. Lịch kiểm tra chi tiết 29 đợt theo các tháng trong năm học 2026 - 2027.',
         },
       ],
     },
@@ -784,13 +788,17 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
     title: 'Quyết định Thành lập Ban kiểm tra nội bộ năm học',
     purpose: 'Quyết định hành chính xác lập cơ cấu nhân sự Ban KTNB nhà trường, quyền hạn và phân công nhiệm vụ cụ thể.',
     signAuthority: 'Hiệu trưởng ký tên và đóng dấu',
-    issuedWith: 'Danh sách 12 thành viên Ban Kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều',
+    issuedWith: 'Danh sách 22 thành viên Ban Kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều',
     sampleData: {
       title: 'QUYẾT ĐỊNH Về việc thành lập Ban kiểm tra nội bộ năm học 2026 - 2027',
       sections: [
         {
+          heading: 'Căn cứ pháp lý',
+          content: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT; Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp về thực hiện công tác kiểm tra nội bộ năm học 2026 - 2027; Hướng dẫn số 1134/SGDĐT-TCCB và Kế hoạch số 48/KH-THCS&THPTĐBK ngày 15/10/2026.',
+        },
+        {
           heading: 'Điều 1. Thành lập Ban',
-          content: 'Thành lập Ban kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều năm học 2026 - 2027 gồm 12 ông (bà) có tên trong danh sách đính kèm, do ông Lê Thanh Cường - Hiệu trưởng làm Trưởng ban.',
+          content: 'Thành lập Ban kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều năm học 2026 - 2027 gồm 22 ông (bà) có tên trong danh sách đính kèm, do ông Lê Thanh Cường - Hiệu trưởng làm Trưởng ban.',
         },
         {
           heading: 'Điều 2. Nhiệm vụ và quyền hạn',

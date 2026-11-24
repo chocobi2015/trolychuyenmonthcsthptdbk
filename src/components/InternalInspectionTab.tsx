@@ -127,7 +127,7 @@ export const InternalInspectionTab: React.FC = () => {
                 href="/downloads/QUYET_DINH_BAN_KIEM_TRA_NOI_BO_2026_2027.docx"
                 download
                 className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition"
-                title="Tải Quyết định thành lập Ban Kiểm tra nội bộ (Mẫu 02)"
+                title="Tải Quyết định thành lập Ban Kiểm tra nội bộ (Mẫu 02 - Đã bổ sung CV 3953)"
               >
                 <Download className="w-3.5 h-3.5 text-sky-400" />
                 <span>QĐ Ban KTNB</span>
@@ -136,10 +136,31 @@ export const InternalInspectionTab: React.FC = () => {
                 href="/downloads/TRON_BO_6_BIEU_MAU_KIEM_TRA_NOI_BO_HD1134.docx"
                 download
                 className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition"
-                title="Tải trọn bộ 06 Biểu mẫu nghiệp vụ Phụ lục HD 1134"
+                title="Tải trọn bộ 06 Biểu mẫu nghiệp vụ chuẩn (Mẫu 01 đến Mẫu 06)"
               >
                 <Download className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Trọn bộ 06 Mẫu</span>
+              </a>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="/downloads/TRON_BO_HO_SO_KTNB_HK1_2026_2027.docx"
+                download
+                className="flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-semibold text-amber-100 bg-amber-600/90 hover:bg-amber-500 border border-amber-400/40 shadow-sm transition"
+                title="Tải trọn bộ hồ sơ Đợt 01–13 (Mẫu 03, 04, 05, 06 soạn sẵn) + Báo cáo Sơ kết HK1 gửi Sở GDĐT"
+              >
+                <Download className="w-3.5 h-3.5 text-amber-200 shrink-0" />
+                <span>Hồ sơ HK1 (Đợt 1–13)</span>
+              </a>
+              <a
+                href="/downloads/TRON_BO_HO_SO_KTNB_HK2_HE_2026_2027.docx"
+                download
+                className="flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-semibold text-emerald-100 bg-emerald-700/90 hover:bg-emerald-600 border border-emerald-400/40 shadow-sm transition"
+                title="Tải trọn bộ hồ sơ Đợt 14–29 (Mẫu 03, 04, 05, 06 soạn sẵn) + Báo cáo Tổng kết năm học gửi Sở GDĐT"
+              >
+                <Download className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
+                <span>Hồ sơ HK2 (Đợt 14–29)</span>
               </a>
             </div>
 
@@ -1105,7 +1126,7 @@ export const InternalInspectionTab: React.FC = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={() => {
                     const text = `${selectedTemplate.sampleData.title}\n\n` +
@@ -1123,7 +1144,25 @@ export const InternalInspectionTab: React.FC = () => {
                   className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Tải Word (.docx)</span>
+                  <span>Tải 06 Mẫu chuẩn (.docx)</span>
+                </a>
+                <a
+                  href="/downloads/TRON_BO_HO_SO_KTNB_HK1_2026_2027.docx"
+                  download
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 transition"
+                  title="Tải trọn bộ hồ sơ soạn sẵn Đợt 01–13 (Mẫu 03, 04, 05, 06) + Báo cáo Sơ kết HK1"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Full Hồ sơ HK1 (Đợt 1–13)</span>
+                </a>
+                <a
+                  href="/downloads/TRON_BO_HO_SO_KTNB_HK2_HE_2026_2027.docx"
+                  download
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition"
+                  title="Tải trọn bộ hồ sơ soạn sẵn Đợt 14–29 (Mẫu 03, 04, 05, 06) + Báo cáo Tổng kết năm học"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Full Hồ sơ HK2 & Hè (Đợt 14–29)</span>
                 </a>
               </div>
             </div>
@@ -1225,27 +1264,36 @@ export const InternalInspectionTab: React.FC = () => {
                   Kế hoạch KTNB & Quyết định thành lập Ban KTNB
                 </h4>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Gồm Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 (Số 48/KH) và Quyết định thành lập Ban KTNB gồm 12 thành viên (Số 49/QĐ).
+                  Gồm Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 (Số 48/KH) và Quyết định thành lập Ban KTNB gồm 22 thành viên (Số 49/QĐ, đã cập nhật căn cứ Công văn 3953/SGDĐT-TCCB).
                 </p>
-                <div className="mt-4 pt-3 border-t border-blue-200/80 flex items-center justify-between text-xs">
+                <div className="mt-4 pt-3 border-t border-blue-200/80 flex items-center justify-between gap-2 text-xs">
                   <span className="text-emerald-700 font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    Đã hoàn thiện hồ sơ
+                    Đã hoàn thiện
                   </span>
-                  <a
-                    href="/downloads/KE_HOACH_KIEM_TRA_NOI_BO_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
-                    download
-                    className="text-blue-600 font-bold hover:underline"
-                  >
-                    Tải file nộp
-                  </a>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href="/downloads/KE_HOACH_KIEM_TRA_NOI_BO_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
+                      download
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      Tải KH
+                    </a>
+                    <a
+                      href="/downloads/QUYET_DINH_BAN_KIEM_TRA_NOI_BO_2026_2027.docx"
+                      download
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      Tải QĐ
+                    </a>
+                  </div>
                 </div>
               </div>
 
               {/* Milestone 2 */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 relative overflow-hidden">
+              <div className="bg-amber-50/50 border border-amber-200 rounded-xl p-5 relative overflow-hidden">
                 <div className="absolute top-3 right-3">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700 uppercase">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-200 text-amber-900 uppercase">
                     Mốc 2
                   </span>
                 </div>
@@ -1254,35 +1302,49 @@ export const InternalInspectionTab: React.FC = () => {
                   Báo cáo sơ kết công tác KTNB Học kỳ I
                 </h4>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Tổng hợp kết quả 8 cuộc kiểm tra đợt HK1 (từ tháng 10/2026 đến tháng 01/2027), đánh giá việc khắc phục tồn tại của các bộ phận.
+                  Tổng hợp đầy đủ 13 đợt kiểm tra HK1 (Tháng 09/2026 – 01/2027) kèm trọn bộ Mẫu 03, 04, 05, 06 từng đợt và Báo cáo sơ kết gửi Sở GDĐT sẵn sàng in và hiệu chỉnh nhẹ.
                 </p>
-                <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs">
-                  <span className="text-slate-500 font-medium flex items-center gap-1">
-                    <Clock className="w-4 h-4 text-amber-500" />
-                    Sẽ thực hiện vào tháng 01/2027
+                <div className="mt-4 pt-3 border-t border-amber-200/80 flex items-center justify-between text-xs">
+                  <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    Đã soạn sẵn trọn bộ
                   </span>
+                  <a
+                    href="/downloads/TRON_BO_HO_SO_KTNB_HK1_2026_2027.docx"
+                    download
+                    className="text-amber-700 font-bold hover:underline"
+                  >
+                    Tải Tập HK1 (.docx)
+                  </a>
                 </div>
               </div>
 
               {/* Milestone 3 */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 relative overflow-hidden">
+              <div className="bg-emerald-50/50 border border-emerald-200 rounded-xl p-5 relative overflow-hidden">
                 <div className="absolute top-3 right-3">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700 uppercase">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-200 text-emerald-900 uppercase">
                     Mốc 3
                   </span>
                 </div>
-                <div className="text-xs font-bold text-indigo-900 uppercase">Trước ngày 18 tháng 5 năm 2027</div>
+                <div className="text-xs font-bold text-emerald-900 uppercase">Trước ngày 18 tháng 5 năm 2027</div>
                 <h4 className="text-sm font-bold text-slate-900 mt-2">
                   Báo cáo tổng kết năm học & Chấm điểm thi đua
                 </h4>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Báo cáo tổng kết 14 cuộc kiểm tra của toàn năm học và kết quả tự đánh giá chấm điểm tiêu chí thi đua công tác KTNB cơ sở giáo dục.
+                  Gồm trọn bộ 16 đợt kiểm tra HK2 & Hè (Đợt 14–29, Mẫu 03–06 từng đợt) cùng Báo cáo tổng kết cả năm (29 đợt) và bảng tự đánh giá gửi Sở GDĐT.
                 </p>
-                <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs">
-                  <span className="text-slate-500 font-medium flex items-center gap-1">
-                    <Clock className="w-4 h-4 text-indigo-500" />
-                    Sẽ thực hiện vào tháng 05/2027
+                <div className="mt-4 pt-3 border-t border-emerald-200/80 flex items-center justify-between text-xs">
+                  <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    Đã soạn sẵn trọn bộ
                   </span>
+                  <a
+                    href="/downloads/TRON_BO_HO_SO_KTNB_HK2_HE_2026_2027.docx"
+                    download
+                    className="text-emerald-700 font-bold hover:underline"
+                  >
+                    Tải Tập HK2 (.docx)
+                  </a>
                 </div>
               </div>
             </div>
