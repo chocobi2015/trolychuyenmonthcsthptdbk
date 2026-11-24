@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy, startTransition } from 'react';
 import { Header } from './components/Header';
 import { OfficialLegalRefModal } from './components/OfficialLegalRefModal';
 import { SchoolStudentsModal } from './components/SchoolStudentsModal';
@@ -16,16 +16,29 @@ import { INITIAL_SCHOOL_DEADLINES } from './data/initialDeadlines';
 import { DeadlineManagementModal } from './components/DeadlineManagementModal';
 import { extractDeadlinesFromDirective, extractDeadlinesFromSchoolDoc } from './utils/deadlineExtractor';
 
-const DocumentBuilderTab = lazy(() => import('./components/DocumentBuilderTab').then(m => ({ default: m.DocumentBuilderTab })));
-const DocumentEditorView = lazy(() => import('./components/DocumentEditorView').then(m => ({ default: m.DocumentEditorView })));
-const DocumentArchiveTab = lazy(() => import('./components/DocumentArchiveTab').then(m => ({ default: m.DocumentArchiveTab })));
-const DepartmentDirectivesTab = lazy(() => import('./components/DepartmentDirectivesTab').then(m => ({ default: m.DepartmentDirectivesTab })));
-const SchoolContextPanel = lazy(() => import('./components/SchoolContextPanel').then(m => ({ default: m.SchoolContextPanel })));
-const TeacherDirectoryTab = lazy(() => import('./components/TeacherDirectoryTab').then(m => ({ default: m.TeacherDirectoryTab })));
-const InclusiveEducationTab = lazy(() => import('./components/InclusiveEducationTab').then(m => ({ default: m.InclusiveEducationTab })));
-const DepartmentMeetingsTab = lazy(() => import('./components/DepartmentMeetingsTab').then(m => ({ default: m.DepartmentMeetingsTab })));
-const InternalInspectionTab = lazy(() => import('./components/InternalInspectionTab').then(m => ({ default: m.InternalInspectionTab })));
-const PartyWorkTab = lazy(() => import('./components/PartyWorkTab').then(m => ({ default: m.PartyWorkTab })));
+const tabLoaders = {
+  builder: () => import('./components/DocumentBuilderTab').then(m => ({ default: m.DocumentBuilderTab })),
+  editor: () => import('./components/DocumentEditorView').then(m => ({ default: m.DocumentEditorView })),
+  archive: () => import('./components/DocumentArchiveTab').then(m => ({ default: m.DocumentArchiveTab })),
+  directives: () => import('./components/DepartmentDirectivesTab').then(m => ({ default: m.DepartmentDirectivesTab })),
+  schoolContext: () => import('./components/SchoolContextPanel').then(m => ({ default: m.SchoolContextPanel })),
+  teachers: () => import('./components/TeacherDirectoryTab').then(m => ({ default: m.TeacherDirectoryTab })),
+  inclusive: () => import('./components/InclusiveEducationTab').then(m => ({ default: m.InclusiveEducationTab })),
+  meetings: () => import('./components/DepartmentMeetingsTab').then(m => ({ default: m.DepartmentMeetingsTab })),
+  inspection: () => import('./components/InternalInspectionTab').then(m => ({ default: m.InternalInspectionTab })),
+  party: () => import('./components/PartyWorkTab').then(m => ({ default: m.PartyWorkTab })),
+};
+
+const DocumentBuilderTab = lazy(tabLoaders.builder);
+const DocumentEditorView = lazy(tabLoaders.editor);
+const DocumentArchiveTab = lazy(tabLoaders.archive);
+const DepartmentDirectivesTab = lazy(tabLoaders.directives);
+const SchoolContextPanel = lazy(tabLoaders.schoolContext);
+const TeacherDirectoryTab = lazy(tabLoaders.teachers);
+const InclusiveEducationTab = lazy(tabLoaders.inclusive);
+const DepartmentMeetingsTab = lazy(tabLoaders.meetings);
+const InternalInspectionTab = lazy(tabLoaders.inspection);
+const PartyWorkTab = lazy(tabLoaders.party);
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
@@ -40,8 +53,36 @@ const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học si
 const OFFICIAL_HSSS_VERSION = '2026-10-09-official-v10';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('midterm_assessment_plan');
-  const [schoolSubView, setSchoolSubView] = useState<'context' | 'teachers'>('context');
+  const [activeTab, setActiveTabState] = useState<string>('midterm_assessment_plan');
+  const [schoolSubView, setSchoolSubViewState] = useState<'context' | 'teachers'>('context');
+
+  const setActiveTab = (tab: string) => {
+    startTransition(() => {
+      setActiveTabState(tab);
+    });
+  };
+
+  const setSchoolSubView = (view: 'context' | 'teachers') => {
+    startTransition(() => {
+      setSchoolSubViewState(view);
+    });
+  };
+
+  // Tải ngầm trước các phân hệ khi trình duyệt rảnh sau lần mở đầu tiên -> chuyển tab tức thì, không hiện màn hình chờ
+  useEffect(() => {
+    const prefetchAll = () => {
+      Object.values(tabLoaders).forEach((load) => {
+        load().catch(() => {});
+      });
+    };
+    if ('requestIdleCallback' in window) {
+      const id = (window as any).requestIdleCallback(prefetchAll, { timeout: 1200 });
+      return () => (window as any).cancelIdleCallback(id);
+    }
+    const timer = setTimeout(prefetchAll, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isUploadDirectiveModalOpen, setIsUploadDirectiveModalOpen] = useState(false);
   const [isStudentsModalOpen, setIsStudentsModalOpen] = useState(false);
@@ -690,14 +731,7 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center py-20 text-slate-500 text-sm">
-              <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mr-3" />
-              Đang tải nội dung phân hệ...
-            </div>
-          }
-        >
+        <Suspense fallback={null}>
         {/* Tab Featured: Kế hoạch kiểm tra, đánh giá giữa HK1 năm học 2026 - 2027 (Số 45) */}
         {activeTab === 'midterm_assessment_plan' && (
           <MidtermAssessmentPlanView />
