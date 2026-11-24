@@ -118,16 +118,21 @@ export const TABLE_CELL_MARGINS_DATA = {
 // =============================================================================
 function splitAgencyLines(raw: string, kind: 'superior' | 'issuing'): string[] {
   const cleaned = raw.trim().toUpperCase();
-  if (cleaned.includes('\n')) {
-    return cleaned.split('\n').map((s) => s.trim()).filter(Boolean);
-  }
+  const collapsed = cleaned.replace(/\s+/g, ' ');
   if (kind === 'superior') {
-    if (cleaned === 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP' || cleaned === 'SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP') {
-      return ['SỞ GIÁO DỤC VÀ ĐÀO TẠO', 'TỈNH ĐỒNG THÁP'];
-    }
-    if (cleaned === 'SỞ GDĐT TỈNH ĐỒNG THÁP' || cleaned === 'SỞ GDĐT ĐỒNG THÁP') {
+    if (
+      collapsed === 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP' ||
+      collapsed === 'SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP' ||
+      collapsed === 'SỞ GIÁO DỤC ĐÀO TẠO TỈNH ĐỒNG THÁP' ||
+      collapsed === 'SỞ GIÁO DỤC ĐÀO TẠO ĐỒNG THÁP' ||
+      collapsed === 'SỞ GDĐT TỈNH ĐỒNG THÁP' ||
+      collapsed === 'SỞ GDĐT ĐỒNG THÁP'
+    ) {
       return ['SỞ GDĐT TỈNH ĐỒNG THÁP'];
     }
+  }
+  if (cleaned.includes('\n')) {
+    return cleaned.split('\n').map((s) => s.trim()).filter(Boolean);
   }
   if (kind === 'issuing') {
     if (cleaned.includes('TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU')) {
@@ -629,7 +634,7 @@ export function createPartyDocHeaderTable(
 /**
  * Tạo Header Table chuẩn hành chính Nhà nước theo Nghị định 30/2020/NĐ-CP:
  * - Cột trái (3855 dxa) và Cột phải (5500 dxa) có khoảng đệm rõ ràng, KHÔNG BAO GIỜ chạm chữ.
- * - Ngắt dòng chuẩn tên cơ quan (SỞ GIÁO DỤC VÀ ĐÀO TẠO / TỈNH ĐỒNG THÁP; TRƯỜNG THCS VÀ THPT / ĐỐC BINH KIỀU).
+ * - Ngắt dòng chuẩn tên cơ quan (SỞ GDĐT TỈNH ĐỒNG THÁP gọn 1 dòng; TRƯỜNG THCS VÀ THPT / ĐỐC BINH KIỀU).
  * - Quốc hiệu "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM" luôn gọn trên 1 hàng duy nhất.
  * - Hàng 2 căn thẳng hàng tuyệt đối giữa Số ký hiệu (trái) và Địa danh, ngày tháng năm (phải).
  */

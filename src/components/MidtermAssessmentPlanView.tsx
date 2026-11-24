@@ -240,8 +240,8 @@ export const MidtermAssessmentPlanView: React.FC = () => {
         <div className="grid grid-cols-12 gap-4 pb-4 border-b border-slate-200">
           {/* Cột trái: Cơ quan ban hành & Số hiệu */}
           <div className="col-span-5 text-center space-y-0.5">
-            <p className="text-[12pt] sm:text-[13pt] font-normal uppercase text-slate-800 leading-tight">
-              SỞ GIÁO DỤC VÀ ĐÀO TẠO<br />TỈNH ĐỒNG THÁP
+            <p className="text-[12pt] sm:text-[13pt] font-normal uppercase text-slate-800 leading-tight whitespace-nowrap">
+              SỞ GDĐT TỈNH ĐỒNG THÁP
             </p>
             <p className="text-[12pt] sm:text-[13pt] font-bold uppercase text-slate-900 leading-tight">
               TRƯỜNG THCS VÀ THPT<br />ĐỐC BINH KIỀU

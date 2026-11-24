@@ -120,7 +120,7 @@ export async function generateAllInspectionDocuments() {
   // Quốc hiệu, Tiêu ngữ, Cơ quan ban hành (chuẩn tuyệt đối không đè chữ, không xuống dòng sai)
   planDocChildren.push(
     createAdminDocHeaderTable(
-      'SỞ GIÁO DỤC VÀ ĐÀO TẠO\nTỈNH ĐỒNG THÁP',
+      'SỞ GDĐT TỈNH ĐỒNG THÁP',
       'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
       'Số: 48/KH-THCS&THPTĐBK',
       'Đốc Binh Kiều, ngày 15 tháng 10 năm 2026'
@@ -582,7 +582,7 @@ export async function generateAllInspectionDocuments() {
         footers: { default: createPageNumberFooter() },
         children: [
           createAdminDocHeaderTable(
-            'SỞ GIÁO DỤC VÀ ĐÀO TẠO\nTỈNH ĐỒNG THÁP',
+            'SỞ GDĐT TỈNH ĐỒNG THÁP',
             'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
             'Số: 49/QĐ-THCS&THPTĐBK',
             'Đốc Binh Kiều, ngày 15 tháng 10 năm 2026'

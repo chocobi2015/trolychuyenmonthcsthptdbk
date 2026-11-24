@@ -901,8 +901,11 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều chủ động phư
                   {/* Header 2 Columns Quốc hiệu & Cơ quan ban hành */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-200 text-center">
                     <div>
-                      <div className="text-xs text-slate-700">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP</div>
-                      <div className="text-xs sm:text-sm font-bold uppercase text-slate-900">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+                      <div className="text-xs text-slate-700 whitespace-nowrap">SỞ GDĐT TỈNH ĐỒNG THÁP</div>
+                      <div className="text-xs sm:text-sm font-bold uppercase text-slate-900 leading-tight">
+                        <div>TRƯỜNG THCS VÀ THPT</div>
+                        <div>ĐỐC BINH KIỀU</div>
+                      </div>
                       <div className="text-xs text-slate-800 font-semibold pt-1">Số: 186/TB-THCS-THPT</div>
                     </div>
                     <div>
@@ -1113,8 +1116,11 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều chủ động phư
                   {/* Header 2 Columns */}
                   <div className="grid grid-cols-2 gap-4 pb-4 border-b border-slate-200">
                     <div className="text-center space-y-0.5">
-                      <div className="text-xs font-normal">SỞ GDĐT TỈNH ĐỒNG THÁP</div>
-                      <div className="text-xs font-bold uppercase">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+                      <div className="text-xs font-normal whitespace-nowrap">SỞ GDĐT TỈNH ĐỒNG THÁP</div>
+                      <div className="text-xs font-bold uppercase leading-tight">
+                        <div>TRƯỜNG THCS VÀ THPT</div>
+                        <div>ĐỐC BINH KIỀU</div>
+                      </div>
                       <div className="text-xs font-bold uppercase text-indigo-900">{viewingMeeting.departmentName}</div>
                       <div className="text-xs font-normal text-slate-600 pt-1">{viewingMeeting.meetingNumber}</div>
                     </div>

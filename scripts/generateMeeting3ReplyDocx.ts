@@ -288,7 +288,7 @@ export async function generateMeetingReplyDocx(outputPath: string): Promise<void
   // Header 2 cột chuẩn Nghị định 30/2020/NĐ-CP (không chồng lấn, Đốc Binh Kiều)
   children.push(
     createAdminDocHeaderTable(
-      'SỞ GIÁO DỤC VÀ ĐÀO TẠO\nTỈNH ĐỒNG THÁP',
+      'SỞ GDĐT TỈNH ĐỒNG THÁP',
       'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
       'Số: 186/TB-THCS&THPTĐBK',
       'Đốc Binh Kiều, ngày 09 tháng 10 năm 2026'

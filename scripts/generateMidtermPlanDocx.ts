@@ -197,7 +197,7 @@ async function generateMidtermPlanDocx() {
 
   children.push(
     createAdminDocHeaderTable(
-      'SỞ GIÁO DỤC VÀ ĐÀO TẠO\nTỈNH ĐỒNG THÁP',
+      'SỞ GDĐT TỈNH ĐỒNG THÁP',
       'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
       docData.documentNumber || 'Số: 45/KH-THCS&THPTĐBK',
       signDate

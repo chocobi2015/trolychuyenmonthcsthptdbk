@@ -533,8 +533,11 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
             {/* Header administrative */}
             <div className="grid grid-cols-2 gap-4 pb-4 border-b border-slate-200 font-sans text-xs">
               <div className="text-center space-y-1">
-                <p className="font-semibold text-slate-700">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP</p>
-                <p className="font-bold text-slate-900 uppercase">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</p>
+                <p className="font-normal text-slate-700 whitespace-nowrap">SỞ GDĐT TỈNH ĐỒNG THÁP</p>
+                <div className="font-bold text-slate-900 uppercase leading-tight">
+                  <p>TRƯỜNG THCS VÀ THPT</p>
+                  <p>ĐỐC BINH KIỀU</p>
+                </div>
                 <p className="font-mono text-slate-600">{OFFICIAL_INCLUSIVE_EDUCATION_PLAN.documentNumber}</p>
               </div>
               <div className="text-center space-y-1">

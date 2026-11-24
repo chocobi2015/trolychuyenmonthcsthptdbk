@@ -1133,8 +1133,11 @@ export const InternalInspectionTab: React.FC = () => {
               {/* Official Header Table */}
               <div className="grid grid-cols-2 gap-4 pb-6 border-b border-slate-300 text-xs font-sans">
                 <div className="text-center">
-                  <div className="font-semibold uppercase text-slate-700">SỞ GDĐT ĐỒNG THÁP</div>
-                  <div className="font-bold uppercase text-slate-900">TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+                  <div className="font-normal uppercase text-slate-700 whitespace-nowrap">SỞ GDĐT TỈNH ĐỒNG THÁP</div>
+                  <div className="font-bold uppercase text-slate-900 leading-tight">
+                    <div>TRƯỜNG THCS VÀ THPT</div>
+                    <div>ĐỐC BINH KIỀU</div>
+                  </div>
                   <div className="text-slate-400">————————</div>
                   <div className="text-[11px] font-semibold text-slate-700 mt-1">
                     Số: ..... /QĐ-THCS-THPTĐBK

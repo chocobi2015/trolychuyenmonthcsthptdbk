@@ -207,9 +207,15 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
           <div className="grid grid-cols-12 gap-x-4 gap-y-2 pb-2 items-start">
             {/* Hàng 1 - Trái: Cơ quan ban hành (Font 13pt) */}
             <div className="col-span-5 text-center flex flex-col items-center">
-              {/* Sở GDĐT Đồng Tháp: Font 13, chữ đứng, in hoa, không đậm */}
-              <span className="text-[13pt] font-normal uppercase tracking-tight">
-                {doc.issuingAuthorityTop || 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP'}
+              {/* Sở GDĐT Tỉnh Đồng Tháp: Font 13, chữ đứng, in hoa, không đậm, gọn 1 hàng */}
+              <span className="text-[12.5pt] font-normal uppercase tracking-tight whitespace-nowrap">
+                {(() => {
+                  const raw = (doc.issuingAuthorityTop || 'SỞ GDĐT TỈNH ĐỒNG THÁP').replace(/\s+/g, ' ').trim().toUpperCase();
+                  if (raw.includes('ĐỒNG THÁP') && (raw.includes('SỞ GIÁO DỤC') || raw.includes('SỞ GDĐT'))) {
+                    return 'SỞ GDĐT TỈNH ĐỒNG THÁP';
+                  }
+                  return doc.issuingAuthorityTop || 'SỞ GDĐT TỈNH ĐỒNG THÁP';
+                })()}
               </span>
 
               {/* Trường THCS và THPT: Font 13, chữ đứng, in hoa, ĐẬM */}

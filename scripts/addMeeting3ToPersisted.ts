@@ -22,7 +22,7 @@ const newMeeting = {
     list: ['120 Cán bộ, giáo viên, nhân viên từ 6 tổ chuyên môn toàn trường']
   },
   topic: 'Bảng tổng hợp ý kiến 6 Tổ chuyên môn & Nội dung trả lời, chỉ đạo của Ban Giám hiệu (Phiên họp Tổ lần 3 ngày 08/10/2026)',
-  content: `SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP
+  content: `SỞ GDĐT TỈNH ĐỒNG THÁP
 TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU
 Số: 03/TB-THCS&THPTĐBK
 

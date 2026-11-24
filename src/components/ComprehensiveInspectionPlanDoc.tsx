@@ -166,8 +166,8 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
         {/* Quốc hiệu, Tiêu ngữ & Tiêu đề cơ quan */}
         <div id="sec-header" className="grid grid-cols-1 sm:grid-cols-12 gap-4 pb-6 border-b-2 border-slate-300">
           <div className="sm:col-span-5 text-center space-y-0.5">
-            <div className="text-[12pt] uppercase font-normal tracking-tight text-slate-800 leading-snug">
-              SỞ GIÁO DỤC VÀ ĐÀO TẠO<br />TỈNH ĐỒNG THÁP
+            <div className="text-[12pt] uppercase font-normal tracking-tight text-slate-800 leading-snug whitespace-nowrap">
+              SỞ GDĐT TỈNH ĐỒNG THÁP
             </div>
             <div className="text-[12pt] uppercase font-bold text-slate-900 leading-snug">
               TRƯỜNG THCS VÀ THPT<br />ĐỐC BINH KIỀU
