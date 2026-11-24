@@ -62,7 +62,7 @@ export const INITIAL_SCHOOL_DEADLINES: SchoolDeadline[] = [
     priority: 'normal',
     status: 'pending',
     targetAudience: '06 Tổ chuyên môn',
-    description: 'Tập trung tháo gỡ khó khăn về thiết bị dạy học giữa điểm chính và điểm Tân Kiều (cách 11km), phân tích ma trận đề giữa kỳ.',
+    description: 'Tập trung tháo gỡ khó khăn về thiết bị dạy học giữa điểm chính và Điểm trường THCS Tân Kiều, phân tích ma trận đề giữa kỳ.',
     isAutomated: true,
     createdAt: '2026-10-20',
   },

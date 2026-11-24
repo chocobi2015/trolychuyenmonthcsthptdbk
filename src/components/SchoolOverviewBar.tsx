@@ -29,7 +29,7 @@ export const SchoolOverviewBar: React.FC = () => {
         {/* Right: Quick Alert for Campus Distance */}
         <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1.5 rounded-lg">
           <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
-          <span>Điểm Tân Kiều cách điểm chính 11 km: Chú trọng tính khả thi về thiết bị và công nghệ số khi duyệt kế hoạch!</span>
+          <span>Đồng bộ quản trị 03 điểm trường: Chú trọng tính khả thi về thiết bị và công nghệ số khi duyệt kế hoạch!</span>
         </div>
       </div>
 

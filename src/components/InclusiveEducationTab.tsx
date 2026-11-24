@@ -142,7 +142,7 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
               Kế Hoạch & Quản Lý Giáo Dục Hòa Nhập 25 Học Sinh Khuyết Tật
             </h1>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Thực hiện <strong>Công văn số 3326/SGDĐT-GDPT</strong> và <strong>Công văn số 3408/SGDĐT-GDPT</strong> của Sở GDĐT Đồng Tháp. Quản lý hồ sơ và kế hoạch giáo dục cá nhân cho 25 học sinh khuyết tật tại 3 điểm trường: <strong>03 HS cấp THPT (Điểm chính)</strong>, <strong>10 HS cấp THCS (Điểm Đốc Binh Kiều)</strong> và <strong>12 HS cấp THCS (Điểm Tân Kiều cách 11km)</strong>.
+              Thực hiện <strong>Công văn số 3326/SGDĐT-GDPT</strong> và <strong>Công văn số 3408/SGDĐT-GDPT</strong> của Sở GDĐT Đồng Tháp. Quản lý hồ sơ và kế hoạch giáo dục cá nhân cho 25 học sinh khuyết tật tại 3 điểm trường: <strong>03 HS cấp THPT (Điểm chính)</strong>, <strong>10 HS cấp THCS (Điểm Đốc Binh Kiều)</strong> và <strong>12 HS cấp THCS (Điểm Tân Kiều)</strong>.
             </p>
           </div>
 
@@ -189,7 +189,7 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
           <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
             <div className="text-[11px] text-slate-500 font-medium">Phân Bổ 3 Điểm Trường</div>
             <div className="text-lg font-bold text-slate-900 mt-0.5 tabular-nums">THPT: 3 · ĐBK: 10 · TK: 12</div>
-            <div className="text-[11px] text-blue-700 font-medium mt-0.5">Tân Kiều (cách 11km): 12 em (48%)</div>
+            <div className="text-[11px] text-blue-700 font-medium mt-0.5">Điểm Tân Kiều: 12 em (48%)</div>
           </div>
 
           <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
@@ -330,7 +330,7 @@ export const InclusiveEducationTab: React.FC<InclusiveEducationTabProps> = ({
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-700">Điểm Tân Kiều (Cấp THCS - cách 11km)</span>
+                <span className="text-xs font-bold text-slate-700">Điểm Tân Kiều (Cấp THCS)</span>
                 <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-black">{countTanKieu} HS</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1">

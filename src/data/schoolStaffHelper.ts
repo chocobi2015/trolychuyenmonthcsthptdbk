@@ -66,7 +66,7 @@ export function getCampusDisplayName(campusCode?: string): string {
   if (!campusCode) return 'Chưa rõ';
   if (campusCode === 'THPTDBK' || campusCode.includes('THPT')) return 'Điểm chính (THPT)';
   if (campusCode === 'THCSDBK' || campusCode.includes('DBK')) return 'Điểm Đốc Binh Kiều (THCS)';
-  if (campusCode === 'THCSTK' || campusCode.includes('TK')) return 'Điểm Tân Kiều (11km)';
+  if (campusCode === 'THCSTK' || campusCode.includes('TK')) return 'Điểm trường THCS Tân Kiều';
   return campusCode;
 }
 

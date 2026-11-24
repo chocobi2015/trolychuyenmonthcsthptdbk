@@ -233,36 +233,36 @@ export const MidtermAssessmentPlanView: React.FC = () => {
       {/* Main A4 Document Paper (Chuẩn thể thức Nghị định 30/2020/NĐ-CP) */}
       <div
         id="midterm-plan-paper"
-        className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 sm:p-12 lg:p-16 max-w-5xl mx-auto print:p-0 print:shadow-none print:border-none print:rounded-none font-['Times_New_Roman',Times,serif] text-[13pt] sm:text-[14pt] leading-[1.4] text-slate-900"
+        className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 sm:p-12 lg:p-16 max-w-5xl mx-auto print:p-0 print:shadow-none print:border-none print:rounded-none font-serif text-[13pt] sm:text-[14pt] leading-[1.4] text-slate-900"
         style={{ minHeight: '29.7cm' }}
       >
         {/* 1. Header 2 Cột Chuẩn Nghị Định 30/2020/NĐ-CP */}
         <div className="grid grid-cols-12 gap-4 pb-4 border-b border-slate-200">
           {/* Cột trái: Cơ quan ban hành & Số hiệu */}
           <div className="col-span-5 text-center space-y-0.5">
-            <p className="text-[12pt] sm:text-[13pt] font-normal uppercase text-slate-800">
-              SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP
+            <p className="text-[12pt] sm:text-[13pt] font-normal uppercase text-slate-800 leading-tight">
+              SỞ GIÁO DỤC VÀ ĐÀO TẠO<br />TỈNH ĐỒNG THÁP
             </p>
             <p className="text-[12pt] sm:text-[13pt] font-bold uppercase text-slate-900 leading-tight">
               TRƯỜNG THCS VÀ THPT<br />ĐỐC BINH KIỀU
             </p>
             <div className="w-24 border-b border-slate-900 mx-auto my-1"></div>
-            <p className="text-[13pt] font-medium text-slate-900 pt-0.5">
-              Số: <strong>45/KH-THCS&THPTĐBK</strong>
+            <p className="text-[13pt] font-normal text-slate-900 pt-0.5">
+              Số: 45/KH-THCS&THPTĐBK
             </p>
           </div>
 
           {/* Cột phải: Quốc hiệu, Tiêu ngữ & Địa danh ngày tháng */}
           <div className="col-span-7 text-center space-y-0.5">
-            <p className="text-[12pt] sm:text-[13pt] font-bold uppercase text-slate-900">
+            <p className="text-[12pt] sm:text-[13pt] font-bold uppercase text-slate-900 whitespace-nowrap">
               CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
             </p>
             <p className="text-[13pt] sm:text-[14pt] font-bold text-slate-900">
               Độc lập - Tự do - Hạnh phúc
             </p>
             <div className="w-36 border-b border-slate-900 mx-auto my-1"></div>
-            <p className="text-[13pt] sm:text-[14pt] italic text-slate-800 pt-1 text-right sm:pr-4">
-              Tháp Mười, ngày 16 tháng 10 năm 2026
+            <p className="text-[13pt] sm:text-[14pt] italic text-slate-800 pt-1 text-center">
+              Đốc Binh Kiều, ngày 16 tháng 10 năm 2026
             </p>
           </div>
         </div>
@@ -278,25 +278,25 @@ export const MidtermAssessmentPlanView: React.FC = () => {
           <div className="w-32 border-b-2 border-slate-900 mx-auto mt-2"></div>
         </div>
 
-        {/* 3. Căn Cứ Pháp Lý */}
+        {/* 3. Căn Cứ Pháp Lý (Chữ đứng thường chuẩn Nghị định 30/2020/NĐ-CP) */}
         <div className="space-y-1.5 mb-6 text-justify">
-          <p className="indent-8 italic text-slate-800">
+          <p className="indent-8 not-italic text-slate-900">
             Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15/9/2020 của Bộ Giáo dục và Đào tạo về việc ban hành Điều lệ trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;
           </p>
-          <p className="indent-8 italic text-slate-800">
+          <p className="indent-8 not-italic text-slate-900">
             Căn cứ Thông tư số 22/2021/TT-BGDĐT ngày 20/7/2021 của Bộ Giáo dục và Đào tạo Quy định về đánh giá học sinh trung học cơ sở và học sinh trung học phổ thông;
           </p>
-          <p className="indent-8 italic text-slate-800">
+          <p className="indent-8 not-italic text-slate-900">
             Căn cứ Công văn số 7991/BGDĐT-GDTrH ngày 20/12/2024 của Bộ Giáo dục và Đào tạo về việc hướng dẫn xây dựng ma trận, bảng đặc tả đề kiểm tra định kì các môn học cấp THCS, THPT;
           </p>
-          <p className="indent-8 italic text-slate-800">
+          <p className="indent-8 not-italic text-slate-900">
             Căn cứ Công văn số 471/SGDĐT-GDPT ngày 14/4/2025 của Sở Giáo dục và Đào tạo tỉnh Đồng Tháp về việc thực hiện kiểm tra, đánh giá đối với cấp THCS, THPT;
           </p>
-          <p className="indent-8 italic text-slate-800">
+          <p className="indent-8 not-italic text-slate-900">
             Căn cứ Kế hoạch giáo dục nhà trường số 34/KH-THCS&THPTĐBK ngày 25/9/2026 của Trường THCS và THPT Đốc Binh Kiều năm học 2026 - 2027;
           </p>
-          <p className="indent-8 italic text-slate-800">
-            Căn cứ Kế hoạch số 39/KH-THCS&THPTĐBK ngày 05/10/2026 của Trường THCS và THPT Đốc Binh Kiều về tổ chức thực hiện kiểm tra, đánh giá học sinh năm học 2026 - 2027;
+          <p className="indent-8 not-italic text-slate-900">
+            Căn cứ Kế hoạch số 39/KH-THCS&THPTĐBK ngày 05/10/2026 của Trường THCS và THPT Đốc Binh Kiều về tổ chức thực hiện kiểm tra, đánh giá học sinh năm học 2026 - 2027.
           </p>
           <p className="indent-8 text-slate-900 pt-1">
             Nay Trường THCS và THPT Đốc Binh Kiều xây dựng Kế hoạch tổ chức kiểm tra, đánh giá giữa học kỳ I năm học 2026 - 2027 với các nội dung chi tiết như sau:

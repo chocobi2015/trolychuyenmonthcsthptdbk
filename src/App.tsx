@@ -29,7 +29,7 @@ import { extractDeadlinesFromDirective, extractDeadlinesFromSchoolDoc } from './
 const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
   + Điểm Trường Đốc Binh Kiều: 24 lớp cấp THCS (6 lớp đầu mỗi khối 6-9: Khối 6: 6 lớp - 245 HS, Khối 7: 6 lớp - 234 HS, Khối 8: 6 lớp - 251 HS, Khối 9: 6 lớp - 250 HS) với 980 học sinh.
-  + Điểm Trường Tân Kiều (cách 11km): 15 lớp cấp THCS (các lớp từ A7 trở đi: Khối 6: 4 lớp - 166 HS, Khối 7: 3 lớp - 133 HS, Khối 8: 4 lớp - 147 HS, Khối 9: 4 lớp - 156 HS) với 602 học sinh.
+  + Điểm Trường THCS Tân Kiều: 15 lớp cấp THCS (các lớp từ A7 trở đi: Khối 6: 4 lớp - 166 HS, Khối 7: 3 lớp - 133 HS, Khối 8: 4 lớp - 147 HS, Khối 9: 4 lớp - 156 HS) với 602 học sinh.
   + Tổng cấp THCS: 39 lớp (1.582 HS); Tổng cấp THPT: 14 lớp (529 HS); Học sinh khuyết tật hòa nhập: 25 HS.
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên).
 - Cơ cấu 07 Tổ trong trường: 06 Tổ chuyên môn (Toán, Ngữ văn - TV - TB, KHTN-CN, KHXH, Ngoại ngữ - Tin học, GDTC - QPAN - Nghệ thuật) và 01 Tổ Văn phòng (14 NV).

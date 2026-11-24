@@ -49,7 +49,7 @@ export const SCHOOL_CAMPUSES = [
     studentCount: 601,
     grades: "Khối 6, 7, 8, 9",
     locationNote: "15 lớp THCS (601 học sinh), kết nối mạng và quản lý dữ liệu số tập trung",
-    distanceFromMainCampus: "Cách điểm chính 11 km"
+    distanceFromMainCampus: "Ấp Tân Kiều, xã Đốc Binh Kiều"
   },
   {
     id: "dbk-highschool",
@@ -94,7 +94,7 @@ I. ĐẶC ĐIỂM TÌNH HÌNH
 2. Tình hình đội ngũ:
 - Tổng số giáo viên: 18 giáo viên (Toán: 14 GV, Tin học: 4 GV).
 - Trình độ chuyên môn: 100% đạt chuẩn Đại học trở lên, trong đó có 3 Thạc sĩ.
-- Phân công: 10 GV dạy điểm chính Đốc Binh Kiều, 5 GV dạy tại điểm Tân Kiều (cách 11km), 3 GV dạy chéo THPT.
+- Phân công: 10 GV dạy điểm chính Đốc Binh Kiều, 5 GV dạy tại Điểm trường THCS Tân Kiều, 3 GV dạy chéo THPT.
 
 3. Thiết bị dạy học:
 - Điểm chính Đốc Binh Kiều: 02 phòng máy vi tính (80 máy kết nối Internet), 24 phòng học đều trang bị Tivi 65 inch thông minh.

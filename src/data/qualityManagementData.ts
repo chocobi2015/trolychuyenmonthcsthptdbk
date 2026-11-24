@@ -143,7 +143,7 @@ export const OFFICIAL_QUALITY_MANAGEMENT_PLAN: SchoolDocument = {
 
 2. Yêu cầu:
 - Kỷ cương, minh bạch và trách nhiệm: Từng tổ chuyên môn, cán bộ quản lý và giáo viên phải nắm vững quy chế thi, quy định kiểm tra đánh giá; chịu trách nhiệm cá nhân về tính chính xác, khách quan của kết quả đánh giá.
-- Đồng bộ tại 03 điểm trường: Công tác khảo thí, ngân hàng đề kiểm tra, hồ sơ học sinh và tự đánh giá chất lượng phải được triển khai đồng đều tại cả Điểm chính THPT, Điểm Đốc Binh Kiều THCS và Điểm Tân Kiều THCS (cách 11km), không để xảy ra chênh lệch chất lượng giữa các điểm trường.
+- Đồng bộ tại 03 điểm trường: Công tác khảo thí, ngân hàng đề kiểm tra, hồ sơ học sinh và tự đánh giá chất lượng phải được triển khai đồng đều tại cả Điểm chính THPT, Điểm trường THCS Đốc Binh Kiều và Điểm trường THCS Tân Kiều, không để xảy ra chênh lệch chất lượng giữa các điểm trường.
 - Giảm áp lực thi cử và cắt giảm hội thi phong trào hình thức: Thực hiện nghiêm Công văn số 5922/BGDĐT-GDPT ngày 03/9/2026 của Bộ GDĐT, kiên quyết cắt giảm các cuộc thi, hội thi không thiết thực, trùng lặp, hình thức để tập trung nâng cao chất lượng dạy học cốt lõi.
 - Đẩy mạnh số hóa và liêm chính học thuật: Hoàn thành 100% số hóa dữ liệu văn bằng trước 30/11/2026; ban hành và kiểm soát chặt chẽ quy định sử dụng AI, phòng chống gian lận công nghệ cao trong kiểm tra, đánh giá.`
     },
@@ -175,7 +175,7 @@ export const OFFICIAL_QUALITY_MANAGEMENT_PLAN: SchoolDocument = {
 
 6. Công tác bảo đảm chất lượng giáo dục (BĐCLGD) và duy trì trường đạt chuẩn quốc gia:
 - Thực hiện đúng quy định tại Thông tư số 57/2026/TT-BGDĐT ngày 07/7/2026 của Bộ GDĐT về bảo đảm chất lượng và công nhận chuẩn quốc gia.
-- Kiện toàn Hội đồng tự đánh giá chất lượng giáo dục của trường; thu thập minh chứng thực chất, liên tục dựa trên dữ liệu thật của 5 tiêu chuẩn kiểm định; đánh giá đầy đủ điều kiện cơ sở vật chất và hoạt động giáo dục tại cả 03 điểm trường (đặc biệt Điểm Tân Kiều cách 11km).
+- Kiện toàn Hội đồng tự đánh giá chất lượng giáo dục của trường; thu thập minh chứng thực chất, liên tục dựa trên dữ liệu thật của 5 tiêu chuẩn kiểm định; đánh giá đầy đủ điều kiện cơ sở vật chất và hoạt động giáo dục tại cả 03 điểm trường (Điểm chính THPT, Điểm trường THCS Đốc Binh Kiều và Điểm trường THCS Tân Kiều).
 - Xây dựng Kế hoạch cải tiến chất lượng giáo dục giai đoạn 2026 - 2030, gắn với mục tiêu duy trì và nâng cao mức độ chuẩn quốc gia của trường.
 
 7. Quản lý văn bằng, chứng chỉ (VBCC) và số hóa 100% dữ liệu trước 30/11/2026:

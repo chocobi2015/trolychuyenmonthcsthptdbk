@@ -81,7 +81,7 @@ const PARTY_MEMBERS_BCH: PartyCommitteeMember[] = [
     oldSchool: 'THCS Tân Kiều',
     politicalTheory: 'Trung cấp LLCT',
     qualification: 'Đại học',
-    duties: 'Bí thư Chi bộ 2 (Khối THCS Điểm Tân Kiều, 15 lớp, 602 HS); quản lý điều hành cơ sở vật chất, chuyên môn, nề nếp tại Điểm trường Tân Kiều (thuộc địa bàn xã Đốc Binh Kiều, cách điểm chính 11km); đầu mối quan hệ với Đảng ủy, UBND xã Đốc Binh Kiều.',
+    duties: 'Bí thư Chi bộ 2 (Khối THCS Điểm Tân Kiều, 15 lớp, 602 HS); quản lý điều hành cơ sở vật chất, chuyên môn, nề nếp tại Điểm trường Tân Kiều (thuộc địa bàn xã Đốc Binh Kiều); đầu mối quan hệ với Đảng ủy, UBND xã Đốc Binh Kiều.',
     highlightTag: 'Bí thư Chi bộ 2',
   },
   {
@@ -474,7 +474,7 @@ export const PartyWorkTab: React.FC = () => {
                     <li><strong>Điều 3:</strong> Bí thư Đảng ủy - Đồng chí Lê Thanh Cường (Hiệu trưởng): Lãnh đạo toàn diện, công tác cán bộ, quy hoạch, tài chính tài sản, giữ mối liên hệ với Thường trực Đảng ủy xã Đốc Binh Kiều và Sở GDĐT Đồng Tháp.</li>
                     <li><strong>Điều 4:</strong> Phó Bí thư Đảng ủy - Đồng chí Nguyễn Minh Trí (PHT Thường trực): Thường trực Đảng ủy, phụ trách công tác xây dựng Đảng, giám sát Chi bộ 1 và Chi bộ 3, phụ trách chuyên môn THPT.</li>
                     <li><strong>Điều 5:</strong> ĐUV, Bí thư Chi bộ 1 - Đồng chí Trịnh Văn Sơn: Lãnh đạo Chi bộ 1 (Khối THPT & BGH), bồi dưỡng HSG môn KHXH, ôn thi tốt nghiệp THPT, phát triển đảng học sinh lớp 12.</li>
-                    <li><strong>Điều 6:</strong> ĐUV, Bí thư Chi bộ 2 - Đồng chí Nguyễn Thanh Tòng (PHT): Lãnh đạo Chi bộ 2 (Khối THCS Tân Kiều, 15 lớp, 602 HS), điều hành điểm trường Tân Kiều (thuộc xã Đốc Binh Kiều, cách 11km).</li>
+                    <li><strong>Điều 6:</strong> ĐUV, Bí thư Chi bộ 2 - Đồng chí Nguyễn Thanh Tòng (PHT): Lãnh đạo Chi bộ 2 (Khối THCS Tân Kiều, 15 lớp, 602 HS), điều hành điểm trường Tân Kiều (thuộc xã Đốc Binh Kiều).</li>
                     <li><strong>Điều 7:</strong> ĐUV, Bí thư Chi bộ 3 - Đồng chí Lê Văn Nguyên: Lãnh đạo Chi bộ 3 (Khối THCS ĐBK, 24 lớp, 980 HS), phụ trách phong trào TDTT, HKPĐ, GDQP-AN toàn trường.</li>
                     <li><strong>Điều 8:</strong> ĐUV phụ trách Tổ chức Đảng - Đồng chí Lê Thị Ngọc Tuyền: Thẩm tra hồ sơ kết nạp Đảng, chuyển chính thức, trình Đảng ủy xã Đốc Binh Kiều quyết định.</li>
                     <li><strong>Điều 9:</strong> ĐUV phụ trách Kiểm tra, Giám sát Đảng - Đồng chí Bùi Kim Huỳnh: Chương trình kiểm tra giám sát năm, kỷ luật Đảng, giải quyết khiếu nại.</li>
@@ -545,7 +545,7 @@ export const PartyWorkTab: React.FC = () => {
                   </div>
                   <h4 className="font-bold text-red-800 uppercase mt-2">3 Khâu đột phá toàn khóa:</h4>
                   <ol className="list-decimal pl-4 space-y-1 text-slate-700">
-                    <li><strong>Đột phá 1:</strong> Chuyển đổi số liên cơ sở trên địa bàn xã Đốc Binh Kiều (xóa nhòa cự ly 11km giữa điểm chính và Tân Kiều).</li>
+                    <li><strong>Đột phá 1:</strong> Chuyển đổi số liên cơ sở trên địa bàn xã Đốc Binh Kiều, kết nối quản trị thông suốt giữa 03 điểm trường.</li>
                     <li><strong>Đột phá 2:</strong> Liên thông chất lượng dạy và học giữa 2 cấp THCS và THPT, chiến lược bồi dưỡng HSG từ lớp 9 lên THPT.</li>
                     <li><strong>Đột phá 3:</strong> Xây dựng văn hóa nhà trường đoàn kết, nhân ái sau sáp nhập, phát huy tinh thần gương mẫu của 85 đảng viên.</li>
                   </ol>
@@ -728,7 +728,7 @@ export const PartyWorkTab: React.FC = () => {
                   Chi bộ 2 trực thuộc
                 </span>
                 <h3 className="text-base font-bold text-slate-900 mt-2">CHI BỘ ĐIỂM TÂN KIỀU</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Khu vực Tân Kiều (xã Đốc Binh Kiều, cách 11km) · 15 lớp · 602 Học sinh</p>
+                <p className="text-xs text-slate-500 mt-0.5">Khu vực Tân Kiều (xã Đốc Binh Kiều) · 15 lớp · 602 Học sinh</p>
 
                 <div className="mt-4 space-y-2 text-xs">
                   <div className="flex justify-between border-b border-slate-100 pb-1.5">
@@ -833,7 +833,7 @@ export const PartyWorkTab: React.FC = () => {
                     <td className="p-2.5 border border-slate-200 text-center font-semibold text-amber-700">08 HS</td>
                     <td className="p-2.5 border border-slate-200 text-center">31 người</td>
                     <td className="p-2.5 border border-slate-200 text-center font-bold text-red-700">22 ĐV</td>
-                    <td className="p-2.5 border border-slate-200 text-slate-600">Khu vực Tân Kiều đã sáp nhập vào xã Đốc Binh Kiều (cách 11km)</td>
+                    <td className="p-2.5 border border-slate-200 text-slate-600">Khu vực Tân Kiều đã sáp nhập vào xã Đốc Binh Kiều</td>
                   </tr>
                   <tr className="bg-red-50/70 font-bold text-slate-900">
                     <td className="p-2.5 border border-slate-200">

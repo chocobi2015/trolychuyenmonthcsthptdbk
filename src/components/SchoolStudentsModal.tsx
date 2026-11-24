@@ -68,7 +68,7 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (SỞ GDĐT TỈNH ĐỒNG THÁP)
   + Khối 8 (06 lớp): 8A1 (42), 8A2 (40), 8A3 (41), 8A4 (44), 8A5 (43), 8A6 (41) -> 251 HS
   + Khối 9 (06 lớp): 9A1 (42), 9A2 (38), 9A3 (44), 9A4 (41), 9A5 (42), 9A6 (43) -> 250 HS
 
-- Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách 11km): 15 lớp với 602 học sinh
+- Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi): 15 lớp với 602 học sinh
   + Khối 6 (04 lớp): 6A7 (41), 6A8 (43), 6A9 (40), 6A10 (42) -> 166 HS
   + Khối 7 (03 lớp): 7A7 (44), 7A8 (45), 7A9 (44) -> 133 HS
   + Khối 8 (04 lớp): 8A7 (36), 8A8 (38), 8A9 (36), 8A10 (37) -> 147 HS
@@ -205,7 +205,7 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (SỞ GDĐT TỈNH ĐỒNG THÁP)
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-wide flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5" />
-                <span>3. Điểm Tân Kiều (THCS - 11km)</span>
+                <span>3. Điểm Tân Kiều (THCS)</span>
               </span>
               <span className="text-xs font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
                 15 Lớp
@@ -385,7 +385,7 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (SỞ GDĐT TỈNH ĐỒNG THÁP)
                     <td className="py-2 px-3 text-slate-600 text-[11px]">
                       {c.campusId === 'main' && 'Điểm chính THPT (14 lớp cấp 3)'}
                       {c.campusId === 'dbk' && '6 lớp đầu mỗi khối THCS (6-9)'}
-                      {c.campusId === 'tankieu' && 'Các lớp còn lại mỗi khối THCS (từ A7 trở đi, cách 11km)'}
+                      {c.campusId === 'tankieu' && 'Các lớp còn lại mỗi khối THCS (từ A7 trở đi)'}
                     </td>
                   </tr>
                 ))}

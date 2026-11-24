@@ -105,7 +105,7 @@
     "tankieu": {
       "id": "tankieu",
       "name": "Điểm Trường Tân Kiều (Cấp THCS)",
-      "description": "Các lớp còn lại mỗi khối THCS (từ lớp 6A7, 7A7, 8A7, 9A7 trở đi, cách điểm chính 11 km)",
+      "description": "Các lớp còn lại mỗi khối THCS (từ lớp 6A7, 7A7, 8A7, 9A7 trở đi)",
       "classesCount": 15,
       "studentsCount": 602,
       "grades": {

@@ -303,7 +303,7 @@ export const LessonPlanTab: React.FC<LessonPlanTabProps> = ({ onSaveToArchive, p
                 className="w-full text-xs rounded-lg border-slate-300 border p-2 focus:ring-2 focus:ring-pink-500 focus:outline-none"
               >
                 <option value="Điểm chính Đốc Binh Kiều">Điểm Đốc Binh Kiều</option>
-                <option value="Điểm Tân Kiều (11km)">Điểm Tân Kiều (11km)</option>
+                <option value="Điểm Tân Kiều">Điểm Tân Kiều</option>
                 <option value="Cơ sở THPT">Cơ sở THPT</option>
               </select>
             </div>

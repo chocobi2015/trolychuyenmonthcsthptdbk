@@ -110,7 +110,7 @@ export const ArchiveManagementTab: React.FC<ArchiveManagementTabProps> = ({
             >
               <option value="ALL">Tất cả điểm trường (53 lớp)</option>
               <option value="Đốc Binh Kiều">Điểm Đốc Binh Kiều (24 lớp)</option>
-              <option value="Tân Kiều">Điểm Tân Kiều (15 lớp - cách 11km)</option>
+              <option value="Tân Kiều">Điểm Tân Kiều (15 lớp)</option>
               <option value="THPT">Khối THPT (14 lớp)</option>
             </select>
           </div>

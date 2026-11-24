@@ -255,7 +255,7 @@ II. KẾ HOẠCH VÀ PHƯƠNG HƯỚNG CÔNG TÁC 2 TUẦN TỚI:
 - Tăng cường ứng dụng công nghệ thông tin và trí tuệ nhân tạo (AI) an toàn theo đúng 10 nguyên tắc của nhà trường.`);
     setFormResolutionsText(`100% giáo viên hoàn thành nhập điểm kiểm tra thường xuyên vào sổ điểm điện tử đúng hạn.
 Thống nhất kế hoạch dự giờ, thao giảng định kỳ 2 tiết/giáo viên trong học kỳ I.
-Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ động phương tiện, báo cáo kịp thời vướng mắc về thiết bị.`);
+Giáo viên giảng dạy tại Điểm trường Tân Kiều chủ động phương tiện, báo cáo kịp thời vướng mắc về thiết bị.`);
     setFormTasks([
       {
         id: `t-${Date.now()}-1`,
@@ -908,7 +908,7 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
                     <div>
                       <div className="text-xs sm:text-sm font-bold uppercase text-slate-900">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
                       <div className="text-xs sm:text-sm font-bold underline underline-offset-4 text-slate-900">Độc lập - Tự do - Hạnh phúc</div>
-                      <div className="text-xs italic text-slate-600 pt-1">Tháp Mười, ngày 09 tháng 10 năm 2026</div>
+                      <div className="text-xs italic text-slate-600 pt-1">Đốc Binh Kiều, ngày 09 tháng 10 năm 2026</div>
                     </div>
                   </div>
 
@@ -1650,7 +1650,7 @@ Giáo viên giảng dạy tại Điểm trường Tân Kiều (cách 11km) chủ
               <div className="bg-amber-50 border border-amber-200 text-amber-900 p-4 rounded-xl">
                 <p className="font-bold">Mục đích cung cấp ngữ cảnh chuyên môn:</p>
                 <p className="mt-1">
-                  Toàn bộ các biên bản họp tổ 2 tuần/lần ở tab này phản ánh chân thực nhất thực tế dạy và học: các vướng mắc tại Điểm Tân Kiều cách 11km, việc phụ đạo học sinh yếu buổi 2, triển khai 12 tiết giáo dục AI cốt lõi, ngân hàng đề kiểm tra và chuẩn bị thi tốt nghiệp 2027.
+                  Toàn bộ các biên bản họp tổ 2 tuần/lần ở tab này phản ánh chân thực nhất thực tế dạy và học: các vướng mắc tại Điểm Tân Kiều, việc phụ đạo học sinh yếu buổi 2, triển khai 12 tiết giáo dục AI cốt lõi, ngân hàng đề kiểm tra và chuẩn bị thi tốt nghiệp 2027.
                 </p>
               </div>
 

@@ -4,17 +4,24 @@ import {
   Paragraph,
   TextRun,
   Table,
-  TableRow,
-  TableCell,
-  WidthType,
   AlignmentType,
-  BorderStyle,
-  Header,
   Footer,
-  PageNumber
+  PageNumber,
 } from 'docx';
 import * as fs from 'fs';
 import * as path from 'path';
+import {
+  DOCX_PAGE_SETUP,
+  FONT_SIZES,
+  INDENT_FIRST_LINE,
+  PARAGRAPH_SPACING,
+  createAdminDocHeaderTable,
+  createArticleHeading,
+  createBodyParagraph,
+  createDocumentTitleBlock,
+  createLegalBasisParagraph,
+  createSignatureBlockTable,
+} from '../src/utils/docxStandards';
 
 export interface DepartmentFeedback {
   deptId: string;
@@ -276,355 +283,133 @@ export const DEPARTMENT_FEEDBACKS_MEETING_3: DepartmentFeedback[] = [
 
 export async function generateMeetingReplyDocx(outputPath: string): Promise<void> {
   const FONT_NAME = 'Times New Roman';
-  const noBorder = {
-    top: { style: BorderStyle.NONE, size: 0, color: 'auto' },
-    bottom: { style: BorderStyle.NONE, size: 0, color: 'auto' },
-    left: { style: BorderStyle.NONE, size: 0, color: 'auto' },
-    right: { style: BorderStyle.NONE, size: 0, color: 'auto' }
-  };
-
   const children: (Paragraph | Table)[] = [];
 
-  // Header 2 columns (chuẩn Nghị định 30/2020/NĐ-CP)
-  const headerTable = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    borders: noBorder,
-    rows: [
-      new TableRow({
-        children: [
-          new TableCell({
-            width: { size: 45, type: WidthType.PERCENTAGE },
-            borders: noBorder,
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: 'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
-                    bold: true,
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                spacing: { after: 120 },
-                children: [
-                  new TextRun({
-                    text: 'Số: 186/TB-THCS-THPT',
-                    size: 24,
-                    font: FONT_NAME
-                  })
-                ]
-              })
-            ]
-          }),
-          new TableCell({
-            width: { size: 55, type: WidthType.PERCENTAGE },
-            borders: noBorder,
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: 'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
-                    bold: true,
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: 'Độc lập - Tự do - Hạnh phúc',
-                    bold: true,
-                    size: 24,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                spacing: { after: 120 },
-                children: [
-                  new TextRun({
-                    text: 'Tháp Mười, ngày 09 tháng 10 năm 2026',
-                    italics: true,
-                    size: 24,
-                    font: FONT_NAME
-                  })
-                ]
-              })
-            ]
-          })
-        ]
-      })
-    ]
-  });
-  children.push(headerTable);
-
-  // Document Title (In đậm, canh giữa)
+  // Header 2 cột chuẩn Nghị định 30/2020/NĐ-CP (không chồng lấn, Đốc Binh Kiều)
   children.push(
-    new Paragraph({
-      alignment: AlignmentType.CENTER,
-      spacing: { before: 240, after: 100 },
-      children: [
-        new TextRun({
-          text: 'THÔNG BÁO KẾT LUẬN',
-          bold: true,
-          size: 28,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.CENTER,
-      spacing: { after: 80 },
-      children: [
-        new TextRun({
-          text: 'Về việc tiếp thu, giải đáp và chỉ đạo thực hiện ý kiến, kiến nghị',
-          bold: true,
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.CENTER,
-      spacing: { after: 280 },
-      children: [
-        new TextRun({
-          text: 'của các tổ chuyên môn tại kỳ họp định kỳ lần 3, ngày 08/10/2026',
-          bold: true,
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    })
+    createAdminDocHeaderTable(
+      'SỞ GIÁO DỤC VÀ ĐÀO TẠO\nTỈNH ĐỒNG THÁP',
+      'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
+      'Số: 186/TB-THCS&THPTĐBK',
+      'Đốc Binh Kiều, ngày 09 tháng 10 năm 2026'
+    )
   );
 
-  // Phần Căn cứ pháp lý & Mở đầu
+  // Tiêu đề văn bản
   children.push(
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 120, line: 300 },
-      children: [
-        new TextRun({
-          text: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15/9/2020 của Bộ Giáo dục và Đào tạo ban hành Điều lệ trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học;',
-          italics: true,
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 120, line: 300 },
-      children: [
-        new TextRun({
-          text: 'Căn cứ Kế hoạch thời gian năm học 2026 - 2027 và Kế hoạch giáo dục nhà trường của Trường THCS và THPT Đốc Binh Kiều;',
-          italics: true,
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 180, line: 300 },
-      children: [
-        new TextRun({
-          text: 'Căn cứ Biên bản họp định kỳ lần 3 ngày 08/10/2026 của 06 Tổ chuyên môn trong nhà trường;',
-          italics: true,
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 240, line: 320 },
-      children: [
-        new TextRun({
-          text: 'Ban Giám hiệu Trường THCS và THPT Đốc Binh Kiều đã tổng hợp đầy đủ các ý kiến, kiến nghị và đề xuất của từng tổ chuyên môn. Nhằm kịp thời tháo gỡ khó khăn, thống nhất quy trình chuyên môn và bảo đảm thực hiện thắng lợi nhiệm vụ năm học, Ban Giám hiệu thông báo kết luận tiếp thu, giải đáp chi tiết theo từng tổ chuyên môn như sau:',
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    })
+    ...createDocumentTitleBlock(
+      'THÔNG BÁO KẾT LUẬN',
+      'Về việc tiếp thu, giải đáp và chỉ đạo thực hiện ý kiến, kiến nghị\ncủa các tổ chuyên môn tại kỳ họp định kỳ lần 3, ngày 08/10/2026'
+    )
   );
 
-  // Render từng Tổ từ trên xuống dưới dạng văn bản hành chính kế hoạch (KHÔNG DÙNG BẢNG TO)
+  // Căn cứ pháp lý: CHỮ ĐỨNG THƯỜNG (không in nghiêng), thụt dòng đầu 1.0cm, left = 0
+  children.push(
+    createLegalBasisParagraph(
+      'Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15 tháng 9 năm 2020 của Bộ Giáo dục và Đào tạo ban hành Điều lệ trường trung học cơ sở, trường trung học phổ thông và trường phổ thông có nhiều cấp học'
+    ),
+    createLegalBasisParagraph(
+      'Căn cứ Kế hoạch thời gian năm học 2026 - 2027 và Kế hoạch giáo dục nhà trường của Trường THCS và THPT Đốc Binh Kiều'
+    ),
+    createLegalBasisParagraph(
+      'Căn cứ Biên bản họp định kỳ lần 3 ngày 08 tháng 10 năm 2026 của 06 Tổ chuyên môn trong nhà trường',
+      true
+    ),
+    createBodyParagraph(
+      'Ban Giám hiệu Trường THCS và THPT Đốc Binh Kiều đã tổng hợp đầy đủ các ý kiến, kiến nghị và đề xuất của từng tổ chuyên môn. Nhằm kịp thời tháo gỡ khó khăn, thống nhất quy trình chuyên môn và bảo đảm thực hiện thắng lợi nhiệm vụ năm học, Ban Giám hiệu thông báo kết luận tiếp thu, giải đáp chi tiết theo từng tổ chuyên môn như sau:',
+      { spacingBefore: 60, spacingAfter: 100 }
+    )
+  );
+
+  // Nội dung từng Tổ (14pt đồng bộ, CHỈ thụt dòng đầu 1.0cm, left = 0)
   DEPARTMENT_FEEDBACKS_MEETING_3.forEach((dept) => {
-    // Tiêu đề Tổ
-    children.push(
-      new Paragraph({
-        alignment: AlignmentType.LEFT,
-        spacing: { before: 240, after: 140 },
-        children: [
-          new TextRun({
-            text: `${dept.orderRom}. ${dept.deptName}`,
-            bold: true,
-            size: 27,
-            font: FONT_NAME
-          })
-        ]
-      })
-    );
+    children.push(createArticleHeading(`${dept.orderRom}. ${dept.deptName}`, { spacingBefore: 180, spacingAfter: 60 }));
 
-    // Từng ý kiến của tổ
     dept.opinions.forEach((op, opIdx) => {
-      // Tên ý kiến / Tiêu đề mục
       children.push(
         new Paragraph({
-          alignment: AlignmentType.LEFT,
-          indent: { left: 240 },
-          spacing: { before: 140, after: 80 },
+          alignment: AlignmentType.JUSTIFIED,
+          indent: { firstLine: INDENT_FIRST_LINE, left: 0 },
+          keepNext: true,
+          spacing: {
+            line: PARAGRAPH_SPACING.line,
+            lineRule: PARAGRAPH_SPACING.lineRule,
+            before: 120,
+            after: 50,
+          },
           children: [
             new TextRun({
               text: `${opIdx + 1}. ${op.title}`,
               bold: true,
-              size: 26,
-              font: FONT_NAME
+              size: FONT_SIZES.BODY,
+              font: FONT_NAME,
             }),
-            op.contributor ? new TextRun({
-              text: ` (${op.contributor})`,
-              italics: true,
-              size: 25,
-              font: FONT_NAME
-            }) : new TextRun({ text: '' })
-          ]
+            ...(op.contributor
+              ? [
+                  new TextRun({
+                    text: ` (${op.contributor})`,
+                    italics: true,
+                    size: FONT_SIZES.BODY,
+                    font: FONT_NAME,
+                  }),
+                ]
+              : []),
+          ],
         })
       );
 
-      // Nội dung ý kiến của tổ
       children.push(
-        new Paragraph({
-          alignment: AlignmentType.LEFT,
-          indent: { left: 400 },
-          spacing: { after: 60 },
-          children: [
-            new TextRun({
-              text: 'a) Nội dung ý kiến, đề xuất của Tổ:',
-              bold: true,
-              italics: true,
-              size: 26,
-              font: FONT_NAME
-            })
-          ]
+        createBodyParagraph('a) Nội dung ý kiến, đề xuất của Tổ:', {
+          bold: true,
+          keepNext: true,
+          spacingBefore: 60,
+          spacingAfter: 40,
         })
       );
 
       op.opinionContent.forEach((line) => {
-        children.push(
-          new Paragraph({
-            alignment: AlignmentType.JUSTIFIED,
-            indent: { left: 600 },
-            spacing: { after: 60, line: 300 },
-            children: [
-              new TextRun({
-                text: line,
-                size: 26,
-                font: FONT_NAME
-              })
-            ]
-          })
-        );
+        children.push(createBodyParagraph(line));
       });
 
-      // Trả lời của Ban Giám hiệu
       children.push(
-        new Paragraph({
-          alignment: AlignmentType.LEFT,
-          indent: { left: 400 },
-          spacing: { before: 80, after: 60 },
-          children: [
-            new TextRun({
-              text: 'b) ' + op.responseTitle,
-              bold: true,
-              italics: true,
-              size: 26,
-              font: FONT_NAME
-            })
-          ]
+        createBodyParagraph(`b) ${op.responseTitle}`, {
+          bold: true,
+          keepNext: true,
+          spacingBefore: 60,
+          spacingAfter: 40,
         })
       );
 
       op.responseContent.forEach((line) => {
-        children.push(
-          new Paragraph({
-            alignment: AlignmentType.JUSTIFIED,
-            indent: { left: 600 },
-            spacing: { after: 60, line: 300 },
-            children: [
-              new TextRun({
-                text: line,
-                size: 26,
-                font: FONT_NAME
-              })
-            ]
-          })
-        );
+        children.push(createBodyParagraph(line));
       });
 
-      // Căn cứ pháp lý & phân công nếu có
       if (op.legalBasis || op.assignment) {
         const metaTexts: TextRun[] = [];
         if (op.legalBasis) {
           metaTexts.push(
-            new TextRun({
-              text: '- Căn cứ: ',
-              bold: true,
-              size: 25,
-              font: FONT_NAME
-            }),
-            new TextRun({
-              text: `${op.legalBasis}  `,
-              italics: true,
-              size: 25,
-              font: FONT_NAME
-            })
+            new TextRun({ text: '- Căn cứ: ', bold: true, size: FONT_SIZES.BODY, font: FONT_NAME }),
+            new TextRun({ text: `${op.legalBasis} `, size: FONT_SIZES.BODY, font: FONT_NAME })
           );
         }
         if (op.assignment) {
           metaTexts.push(
-            new TextRun({
-              text: '- Đơn vị thực hiện: ',
-              bold: true,
-              size: 25,
-              font: FONT_NAME
-            }),
-            new TextRun({
-              text: op.assignment,
-              size: 25,
-              font: FONT_NAME
-            })
+            new TextRun({ text: '- Đơn vị thực hiện: ', bold: true, size: FONT_SIZES.BODY, font: FONT_NAME }),
+            new TextRun({ text: op.assignment, size: FONT_SIZES.BODY, font: FONT_NAME })
           );
         }
 
         children.push(
           new Paragraph({
             alignment: AlignmentType.JUSTIFIED,
-            indent: { left: 600 },
-            spacing: { before: 60, after: 120, line: 300 },
-            children: metaTexts
+            indent: { firstLine: INDENT_FIRST_LINE, left: 0 },
+            spacing: {
+              line: PARAGRAPH_SPACING.line,
+              lineRule: PARAGRAPH_SPACING.lineRule,
+              before: 40,
+              after: 80,
+            },
+            children: metaTexts,
           })
         );
       }
@@ -633,208 +418,60 @@ export async function generateMeetingReplyDocx(outputPath: string): Promise<void
 
   // Mục Tổ chức thực hiện
   children.push(
-    new Paragraph({
-      alignment: AlignmentType.LEFT,
-      spacing: { before: 280, after: 140 },
-      children: [
-        new TextRun({
-          text: 'VII. TỔ CHỨC THỰC HIỆN',
-          bold: true,
-          size: 27,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 100, line: 300 },
-      children: [
-        new TextRun({
-          text: '1. Ban Giám hiệu phân công các đồng chí Phó Hiệu trưởng phụ trách chuyên môn trực tiếp rà soát, bổ sung các nội dung đã thống nhất vào Kế hoạch kiểm tra đánh giá của nhà trường; chỉ đạo văn phòng chuyên môn ban hành phụ lục điều chỉnh gửi về các tổ bộ môn.',
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 100, line: 300 },
-      children: [
-        new TextRun({
-          text: '2. Các đồng chí Tổ trưởng chuyên môn chịu trách nhiệm phổ biến chi tiết toàn bộ nội dung văn bản này đến từng cán bộ, giáo viên, nhân viên trong tổ tại phiên họp chuyên môn gần nhất; tổ chức thực hiện nghiêm túc, đúng tiến độ.',
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 100, line: 300 },
-      children: [
-        new TextRun({
-          text: '3. Bộ phận Kế toán - Văn phòng khẩn trương hoàn thiện hồ sơ rà soát thâm niên nhà giáo của giáo viên theo đúng chỉ đạo tại văn bản này; lập bảng kê chi trả dạy thay, dạy thừa giờ kịp thời, chính xác cho thầy cô giáo.',
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    }),
-    new Paragraph({
-      alignment: AlignmentType.JUSTIFIED,
-      indent: { firstLine: 450 },
-      spacing: { after: 240, line: 300 },
-      children: [
-        new TextRun({
-          text: '4. Toàn thể cán bộ, giáo viên, nhân viên nhà trường nêu cao tinh thần trách nhiệm, tăng cường đoàn kết nội bộ, thực hiện tốt kỷ cương nền nếp và văn hóa ứng xử sư phạm, chung tay xây dựng trường học hạnh phúc, hoàn thành xuất sắc nhiệm vụ năm học 2026 - 2027./.',
-          size: 26,
-          font: FONT_NAME
-        })
-      ]
-    })
+    createArticleHeading('VII. TỔ CHỨC THỰC HIỆN', { spacingBefore: 180, spacingAfter: 60 }),
+    createBodyParagraph(
+      '1. Ban Giám hiệu phân công các đồng chí Phó Hiệu trưởng phụ trách chuyên môn trực tiếp rà soát, bổ sung các nội dung đã thống nhất vào Kế hoạch kiểm tra đánh giá của nhà trường; chỉ đạo văn phòng chuyên môn ban hành phụ lục điều chỉnh gửi về các tổ bộ môn.'
+    ),
+    createBodyParagraph(
+      '2. Các đồng chí Tổ trưởng chuyên môn chịu trách nhiệm phổ biến chi tiết toàn bộ nội dung văn bản này đến từng cán bộ, giáo viên, nhân viên trong tổ tại phiên họp chuyên môn gần nhất; tổ chức thực hiện nghiêm túc, đúng tiến độ.'
+    ),
+    createBodyParagraph(
+      '3. Bộ phận Kế toán - Văn phòng khẩn trương hoàn thiện hồ sơ rà soát thâm niên nhà giáo của giáo viên theo đúng chỉ đạo tại văn bản này; lập bảng kê chi trả dạy thay, dạy thừa giờ kịp thời, chính xác cho thầy cô giáo.'
+    ),
+    createBodyParagraph(
+      '4. Toàn thể cán bộ, giáo viên, nhân viên nhà trường nêu cao tinh thần trách nhiệm, tăng cường đoàn kết nội bộ, thực hiện tốt kỷ cương nền nếp và văn hóa ứng xử sư phạm, chung tay xây dựng trường học hạnh phúc, hoàn thành xuất sắc nhiệm vụ năm học 2026 - 2027./.',
+      { spacingAfter: 120 }
+    )
   );
 
-  // Footer / Ký tên và Nơi nhận
-  const signTable = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    borders: noBorder,
-    rows: [
-      new TableRow({
-        children: [
-          new TableCell({
-            width: { size: 50, type: WidthType.PERCENTAGE },
-            borders: noBorder,
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.LEFT,
-                children: [
-                  new TextRun({
-                    text: 'Nơi nhận:',
-                    bold: true,
-                    italics: true,
-                    size: 24,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.LEFT,
-                children: [
-                  new TextRun({
-                    text: '- Lãnh đạo trường (để chỉ đạo);',
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.LEFT,
-                children: [
-                  new TextRun({
-                    text: '- 06 Tổ chuyên môn (để thực hiện);',
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.LEFT,
-                children: [
-                  new TextRun({
-                    text: '- Bộ phận VP, Kế toán (để thực hiện);',
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.LEFT,
-                children: [
-                  new TextRun({
-                    text: '- Lưu: VT, BGH.',
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              })
-            ]
-          }),
-          new TableCell({
-            width: { size: 50, type: WidthType.PERCENTAGE },
-            borders: noBorder,
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: 'TM. BAN GIÁM HIỆU',
-                    bold: true,
-                    size: 24,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                spacing: { after: 800 },
-                children: [
-                  new TextRun({
-                    text: 'HIỆU TRƯỞNG',
-                    bold: true,
-                    size: 24,
-                    font: FONT_NAME
-                  })
-                ]
-              }),
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: '(Đã ký và đóng dấu)',
-                    italics: true,
-                    size: 22,
-                    font: FONT_NAME
-                  })
-                ]
-              })
-            ]
-          })
-        ]
-      })
-    ]
-  });
-  children.push(signTable);
+  // Ký duyệt & Nơi nhận chuẩn Nghị định 30
+  children.push(
+    createSignatureBlockTable(
+      'HIỆU TRƯỞNG',
+      'Lê Thanh Cường',
+      [
+        'Lãnh đạo trường (để chỉ đạo);',
+        '06 Tổ chuyên môn (để thực hiện);',
+        'Bộ phận Văn phòng, Kế toán (để thực hiện);',
+        'Lưu: VT, BGH.',
+      ],
+      { headerRole: 'TM. BAN GIÁM HIỆU' }
+    )
+  );
 
   const doc = new Document({
+    styles: {
+      default: {
+        document: {
+          run: { font: FONT_NAME, size: FONT_SIZES.BODY, color: '000000' },
+          paragraph: {
+            spacing: {
+              line: PARAGRAPH_SPACING.line,
+              lineRule: PARAGRAPH_SPACING.lineRule,
+              before: PARAGRAPH_SPACING.before,
+              after: PARAGRAPH_SPACING.after,
+            },
+          },
+        },
+      },
+    },
     sections: [
       {
         properties: {
           page: {
-            margin: {
-              top: 1134,    // 20mm
-              bottom: 1134, // 20mm
-              left: 1701,   // 30mm
-              right: 850    // 15mm
-            }
-          }
-        },
-        headers: {
-          default: new Header({
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.RIGHT,
-                children: [
-                  new TextRun({
-                    text: 'Trường THCS & THPT Đốc Binh Kiều - Trả lời họp tổ chuyên môn lần 3',
-                    size: 18,
-                    italics: true,
-                    font: FONT_NAME
-                  })
-                ]
-              })
-            ]
-          })
+            size: DOCX_PAGE_SETUP.size,
+            margin: DOCX_PAGE_SETUP.margin,
+          },
         },
         footers: {
           default: new Footer({
@@ -842,22 +479,22 @@ export async function generateMeetingReplyDocx(outputPath: string): Promise<void
               new Paragraph({
                 alignment: AlignmentType.CENTER,
                 children: [
-                  new TextRun({
-                    children: ['Trang ', PageNumber.CURRENT, ' / ', PageNumber.TOTAL_PAGES],
-                    size: 20,
-                    font: FONT_NAME
-                  })
-                ]
-              })
-            ]
-          })
+                  new TextRun({ text: 'Trang ', size: 22, font: FONT_NAME }),
+                  new TextRun({ children: [PageNumber.CURRENT], size: 22, font: FONT_NAME }),
+                  new TextRun({ text: ' / ', size: 22, font: FONT_NAME }),
+                  new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 22, font: FONT_NAME }),
+                ],
+              }),
+            ],
+          }),
         },
-        children
-      }
-    ]
+        children,
+      },
+    ],
   });
 
   const buffer = await Packer.toBuffer(doc);
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, buffer);
   console.log(`Successfully generated DOCX to ${outputPath}`);
 }

@@ -97,17 +97,16 @@ export const InternalInspectionTab: React.FC = () => {
                 Kết hợp KH 76 + KH 134 + HD 1134
               </span>
               <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-indigo-950 text-indigo-200 border border-indigo-800/60">
-                Chuẩn 120 CB-GV-NV từ "NHÂN SỰ MỚI"
+                120 CB-GV-NV · 53 lớp · 2.111 HS
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase">
               Kế Hoạch Kiểm Tra Nội Bộ Trường Học
             </h1>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Kế hoạch kiểm tra nội bộ toàn diện năm học 2026 - 2027 của <strong>Trường THCS & THPT Đốc Binh Kiều</strong>.
-              Kết hợp hoàn chỉnh từ <strong>Kế hoạch 76/KH-THPT ĐBK</strong> (cấp THPT) và <strong>Kế hoạch 134/KH-THCS.TK</strong> (cấp THCS) năm trước,
-              thực hiện đúng <strong>Hướng dẫn số 1134/SGDĐT-TCCB</strong> của Sở GDĐT Đồng Tháp;
-              bao quát <strong>53 lớp, 2.111 học sinh và 120 cán bộ, giáo viên</strong> tại <strong>3 điểm trường</strong>.
+              Kế hoạch kiểm tra nội bộ toàn diện năm học 2026 - 2027 của <strong>Trường THCS & THPT Đốc Binh Kiều</strong>,
+              thực hiện theo <strong>Công văn số 3953/SGDĐT-TCCB</strong> và <strong>Hướng dẫn số 1134/SGDĐT-TCCB</strong> của Sở GDĐT Đồng Tháp;
+              bao quát <strong>53 lớp, 2.111 học sinh và 120 cán bộ, giáo viên, nhân viên</strong> tại <strong>3 điểm trường</strong>.
             </p>
           </div>
 
@@ -149,10 +148,10 @@ export const InternalInspectionTab: React.FC = () => {
                 href="/downloads/NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
                 download="NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
                 className="flex items-center justify-center gap-1 px-2 py-1 rounded bg-emerald-900/60 hover:bg-emerald-800/80 text-[11px] font-medium text-emerald-200 border border-emerald-700/50 transition"
-                title="Tải tệp Excel NHÂN SỰ MỚI (120 CB-GV-NV)"
+                title="Tải tệp Excel danh sách nhân sự (120 CB-GV-NV)"
               >
                 <FileSpreadsheet className="w-3 h-3 text-emerald-400" />
-                <span>Nhân sự mới</span>
+                <span>Danh sách nhân sự</span>
               </a>
               <a
                 href="/downloads/76_KH_THPTDBK_KTNB_2025_2026.doc"
@@ -200,7 +199,7 @@ export const InternalInspectionTab: React.FC = () => {
             <div className="text-xl font-bold text-white flex items-center gap-1.5 mt-0.5">
               <span>{SCHOOL_INSPECTION_COMMITTEE.length} Thành viên</span>
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">100% chuẩn từ NHÂN SỰ MỚI</div>
+            <div className="text-[11px] text-slate-400 mt-1">Đội ngũ năm học 2026 - 2027</div>
           </div>
 
           <div className="bg-slate-800/60 backdrop-blur rounded-lg p-3 border border-blue-700/30">
@@ -371,7 +370,7 @@ export const InternalInspectionTab: React.FC = () => {
                     <option value="all">Tất cả điểm trường</option>
                     <option value="Cả 3 điểm trường">Cả 3 điểm trường</option>
                     <option value="Điểm chính (THPT)">Điểm chính (THPT)</option>
-                    <option value="Tân Kiều">Điểm THCS Tân Kiều (11km)</option>
+                    <option value="Tân Kiều">Điểm THCS Tân Kiều</option>
                     <option value="Đốc Binh Kiều">Điểm THCS Đốc Binh Kiều</option>
                   </select>
                 </div>
@@ -628,8 +627,8 @@ export const InternalInspectionTab: React.FC = () => {
                   <span>Nâng cấp đơn vị sáp nhập 2026 - 2027</span>
                 </div>
                 <ul className="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
-                  <li>Bao quát cả 3 điểm trường (Điểm chính THPT, THCS ĐBK, THCS Tân Kiều cách 11km).</li>
-                  <li>Phân công đích danh Ban Giám hiệu 4 thầy cô và 120 CB-GV-NV từ "NHÂN SỰ MỚI".</li>
+                  <li>Bao quát cả 3 điểm trường (Điểm chính THPT, THCS Đốc Binh Kiều, THCS Tân Kiều).</li>
+                  <li>Phân công cụ thể Ban Giám hiệu 4 thành viên và đội ngũ 120 CB-GV-NV toàn trường.</li>
                   <li>Kiểm tra chuyên đề giáo dục hòa nhập cho 25 học sinh khuyết tật theo CV 3326.</li>
                   <li>Số hóa 100% học bạ điện tử, chữ ký số và đồng bộ CSDL ngành Đúng - Đủ - Sạch - Sống.</li>
                 </ul>
@@ -713,7 +712,7 @@ export const InternalInspectionTab: React.FC = () => {
                   Ban Kiểm Tra Nội Bộ Trường Học Năm Học 2026 - 2027
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Thành lập theo <strong>Quyết định số 49/QĐ-THCS-THPTĐBK</strong> ngày 15/10/2026 của Hiệu trưởng Lê Thanh Cường · Danh sách nhân sự chuẩn 100% theo tệp <strong>NHÂN SỰ MỚI.xlsx</strong>
+                  Thành lập theo <strong>Quyết định số 49/QĐ-THCS&THPTĐBK</strong> ngày 15/10/2026 của Hiệu trưởng Lê Thanh Cường · Quy mô toàn trường 120 CB-GV-NV
                 </p>
               </div>
               <a
@@ -796,7 +795,7 @@ export const InternalInspectionTab: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-xs text-slate-600 mt-3 border-t border-emerald-200/80 pt-2.5 leading-relaxed">
-                  Phụ trách kiểm tra tại Điểm trường THCS Tân Kiều cách 11km (15 lớp, 602 HS); kiểm tra thực hiện CT GDPT 2018, bảo quản thiết bị dạy học và hoạt động bán trú.
+                  Phụ trách kiểm tra tại Điểm trường THCS Tân Kiều (15 lớp, 602 HS); kiểm tra thực hiện CT GDPT 2018, bảo quản thiết bị dạy học và hoạt động bán trú.
                 </p>
               </div>
             </div>
@@ -804,10 +803,10 @@ export const InternalInspectionTab: React.FC = () => {
             {/* Full Members Table */}
             <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                Danh sách chi tiết {SCHOOL_INSPECTION_COMMITTEE.length} thành viên & Phân công nhiệm vụ cụ thể (Chuẩn từ file Excel "NHÂN SỰ MỚI"):
+                Danh sách chi tiết {SCHOOL_INSPECTION_COMMITTEE.length} thành viên & Phân công nhiệm vụ cụ thể:
               </h4>
               <span className="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-medium">
-                ✓ 100% Khớp tệp NHÂN SỰ MỚI.xlsx
+                ✓ Năm học 2026 - 2027
               </span>
             </div>
             <div className="overflow-x-auto rounded-lg border border-slate-200">
@@ -908,7 +907,7 @@ export const InternalInspectionTab: React.FC = () => {
                         ? 'Kế hoạch THPT cũ'
                         : dir.id === 'kh-134-thcstk-2025'
                         ? 'Kế hoạch THCS cũ'
-                        : 'Excel NHÂN SỰ MỚI'}
+                        : 'Danh sách Nhân sự'}
                     </span>
                     <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-700">
                       .{dir.fileFormat?.toUpperCase() || 'PDF'}
@@ -1145,7 +1144,7 @@ export const InternalInspectionTab: React.FC = () => {
                   <div className="font-bold uppercase text-slate-900">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
                   <div className="font-bold text-slate-900 underline underline-offset-4">Độc lập - Tự do - Hạnh phúc</div>
                   <div className="text-[11px] italic text-slate-600 mt-2">
-                    Tháp Mười, ngày ... tháng ... năm 2026
+                    Đốc Binh Kiều, ngày ... tháng ... năm 2026
                   </div>
                 </div>
               </div>

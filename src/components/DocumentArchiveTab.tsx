@@ -275,7 +275,7 @@ export const DocumentArchiveTab: React.FC<DocumentArchiveTabProps> = ({
                 <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="text-slate-400">Ngày ban hành:</span>
-                    <span>{doc.signDate.replace('Tháp Mười, ', '')}</span>
+                    <span>{doc.signDate.replace(/^(Đốc Binh Kiều|Tháp Mười),\s*/i, '')}</span>
                   </div>
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="text-slate-400">Người ký:</span>

@@ -206,10 +206,10 @@ export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
     {
       heading: 'I. ĐẶC ĐIỂM TÌNH HÌNH NHÀ TRƯỜNG',
       content: `1. Quy mô trường lớp và học sinh năm học 2026 - 2027:
-- Toàn trường có tổng cộng 53 lớp với 2.111 học sinh phân bổ tại 03 điểm trường trên địa bàn xã Đốc Binh Kiều và xã Tân Kiều:
+- Toàn trường có tổng cộng 53 lớp với 2.111 học sinh phân bổ tại 03 điểm trường trên địa bàn xã Đốc Binh Kiều:
   + Điểm trường chính (Cấp THPT): 14 lớp (Khối 10: 05 lớp với 203 HS, Khối 11: 04 lớp với 141 HS, Khối 12: 05 lớp với 185 HS) với tổng số 529 học sinh.
   + Điểm Trường Đốc Binh Kiều (Cấp THCS - 6 lớp đầu tiên mỗi khối 6-9): 24 lớp (Khối 6: 06 lớp với 245 HS, Khối 7: 06 lớp với 234 HS, Khối 8: 06 lớp với 251 HS, Khối 9: 06 lớp với 250 HS) với tổng số 980 học sinh.
-  + Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách điểm chính 11km): 15 lớp (Khối 6: 04 lớp với 166 HS, Khối 7: 03 lớp với 133 HS, Khối 8: 04 lớp với 147 HS, Khối 9: 04 lớp với 156 HS) với tổng số 602 học sinh.
+  + Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi): 15 lớp (Khối 6: 04 lớp với 166 HS, Khối 7: 03 lớp với 133 HS, Khối 8: 04 lớp với 147 HS, Khối 9: 04 lớp với 156 HS) với tổng số 602 học sinh.
 
 2. Đội ngũ cán bộ quản lý, giáo viên, nhân viên:
 - Tổng số 120 cán bộ quản lý, giáo viên, nhân viên (102 giáo viên trực tiếp đứng lớp, 100% đạt chuẩn và trên chuẩn trình độ đào tạo).
@@ -226,7 +226,7 @@ export const OFFICIAL_AI_EDUCATION_PLAN: SchoolDocument = {
 
 4. Thuận lợi và khó khăn:
 - Thuận lợi: Được sự quan tâm chỉ đạo sâu sát của Sở GDĐT Đồng Tháp; Ban Giám hiệu chủ động, quyết liệt trong chuyển đổi số; đội ngũ giáo viên Tin học tâm huyết; học sinh hào hứng tiếp cận công nghệ mới.
-- Khó khăn: Địa bàn trải dài trên 3 điểm trường, trong đó Điểm Tân Kiều cách xa 11km gây khó khăn trong việc điều phối thiết bị dùng chung; một bộ phận học sinh khu vực nông thôn có hoàn cảnh khó khăn, thiếu thiết bị máy tính/điện thoại thông minh cá nhân ở nhà; nhận thức về đạo đức số, sở hữu trí tuệ và an toàn dữ liệu của học sinh bước đầu còn hạn chế.`
+- Khó khăn: Địa bàn trải dài trên 03 điểm trường nên việc điều phối thiết bị dùng chung giữa Điểm chính và Điểm trường THCS Tân Kiều đòi hỏi sự phối hợp chặt chẽ; một bộ phận học sinh khu vực nông thôn có hoàn cảnh khó khăn, thiếu thiết bị máy tính/điện thoại thông minh cá nhân ở nhà; nhận thức về đạo đức số, sở hữu trí tuệ và an toàn dữ liệu của học sinh bước đầu còn hạn chế.`
     },
     {
       heading: 'II. MỤC TIÊU TRIỂN KHAI',
@@ -282,7 +282,7 @@ Trang bị những kiến thức và kỹ năng cơ bản, tối thiểu, thiế
 
 2. Nội dung mở rộng (Bố trí theo hoạt động CLB và dự án STEM/KHKT):
 - Bổ trợ chuyên sâu cho học sinh đam mê công nghệ: Lập trình kéo thả tích hợp mô hình AI (Scratch AI, PictoBlox, Teachable Machine).
-- Xây dựng dự án STEM/AI phục vụ đời sống: Hệ thống nhận diện rác thải học đường, ứng dụng phân loại nông sản đặc sản Tháp Mười (sen, xoài), chatbot hỏi đáp nội quy trường học.
+- Xây dựng dự án STEM/AI phục vụ đời sống: Hệ thống nhận diện rác thải học đường, ứng dụng phân loại nông sản đặc sản Đồng Tháp (sen, xoài), chatbot hỏi đáp nội quy trường học.
 - Nghiên cứu đề tài tham gia Cuộc thi Khoa học kỹ thuật cấp trường và cấp tỉnh năm học 2026 - 2027.`
     },
     {
@@ -401,7 +401,7 @@ Mọi sự cố về an toàn thông tin, nghi vấn tài khoản bị đánh c�
 
 3. Các Thầy Phó Hiệu trưởng phụ trách Điểm Trường Đốc Binh Kiều và Điểm Trường Tân Kiều:
 - Phụ trách quản lý trực tiếp cơ sở vật chất phòng máy vi tính, nền nếp học sinh và giám sát việc thực hiện các tiết học AI tại điểm trường mình phụ trách.
-- Báo cáo định kỳ tình hình triển khai và kịp thời tháo gỡ khó khăn về thiết bị tại điểm trường Tân Kiều (cách 11km).
+- Báo cáo định kỳ tình hình triển khai và kịp thời tháo gỡ khó khăn về thiết bị tại Điểm trường THCS Tân Kiều.
 
 4. Tổ Tin học:
 - Là lực lượng nòng cốt, chủ trì xây dựng Kế hoạch chuyên đề 12 tiết nội dung cốt lõi, biên soạn giáo án, bài giảng số và hệ thống phiếu học tập "Unplugged AI" dùng chung toàn trường.

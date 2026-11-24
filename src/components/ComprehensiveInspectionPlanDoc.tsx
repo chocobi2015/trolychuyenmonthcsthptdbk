@@ -63,9 +63,8 @@ export const ComprehensiveInspectionPlanDoc: React.FC = () => {
   const handleCopyFullPlan = () => {
     const docSummary = `KẾ HOẠCH CÔNG TÁC KIỂM TRA NỘI BỘ NĂM HỌC 2026 - 2027
 TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU
-(Kế thừa hoàn chỉnh Kế hoạch 76 THPT ĐBK + Kế hoạch 134 THCS Tân Kiều + Hướng dẫn 1134 Sở GDĐT Đồng Tháp)
-Quy mô: 53 lớp, 2.111 học sinh, 120 CB-GV-NV tại 3 điểm trường (Điểm chính THPT, Điểm THCS ĐBK, Điểm THCS Tân Kiều cách 11km).
-11 Trụ cột kiểm tra bóc tách chi tiết và 29 đợt kiểm tra lớn trải dài 12 tháng (từ tháng 9/2026 đến tháng 8/2027).
+Quy mô: 53 lớp, 2.111 học sinh, 120 CB-GV-NV tại 3 điểm trường (Điểm chính THPT, Điểm THCS Đốc Binh Kiều, Điểm THCS Tân Kiều).
+11 lĩnh vực kiểm tra chi tiết và 29 đợt kiểm tra trong 12 tháng (từ tháng 9/2026 đến tháng 8/2027).
 Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
     navigator.clipboard.writeText(docSummary);
     setCopyFeedback(true);
@@ -107,13 +106,13 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               B. Mục đích & Yêu cầu
             </a>
             <a href="#sec-part-c" className="px-2.5 py-1 rounded bg-blue-50 hover:bg-blue-100 text-[11px] font-bold text-blue-700 transition">
-              C. Bóc tách 11 Trụ cột kiểm tra
+              C. 11 Lĩnh vực kiểm tra
             </a>
             <a href="#sec-part-d" className="px-2.5 py-1 rounded bg-indigo-50 hover:bg-indigo-100 text-[11px] font-bold text-indigo-700 transition">
               D. Lịch trình 29 đợt (12 tháng)
             </a>
             <a href="#sec-part-e" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
-              E. Kinh phí (11km)
+              E. Kinh phí
             </a>
             <a href="#sec-part-f" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
               F. Tổ chức thực hiện
@@ -165,61 +164,59 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
       <div className="bg-white rounded-2xl shadow-md border border-slate-300 p-8 sm:p-12 space-y-10 font-serif text-slate-900 leading-relaxed text-sm">
         
         {/* Quốc hiệu, Tiêu ngữ & Tiêu đề cơ quan */}
-        <div id="sec-header" className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-6 border-b-2 border-slate-300">
-          <div className="text-center sm:text-left space-y-1">
-            <div className="text-xs uppercase font-medium tracking-wide text-slate-600">
-              SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP
+        <div id="sec-header" className="grid grid-cols-1 sm:grid-cols-12 gap-4 pb-6 border-b-2 border-slate-300">
+          <div className="sm:col-span-5 text-center space-y-0.5">
+            <div className="text-[12pt] uppercase font-normal tracking-tight text-slate-800 leading-snug">
+              SỞ GIÁO DỤC VÀ ĐÀO TẠO<br />TỈNH ĐỒNG THÁP
             </div>
-            <div className="text-sm uppercase font-bold text-slate-900">
-              TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU
+            <div className="text-[12pt] uppercase font-bold text-slate-900 leading-snug">
+              TRƯỜNG THCS VÀ THPT<br />ĐỐC BINH KIỀU
             </div>
-            <div className="w-32 h-0.5 bg-slate-400 mx-auto sm:mx-0 my-1" />
-            <div className="text-xs font-semibold text-slate-700">
+            <div className="w-24 h-0.5 bg-slate-800 mx-auto my-1.5" />
+            <div className="text-[12.5pt] font-normal text-slate-800 pt-0.5">
               Số: 48/KH-THCS&THPTĐBK
             </div>
           </div>
 
-          <div className="text-center sm:text-right space-y-1">
-            <div className="text-xs uppercase font-bold tracking-wide text-slate-900">
+          <div className="sm:col-span-7 text-center space-y-0.5">
+            <div className="text-[12pt] uppercase font-bold tracking-tight text-slate-900 whitespace-nowrap">
               CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
             </div>
-            <div className="text-xs font-bold underline decoration-slate-400 text-slate-800">
+            <div className="text-[13pt] font-bold text-slate-900">
               Độc lập - Tự do - Hạnh phúc
             </div>
-            <div className="text-xs italic text-slate-600 pt-1">
-              Tháp Mười, ngày 15 tháng 10 năm 2026
+            <div className="w-40 h-0.5 bg-slate-800 mx-auto my-1.5" />
+            <div className="text-[13pt] italic text-slate-700 pt-0.5">
+              Đốc Binh Kiều, ngày 15 tháng 10 năm 2026
             </div>
           </div>
         </div>
 
         {/* Tiêu đề Kế hoạch */}
-        <div className="text-center space-y-2 py-4">
-          <div className="text-2xl sm:text-3xl font-extrabold uppercase text-slate-900 font-sans tracking-tight">
+        <div className="text-center space-y-1.5 py-4">
+          <div className="text-xl sm:text-2xl font-bold uppercase text-slate-900 tracking-wide">
             KẾ HOẠCH
           </div>
-          <div className="text-lg sm:text-xl font-bold uppercase text-blue-900 font-sans">
-            CÔNG TÁC KIỂM TRA NỘI BỘ NĂM HỌC 2026 - 2027
+          <div className="text-base sm:text-lg font-bold text-slate-900">
+            Công tác kiểm tra nội bộ năm học 2026 - 2027
           </div>
-          <p className="text-xs italic text-slate-600 max-w-3xl mx-auto leading-normal">
-            (Bản bóc tách chi tiết toàn diện: Kết hợp hoàn chỉnh giữa Kế hoạch số 76/KH-THPT ĐBK và Kế hoạch số 134/KH-THCS.TK của hai trường trước sáp nhập; bám sát Hướng dẫn số 1134/SGDĐT-TCCB của Sở GDĐT Đồng Tháp và chuẩn 120 nhân sự từ tệp NHÂN SỰ MỚI.xlsx)
-          </p>
+          <div className="w-36 h-0.5 bg-slate-900 mx-auto mt-2" />
         </div>
 
-        {/* Căn cứ pháp lý */}
-        <div className="bg-slate-50/80 rounded-xl p-5 border border-slate-200 text-xs italic text-slate-700 space-y-1.5 leading-relaxed font-sans">
-          <div className="font-bold text-slate-900 not-italic uppercase mb-2">Căn cứ pháp lý ban hành:</div>
-          <div>- Căn cứ Luật Giáo dục ngày 14 tháng 6 năm 2019;</div>
-          <div>- Căn cứ Luật Thanh tra ngày 14 tháng 11 năm 2022; Luật Thực hiện dân chủ ở cơ sở ngày 10 tháng 11 năm 2022;</div>
-          <div>- Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05 tháng 8 năm 2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;</div>
-          <div>- Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15 tháng 9 năm 2020 của Bộ GDĐT ban hành Điều lệ trường THCS, trường THPT và trường phổ thông có nhiều cấp học;</div>
-          <div>- Căn cứ Thông tư số 22/2021/TT-BGDĐT ngày 20 tháng 7 năm 2021 của Bộ GDĐT quy định về đánh giá học sinh trung học cơ sở và học sinh trung học phổ thông;</div>
-          <div>- Căn cứ Quyết định số 2606/QĐ-UBND ngày 13 tháng 8 năm 2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;</div>
-          <div>- Căn cứ Công văn số 3953/SGDĐT-TCCB ngày 08 tháng 10 năm 2026 của Sở GDĐT Đồng Tháp V/v thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027;</div>
-          <div>- Căn cứ Hướng dẫn số 1134/SGDĐT-TCCB ngày 17 tháng 10 năm 2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ tại các cơ sở giáo dục trực thuộc;</div>
-          <div>- Căn cứ Kế hoạch giáo dục nhà trường số 34/KH-THCS&THPTĐBK ngày 25 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều,</div>
-          <div className="not-italic font-medium text-slate-900 pt-2">
-            Trường THCS và THPT Đốc Binh Kiều xây dựng Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 với các nội dung bóc tách chi tiết như sau:
-          </div>
+        {/* Căn cứ pháp lý (Chữ đứng thường chuẩn Nghị định 30/2020/NĐ-CP) */}
+        <div className="bg-slate-50/80 rounded-xl p-5 border border-slate-200 text-sm not-italic text-slate-800 space-y-1.5 leading-relaxed text-justify">
+          <p className="indent-8">Căn cứ Luật Giáo dục ngày 14 tháng 6 năm 2019;</p>
+          <p className="indent-8">Căn cứ Luật Thanh tra ngày 14 tháng 11 năm 2022; Luật Thực hiện dân chủ ở cơ sở ngày 10 tháng 11 năm 2022;</p>
+          <p className="indent-8">Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05 tháng 8 năm 2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;</p>
+          <p className="indent-8">Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15 tháng 9 năm 2020 của Bộ GDĐT ban hành Điều lệ trường THCS, trường THPT và trường phổ thông có nhiều cấp học;</p>
+          <p className="indent-8">Căn cứ Thông tư số 22/2021/TT-BGDĐT ngày 20 tháng 7 năm 2021 của Bộ GDĐT quy định về đánh giá học sinh trung học cơ sở và học sinh trung học phổ thông;</p>
+          <p className="indent-8">Căn cứ Quyết định số 2606/QĐ-UBND ngày 13 tháng 8 năm 2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;</p>
+          <p className="indent-8">Căn cứ Công văn số 3953/SGDĐT-TCCB ngày 08 tháng 10 năm 2026 của Sở GDĐT Đồng Tháp V/v thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027;</p>
+          <p className="indent-8">Căn cứ Hướng dẫn số 1134/SGDĐT-TCCB ngày 17 tháng 10 năm 2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ tại các cơ sở giáo dục trực thuộc;</p>
+          <p className="indent-8">Căn cứ Kế hoạch giáo dục nhà trường số 34/KH-THCS&THPTĐBK ngày 25 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều.</p>
+          <p className="indent-8 font-normal text-slate-900 pt-1">
+            Trường THCS và THPT Đốc Binh Kiều xây dựng Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 cụ thể như sau:
+          </p>
         </div>
 
         {/* ========================================================================= */}
@@ -288,7 +285,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
             {/* 2. Đội ngũ 120 CB-GV-NV */}
             <div className="space-y-2 pt-2">
               <h4 className="font-bold text-slate-800 text-xs uppercase tracking-wider text-blue-900">
-                2. Đội ngũ cán bộ quản lý, giáo viên, nhân viên (Chuẩn 120 nhân sự từ NHÂN SỰ MỚI):
+                2. Đội ngũ cán bộ quản lý, giáo viên, nhân viên:
               </h4>
               <p className="text-slate-700 leading-relaxed">
                 Đội ngũ sư phạm gồm <strong>120 cán bộ, giáo viên, nhân viên</strong> (Nữ: {SCHOOL_INSPECTION_BACKGROUND.staffScale.femaleCount}, Nam: {SCHOOL_INSPECTION_BACKGROUND.staffScale.maleCount}). Trong đó:
@@ -450,11 +447,8 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               </span>
               <div>
                 <h2 className="text-lg font-bold uppercase tracking-tight text-slate-900">
-                  Nội Dung Kiểm Tra Cụ Thể - Bóc Tách Chi Tiết 11 Lĩnh Vực
+                  Nội Dung Kiểm Tra Cụ Thể - 11 Lĩnh Vực Trọng Tâm
                 </h2>
-                <div className="text-xs text-slate-500 font-normal">
-                  Hợp nhất toàn bộ nội dung từ Kế hoạch 76 (THPT ĐBK) & Kế hoạch 134 (THCS Tân Kiều)
-                </div>
               </div>
             </div>
           </div>
@@ -480,9 +474,6 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
                         <h4 className="text-sm font-bold text-slate-900 leading-snug">
                           {pillar.domainName}
                         </h4>
-                        <div className="text-[11px] text-indigo-700 italic mt-0.5">
-                          {pillar.sourceOrigin}
-                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
@@ -537,7 +528,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
                         <div className="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
                           <h5 className="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-1.5 flex items-center gap-1.5 text-indigo-900">
                             <Users className="w-3.5 h-3.5 text-indigo-600" />
-                            {pillar.orderNumber}.2. Lực lượng kiểm tra (Phân công tên thật):
+                            {pillar.orderNumber}.2. Lực lượng kiểm tra:
                           </h5>
                           <div className="space-y-1 text-slate-700">
                             <div><strong>Trưởng đoàn:</strong> {pillar.inspectionForce.lead}</div>
@@ -549,11 +540,11 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
                         </div>
                       </div>
 
-                      {/* Bóc tách chi tiết từng tiểu mục */}
+                      {/* Nội dung kiểm tra chi tiết từng tiểu mục */}
                       <div className="space-y-3 pt-2">
                         <h5 className="font-bold text-slate-900 uppercase tracking-wider text-[11px] flex items-center gap-1.5 text-slate-900">
                           <FileText className="w-3.5 h-3.5 text-blue-600" />
-                          {pillar.orderNumber}.3. Nội dung, tiêu chuẩn & hồ sơ bóc tách chi tiết:
+                          {pillar.orderNumber}.3. Nội dung, tiêu chuẩn và hồ sơ kiểm tra:
                         </h5>
                         
                         <div className="space-y-3">
@@ -606,7 +597,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               </span>
               <div>
                 <h2 className="text-lg font-bold uppercase tracking-tight text-slate-900">
-                  Kế Hoạch Bóc Tách Chi Tiết Theo Từng Tháng Trong Năm Học (Trọn Vẹn 12 Tháng)
+                  Kế Hoạch Kiểm Tra Chi Tiết Theo Từng Tháng Trong Năm Học (12 Tháng)
                 </h2>
                 <div className="text-xs text-slate-500 font-normal">
                   Từ Tháng 9/2026 đến Tháng 8/2027 · Tổng cộng 29 đợt kiểm tra lớn và chuyên đề
@@ -658,7 +649,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
                 <option value="all">Tất cả điểm trường</option>
                 <option value="Cả 3 điểm trường">Cả 3 điểm trường</option>
                 <option value="Điểm chính (THPT)">Điểm chính (THPT)</option>
-                <option value="Tân Kiều">Điểm THCS Tân Kiều (11km)</option>
+                <option value="Tân Kiều">Điểm THCS Tân Kiều</option>
                 <option value="Đốc Binh Kiều">Điểm THCS Đốc Binh Kiều</option>
               </select>
             </div>
@@ -771,7 +762,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               2. <strong>Chế độ thù lao và công tác phí:</strong> Thành viên Ban Kiểm tra nội bộ và các Đoàn kiểm tra được thanh toán chế độ kiêm nhiệm, hỗ trợ công tác phí theo quy định hiện hành của Nhà nước và Quy chế chi tiêu nội bộ của đơn vị.
             </p>
             <p>
-              3. <strong>Hỗ trợ di chuyển giữa các điểm trường:</strong> Do đặc thù Điểm trường THCS Tân Kiều cách Điểm chính 11km, nhà trường bố trí định mức hỗ trợ xăng xe, phụ cấp di chuyển thực tế cho các thành viên đoàn kiểm tra khi thực hiện nhiệm vụ liên điểm trường.
+              3. <strong>Hỗ trợ di chuyển giữa các điểm trường:</strong> Nhà trường bố trí định mức hỗ trợ xăng xe, phụ cấp di chuyển thực tế theo Quy chế chi tiêu nội bộ cho các thành viên đoàn kiểm tra khi thực hiện nhiệm vụ tại các điểm trường.
             </p>
             <p>
               4. <strong>Văn phòng phẩm và in ấn tài liệu:</strong> Nhà trường bảo đảm đầy đủ văn phòng phẩm, in ấn biểu mẫu, lưu trữ hồ sơ nghiệp vụ cho Ban Kiểm tra nội bộ.
@@ -805,7 +796,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               <div className="mt-1 pl-4 border-l-2 border-indigo-600 space-y-1">
                 <div>- <em>Thầy Nguyễn Minh Trí (PHT Thường trực):</em> Phụ trách công tác kiểm tra chuyên môn cấp THPT, quy trình khảo thí, ôn thi tốt nghiệp THPT và quản lý 07 Tổ chuyên môn.</div>
                 <div>- <em>Cô Phan Thanh Thảo (PHT):</em> Phụ trách công tác kiểm tra nề nếp học sinh, hoạt động của GVCN 53 lớp, Thư viện - Thiết bị và giáo dục hòa nhập cho 25 học sinh khuyết tật.</div>
-                <div>- <em>Thầy Nguyễn Thanh Tòng (PHT):</em> Phụ trách trực tiếp công tác kiểm tra và quản lý vận hành tại Điểm trường THCS Tân Kiều (cách 11km).</div>
+                <div>- <em>Thầy Nguyễn Thanh Tòng (PHT):</em> Phụ trách trực tiếp công tác kiểm tra và quản lý vận hành tại Điểm trường THCS Tân Kiều.</div>
               </div>
             </div>
 

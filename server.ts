@@ -181,7 +181,7 @@ async function syncAssessmentPlanFromWord(docs: any[]) {
       documentNumber: existing.documentNumber && !existing.documentNumber.includes('__') ? existing.documentNumber : 'Số: 39/KH-THCS&THPTĐBK',
       title: 'KẾ HOẠCH',
       subTitle: 'Tổ chức thực hiện kiểm tra, đánh giá học sinh năm học 2026 - 2027',
-      signDate: 'Đồng Tháp, ngày 05 tháng 10 năm 2026',
+      signDate: 'Đốc Binh Kiều, ngày 05 tháng 10 năm 2026',
       issuingAuthorityTop: 'SỞ GDĐT TỈNH ĐỒNG THÁP',
       issuingAuthority: 'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
       signerRole: 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG',
@@ -272,7 +272,7 @@ HỒ SƠ VÀ DỮ LIỆU THỰC TẾ CHUẨN XÁC CỦA TRƯỜNG (Từ Kế ho�
 4. Phân bổ cơ sở vật chất tại 03 điểm trường (Tổng diện tích: 35.380,5 m²):
    - Điểm chính (THPT Đốc Binh Kiều cũ): 15.683 m², khối 10-12 (14 lớp, 529 HS gồm Khối 10: 203 HS, Khối 11: 141 HS, Khối 12: 185 HS), 14 phòng học (9 kiên cố, 3 lắp ghép), 09 phòng bộ môn, PCCC 2 máy bơm, 11 tủ chữa cháy.
    - Điểm Đốc Binh Kiều (THCS Đốc Binh Kiều cũ): 11.126,7 m², khối 6-9 (24 lớp - 6 lớp đầu mỗi khối 6-9, 980 HS gồm K6: 245, K7: 234, K8: 251, K9: 250), 22 phòng học, 05 phòng chức năng, sân bóng mini.
-   - Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km): 8.570,8 m², khối 6-9 (15 lớp - các lớp từ A7 trở đi, 602 HS gồm K6: 166, K7: 133, K8: 147, K9: 156), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
+   - Điểm Tân Kiều (THCS Tân Kiều cũ): 8.570,8 m², khối 6-9 (15 lớp - các lớp từ A7 trở đi, 602 HS gồm K6: 166, K7: 133, K8: 147, K9: 156), 09 phòng học, 10 phòng bộ môn, phòng PHT thường trực.
 5. KHUNG THỜI GIAN HOẠT ĐỘNG TRONG NGÀY (ÁP DỤNG THỐNG NHẤT 3 ĐIỂM TRƯỜNG - MỖI BUỔI ĐỦ 5 TIẾT):
    - BUỔI SÁNG (6h30 - 11h30): Khối 8, 9, 10, 11, 12 học chính khóa & 2 buổi/ngày; Khối 6, 7 học trải nghiệm, bồi dưỡng HSG, phụ đạo yếu, sinh hoạt CLB:
      * 6h30 - 6h45 (15 phút): Vệ sinh trường, lớp
@@ -456,7 +456,7 @@ Hãy xuất kết quả thẩm định dưới dạng cấu trúc JSON chi tiế
       "criteria": "1. Đặc điểm tình hình (Số lớp, HS, tình hình đội ngũ, thiết bị dạy học theo từng điểm trường)",
       "status": "Đạt / Chưa đạt / Khá",
       "findings": "Chi tiết những điểm đã làm tốt",
-      "improvements": "Những điểm còn thiếu hoặc cần bổ sung cụ thể (ví dụ tính toán thiết bị điểm Tân Kiều cách 11km)"
+      "improvements": "Những điểm còn thiếu hoặc cần bổ sung cụ thể (ví dụ bố trí thiết bị thực hành tại điểm Tân Kiều)"
     },
     {
       "criteria": "2. Khung Phân phối chương trình (35 tuần, số tiết HK1/HK2, tính logic, chuẩn đầu ra GDPT 2018)",
@@ -513,7 +513,7 @@ Hãy xuất kết quả thẩm định dưới dạng cấu trúc JSON chi tiế
               status: hasTanKieu ? "Đạt" : "Cần bổ sung",
               findings: "Tổ đã liệt kê số lượng giáo viên, trình độ chuyên môn và phân công giảng dạy. Đã nêu được hiện trạng phòng máy và tivi thông minh.",
               improvements: hasTanKieu 
-                ? "Cần rà soát thêm chi tiết về tình trạng thiết bị thực hành cụ thể tại điểm Tân Kiều (cách 11km) để bảo đảm quyền lợi học tập đồng đều cho học sinh."
+                ? "Cần rà soát thêm chi tiết về tình trạng thiết bị thực hành cụ thể tại điểm Tân Kiều để bảo đảm quyền lợi học tập đồng đều cho học sinh."
                 : "Cần tách bạch rõ ràng số liệu cơ sở vật chất giữa điểm chính Đốc Binh Kiều và điểm Tân Kiều theo đúng tinh thần Công văn 3284."
             },
             {
@@ -860,7 +860,7 @@ Phó Hiệu Trưởng Trường THCS & THPT Đốc Binh Kiều cần xây dựng
 - Khối lớp: ${grade || 'THCS (Khối 6-9) & THPT (Khối 10-12)'}
 - Chủ đề/Mảng kiến thức: ${topic || 'Toàn bộ chương trình môn học'}
 
-Bối cảnh: Trường có 3 điểm trường, trong đó điểm Tân Kiều cách điểm chính 11 km. Cơ sở vật chất có phòng máy, máy chiếu tivi thông minh, học sinh sử dụng thiết bị số có kiểm soát.
+Bối cảnh: Trường có 3 điểm trường (Điểm chính THPT, Điểm THCS Đốc Binh Kiều, Điểm THCS Tân Kiều). Cơ sở vật chất có phòng máy, máy chiếu tivi thông minh, học sinh sử dụng thiết bị số có kiểm soát.
 
 Hãy xây dựng bản định hướng chi tiết chuẩn sư phạm Việt Nam bao gồm:
 1. Mục tiêu phát triển năng lực số (theo Khung năng lực số dành cho người học của Bộ GDĐT) và Năng lực hiểu biết/sử dụng AI an toàn, có trách nhiệm.
@@ -1334,11 +1334,11 @@ Thầy Phó Hiệu Trưởng Nguyễn Minh Trí giao nhiệm vụ CỤ THỂ HÓ
 
 THÔNG TIN TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (SỐ LIỆU CHÍNH THỨC):
 - Trực thuộc: SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG THÁP
-- Địa bàn: Xã Đốc Binh Kiều và Xã Tân Kiều, Huyện Tháp Mười, Tỉnh Đồng Tháp
+- Địa bàn: Xã Đốc Binh Kiều, Tỉnh Đồng Tháp
 - Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm chính (Cấp THPT): 14 lớp (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
   + Điểm Trường Đốc Binh Kiều (Cấp THCS - 6 lớp đầu mỗi khối 6-9): 24 lớp (Khối 6: 6 lớp - 245 HS, Khối 7: 6 lớp - 234 HS, Khối 8: 6 lớp - 251 HS, Khối 9: 6 lớp - 250 HS) với 980 học sinh.
-  + Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách điểm chính 11 km): 15 lớp (Khối 6: 4 lớp - 166 HS, Khối 7: 3 lớp - 133 HS, Khối 8: 4 lớp - 147 HS, Khối 9: 4 lớp - 156 HS) với 602 học sinh.
+  + Điểm Trường Tân Kiều (Cấp THCS - các lớp từ A7 trở đi): 15 lớp (Khối 6: 4 lớp - 166 HS, Khối 7: 3 lớp - 133 HS, Khối 8: 4 lớp - 147 HS, Khối 9: 4 lớp - 156 HS) với 602 học sinh.
   + Tổng cấp THCS: 39 lớp (1.582 HS); Tổng cấp THPT: 14 lớp (529 HS); Học sinh khuyết tật hòa nhập: 25 HS.
 - Đội ngũ: 120 Cán bộ, giáo viên, nhân viên (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên).
 - Cơ cấu: 07 Tổ (06 Tổ chuyên môn và 01 Tổ Văn phòng).
@@ -1351,7 +1351,7 @@ YÊU CẦU THỰC HIỆN:
 - Loại văn bản cần ban hành: ${targetTypeLabel} (${documentType})
 - Số hiệu văn bản dự kiến: ${customDocumentNumber || `Số: .../${targetCodePrefix}`}
 - Tiêu đề mong muốn (nếu có): ${customTitle || 'Tự động tạo tiêu đề phù hợp chuẩn văn thư'}
-- Yêu cầu trọng tâm của Phó Hiệu Trưởng: ${specificFocus || 'Cụ thể hóa chi tiết cho 53 lớp, chú trọng giải pháp điểm Tân Kiều cách 11km và ứng dụng chuyển đổi số/AI thực tiễn.'}
+- Yêu cầu trọng tâm của Phó Hiệu Trưởng: ${specificFocus || 'Cụ thể hóa chi tiết cho 53 lớp tại 03 điểm trường và ứng dụng chuyển đổi số/AI thực tiễn.'}
 
 QUY TẮC BẮT BUỘC VỀ CĂN CỨ VĂN BẢN (LEGAL BASES) & THỜI GIAN THEO CHỈ ĐẠO CỦA THẦY:
 1. Căn cứ pháp lý chỉ được viện dẫn các văn bản cấp trên (Bộ GDĐT, UBND tỉnh, Sở GDĐT) hoặc văn bản của trường ĐÃ ĐƯỢC BAN HÀNH TRƯỚC ngày ký của văn bản này.
@@ -1371,9 +1371,9 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
   "documentNumber": "Số: .../${targetCodePrefix}",
   "title": "${targetTypeLabel} [Tiêu đề đầy đủ, viết hoa, trang trọng]",
   "subTitle": "Cụ thể hóa [Tên và số văn bản của Sở/Bộ]",
-  "signDate": "Tháp Mười, ngày ... tháng ... năm 2026",
-  "issuingAuthorityTop": "SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP",
-  "issuingAuthority": "TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU",
+  "signDate": "Đốc Binh Kiều, ngày ... tháng ... năm 2026",
+  "issuingAuthorityTop": "SỞ GIÁO DỤC VÀ ĐÀO TẠO\\nTỈNH ĐỒNG THÁP",
+  "issuingAuthority": "TRƯỜNG THCS VÀ THPT\\nĐỐC BINH KIỀU",
   "signerRole": "${signerRole}",
   "signerName": "${signerName}",
   "sourceDirective": "Tên và số hiệu văn bản nguồn của cấp trên",
@@ -1389,7 +1389,7 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
     },
     {
       "heading": "II. ĐẶC ĐIỂM TÌNH HÌNH TRƯỜNG THCS & THPT ĐỐC BINH KIỀU",
-      "content": "1. Quy mô lớp học và học sinh (53 lớp: 39 THCS gồm 24 lớp điểm chính, 15 lớp điểm Tân Kiều cách 11km; 14 lớp THPT):\\n...\\n2. Đội ngũ cán bộ, giáo viên (101 người, 07 tổ chuyên môn):\\n...\\n3. Thuận lợi và khó khăn:..."
+      "content": "1. Quy mô lớp học và học sinh (53 lớp: 39 THCS gồm 24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều; 14 lớp THPT):\\n...\\n2. Đội ngũ cán bộ, giáo viên, nhân viên (120 người):\\n...\\n3. Thuận lợi và khó khăn:..."
     },
     {
       "heading": "III. NỘI DUNG VÀ CÁC BIỆN PHÁP THỰC HIỆN",
@@ -1411,7 +1411,7 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
 `;
 
     const fallbackFn = () => {
-      const currentDateStr = `Tháp Mười, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`;
+      const currentDateStr = `Đốc Binh Kiều, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`;
       const defaultDocNum = customDocumentNumber || `Số: ${Math.floor(Math.random() * 50) + 50}/${targetCodePrefix}`;
 
       return {
@@ -1441,14 +1441,14 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
 - Tăng cường ứng dụng công nghệ thông tin, thúc đẩy chuyển đổi số và khai thác năng lực Trí tuệ nhân tạo (AI) an toàn trong công tác quản lý và giảng dạy.
 
 2. Yêu cầu:
-- Kế hoạch phải sát thực tế, có tính khả thi cao, phân định rõ trách nhiệm của từng cá nhân và bộ phận, đặc biệt bảo đảm điều kiện dạy học đồng bộ tại Điểm trường Tân Kiều (cách điểm chính 11 km).
+- Kế hoạch phải sát thực tế, có tính khả thi cao, phân định rõ trách nhiệm của từng cá nhân và bộ phận, bảo đảm điều kiện dạy học đồng bộ tại cả 03 điểm trường.
 - Toàn thể cán bộ quản lý, giáo viên, nhân viên nắm vững nội dung và nghiêm túc chấp hành.`,
           },
           {
             heading: 'II. ĐẶC ĐIỂM TÌNH HÌNH NHÀ TRƯỜNG',
             content: `1. Quy mô trường lớp và học sinh:
 - Tổng số: 53 lớp với 2.111 học sinh, bố trí tại 3 điểm trường:
-  + Cấp THCS: 39 lớp với 1.582 học sinh (gồm Khối 6: 10 lớp, 411 HS; Khối 7: 9 lớp, 367 HS; Khối 8: 10 lớp, 398 HS; Khối 9: 10 lớp, 406 HS). Trong đó: Điểm Đốc Binh Kiều có 24 lớp (980 HS); Điểm Tân Kiều có 15 lớp (602 HS, cách điểm chính 11 km).
+  + Cấp THCS: 39 lớp với 1.582 học sinh (gồm Khối 6: 10 lớp, 411 HS; Khối 7: 9 lớp, 367 HS; Khối 8: 10 lớp, 398 HS; Khối 9: 10 lớp, 406 HS). Trong đó: Điểm Đốc Binh Kiều có 24 lớp (980 HS); Điểm Tân Kiều có 15 lớp (602 HS).
   + Cấp THPT: 14 lớp với 529 học sinh học tại Điểm chính (Khối 10: 5 lớp, 203 HS; Khối 11: 4 lớp, 141 HS; Khối 12: 5 lớp, 185 HS).
 
 2. Đội ngũ cán bộ, giáo viên, nhân viên:
@@ -1456,8 +1456,8 @@ HÃY XUẤT RA DỮ LIỆU JSON ĐÚNG CHUẨN THỂ THỨC NGHỊ ĐỊNH 30/20
 - Cơ cấu tổ chức gồm: Ban Giám hiệu (04 cán bộ quản lý) và 07 Tổ trong trường (06 tổ chuyên môn: Tổ Toán 15, Tổ Ngữ văn - TV - TB 17, Tổ KHTN - Công nghệ 26, Tổ Lịch sử - Địa lý - GDCD 16, Tổ Ngoại ngữ - Tin học 16, Tổ GDTC - QPAN - Nghệ thuật 12; và 01 Tổ Văn phòng 14).
 
 3. Thuận lợi và khó khăn:
-- Thuận lợi: Được sự lãnh đạo sâu sát của Sở GDĐT Đồng Tháp và Huyện ủy, UBND Huyện Tháp Mười; tập thể sư phạm đoàn kết, có tinh thần trách nhiệm và tích cực đổi mới phương pháp.
-- Khó khăn: Địa bàn cách trở giữa 2 xã, điểm trường Tân Kiều cách điểm chính 11 km; cần tăng cường điều phối thiết bị thực hành và lịch sinh hoạt chuyên môn trực tuyến.`,
+- Thuận lợi: Được sự lãnh đạo sâu sát của Sở GDĐT Đồng Tháp và Đảng ủy, UBND xã Đốc Binh Kiều; tập thể sư phạm đoàn kết, có tinh thần trách nhiệm và tích cực đổi mới phương pháp.
+- Khó khăn: Nhà trường tổ chức giảng dạy tại 03 điểm trường trên địa bàn xã Đốc Binh Kiều nên cần tăng cường điều phối thiết bị thực hành và lịch sinh hoạt chuyên môn trực tuyến.`,
           },
           {
             heading: 'III. NHIỆM VỤ VÀ CÁC BIỆN PHÁP THỰC HIỆN TRỌNG TÂM',
@@ -1564,7 +1564,7 @@ QUY ĐỊNH BẮT BUỘC VỀ ĐỘ DÀI VÀ TÍNH CỤ THỂ (TUYỆT ĐỐI KH
    - Mạng lưới: 53 lớp với 2.111 học sinh tại 3 điểm trường:
      + Điểm chính (THPT): Khối 10, 11, 12 (14 lớp, 529 học sinh gồm K10: 203, K11: 141, K12: 185).
      + Điểm Đốc Binh Kiều (THCS): Khối 6, 7, 8, 9 (24 lớp - 6 lớp đầu mỗi khối, 980 học sinh).
-     + Điểm Tân Kiều (THCS): Khối 6, 7, 8, 9 (15 lớp - từ A7 trở đi, 602 học sinh, cách điểm chính 11 km).
+     + Điểm Tân Kiều (THCS): Khối 6, 7, 8, 9 (15 lớp - từ A7 trở đi, 602 học sinh).
    - Đội ngũ: 120 CB-GV-NV (102 giáo viên trực tiếp giảng dạy), cơ cấu 07 tổ (06 tổ chuyên môn và 01 tổ văn phòng).
    - Ban Giám hiệu: Thầy Hiệu trưởng Lê Thanh Cường phụ trách chung, Thầy Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp phụ trách chuyên môn.
 ${is2BuoiPlan ? `
@@ -1572,7 +1572,7 @@ ${is2BuoiPlan ? `
    - Quy tắc 1 (Khung sườn cứng): Bắt buộc bám theo đúng 5 mục lớn của Sở GDĐT:
      * I. MỤC ĐÍCH, YÊU CẦU (Mục đích a, b, c, d; Yêu cầu a, b, c, d bám sát Sở).
      * II. NỘI DUNG, HÌNH THỨC TỔ CHỨC DẠY HỌC 2 BUỔI/NGÀY:
-       + 1. Đối với cấp trung học cơ sở: 39 lớp (24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều cách 11km). Thời lượng, thời khóa biểu (sáng khối 8,9; chiều khối 6,7), nội dung Buổi 1 chính khóa và Buổi 2 (phụ đạo miễn phí học sinh chưa đạt YCCĐ, bồi dưỡng HSG lớp 9, ôn thi vào lớp 10, STEM, Tin học-AI, CLB).
+       + 1. Đối với cấp trung học cơ sở: 39 lớp (24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều). Thời lượng, thời khóa biểu (sáng khối 8,9; chiều khối 6,7), nội dung Buổi 1 chính khóa và Buổi 2 (phụ đạo miễn phí học sinh chưa đạt YCCĐ, bồi dưỡng HSG lớp 9, ôn thi vào lớp 10, STEM, Tin học-AI, CLB).
        + 2. Đối với cấp trung học phổ thông: 14 lớp (Khối 10, 11, 12 tại Điểm chính). Thời lượng, thời khóa biểu sáng chính khóa, chiều buổi 2 (phụ đạo, bồi dưỡng HSG tỉnh, ôn thi tốt nghiệp THPT theo tổ hợp KHTN/KHXH, NCKH kỹ thuật).
        (LƯU Ý: XÓA BỎ MỤC TIỂU HỌC CỦA SỞ VÌ TRƯỜNG CHỈ CÓ THCS VÀ THPT).
      * III. KINH PHÍ VÀ ĐIỀU KIỆN THỰC HIỆN: Kinh phí ngân sách chi thường xuyên theo định mức và Công văn 9179/BTC-NSNN; chủ trương xã hội hóa giáo dục đúng quy định, nguyên tắc tự nguyện, công khai, tuyệt đối không thu tiền sai quy định; khai thác 19 phòng bộ môn và các phòng máy tính.
@@ -1598,8 +1598,8 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
   "documentNumber": "Số: .../${targetCodePrefix}",
   "title": "${targetTypeLabel}",
   "subTitle": "${topic.replace(/^(Kế hoạch|Quyết định|Hướng dẫn|Quy chế|Báo cáo|Thông báo|Tờ trình)\s*/i, '').trim()}",
-  "signDate": "Đồng Tháp, ngày 28 tháng 9 năm 2026",
-  "issuingAuthorityTop": "SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP",
+  "signDate": "Đốc Binh Kiều, ngày 28 tháng 9 năm 2026",
+  "issuingAuthorityTop": "SỞ GIÁO DỤC VÀ ĐÀO TẠO\\nTỈNH ĐỒNG THÁP",
   "issuingAuthority": "TRƯỜNG THCS VÀ THPT\\nĐỐC BINH KIỀU",
   "signerRole": "${signerRole}",
   "signerName": "${signerName}",
@@ -1616,7 +1616,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
     },
     {
       "heading": "II. ĐẶC ĐIỂM TÌNH HÌNH VÀ CƠ CẤU ĐIỀU KIỆN TỔ CHỨC",
-      "content": "1. Quy mô học sinh và lớp học (53 lớp: 39 THCS gồm 24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều cách 11km; 14 lớp THPT):\\n...\\n\\n2. Đội ngũ cán bộ quản lý và giáo viên (120 CB-GV-NV, 102 GV trực tiếp giảng dạy):\\n...\\n\\n3. Thuận lợi và khó khăn:..."
+      "content": "1. Quy mô học sinh và lớp học (53 lớp: 39 THCS gồm 24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều; 14 lớp THPT):\\n...\\n\\n2. Đội ngũ cán bộ quản lý và giáo viên (120 CB-GV-NV, 102 GV trực tiếp giảng dạy):\\n...\\n\\n3. Thuận lợi và khó khăn:..."
     },
     {
       "heading": "III. NỘI DUNG, HÌNH THỨC VÀ KHUNG THỜI GIAN HOẠT ĐỘNG",
@@ -1624,7 +1624,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
     },
     {
       "heading": "IV. BỐ TRÍ ĐỘI NGŨ, CƠ SỞ VẬT CHẤT VÀ KINH PHÍ",
-      "content": "1. Phân công đội ngũ giáo viên (bố trí dạy liền buổi cùng 1 điểm trường, tránh đi lại giữa 2 điểm trường cách 11km):\\n...\\n\\n2. Khai thác cơ sở vật chất (phòng bộ môn, phòng máy tính, thư viện):\\n...\\n\\n3. Kinh phí thực hiện:..."
+      "content": "1. Phân công đội ngũ giáo viên (bố trí dạy liền buổi cùng 1 điểm trường, hạn chế di chuyển giữa các điểm trường trong cùng buổi):\\n...\\n\\n2. Khai thác cơ sở vật chất (phòng bộ môn, phòng máy tính, thư viện):\\n...\\n\\n3. Kinh phí thực hiện:..."
     },
     {
       "heading": "V. TỔ CHỨC THỰC HIỆN",
@@ -1641,7 +1641,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
 `;
 
     const fallbackFn = () => {
-      const currentDateStr = `Tháp Mười, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`;
+      const currentDateStr = `Đốc Binh Kiều, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`;
       const defaultDocNum = `Số: ${Math.floor(Math.random() * 50) + 50}/${targetCodePrefix}`;
       const upperTopic = topic.trim().toUpperCase();
 
@@ -1659,7 +1659,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
           documentNumber: `Số: 45/KH-THCS&THPTĐBK`,
           title: 'KẾ HOẠCH',
           subTitle: 'Tổ chức dạy học 2 buổi/ngày năm học 2026 - 2027',
-          signDate: 'Đồng Tháp, ngày 28 tháng 9 năm 2026',
+          signDate: 'Đốc Binh Kiều, ngày 28 tháng 9 năm 2026',
           issuingAuthorityTop: 'SỞ GDĐT TỈNH ĐỒNG THÁP',
           issuingAuthority: 'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
           signerRole: signerRole,
@@ -1679,7 +1679,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
 - Khắc phục tình trạng học thêm, dạy thêm sai quy định; giúp đỡ kịp thời những học sinh có nguy cơ chưa đạt yêu cầu cần đạt (YCCĐ) và bồi dưỡng chuyên sâu cho học sinh giỏi tham gia các kỳ thi cấp tỉnh.
 
 2. Yêu cầu:
-- Tổ chức dạy học 2 buổi/ngày phải bảo đảm tính tự nguyện, đồng thuận của cha mẹ học sinh; phù hợp với điều kiện cơ sở vật chất và đội ngũ giáo viên của từng điểm trường (Điểm chính, Điểm Đốc Binh Kiều và Điểm Tân Kiều cách 11km).
+- Tổ chức dạy học 2 buổi/ngày phải bảo đảm tính tự nguyện, đồng thuận của cha mẹ học sinh; phù hợp với điều kiện cơ sở vật chất và đội ngũ giáo viên của từng điểm trường (Điểm chính, Điểm Đốc Binh Kiều và Điểm Tân Kiều).
 - Không gây quá tải cho học sinh và giáo viên; phân định rành mạch giữa chương trình chính khóa buổi sáng và các hoạt động giáo dục tăng cường buổi chiều.
 - Bảo đảm an toàn tuyệt đối cho học sinh trong suốt thời gian học tập tại trường.`
             },
@@ -1690,7 +1690,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
 - Phân bổ theo 3 điểm trường:
   + Điểm chính (Khối 10, 11, 12): 14 lớp, 529 học sinh. Cơ sở vật chất có 14 phòng học, 09 phòng bộ môn kiên cố, 03 phòng lắp ghép, phòng máy vi tính.
   + Điểm Đốc Binh Kiều (Khối 6, 7, 8, 9): 24 lớp, 980 học sinh. Cơ sở vật chất có 22 phòng học, 05 phòng chức năng, sân bóng đá mini, sân bóng chuyền.
-  + Điểm Tân Kiều (Khối 6, 7, 8, 9 - cách điểm chính 11 km): 15 lớp, 602 học sinh. Cơ sở vật chất có 09 phòng học, 10 phòng bộ môn.
+  + Điểm Tân Kiều (Khối 6, 7, 8, 9): 15 lớp, 602 học sinh. Cơ sở vật chất có 09 phòng học, 10 phòng bộ môn.
 
 2. Đội ngũ cán bộ quản lý và giáo viên:
 - Tổng số: 120 người (04 Ban Giám hiệu, 102 Giáo viên trực tiếp giảng dạy, 14 Nhân viên). Có 85 Đảng viên, 09 Thạc sĩ.
@@ -1698,7 +1698,7 @@ HÃY XUẤT RA DỮ LIỆU ĐỊNH DẠNG JSON ĐÚNG CHUẨN THỂ THỨC NGH�
 
 3. Thuận lợi và khó khăn:
 - Thuận lợi: Được sự quan tâm sâu sát của Sở GDĐT Đồng Tháp, chính quyền địa phương và sự đồng thuận cao của Ban đại diện CMHS. Đội ngũ giáo viên trẻ, nhiệt huyết, 100% đạt chuẩn và trên chuẩn đào tạo.
-- Khó khăn: Địa bàn trải rộng trên 2 xã; Điểm Tân Kiều cách điểm chính 11 km đòi hỏi phương án sắp xếp thời khóa biểu thông minh, ưu tiên giáo viên dạy liền buổi tại cùng 1 điểm trường, không bố trí giáo viên di chuyển giữa 2 điểm trường trong cùng một buổi.`
+- Khó khăn: Địa bàn trải rộng trên địa bàn xã Đốc Binh Kiều với 03 điểm trường nên đòi hỏi phương án sắp xếp thời khóa biểu khoa học, ưu tiên giáo viên dạy liền buổi tại cùng một điểm trường, hạn chế di chuyển giữa các điểm trường trong cùng một buổi.`
             },
             {
               heading: 'III. NỘI DUNG, HÌNH THỨC VÀ KHUNG THỜI GIAN HOẠT ĐỘNG 2 BUỔI/NGÀY',
@@ -1766,7 +1766,7 @@ b) Buổi chiều (Chính khóa khối 6, 7 và tăng cường khối 8, 9, 10, 
         };
       }
 
-      let contentII = `Quy mô áp dụng: Toàn trường với 53 lớp và 2.111 học sinh; 120 cán bộ giáo viên nhân viên (102 giáo viên trực tiếp giảng dạy). Trong đó: 39 lớp cấp THCS (24 lớp điểm Đốc Binh Kiều với 980 HS, 15 lớp điểm Tân Kiều cách 11km với 602 HS) và 14 lớp cấp THPT với 529 HS.`;
+      let contentII = `Quy mô áp dụng: Toàn trường với 53 lớp và 2.111 học sinh; 120 cán bộ giáo viên nhân viên (102 giáo viên trực tiếp giảng dạy). Trong đó: 39 lớp cấp THCS (24 lớp điểm Đốc Binh Kiều với 980 HS, 15 lớp điểm Tân Kiều với 602 HS) và 14 lớp cấp THPT với 529 HS.`;
       let contentIII = `Thời gian thực hiện theo khung năm học 2026 - 2027 (đủ 35 tuần thực học, HK1: 18 tuần, HK2: 17 tuần). Khung giờ hoạt động buổi sáng từ 7h00 đến 11h30 (5 tiết), buổi chiều từ 12h30 đến 17h00 (5 tiết).`;
 
       if (topic.toLowerCase().includes('giáo viên dạy giỏi') || topic.toLowerCase().includes('gvdg')) {
@@ -1803,7 +1803,7 @@ b) Buổi chiều (Chính khóa khối 6, 7 và tăng cường khối 8, 9, 10, 
         sections: [
           {
             heading: 'I. MỤC ĐÍCH, YÊU CẦU',
-            content: `1. Mục đích:\n- Triển khai nghiêm túc, đúng quy định pháp luật và hướng dẫn của ngành giáo dục vào thực tế Trường THCS và THPT Đốc Binh Kiều.\n- Nâng cao chất lượng giáo dục toàn diện, khích lệ phong trào thi đua dạy tốt - học tốt trong toàn trường.\n- Đảm bảo quyền lợi học tập công bằng, đồng bộ cho học sinh tại cả 3 điểm trường (đặc biệt điểm Tân Kiều cách 11km).\n\n2. Yêu cầu:\n- Nội dung thực hiện phải thiết thực, công khai, minh bạch, có tính khả thi cao.\n- Phân công rõ trách nhiệm từng tổ chức, cá nhân; phối hợp chặt chẽ giữa các bộ phận.`
+            content: `1. Mục đích:\n- Triển khai nghiêm túc, đúng quy định pháp luật và hướng dẫn của ngành giáo dục vào thực tế Trường THCS và THPT Đốc Binh Kiều.\n- Nâng cao chất lượng giáo dục toàn diện, khích lệ phong trào thi đua dạy tốt - học tốt trong toàn trường.\n- Đảm bảo quyền lợi học tập công bằng, đồng bộ cho học sinh tại cả 3 điểm trường.\n\n2. Yêu cầu:\n- Nội dung thực hiện phải thiết thực, công khai, minh bạch, có tính khả thi cao.\n- Phân công rõ trách nhiệm từng tổ chức, cá nhân; phối hợp chặt chẽ giữa các bộ phận.`
           },
           {
             heading: 'II. ĐỐI TƯỢNG, ĐIỀU KIỆN VÀ NỘI DUNG THỰC HIỆN',

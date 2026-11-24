@@ -65,7 +65,7 @@ export const SCHOOL_INSPECTION_BACKGROUND = {
     campusBreakdown: [
       {
         campusName: 'Điểm chính (Khối THPT Đốc Binh Kiều)',
-        address: 'Ấp 1, xã Đốc Binh Kiều, huyện Tháp Mười, tỉnh Đồng Tháp',
+        address: 'Ấp 1, xã Đốc Binh Kiều, tỉnh Đồng Tháp',
         classesCount: 14,
         studentsCount: 529,
         grades: 'Khối 10, Khối 11, Khối 12',
@@ -73,24 +73,24 @@ export const SCHOOL_INSPECTION_BACKGROUND = {
       },
       {
         campusName: 'Điểm trường THCS Đốc Binh Kiều',
-        address: 'Trung tâm xã Đốc Binh Kiều, huyện Tháp Mười',
+        address: 'Trung tâm xã Đốc Binh Kiều, tỉnh Đồng Tháp',
         classesCount: 24,
         studentsCount: 980,
         grades: 'Khối 6, Khối 7, Khối 8, Khối 9 (từ lớp A1 đến A6)',
-        specialFeatures: 'Quy mô học sinh THCS đông nhất; tập trung 20 học sinh khuyết tật học hòa nhập.'
+        specialFeatures: 'Quy mô học sinh THCS đông nhất; tập trung học sinh khuyết tật học hòa nhập.'
       },
       {
-        campusName: 'Điểm trường THCS Tân Kiều (cách 11km)',
-        address: 'Ấp Tân Kiều, xã Tân Kiều cũ (nay sáp nhập), huyện Tháp Mười',
+        campusName: 'Điểm trường THCS Tân Kiều',
+        address: 'Ấp Tân Kiều, xã Đốc Binh Kiều, tỉnh Đồng Tháp',
         classesCount: 15,
         studentsCount: 602,
         grades: 'Khối 6, Khối 7, Khối 8, Khối 9 (từ lớp A7 trở đi)',
-        specialFeatures: 'Địa bàn cách xa điểm chính 11km; có 05 học sinh khuyết tật học hòa nhập; giáo viên bộ môn được phân công dạy liên điểm.'
+        specialFeatures: 'Có học sinh khuyết tật học hòa nhập; giáo viên bộ môn được phân công giảng dạy liên điểm.'
       }
     ]
   },
 
-  // 2. Đội ngũ cán bộ, giáo viên, nhân viên (Chuẩn 120 nhân sự từ NHÂN SỰ MỚI)
+  // 2. Đội ngũ cán bộ, giáo viên, nhân viên
   staffScale: {
     totalStaff: 120,
     femaleCount: 63,
@@ -126,13 +126,13 @@ export const SCHOOL_INSPECTION_BACKGROUND = {
 
   // 4. Đánh giá Thuận lợi & Khó khăn
   strengths: [
-    'Được sự quan tâm lãnh đạo sâu sát của Huyện ủy, UBND huyện Tháp Mười, Đảng ủy xã Đốc Binh Kiều và sự hướng dẫn nghiệp vụ thanh tra, kiểm tra thường xuyên của Thanh tra Sở GDĐT Đồng Tháp.',
+    'Được sự quan tâm lãnh đạo sâu sát của Đảng ủy, UBND xã Đốc Binh Kiều và sự hướng dẫn nghiệp vụ thanh tra, kiểm tra thường xuyên của Sở GDĐT Đồng Tháp.',
     'Sau sáp nhập, quy mô trường liên cấp tạo nên sức mạnh tổng hợp: nguồn lực đội ngũ 120 CB-GV-NV dồi dào, khắc phục triệt để tình trạng thừa thiếu cục bộ giáo viên bộ môn; giáo viên THPT và THCS có điều kiện sinh hoạt chuyên môn liên thông, hỗ trợ phương pháp dạy học theo Chương trình GDPT 2018.',
     'Tập thể sư phạm có tinh thần đoàn kết, ý thức kỷ cương, trách nhiệm nghề nghiệp cao; 85 đảng viên phát huy tốt vai trò tiên phong gương mẫu.',
     'Cơ sở vật chất, phòng bộ môn, thiết bị dạy học được tích hợp từ 3 đơn vị đáp ứng tốt yêu cầu đổi mới phương pháp và ứng dụng công nghệ thông tin, ứng dụng AI trong giảng dạy.'
   ],
   challenges: [
-    'Quy mô quản lý trải dài trên 3 điểm trường; Điểm trường THCS Tân Kiều cách điểm chính 11km gây khó khăn trong công tác kiểm tra trực tiếp hàng ngày và luân chuyển cơ sở vật chất, sách báo thư viện.',
+    'Quy mô quản lý trải dài trên 03 điểm trường nên công tác kiểm tra trực tiếp hằng ngày và điều phối cơ sở vật chất, sách báo thư viện giữa Điểm chính và Điểm trường THCS Tân Kiều đòi hỏi sự phối hợp chặt chẽ.',
     'Đội ngũ cán bộ tham gia Ban KTNB chủ yếu là kiêm nhiệm (vừa giảng dạy, vừa làm công tác chủ nhiệm hoặc quản lý tổ chuyên môn), quỹ thời gian dành cho các đợt kiểm tra chuyên sâu còn hạn hẹp.',
     'Đối tượng học sinh đa dạng từ lớp 6 đến lớp 12 với tâm sinh lý lứa tuổi khác nhau; trường có 25 học sinh khuyết tật học hòa nhập đòi hỏi quy trình kiểm tra đánh giá chuyên biệt, sát thực tế.'
   ]
@@ -195,7 +195,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
         items: [
           'Kiểm tra hệ thống hồ sơ, sổ sách thư viện: Sổ đăng ký tổng quát, sổ đăng ký cá biệt, sổ đăng ký sách giáo khoa, sổ nhật ký bạn đọc theo Quyết định 01/2003/QĐ-BGDĐT.',
           'Kiểm tra phần mềm thư viện số: Tỷ lệ số hóa kho sách, mã vạch quản lý sách, thống kê lượt mượn đọc hàng tháng của giáo viên và học sinh tại cả 3 điểm trường.',
-          'Kiểm tra công tác luân chuyển sách báo giữa Điểm chính THPT và 2 Điểm trường THCS (đặc biệt Điểm Tân Kiều cách 11km), bảo đảm học sinh vùng sâu có đủ sách đọc bổ trợ.',
+          'Kiểm tra công tác luân chuyển sách báo giữa Điểm chính THPT và 02 Điểm trường THCS (đặc biệt Điểm trường THCS Tân Kiều), bảo đảm học sinh có đủ sách đọc bổ trợ.',
           'Kiểm tra việc bảo quản, bảo dưỡng kho sách, phòng đọc giáo viên và học sinh; tổ chức Ngày hội đọc sách và phong tràu giới thiệu sách hay dưới cờ.'
         ]
       },
@@ -420,7 +420,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
         items: [
           'Kiểm tra việc xây dựng Quy chế chi tiêu nội bộ năm học: Đảm bảo dân chủ, công khai, lấy ý kiến tập thể hội đồng sư phạm và được thông qua tại Hội nghị viên chức người lao động.',
           'Kiểm tra chứng từ thu chi ngân sách nhà nước cấp: Tính hợp lệ, hợp pháp của hóa đơn chứng từ; chi đúng mục đích, đúng định mức tiêu chuẩn; không để nợ đọng chứng từ.',
-          'Kiểm tra các khoản thu hộ: Thu Bảo hiểm y tế học sinh (đạt chỉ tiêu 100% học sinh tham gia BHYT), bảo hiểm thân thể tự nguyện; nộp tiền kịp thời cho cơ quan BHXH huyện Tháp Mười, không để thất thoát.',
+          'Kiểm tra các khoản thu hộ: Thu Bảo hiểm y tế học sinh (đạt chỉ tiêu 100% học sinh tham gia BHYT), bảo hiểm thân thể tự nguyện; nộp tiền kịp thời cho cơ quan Bảo hiểm xã hội theo quy định, không để thất thoát.',
           'Kiểm tra công tác quản lý kinh phí hoạt động của Ban đại diện Cha mẹ học sinh theo đúng Thông tư số 55/2011/TT-BGDĐT: Nhà trường KHÔNG đứng ra thu, không quy định mức kinh phí bình quân, Ban đại diện tự quản lý và chi cho các hoạt động trực tiếp của học sinh.',
           'Kiểm tra việc thực hiện công khai minh bạch tài chính theo Thông tư 36/2017/TT-BGDĐT và Thông tư 61/2017/TT-BTC: Niêm yết công khai tại bảng tin 3 điểm trường và trên website trường.'
         ]
@@ -690,13 +690,13 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
   {
     id: 'pillar-11',
     orderNumber: 11,
-    domainName: 'Kiểm tra các nhiệm vụ trọng tâm đặc thù của năm học sáp nhập (Giáo dục hòa nhập, Ôn thi tốt nghiệp & Lớp 10, Điểm Tân Kiều 11km)',
-    sourceOrigin: 'Bóc tách từ Kế hoạch 76/KH-THPTĐBK (Tháng 4, 5, 6, 7), Công văn số 3326/SGDĐT-GDTrH và Kế hoạch giáo dục số 34/KH',
+    domainName: 'Kiểm tra các nhiệm vụ trọng tâm đặc thù của năm học (Giáo dục hòa nhập, Ôn thi tốt nghiệp & Lớp 10, Điểm trường THCS Tân Kiều)',
+    sourceOrigin: 'Công văn số 3326/SGDĐT-GDTrH và Kế hoạch giáo dục số 34/KH-THCS&THPTĐBK',
     targetsDetail: [
-      '25 học sinh khuyết tật học hòa nhập và các giáo viên trực tiếp giảng dạy (20 HS tại THCS ĐBK, 05 HS tại THCS Tân Kiều).',
+      '25 học sinh khuyết tật học hòa nhập và các giáo viên trực tiếp giảng dạy tại 03 điểm trường.',
       'Công tác dạy ôn thi tốt nghiệp THPT năm 2027 cho học sinh Khối 12 tại Điểm chính.',
-      'Công tác dạy ôn thi tuyển sinh vào lớp 10 cho học sinh Khối 9 tại 2 Điểm trường THCS.',
-      'Cơ sở vật chất, luân chuyển giáo viên dạy liên điểm tại Điểm Tân Kiều cách 11km.'
+      'Công tác dạy ôn thi tuyển sinh vào lớp 10 cho học sinh Khối 9 tại 02 Điểm trường THCS.',
+      'Cơ sở vật chất và việc phân công giáo viên giảng dạy liên điểm tại Điểm trường THCS Tân Kiều.'
     ],
     inspectionForce: {
       lead: 'Thầy Lê Thanh Cường (Hiệu trưởng)',
@@ -706,7 +706,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
     formatsAndMetrics: {
       comprehensiveRate: '100% học sinh khuyết tật có Kế hoạch giáo dục cá nhân và được kiểm tra chuyên đề hồ sơ.',
       thematicRate: '100% các lớp ôn thi Khối 9 và Khối 12 được kiểm tra kế hoạch ôn tập và chất lượng khảo sát thử.',
-      surpriseRate: 'Kiểm tra đột xuất nền nếp giảng dạy của giáo viên luân chuyển tại Điểm trường Tân Kiều cách 11km.',
+      surpriseRate: 'Kiểm tra đột xuất nền nếp giảng dạy của giáo viên luân chuyển tại Điểm trường THCS Tân Kiều.',
       routineFrequency: 'Theo dõi hàng tuần tiến độ ôn thi tốt nghiệp và dữ liệu số hóa học bạ số.',
       implementationTime: 'Xuyên suốt năm học; cao điểm tháng 11/2026, tháng 3/2027, tháng 4/2027, tháng 6-7/2027.'
     },
@@ -729,7 +729,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
         ]
       },
       {
-        heading: 'c) Kiểm tra điều kiện dạy học và quản lý tại Điểm trường Tân Kiều (cách 11km)',
+        heading: 'c) Kiểm tra điều kiện dạy học và quản lý tại Điểm trường THCS Tân Kiều',
         items: [
           'Kiểm tra việc thực hiện thời khóa biểu của giáo viên được điều động luân chuyển dạy liên điểm giữa Điểm chính và Điểm Tân Kiều; đảm bảo quyền lợi phụ cấp công tác.',
           'Kiểm tra việc vận hành phòng học bộ môn, máy vi tính và thiết bị dạy học tại cơ sở Tân Kiều, không để phòng học bỏ trống gây lãng phí.',
@@ -860,7 +860,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     month: 'Tháng 11/2026',
     monthNumber: 11,
     timeframe: '02/11/2026 - 10/11/2026',
-    title: 'Kiểm tra chuyên đề điều kiện dạy học và quản lý CSVC tại Điểm trường Tân Kiều (cách 11km)',
+    title: 'Kiểm tra chuyên đề điều kiện dạy học và quản lý CSVC tại Điểm trường THCS Tân Kiều',
     category: 'Hành chính - Quản trị',
     campus: 'Điểm Tân Kiều (THCS)',
     target: 'Cán bộ quản lý, giáo viên bộ môn và các lớp THCS tại Điểm Tân Kiều (Khối 6-9, từ lớp A7)',
@@ -965,7 +965,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     teamMembers: ['Đại diện Cấp ủy Chi bộ', 'Trưởng Ban Thanh tra nhân dân', 'Chủ tịch Công đoàn'],
     specificTasks: [
       'Kiểm tra sổ sách kế toán, chứng từ thanh toán năm 2026 trước thời điểm khóa sổ ngân sách.',
-      'Kiểm kê quỹ tiền mặt và tài khoản tiền gửi tại Kho bạc Nhà nước huyện Tháp Mười.',
+      'Kiểm kê quỹ tiền mặt và tài khoản tiền gửi tại Kho bạc Nhà nước theo quy định.',
       'Kiểm tra việc công khai dự toán và quyết toán tài chính cuối năm theo Thông tư 61/2017/TT-BTC.'
     ],
     expectedOutput: 'Biên bản kiểm tra tài chính năm 2026; Báo cáo quyết toán ngân sách nhà nước.',

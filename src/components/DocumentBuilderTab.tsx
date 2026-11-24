@@ -63,7 +63,7 @@ const QUICK_TITLE_SUGGESTIONS = [
     tag: 'Quản lý',
   },
   {
-    title: 'Kế hoạch liên kết chuyên môn và luân chuyển thiết bị giữa Điểm chính và Điểm Tân Kiều (cách 11km)',
+    title: 'Kế hoạch liên kết chuyên môn và luân chuyển thiết bị giữa các Điểm trường',
     type: 'plan' as DocumentType,
     tag: 'Điểm trường',
   },
@@ -110,7 +110,7 @@ export const DocumentBuilderTab: React.FC<DocumentBuilderTabProps> = ({
   const [customDocNumber, setCustomDocNumber] = useState('');
   const [customTitle, setCustomTitle] = useState(prefilledDirective ? prefilledDirective.title : '');
   const [specificFocus, setSpecificFocus] = useState(
-    'Cụ thể hóa chi tiết cho 53 lớp, đặc biệt chú ý bố trí thực hành tại Điểm Tân Kiều (cách 11km), phân công trách nhiệm BGH, 07 tổ chuyên môn và đẩy mạnh chuyển đổi số/AI.'
+    'Cụ thể hóa chi tiết cho 53 lớp tại 03 điểm trường, phân công trách nhiệm BGH, 07 tổ chuyên môn và đẩy mạnh chuyển đổi số/AI.'
   );
 
   // Sync when prefilledDirective changes
@@ -281,7 +281,7 @@ Nguyễn Phương Toàn (đã ký)`);
         documentNumber: resData.data.documentNumber || `Số: .../${documentType.toUpperCase()}-THCS&THPTĐBK`,
         title: resData.data.title || 'VĂN BẢN QUẢN LÝ GIÁO DỤC',
         subTitle: resData.data.subTitle,
-        signDate: resData.data.signDate || `Tháp Mười, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`,
+        signDate: resData.data.signDate || `Đốc Binh Kiều, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`,
         createdDate: new Date().toISOString(),
         issuingAuthorityTop: resData.data.issuingAuthorityTop || 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
         issuingAuthority: resData.data.issuingAuthority || 'TRƯỜNG THCS VÀ THPT\nĐỐC BINH KIỀU',
@@ -337,7 +337,7 @@ Nguyễn Phương Toàn (đã ký)`);
           documentNumber: `Số: ${Math.floor(Math.random() * 50) + 50}/KH-THCS&THPTĐBK`,
           title: titleLine.replace(/^#+\s*/, ''),
           subTitle: 'Cụ thể hóa văn bản chỉ đạo của cấp trên',
-          signDate: `Tháp Mười, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`,
+          signDate: `Đốc Binh Kiều, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`,
           issuingAuthorityTop: 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
           issuingAuthority: 'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
           signerRole: signerRole === 'PHT' ? 'KT. HIỆU TRƯỞNG\nPHÓ HIỆU TRƯỞNG' : 'HIỆU TRƯỞNG',
@@ -369,7 +369,7 @@ Nguyễn Phương Toàn (đã ký)`);
         documentNumber: parsedDoc.documentNumber || `Số: .../KH-THCS&THPTĐBK`,
         title: parsedDoc.title || 'VĂN BẢN TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
         subTitle: parsedDoc.subTitle,
-        signDate: parsedDoc.signDate || `Tháp Mười, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`,
+        signDate: parsedDoc.signDate || `Đốc Binh Kiều, ngày ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm 2026`,
         createdDate: new Date().toISOString(),
         issuingAuthorityTop: parsedDoc.issuingAuthorityTop || 'SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG THÁP',
         issuingAuthority: parsedDoc.issuingAuthority || 'TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU',
@@ -387,10 +387,10 @@ Nguyễn Phương Toàn (đã ký)`);
     }
   };
 
-  const samplePromptForChat = `Hãy đóng vai Thư ký Chuyên môn Trường THCS và THPT Đốc Binh Kiều (huyện Tháp Mười, tỉnh Đồng Tháp).
+  const samplePromptForChat = `Hãy đóng vai Thư ký Chuyên môn Trường THCS và THPT Đốc Binh Kiều (xã Đốc Binh Kiều, tỉnh Đồng Tháp).
 Cụ thể hóa văn bản chỉ đạo sau đây thành một [KẾ HOẠCH / QUYẾT ĐỊNH / HƯỚNG DẪN] chính thức của nhà trường theo Nghị định 30/2020/NĐ-CP:
-- Quy mô trường: 53 lớp (39 THCS gồm 24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều cách 11km; 14 lớp THPT).
-- Đội ngũ: 101 cán bộ, giáo viên (07 tổ chuyên môn).
+- Quy mô trường: 53 lớp (39 THCS gồm 24 lớp điểm Đốc Binh Kiều, 15 lớp điểm Tân Kiều; 14 lớp THPT).
+- Đội ngũ: 120 cán bộ, giáo viên, nhân viên (07 tổ chuyên môn và Tổ Văn phòng).
 - Người ký: Thầy Nguyễn Minh Trí (KT. Hiệu trưởng / Phó Hiệu trưởng).
 - Nội dung chỉ đạo cần cụ thể hóa:
 [DÁN VĂN BẢN CỦA SỞ / BỘ VÀO ĐÂY]`;
@@ -673,7 +673,7 @@ Cụ thể hóa văn bản chỉ đạo sau đây thành một [KẾ HOẠCH / Q
               {/* Submit Button */}
               <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-3">
                 <span className="text-xs text-slate-500">
-                  Tự động tích hợp số liệu 53 lớp, 101 GV và Điểm Tân Kiều cách 11km.
+                  Tự động tích hợp số liệu 53 lớp, 120 CB-GV-NV tại 03 điểm trường.
                 </span>
 
                 <button

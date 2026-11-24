@@ -129,7 +129,7 @@ export async function generateAllPartyDocuments() {
 
           createArticleHeading('Điều 6. Nhiệm vụ, quyền hạn của Đảng ủy viên, Bí thư Chi bộ 2 - Đồng chí Nguyễn Thanh Tòng (Phó Hiệu trưởng)'),
           createBodyParagraph('1. Phụ trách toàn diện công tác Đảng tại Chi bộ 2 (Chi bộ Khối THCS Điểm trường Tân Kiều - gồm 15 lớp, 602 học sinh).'),
-          createBodyParagraph('2. Trực tiếp phụ trách điều hành mọi mặt hoạt động chuyên môn, cơ sở vật chất, an ninh trật tự, nề nếp học sinh tại Điểm trường Tân Kiều (cơ sở cách điểm chính 11km thuộc xã Đốc Binh Kiều).'),
+          createBodyParagraph('2. Trực tiếp phụ trách điều hành mọi mặt hoạt động chuyên môn, cơ sở vật chất, an ninh trật tự, nề nếp học sinh tại Điểm trường THCS Tân Kiều (thuộc địa bàn xã Đốc Binh Kiều).'),
           createBodyParagraph('3. Giữ mối quan hệ phối hợp thường xuyên với Đảng ủy, HĐND, UBND, Ủy ban MTTQ Việt Nam xã Đốc Binh Kiều và các cơ quan đóng trên địa bàn Tân Kiều nhằm làm tốt công tác xã hội hóa giáo dục, duy trì sĩ số, phòng chống bỏ học.'),
           createBodyParagraph('4. Chỉ đạo công tác bồi dưỡng học sinh giỏi THCS, phụ đạo học sinh yếu kém và thực hiện giáo dục hòa nhập cho học sinh khuyết tật tại điểm Tân Kiều.'),
 
@@ -293,7 +293,7 @@ export async function generateAllPartyDocuments() {
 
           createArticleHeading('4. Đồng chí Nguyễn Thanh Tòng - Đảng ủy viên, Bí thư Chi bộ 2 (Phó Hiệu trưởng):'),
           createSubItem('-', 'Trực tiếp làm Bí thư Chi bộ 2 (Khối THCS Điểm trường Tân Kiều - gồm 15 lớp, 602 học sinh).', { boldPrefix: false }),
-          createSubItem('-', 'Trực tiếp quản lý, điều hành toàn diện cơ sở vật chất, chuyên môn, nề nếp kỷ cương dạy và học tại Điểm trường Tân Kiều (thuộc địa bàn xã Đốc Binh Kiều, cách điểm chính 11km).', { boldPrefix: false }),
+          createSubItem('-', 'Trực tiếp quản lý, điều hành toàn diện cơ sở vật chất, chuyên môn, nề nếp kỷ cương dạy và học tại Điểm trường THCS Tân Kiều (thuộc địa bàn xã Đốc Binh Kiều).', { boldPrefix: false }),
           createSubItem('-', 'Phụ trách công tác bồi dưỡng học sinh giỏi cấp THCS tại Tân Kiều; làm đầu mối giữ mối liên hệ mật thiết với Đảng ủy, UBND xã Đốc Binh Kiều và các ấp trên địa bàn khu vực Tân Kiều.', { boldPrefix: false }),
 
           createArticleHeading('5. Đồng chí Lê Văn Nguyên - Đảng ủy viên, Bí thư Chi bộ 3 (Tổ trưởng GDTC - QPAN - Nghệ thuật):'),
@@ -413,7 +413,7 @@ export async function generateAllPartyDocuments() {
           createSubItem('(17)', 'Phấn đấu tập thể nhà trường đạt danh hiệu “Tập thể Lao động Xuất sắc” ít nhất 03 lần trong nhiệm kỳ, nhận Cờ thi đua của UBND tỉnh Đồng Tháp và hoàn thành công nhận Trường đạt Chuẩn quốc gia mức độ 1.'),
 
           ...createChapterHeading('II. BA KHÂU ĐỘT PHÁ TOÀN KHÓA'),
-          createBodyParagraph('1. **Đột phá 1:** Đồng bộ hóa cơ chế điều hành và chuyển đổi số liên cơ sở (03 điểm trường trên địa bàn xã Đốc Binh Kiều). Xóa bỏ khoảng cách địa lý 11km giữa điểm chính và Điểm Tân Kiều bằng mô hình quản trị số: Họp giao ban trực tuyến kết hợp trực tiếp, điều hành hồ sơ trên môi trường số, 100% giáo án, học bạ và sổ điểm điện tử.'),
+          createBodyParagraph('1. **Đột phá 1:** Đồng bộ hóa cơ chế điều hành và chuyển đổi số liên cơ sở tại 03 điểm trường trên địa bàn xã Đốc Binh Kiều bằng mô hình quản trị số: Họp giao ban trực tuyến kết hợp trực tiếp, điều hành hồ sơ trên môi trường số, 100% giáo án, học bạ và sổ điểm điện tử.'),
           createBodyParagraph('2. **Đột phá 2:** Liên thông chất lượng dạy và học giữa 2 cấp THCS và THPT. Xây dựng chiến lược đào tạo mũi nhọn học sinh giỏi và ôn thi tuyển sinh, tốt nghiệp bài bản ngay từ khối THCS chuyển tiếp lên THPT, giữ vững vị thế chất lượng của trường trong cụm thi đua tỉnh Đồng Tháp.'),
           createBodyParagraph('3. **Đột phá 3:** Xây dựng văn hóa nhà trường đoàn kết, nhân ái, gương mẫu sau sáp nhập. Phát huy tinh thần tiên phong của 85 đảng viên, khơi dậy khát vọng cống hiến của 120 CB-GV-NV, chăm lo chu đáo đời sống vật chất và tinh thần cho người lao động.'),
 
@@ -518,7 +518,7 @@ export async function generateAllPartyDocuments() {
 
           ...createChapterHeading('II. CÁC NHÓM GIẢI PHÁP CHỦ YẾU NĂM 2026'),
           createArticleHeading('1. Đổi mới phương thức lãnh đạo, điều hành của Đảng ủy và Ban Giám hiệu'),
-          createSubItem('-', 'Thiết lập quy chế giao ban trực tuyến định kỳ giữa Ban Giám hiệu với cán bộ phụ trách Điểm trường Tân Kiều (11km) và Điểm Đốc Binh Kiều để nắm bắt tình hình hằng ngày.', { boldPrefix: false }),
+          createSubItem('-', 'Thiết lập quy chế giao ban trực tuyến định kỳ giữa Ban Giám hiệu với cán bộ phụ trách Điểm trường THCS Tân Kiều và Điểm trường THCS Đốc Binh Kiều để nắm bắt tình hình hằng ngày.', { boldPrefix: false }),
           createSubItem('-', 'Đẩy mạnh thực hiện mô hình “Cuộc họp không văn bản giấy”; phân công công việc khoa học theo năng lực sở trường của 10 đồng chí Đảng ủy viên, tránh chồng chéo hoặc bỏ sót nhiệm vụ.', { boldPrefix: false }),
           createSubItem('-', 'Tuyên dương, khen thưởng kịp thời các tập thể, cá nhân có thành tích xuất sắc, có sáng kiến hay trong việc ổn định đơn vị sau sáp nhập.', { boldPrefix: false }),
 

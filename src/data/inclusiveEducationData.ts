@@ -173,7 +173,7 @@ export const INCLUSIVE_DEMAND_SURVEY = [
     stt: 6,
     content: 'Tư vấn, hỗ trợ cơ sở giáo dục, giáo viên và gia đình trong các hoạt động chăm sóc, giáo dục hoà nhập',
     urgencyLevel: '(2) - Cấp thiết',
-    schoolNote: 'Phối hợp trạm y tế xã Đốc Binh Kiều, xã Tân Kiều và phụ huynh chăm sóc sức khỏe học sinh.'
+    schoolNote: 'Phối hợp Trạm Y tế xã Đốc Binh Kiều và phụ huynh chăm sóc sức khỏe học sinh.'
   },
   {
     stt: 7,
@@ -254,7 +254,7 @@ b) Cấp THCS - Điểm Đốc Binh Kiều (24 lớp THCS, 980 HS):
 - Tỷ lệ giới tính: 05 nữ, 05 nam; 100% cư ngụ trên địa bàn xã Đốc Binh Kiều (Ấp 2, Ấp 4, Ấp 5).
 - Phương án bố trí: Xếp vào 08 lớp (trong đó lớp 7A4 và 8A1 có 02 em; các lớp 6A1, 6A4, 7A2, 7A3, 8A2, 8A4 có 01 em).
 
-c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 601 HS):
+c) Cấp THCS - Điểm trường THCS Tân Kiều (15 lớp THCS, 602 HS):
 - Tổng số: 12 học sinh khuyết tật (chiếm 48% tổng số HSKT toàn trường - đây là điểm trường có số lượng HSKT theo học đông nhất).
 - Danh sách lớp:
   + Lớp 6A9: 02 học sinh (Trần Gia Huy - Trí tuệ, Nhẹ; Nguyễn Thị Kiều Trúc - Trí tuệ, Nhẹ).
@@ -262,7 +262,7 @@ c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 
   + Lớp 7A9: 02 học sinh (Lê Nhựt Khánh - Trí tuệ, Nhẹ; Trần Thị Kiều Oanh - Trí tuệ, Nhẹ).
   + Lớp 8A9: 01 học sinh (Nguyễn Thành Mỹ - Trí tuệ, Nhẹ).
   + Lớp 8A10: 02 học sinh (Lê Thị Lin Đa - Trí tuệ, Nhẹ; Lê Thị Trúc Linh - Trí tuệ, Nhẹ).
-  + Lớp 9A9: 01 học sinh (Nguyễn Lâm Khang - Trí tuệ, Nhẹ; Ấp Mỹ Hoà, Tháp Mười).
+  + Lớp 9A9: 01 học sinh (Nguyễn Lâm Khang - Trí tuệ, Nhẹ; Ấp Mỹ Hoà, xã Đốc Binh Kiều).
   + Lớp 9A10: 02 học sinh (Phạm Văn Thanh Trí Cao - Trí tuệ, Nhẹ; Võ Thị Anh Thư - Ung bướu ác tính, Mức độ Nặng).
 - Cơ cấu mức độ: 01 em khuyết tật nặng (em Võ Thị Anh Thư - ung bướu ác tính), 11 em khuyết tật trí tuệ mức độ nhẹ.
 - Tỷ lệ giới tính: 05 nữ, 07 nam; phần lớn cư trú tại Ấp Tân Kiều và Ấp 7 xã Đốc Binh Kiều, 01 em tại xã Nhơn Ninh và 01 em tại xã Mỹ Hòa.
@@ -274,14 +274,14 @@ c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 
 - 100% học sinh khuyết tật (25/25 em) đều duy trì đi học đầy đủ, không có học sinh bỏ học trong năm học 2025 - 2026.
 
 3. Khó khăn và thách thức:
-- Điểm trường Tân Kiều cách điểm chính 11km nhưng tập trung tới 12 học sinh khuyết tật (gần 50% toàn trường), trong đó có học sinh mắc bệnh hiểm nghèo (ung bướu ác tính) và học sinh trí tuệ học chậm, đòi hỏi công tác quản lý chuyên môn và y tế học đường phải được quan tâm đặc biệt.
+- Điểm trường THCS Tân Kiều tập trung tới 12 học sinh khuyết tật (gần 50% toàn trường), trong đó có học sinh mắc bệnh hiểm nghèo (ung bướu ác tính) và học sinh trí tuệ học chậm, đòi hỏi công tác quản lý chuyên môn và y tế học đường phải được quan tâm đặc biệt.
 - Nhà trường chưa có biên chế giáo viên chuyên trách về giáo dục đặc biệt; giáo viên bộ môn vừa phải hoàn thành chương trình GDPT 2018 vừa phải cá thể hóa bài dạy hòa nhập.
 - Điều kiện kinh tế của nhiều gia đình học sinh khuyết tật còn khó khăn (Ấp Tân Kiều, Ấp 7 vùng sâu, cha mẹ đi làm ăn xa), việc phối hợp rèn luyện kỹ năng tại gia đình gặp nhiều trở ngại.`
     },
     {
       heading: 'III. NHIỆM VỤ VÀ CÁC BIỆN PHÁP TRỌNG TÂM',
       content: `1. Huy động, tiếp nhận và phân công sắp xếp lớp học:
-- Phối hợp chặt chẽ với UBND xã Đốc Binh Kiều, UBND xã Tân Kiều và trạm y tế 2 xã trong công tác điều tra phổ cập, rà soát trẻ khuyết tật trong độ tuổi để huy động 100% các em có khả năng học tập đến trường; duy trì sĩ số, kiên quyết không để em nào phải bỏ học vì hoàn cảnh khó khăn hay bệnh tật.
+- Phối hợp chặt chẽ với UBND xã Đốc Binh Kiều và Trạm Y tế xã trong công tác điều tra phổ cập, rà soát trẻ khuyết tật trong độ tuổi để huy động 100% các em có khả năng học tập đến trường; duy trì sĩ số, kiên quyết không để em nào phải bỏ học vì hoàn cảnh khó khăn hay bệnh tật.
 - Tiếp nhận học sinh khuyết tật đúng quy định, thủ tục đơn giản, nhân văn; không đặt ra bất kỳ rào cản hay điều kiện nào ngoài quy định.
 - Hiệu trưởng ban hành Quyết định phân công giáo viên chủ nhiệm và giáo viên bộ môn dạy 18 lớp có học sinh hòa nhập; ưu tiên phân công giáo viên có kinh nghiệm, giàu lòng vị tha và nhiệt tình.
 
@@ -329,12 +329,12 @@ c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 
     },
     {
       heading: 'IV. GIẢI PHÁP ĐẶC THÙ CHO TỪNG ĐIỂM TRƯỜNG VÀ CƠ SỞ VẬT CHẤT',
-      content: `1. Giải pháp đặc thù cho Điểm Tân Kiều (cách 11km - 12 HSKT):
-- Đây là điểm trường tập trung số lượng học sinh khuyết tật đông nhất (12 em), khoảng cách xa trung tâm. Nhà trường chỉ đạo:
+      content: `1. Giải pháp đặc thù cho Điểm trường THCS Tân Kiều (12 HSKT):
+- Đây là điểm trường tập trung số lượng học sinh khuyết tật đông nhất (12 em). Nhà trường chỉ đạo:
   + Bố trí 100% các lớp có HSKT (6A9, 6A10, 7A9, 8A9, 8A10, 9A9, 9A10) học tại tầng trệt, gần khu vệ sinh và phòng y tế để các em di chuyển thuận lợi.
   + Cử cán bộ phụ trách Điểm trường và Phó Hiệu trưởng Nguyễn Minh Trí trực tiếp dự giờ, kiểm tra định kỳ 2 tuần/lần để kịp thời hỗ trợ phương pháp cho giáo viên.
-  + Phòng y tế Điểm Tân Kiều phối hợp thường xuyên với Trạm Y tế xã Tân Kiều, có sổ theo dõi sức khỏe riêng đối với em Võ Thị Anh Thư (ung bướu ác tính) và các em khuyết tật nặng.
-  + Phân công các giáo viên có kinh nghiệm chủ trì KHGDCN, phát động phong trào "Bạn giúp bạn" tại tất cả 7 lớp hòa nhập của Điểm Tân Kiều.
+  + Phòng y tế Điểm trường THCS Tân Kiều phối hợp thường xuyên với Trạm Y tế xã Đốc Binh Kiều, có sổ theo dõi sức khỏe riêng đối với em Võ Thị Anh Thư (ung bướu ác tính) và các em khuyết tật nặng.
+  + Phân công các giáo viên có kinh nghiệm chủ trì KHGDCN, phát động phong trào "Bạn giúp bạn" tại tất cả 7 lớp hòa nhập của Điểm trường THCS Tân Kiều.
 
 2. Giải pháp cho Điểm Đốc Binh Kiều (10 HSKT):
 - Bố trí các lớp 6A1, 6A4, 7A2, 7A3, 7A4, 8A1, 8A2, 8A4 tại dãy phòng học tầng trệt; trang bị hệ thống chiếu sáng đạt chuẩn cho lớp 6A4 có học sinh khiếm thị nặng.
@@ -353,7 +353,7 @@ c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 
 4. Đánh giá, xác định khả năng và phân loại nhu cầu GD đối với HSKT: (2) - Cấp thiết.
 5. Tư vấn, hỗ trợ CSGD, giáo viên và gia đình trong các hoạt động chăm sóc, giáo dục hoà nhập: (2) - Cấp thiết.
 6. Hỗ trợ tham gia huy động HSKT đến trường: (2) - Cấp thiết.
-* Đề xuất với Sở GDĐT: Hỗ trợ trang cấp tài liệu chuyên khảo về giáo dục hòa nhập học sinh khuyết tật trí tuệ; tổ chức các chuyên đề can thiệp giáo dục hòa nhập liên trường tại cụm Tháp Mười.`
+* Đề xuất với Sở GDĐT: Hỗ trợ trang cấp tài liệu chuyên khảo về giáo dục hòa nhập học sinh khuyết tật trí tuệ; tổ chức các chuyên đề can thiệp giáo dục hòa nhập liên trường trên địa bàn tỉnh.`
     },
     {
       heading: 'VI. TỔ CHỨC THỰC HIỆN',
@@ -361,7 +361,7 @@ c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 
 - Thầy Hiệu trưởng Lê Thanh Cường: Chỉ đạo chung; phê duyệt các quyết định phân công chuyên môn, quyết định phê duyệt KHGDCN và chi trả chế độ chính sách.
 - Thầy Phó Hiệu trưởng Nguyễn Minh Trí (Trưởng ban Giáo dục hòa nhập):
   + Trực tiếp xây dựng và chỉ đạo thực hiện Kế hoạch này; phê duyệt Kế hoạch giáo dục cá nhân (KHGDCN) của toàn bộ 25 học sinh khuyết tật; ban hành quyết định miễn, giảm, điều chỉnh môn học theo thẩm quyền.
-  + Thường xuyên kiểm tra, dự giờ các lớp học hòa nhập tại cả 3 điểm trường (đặc biệt là Điểm Tân Kiều cách 11km); kịp thời tháo gỡ khó khăn về phương pháp giảng dạy cho giáo viên.
+  + Thường xuyên kiểm tra, dự giờ các lớp học hòa nhập tại cả 03 điểm trường (đặc biệt là Điểm trường THCS Tân Kiều); kịp thời tháo gỡ khó khăn về phương pháp giảng dạy cho giáo viên.
   + Chủ trì sơ kết công tác hòa nhập cuối Học kỳ I và tổng kết năm học; báo cáo kết quả về Phòng Giáo dục Phổ thông Sở GDĐT Đồng Tháp.
 
 2. Các Tổ chuyên môn (06 tổ chuyên môn):
@@ -387,7 +387,7 @@ c) Cấp THCS - Điểm Tân Kiều (cách Điểm chính 11km - 15 lớp THCS, 
   ],
   recipients: [
     'Sở GDĐT Đồng Tháp (để báo cáo);',
-    'UBND xã Đốc Binh Kiều, xã Tân Kiều (để phối hợp);',
+    'UBND xã Đốc Binh Kiều (để phối hợp);',
     'Hiệu trưởng (để chỉ đạo);',
     'Các Phó Hiệu trưởng (để phối hợp);',
     '07 tổ trong nhà trường (06 tổ CM và 01 tổ VP) (để thực hiện);',
@@ -713,7 +713,7 @@ export const INCLUSIVE_STUDENTS_LIST: InclusiveStudentProfile[] = [
     schoolCampus: 'Điểm Tân Kiều (THCS)',
     gradeGroup: 'Khối 9',
     droppedOut: 'Không',
-    homeAddress: 'Ấp Mỹ Hoà, xã Tháp Mười',
+    homeAddress: 'Ấp Mỹ Hoà, xã Đốc Binh Kiều',
     phone: '0337381008',
     leadTeacher: 'Phan Văn Kiệt (GVCN 9A9 Điểm Tân Kiều)',
     supportMeasures: 'Ôn tập kiến thức cốt lõi, tư vấn hướng nghiệp học nghề phù hợp sau THCS',

@@ -133,7 +133,7 @@ export const TeacherDirectoryTab: React.FC<TeacherDirectoryTabProps> = ({
   const handleCopyStaffSummary = () => {
     const summary = `BÁO CÁO NHÂN SỰ & ĐỘI NGŨ CÁN BỘ - GIÁO VIÊN - NHÂN VIÊN
 TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
-(Căn cứ tệp dữ liệu NHÂN SỰ MỚI.xlsx chuẩn 100% - 120 CB-GV-NV, 85 Đảng viên)
+(Danh sách chính thức toàn trường năm học 2026 - 2027: 120 CB-GV-NV, 85 Đảng viên)
 
 1. TỔNG QUY MÔ ĐỘI NGŨ:
 - Tổng số: 120 người (04 Ban Giám hiệu, 102 Giáo viên, 14 Nhân viên).
@@ -192,10 +192,10 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
             href="/downloads/NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
             download="NHAN_SU_MOI_THCS_THPT_DOC_BINH_KIEU.xlsx"
             className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-300 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center gap-1.5 transition shadow-2xs"
-            title="Tải tệp Excel NHÂN SỰ MỚI.xlsx chính thức"
+            title="Tải tệp Excel danh sách 120 CB-GV-NV chính thức"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-700" />
-            <span>Tải Excel "NHÂN SỰ MỚI"</span>
+            <span>Tải Excel Nhân sự</span>
           </a>
 
           <button
@@ -230,7 +230,7 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
           }`}
         >
           <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
-          <span>1. Danh Sách 120 CB-GV-NV (File Excel "NHÂN SỰ MỚI" Cập Nhật)</span>
+          <span>1. Danh Sách 120 CB-GV-NV Toàn Trường Năm Học 2026 - 2027</span>
           <span className="px-1.5 py-0.2 bg-emerald-600 text-white text-[10px] rounded-full font-bold">120</span>
         </button>
 
@@ -611,7 +611,7 @@ TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU (NĂM HỌC 2026 - 2027)
                   <option value="ALL">Tất cả 3 Điểm trường (53 lớp - 2.111 HS)</option>
                   <option value="THPTDBK">Điểm chính (THPT - 14 lớp, 529 HS)</option>
                   <option value="THCSDBK">Điểm Đốc Binh Kiều (THCS - 24 lớp, 980 HS)</option>
-                  <option value="THCSTK">Điểm Tân Kiều (THCS - 15 lớp, 602 HS - 11km)</option>
+                  <option value="THCSTK">Điểm Tân Kiều (THCS - 15 lớp, 602 HS)</option>
                 </select>
               </div>
             </div>

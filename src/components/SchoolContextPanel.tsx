@@ -194,7 +194,7 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
               </span>
             </div>
             <div className="text-xs text-slate-600 space-y-1">
-              <p>• <strong>Khoảng cách</strong>: Cách điểm chính <strong>11 km</strong> (xã Tân Kiều).</p>
+              <p>• <strong>Địa bàn</strong>: Khu vực Tân Kiều, xã Đốc Binh Kiều, tỉnh Đồng Tháp.</p>
               <p>• <strong>Diện tích</strong>: 8.570,8 m².</p>
               <p>• <strong>Học sinh (từ A7 trở đi)</strong>: Khối 6 (4 lớp, 166 HS), Khối 7 (3 lớp, 133 HS), Khối 8 (4 lớp, 147 HS), Khối 9 (4 lớp, 156 HS).</p>
               <p>• <strong>Cơ sở vật chất</strong>: 09 phòng học; 10 phòng bộ môn (tiếng Anh, đa năng, tin học, KHTN 2 phòng, KHXH, công nghệ); 10 phòng làm việc và sinh hoạt, có phòng Ban Giám hiệu thường trực.</p>
@@ -475,7 +475,7 @@ export const SchoolContextPanel: React.FC<SchoolContextPanelProps> = ({
             </div>
 
             <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-2xs">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Điểm Tân Kiều (Cách 11 km)</span>
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Điểm Tân Kiều (Cấp THCS)</span>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-xl font-black text-emerald-900">602 HS</span>
                 <span className="text-xs font-semibold text-slate-600">(15 Lớp THCS)</span>

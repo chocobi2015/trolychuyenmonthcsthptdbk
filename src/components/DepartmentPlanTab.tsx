@@ -211,8 +211,8 @@ export const DepartmentPlanTab: React.FC<DepartmentPlanTabProps> = ({ onSaveToAr
               <option value="Điểm chính Đốc Binh Kiều (24 lớp)">
                 Điểm chính Đốc Binh Kiều (24 lớp)
               </option>
-              <option value="Điểm Tân Kiều (15 lớp - cách 11km)">
-                Điểm Tân Kiều (15 lớp - cách điểm chính 11 km)
+              <option value="Điểm Tân Kiều (15 lớp)">
+                Điểm Tân Kiều (15 lớp)
               </option>
               <option value="Điểm THPT Đốc Binh Kiều (14 lớp)">
                 Điểm THPT Đốc Binh Kiều (14 lớp Khối 10-12)

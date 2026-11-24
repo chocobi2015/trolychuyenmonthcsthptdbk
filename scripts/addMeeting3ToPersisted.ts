@@ -28,7 +28,7 @@ Số: 03/TB-THCS&THPTĐBK
 
 CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
 Độc lập - Tự do - Hạnh phúc
-Tháp Mười, ngày 09 tháng 10 năm 2026
+Đốc Binh Kiều, ngày 09 tháng 10 năm 2026
 
 BẢNG TỔNG HỢP Ý KIẾN HỌP TỔ CHUYÊN MÔN VÀ NỘI DUNG TRẢ LỜI, CHỈ ĐẠO CỦA BAN GIÁM HIỆU
 (Sau phiên họp Tổ chuyên môn lần 3 ngày 08/10/2026 của 06 Tổ chuyên môn)

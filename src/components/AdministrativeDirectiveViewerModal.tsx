@@ -538,7 +538,7 @@ export const AdministrativeDirectiveViewerModal: React.FC<AdministrativeDirectiv
           <div
             className={`bg-white text-slate-900 border border-slate-200 shadow-sm sm:shadow-md print:border-none print:shadow-none w-full ${directive.htmlContent && directive.documentNumber.startsWith('Phụ lục') ? 'max-w-none p-4 sm:p-8' : 'max-w-[850px] p-6 sm:p-14'} min-h-full`}
             style={{
-              fontFamily: '"Times New Roman", Times, serif',
+              fontFamily: '"Tinos", "Times New Roman", Times, serif',
               fontSize: `${fontSizePt}pt`,
               lineHeight: '1.45',
             }}
@@ -609,7 +609,7 @@ export const AdministrativeDirectiveViewerModal: React.FC<AdministrativeDirectiv
             {parsedDoc.legalBases.length > 0 && (
               <div className="space-y-1.5 pb-4 text-justify">
                 {parsedDoc.legalBases.map((base, idx) => (
-                  <p key={idx} className="italic text-[13pt] text-slate-800 leading-[1.4] pl-6 -indent-6 text-justify">
+                  <p key={idx} className="not-italic text-[13.5pt] text-slate-900 leading-[1.4] indent-8 text-justify">
                     {renderTextWithHighlight(base)}
                   </p>
                 ))}
@@ -667,10 +667,10 @@ export const AdministrativeDirectiveViewerModal: React.FC<AdministrativeDirectiv
                   );
                 }
 
-                // Điểm a), b), c) hoặc gạch đầu dòng (Hanging indent chuẩn hành chính)
+                // Điểm a), b), c) hoặc gạch đầu dòng (chỉ thụt đầu dòng 1, dòng 2 thẳng lề trái-phải)
                 if (item.type === 'bullet') {
                   return (
-                    <p key={idx} className="pl-6 -indent-6 text-slate-900 leading-[1.45] text-justify">
+                    <p key={idx} className="indent-8 text-slate-900 leading-[1.45] text-justify">
                       {renderTextWithHighlight(item.text)}
                     </p>
                   );

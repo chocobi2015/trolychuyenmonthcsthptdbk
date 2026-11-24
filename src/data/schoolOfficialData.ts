@@ -57,7 +57,7 @@ export const SCHOOL_OFFICIAL_PROFILE = {
     },
     {
       id: 'tankieu',
-      name: 'Điểm Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách 11 km)',
+      name: 'Điểm trường THCS Tân Kiều (các lớp từ A7 trở đi)',
       level: 'THCS',
       classes: 15,
       students: 602,
@@ -88,7 +88,7 @@ export const SCHOOL_OFFICIAL_PROFILE = {
       { name: 'Lê Thanh Cường', role: 'Hiệu trưởng', assignment: 'Phụ trách chung toàn trường, cơ sở vật chất, tài chính & Điểm chính THPT', phone: '', degree: 'Thạc sỹ QLGD' },
       { name: 'Nguyễn Minh Trí', role: 'Phó Hiệu trưởng', assignment: 'Trực tiếp phụ trách chuyên môn toàn trường, thi cử, kiểm tra đánh giá & Điểm chính THPT', phone: '', degree: 'ĐHSP GDCT, Vật lý' },
       { name: 'Phan Thanh Thảo', role: 'Phó Hiệu trưởng', assignment: 'Phụ trách công tác quản lý điều hành tại Điểm trường THCS Đốc Binh Kiều', phone: '', degree: 'Đại học Lịch sử' },
-      { name: 'Nguyễn Thanh Tòng', role: 'Phó Hiệu trưởng', assignment: 'Phụ trách công tác quản lý điều hành tại Điểm trường THCS Tân Kiều (cách 11km)', phone: '', degree: 'Đại học Sinh học' },
+      { name: 'Nguyễn Thanh Tòng', role: 'Phó Hiệu trưởng', assignment: 'Phụ trách công tác quản lý điều hành tại Điểm trường THCS Tân Kiều', phone: '', degree: 'Đại học Sinh học' },
     ],
     leader: 'Lê Thanh Cường (Hiệu trưởng phụ trách chung), Nguyễn Minh Trí (Phó Hiệu trưởng chuyên môn), Phan Thanh Thảo (Phó Hiệu trưởng điểm THCS Đốc Binh Kiều), Nguyễn Thanh Tòng (Phó Hiệu trưởng điểm THCS Tân Kiều)',
   },
@@ -155,7 +155,7 @@ export const SCHOOL_OFFICIAL_PROFILE = {
     },
     {
       id: 'tankieu',
-      name: 'Điểm Tân Kiều (THCS Tân Kiều cũ - cách điểm chính 11 km)',
+      name: 'Điểm trường THCS Tân Kiều',
       grades: 'Khối 6, 7, 8, 9',
       classes: 15,
       students: 602,
@@ -322,8 +322,8 @@ export const OFFICIAL_STUDENT_DETAILED_STATS = {
     },
     {
       id: 'tankieu',
-      name: 'Điểm Tân Kiều (Cấp THCS - các lớp từ A7 trở đi, cách 11 km)',
-      address: 'Xã Tân Kiều (Cách điểm chính 11 km)',
+      name: 'Điểm trường THCS Tân Kiều (các lớp từ A7 trở đi)',
+      address: 'Ấp Tân Kiều, xã Đốc Binh Kiều, tỉnh Đồng Tháp',
       classes: 15,
       students: 602,
       disabled: 6,

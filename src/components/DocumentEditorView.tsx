@@ -194,7 +194,7 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
         <div 
           className={`bg-white text-slate-900 shadow-md print:shadow-none w-full max-w-[850px] min-h-[1130px] text-[14pt] leading-[1.4] transition-all ${doc.sourceHtml ? 'docx-backed' : ''}`}
           style={{
-            fontFamily: '"Times New Roman", Times, serif',
+            fontFamily: '"Tinos", "Times New Roman", Times, serif',
             lineHeight: '1.4',
             paddingTop: '2cm',
             paddingBottom: '2cm',
@@ -253,7 +253,7 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
             {/* Hàng 2 - Phải: Địa danh và ngày tháng năm */}
             <div className="col-span-7 text-center flex flex-col items-center justify-center">
               <span className="text-[13.5pt] italic text-center block">
-                {doc.signDate || 'Đồng Tháp, ngày 28 tháng 9 năm 2026'}
+                {doc.signDate || 'Đốc Binh Kiều, ngày 28 tháng 9 năm 2026'}
               </span>
             </div>
           </div>
@@ -403,12 +403,12 @@ export const DocumentEditorView: React.FC<DocumentEditorViewProps> = ({
                         const trimmed = block.text.trim();
                         if (!trimmed) return <div key={bIdx} className="h-1.5" />;
 
-                        // Dấu cộng cấp 2 (sub-bullet): + ...
+                        // Dấu cộng cấp 2 (sub-bullet): + ... (chỉ thụt đầu dòng 1.0cm, dòng 2 thẳng lề)
                         if (trimmed.startsWith('+')) {
                           return (
                             <p
                               key={bIdx}
-                              className="indent-[1.5cm] pl-0 text-[14pt] leading-[1.4] text-justify text-slate-900 font-normal"
+                              className="indent-[1cm] pl-0 text-[14pt] leading-[1.4] text-justify text-slate-900 font-normal"
                             >
                               {trimmed}
                             </p>
