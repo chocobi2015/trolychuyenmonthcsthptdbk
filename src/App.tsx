@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { OfficialLegalRefModal } from './components/OfficialLegalRefModal';
-import { DocumentBuilderTab } from './components/DocumentBuilderTab';
-import { DocumentEditorView } from './components/DocumentEditorView';
-import { DocumentArchiveTab } from './components/DocumentArchiveTab';
-import { DepartmentDirectivesTab } from './components/DepartmentDirectivesTab';
-import { SchoolContextPanel } from './components/SchoolContextPanel';
-import { TeacherDirectoryTab } from './components/TeacherDirectoryTab';
-import { InclusiveEducationTab } from './components/InclusiveEducationTab';
-import { DepartmentMeetingsTab } from './components/DepartmentMeetingsTab';
-import { InternalInspectionTab } from './components/InternalInspectionTab';
 import { SchoolStudentsModal } from './components/SchoolStudentsModal';
 import { SchoolDocument, DepartmentDirective } from './types/document';
 import { INITIAL_SCHOOL_DOCUMENTS } from './data/mockDocuments';
@@ -20,11 +11,21 @@ import { OFFICIAL_INCLUSIVE_EDUCATION_PLAN, DIRECTIVE_3326_GDHN, DIRECTIVE_3408_
 import { OFFICIAL_AI_EDUCATION_PLAN } from './data/aiEducationData';
 import { OFFICIAL_QUALITY_MANAGEMENT_PLAN } from './data/qualityManagementData';
 import { MidtermAssessmentPlanView } from './components/MidtermAssessmentPlanView';
-import { PartyWorkTab } from './components/PartyWorkTab';
 import { SchoolDeadline } from './types/deadline';
 import { INITIAL_SCHOOL_DEADLINES } from './data/initialDeadlines';
 import { DeadlineManagementModal } from './components/DeadlineManagementModal';
 import { extractDeadlinesFromDirective, extractDeadlinesFromSchoolDoc } from './utils/deadlineExtractor';
+
+const DocumentBuilderTab = lazy(() => import('./components/DocumentBuilderTab').then(m => ({ default: m.DocumentBuilderTab })));
+const DocumentEditorView = lazy(() => import('./components/DocumentEditorView').then(m => ({ default: m.DocumentEditorView })));
+const DocumentArchiveTab = lazy(() => import('./components/DocumentArchiveTab').then(m => ({ default: m.DocumentArchiveTab })));
+const DepartmentDirectivesTab = lazy(() => import('./components/DepartmentDirectivesTab').then(m => ({ default: m.DepartmentDirectivesTab })));
+const SchoolContextPanel = lazy(() => import('./components/SchoolContextPanel').then(m => ({ default: m.SchoolContextPanel })));
+const TeacherDirectoryTab = lazy(() => import('./components/TeacherDirectoryTab').then(m => ({ default: m.TeacherDirectoryTab })));
+const InclusiveEducationTab = lazy(() => import('./components/InclusiveEducationTab').then(m => ({ default: m.InclusiveEducationTab })));
+const DepartmentMeetingsTab = lazy(() => import('./components/DepartmentMeetingsTab').then(m => ({ default: m.DepartmentMeetingsTab })));
+const InternalInspectionTab = lazy(() => import('./components/InternalInspectionTab').then(m => ({ default: m.InternalInspectionTab })));
+const PartyWorkTab = lazy(() => import('./components/PartyWorkTab').then(m => ({ default: m.PartyWorkTab })));
 
 const DEFAULT_SCHOOL_FACTS = `- Quy mô mạng lưới: 53 lớp, 2.111 học sinh tại 03 điểm trường:
   + Điểm trường chính: 14 lớp cấp THPT (Khối 10: 5 lớp - 203 HS, Khối 11: 4 lớp - 141 HS, Khối 12: 5 lớp - 185 HS) với 529 học sinh.
@@ -689,6 +690,14 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center py-20 text-slate-500 text-sm">
+              <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mr-3" />
+              Đang tải nội dung phân hệ...
+            </div>
+          }
+        >
         {/* Tab Featured: Kế hoạch kiểm tra, đánh giá giữa HK1 năm học 2026 - 2027 (Số 45) */}
         {activeTab === 'midterm_assessment_plan' && (
           <MidtermAssessmentPlanView />
@@ -802,6 +811,7 @@ export default function App() {
             onContextualizeDirective={handleContextualizeDirective}
           />
         )}
+        </Suspense>
       </main>
 
       {/* Official Legal Reference Modal */}

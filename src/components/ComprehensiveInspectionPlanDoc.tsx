@@ -795,7 +795,7 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               <strong>2. Trách nhiệm của các Phó Hiệu trưởng (Phó Trưởng ban):</strong>
               <div className="mt-1 pl-4 border-l-2 border-indigo-600 space-y-1">
                 <div>- <em>Thầy Nguyễn Minh Trí (PHT Thường trực):</em> Phụ trách công tác kiểm tra chuyên môn cấp THPT, quy trình khảo thí, ôn thi tốt nghiệp THPT và quản lý 07 Tổ chuyên môn.</div>
-                <div>- <em>Cô Phan Thanh Thảo (PHT):</em> Phụ trách công tác kiểm tra nề nếp học sinh, hoạt động của GVCN 53 lớp, Thư viện - Thiết bị và giáo dục hòa nhập cho 25 học sinh khuyết tật.</div>
+                <div>- <em>Thầy Phan Thanh Thảo (PHT):</em> Phụ trách trực tiếp công tác kiểm tra nội bộ tại Điểm trường THCS Đốc Binh Kiều (24 lớp, 980 học sinh), công tác nề nếp học sinh, hoạt động của GVCN, Thư viện - Thiết bị và giáo dục hòa nhập cho 25 học sinh khuyết tật.</div>
                 <div>- <em>Thầy Nguyễn Thanh Tòng (PHT):</em> Phụ trách trực tiếp công tác kiểm tra và quản lý vận hành tại Điểm trường THCS Tân Kiều.</div>
               </div>
             </div>

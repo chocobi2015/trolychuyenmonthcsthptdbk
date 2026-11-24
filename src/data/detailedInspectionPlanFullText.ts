@@ -169,7 +169,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
     ],
     inspectionForce: {
       lead: 'Thầy Lê Thanh Cường (Hiệu trưởng) & Thầy Nguyễn Minh Trí (PHT Thường trực)',
-      deputies: ['Cô Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
+      deputies: ['Thầy Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
       members: ['Nguyễn Văn Tới (TT Toán)', 'Tô Thị Lắm (TT Ngữ văn)', 'Bùi Kim Huỳnh (TT KHTN)', 'Lê Hồng Thúy (TT KHXH)', 'Lê Thị Ngọc Tuyền (TT Ngoại ngữ)', 'Lê Văn Nguyên (TT GDTC)', 'Trần Văn Út (TT Văn phòng)']
     },
     formatsAndMetrics: {
@@ -226,7 +226,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
     ],
     inspectionForce: {
       lead: 'Thầy Nguyễn Minh Trí (PHT Thường trực - Phụ trách chuyên môn)',
-      deputies: ['Cô Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
+      deputies: ['Thầy Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
       members: ['Các Tổ trưởng, Tổ phó chuyên môn tương ứng', 'Giáo viên cốt cán môn học', 'Đại diện Ban Thanh tra nhân dân']
     },
     formatsAndMetrics: {
@@ -291,7 +291,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
       'Tiểu ban Tư vấn tâm lý học sinh, Ban phòng chống bạo lực học đường và toàn bộ 2.111 học sinh.'
     ],
     inspectionForce: {
-      lead: 'Thầy Lê Thanh Cường (HT) & Cô Phan Thanh Thảo (PHT)',
+      lead: 'Thầy Lê Thanh Cường (HT) & Thầy Phan Thanh Thảo (PHT)',
       deputies: ['Thầy Nguyễn Thanh Tòng (PHT)', 'Thầy Nguyễn Minh Trí (PHT)'],
       members: ['Ngô Anh Tuấn (Bí thư Đoàn trường)', 'Tổng phụ trách Đội', 'Trần Văn Út (Tổ trưởng Văn phòng)', 'Đại diện Ban đại diện CMHS trường']
     },
@@ -404,7 +404,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
     ],
     inspectionForce: {
       lead: 'Thầy Lê Thanh Cường (Hiệu trưởng)',
-      deputies: ['Thầy Nguyễn Minh Trí (PHT)', 'Cô Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
+      deputies: ['Thầy Nguyễn Minh Trí (PHT)', 'Thầy Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
       members: ['Đại diện Cấp ủy Chi bộ', 'Ban Thanh tra nhân dân', 'Tổ trưởng các tổ chuyên môn', 'Kế toán kiểm tra chéo']
     },
     formatsAndMetrics: {
@@ -464,7 +464,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
     targetsDetail: [
       'Thầy Lê Thanh Cường - Hiệu trưởng (Người đứng đầu cơ quan).',
       'Thầy Nguyễn Minh Trí - Phó Hiệu trưởng (Phụ trách chuyên môn).',
-      'Cô Phan Thanh Thảo - Phó Hiệu trưởng (Phụ trách Điểm THCS ĐBK).',
+      'Thầy Phan Thanh Thảo - Phó Hiệu trưởng (Phụ trách Điểm THCS ĐBK).',
       'Thầy Nguyễn Thanh Tòng - Phó Hiệu trưởng (Phụ trách Điểm Tân Kiều).'
     ],
     inspectionForce: {
@@ -700,7 +700,7 @@ export const DETAILED_INSPECTION_PILLARS_UNABRIDGED: DetailedInspectionPillar[] 
     ],
     inspectionForce: {
       lead: 'Thầy Lê Thanh Cường (Hiệu trưởng)',
-      deputies: ['Thầy Nguyễn Minh Trí (PHT)', 'Cô Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
+      deputies: ['Thầy Nguyễn Minh Trí (PHT)', 'Thầy Phan Thanh Thảo (PHT)', 'Thầy Nguyễn Thanh Tòng (PHT)'],
       members: ['Tổ trưởng các tổ chuyên môn', 'Tổ tư vấn tâm lý học đường', 'Cán bộ quản trị phần mềm CSDL']
     },
     formatsAndMetrics: {
@@ -784,7 +784,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Tài chính - Cơ sở vật chất',
     campus: 'Cả 3 điểm trường',
     target: 'Nhân viên thiết bị, nhân viên thư viện, nhân viên bảo vệ tại 3 điểm trường',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Phạm Thị Lệ Huyên (TB THPT)', 'Nguyễn Thị Xuyến (TV THPT)', 'Nguyễn Văn Chữ (TB THCS TK)', 'Hồ Văn Hữu (TV THCS TK)', 'Huỳnh Quang Huy (Bảo vệ)'],
     specificTasks: [
       'Kiểm tra việc cung ứng sách giáo khoa CT GDPT 2018 cho học sinh, không để học sinh thiếu sách.',
@@ -824,7 +824,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Nền nếp - Đoàn thể',
     campus: 'Cả 3 điểm trường',
     target: 'GVCN 53 lớp, Đoàn Thanh niên, Tổng phụ trách Đội, Đội cờ đỏ, Nhân viên bảo vệ',
-    leadInspector: 'Thầy Lê Thanh Cường (HT) & Cô Phan Thanh Thảo (PHT)',
+    leadInspector: 'Thầy Lê Thanh Cường (HT) & Thầy Phan Thanh Thảo (PHT)',
     teamMembers: ['Ngô Anh Tuấn (Bí thư Đoàn trường)', 'Trần Văn Út (TT Văn phòng)', 'Nguyễn Ngọc Cường (Bảo vệ)', 'Đại diện Ban đại diện CMHS'],
     specificTasks: [
       'Kiểm tra việc triển khai Nội quy trường lớp (3 thành phần) đến 2.111 học sinh.',
@@ -902,7 +902,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Nền nếp - Đoàn thể',
     campus: 'Cả 3 điểm trường',
     target: 'Giáo viên chủ nhiệm 53 lớp tại 3 điểm trường',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT)',
     teamMembers: ['Ngô Anh Tuấn (Bí thư Đoàn)', 'Trần Văn Út (TT Văn phòng)', 'Các Tổ phó chuyên môn phụ trách điểm'],
     specificTasks: [
       'Kiểm tra Sổ chủ nhiệm lớp: Kế hoạch tuần, tháng, biện pháp quản lý học sinh cá biệt.',
@@ -923,7 +923,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Tài chính - Cơ sở vật chất',
     campus: 'Cả 3 điểm trường',
     target: '03 viên chức Thư viện, 03 nhân viên Thiết bị, giáo viên quản lý phòng máy Tin học',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Nguyễn Thị Xuyến (TV)', 'Phạm Thị Lệ Huyên (TB)', 'Nguyễn Văn Chữ (TB)', 'Hồ Văn Hữu (TV)', 'Nguyễn Trung Hiếu (Tổ phó Tin học)'],
     specificTasks: [
       'Kiểm tra sổ theo dõi mượn trả thiết bị thí nghiệm của giáo viên các môn KHTN, Lý, Hóa, Sinh.',
@@ -1022,7 +1022,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Nền nếp - Đoàn thể',
     campus: 'Cả 3 điểm trường',
     target: 'GVCN 53 lớp, Đoàn trường, Liên đội, Nhân viên bảo vệ cổng',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Ngô Anh Tuấn (Bí thư Đoàn)', 'Tổng phụ trách Đội', 'Trần Văn Út (TT Văn phòng)', 'Các Tổ phó phụ trách điểm trường'],
     specificTasks: [
       'Kiểm tra sĩ số chuyên cần học sinh trở lại lớp sau kỳ nghỉ Tết Nguyên đán.',
@@ -1062,7 +1062,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Chuyên môn',
     campus: 'Cả 3 điểm trường',
     target: 'GVCN có học sinh khuyết tật (25 HS tại 3 điểm trường), Tổ tư vấn tâm lý học đường',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Lê Hồng Thúy (TT KHXH)', 'Trương Văn Nghĩa (Tổ phó Văn)', 'Ngô Anh Tuấn (Bí thư Đoàn)', 'Cán bộ y tế học đường'],
     specificTasks: [
       'Kiểm tra Kế hoạch giáo dục cá nhân (KHGDCN) cho 25 học sinh khuyết tật theo CV 3326.',
@@ -1140,7 +1140,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Tài chính - Cơ sở vật chất',
     campus: 'Cả 3 điểm trường',
     target: 'Bộ phận Y tế, Bảo vệ, Phục vụ vệ sinh tại 3 điểm trường',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Minh Tho (Y tế)', 'Trần Thị Bích Hạnh (Y tế)', 'Nguyễn Ngọc Cường (BV)', 'Nguyễn Văn Thuấn (BV)', 'Huỳnh Quang Huy (BV)'],
     specificTasks: [
       'Kiểm tra hạn sử dụng và áp suất của 48 bình chữa cháy; chạy thử 03 máy bơm chữa cháy.',
@@ -1199,7 +1199,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Hành chính - Quản trị',
     campus: 'Cả 3 điểm trường',
     target: 'GVCN 53 lớp, giáo viên bộ môn, cán bộ văn thư lưu trữ, kế toán tài sản',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Trần Văn Út (TT Văn phòng)', 'Các Tổ phó phụ trách điểm trường', 'Nguyễn Thị Kim Ngọc (Văn thư)'],
     specificTasks: [
       'Kiểm tra 100% học bạ điện tử đã được ký số đầy đủ của GVBM, GVCN và Hiệu trưởng.',
@@ -1279,7 +1279,7 @@ export const MONTHLY_INSPECTION_SCHEDULE_FULL_YEAR: MonthlyDetailedInspection[] 
     category: 'Tài chính - Cơ sở vật chất',
     campus: 'Cả 3 điểm trường',
     target: 'Bộ phận Cơ sở vật chất, bảo vệ trực hè, đơn vị thi công sửa chữa nhỏ',
-    leadInspector: 'Cô Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
+    leadInspector: 'Thầy Phan Thanh Thảo (PHT) & Thầy Nguyễn Thanh Tòng (PHT)',
     teamMembers: ['Trần Văn Út (TT Văn phòng)', 'Phạm Thị Lệ Huyên (TB)', 'Nguyễn Văn Chữ (TB)', 'Nguyễn Ngọc Cường (BV)', 'Huỳnh Quang Huy (BV)'],
     specificTasks: [
       'Kiểm tra tình trạng bảo quản tài sản, máy móc vi tính trong thời gian nghỉ hè (tránh ẩm mốc, côn trùng).',

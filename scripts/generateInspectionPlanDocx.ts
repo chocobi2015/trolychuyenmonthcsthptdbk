@@ -290,7 +290,7 @@ export async function generateAllInspectionDocuments() {
     p(
       '- Thường trực Ban Kiểm tra nội bộ; trực tiếp phụ trách theo dõi công tác kiểm tra quy chế chuyên môn toàn trường và Điểm chính THPT (Khối 10, 11, 12); làm Trưởng các đoàn kiểm tra hoạt động sư phạm nhà giáo, kiểm tra khảo thí, ôn thi tốt nghiệp THPT và quản lý dạy thêm, học thêm.'
     ),
-    p('3. Phó Hiệu trưởng (Bà Phan Thanh Thảo):', true),
+    p('3. Phó Hiệu trưởng (Ông Phan Thanh Thảo):', true),
     p(
       '- Phụ trách công tác kiểm tra nội bộ tại Điểm trường THCS Đốc Binh Kiều (24 lớp, 980 học sinh); trực tiếp làm Trưởng các đoàn kiểm tra chuyên môn cấp THCS, công tác chủ nhiệm lớp, giáo dục hòa nhập cho học sinh khuyết tật và hoạt động Đội Thiếu niên Tiền phong Hồ Chí Minh.'
     ),
