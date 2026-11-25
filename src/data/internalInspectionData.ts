@@ -756,28 +756,24 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
   {
     formId: 'mau-01',
     formNumber: 'MẪU SỐ 01',
-    title: 'Quyết định Ban hành Kế hoạch kiểm tra nội bộ & Kế hoạch kiểm tra nội bộ năm học',
-    purpose: 'Căn cứ pháp lý cao nhất tại đơn vị, ban hành công khai Kế hoạch KTNB đầu năm học và danh mục các cuộc kiểm tra trong năm.',
-    signAuthority: 'Hiệu trưởng ký tên và đóng dấu',
-    issuedWith: 'Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 (Số: 48/KH-THCS&THPTĐBK)',
+    title: 'Quyết định Ban hành Kế hoạch KTNB & Kế hoạch kiểm tra nội bộ năm học',
+    purpose: 'Ban hành công khai Kế hoạch KTNB năm học (gồm Quyết định ban hành Số 48/QĐ + Kế hoạch ngắn gọn đúng 4 mục I, II, III, IV + 03 Phụ lục chi tiết).',
+    signAuthority: 'HIỆU TRƯỞNG',
+    issuedWith: 'Quyết định số 48/QĐ-THCS&THPTĐBK & Kế hoạch số 48/KH-THCS&THPTĐBK (kèm 03 Phụ lục)',
     sampleData: {
-      title: 'QUYẾT ĐỊNH Về việc ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027',
+      title: 'QUYẾT ĐỊNH Ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027',
       sections: [
         {
-          heading: 'Căn cứ pháp lý',
-          content: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT; Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp về việc thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027; Hướng dẫn số 1134/SGDĐT-TCCB ngày 17/10/2025 của Sở GDĐT Đồng Tháp.',
+          heading: 'Căn cứ pháp lý (chữ đứng thường)',
+          content: 'Căn cứ Thông tư 32/2020/TT-BGDĐT; Nghị định 217/2025/NĐ-CP; Quyết định 2606/QĐ-UBND; Công văn 1134/SGDĐT-TCCB (17/10/2025) và Công văn 3953/SGDĐT-TCCB (08/10/2026) của Sở GDĐT Đồng Tháp.',
         },
         {
-          heading: 'Điều 1. Ban hành Kế hoạch',
-          content: 'Ban hành kèm theo Quyết định này Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 của Trường THCS và THPT Đốc Binh Kiều.',
+          heading: 'Điều 1 & Điều 2 (Quyết định Ban hành Kế hoạch)',
+          content: 'Điều 1. Ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 của Trường THCS và THPT Đốc Binh Kiều (đính kèm Kế hoạch số 48/KH). Điều 2. Các Phó Hiệu trưởng, Ban KTNB, Tổ CM, Văn phòng và cá nhân liên quan chịu trách nhiệm thi hành.',
         },
         {
-          heading: 'Điều 2. Trách nhiệm thi hành',
-          content: 'Các Phó Hiệu trưởng, Ban Kiểm tra nội bộ, các Tổ chuyên môn, bộ phận Văn phòng, cá nhân và tổ chức có liên quan chịu trách nhiệm thi hành Quyết định này.',
-        },
-        {
-          heading: 'Nội dung Kế hoạch kiểm tra nội bộ (Kèm theo)',
-          content: 'Bao gồm: I. Mục đích yêu cầu; II. Nội dung kiểm tra (4 nhóm trọng tâm); III. Tổ chức thực hiện; IV. Lịch kiểm tra chi tiết 29 đợt theo các tháng trong năm học 2026 - 2027.',
+          heading: 'Kế hoạch KTNB đính kèm (đúng 4 mục Mẫu 01 CV 1134)',
+          content: 'I. Mục đích, yêu cầu (1. Mục đích; 2. Yêu cầu); II. Nội dung kiểm tra (Khái quát & thống kê tổng số 29 đợt, đối tượng, thời kỳ, thời hạn, 4 trọng tâm theo CV 1134); III. Tổ chức thực hiện (1. Các biện pháp; 2. Trách nhiệm); IV. Danh mục các cuộc kiểm tra (Bảng 7 cột). Toàn bộ chi tiết đưa vào Phụ lục 1, 2, 3.',
         },
       ],
     },
@@ -785,28 +781,24 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
   {
     formId: 'mau-02',
     formNumber: 'MẪU SỐ 02',
-    title: 'Quyết định Thành lập Ban kiểm tra nội bộ năm học',
-    purpose: 'Quyết định hành chính xác lập cơ cấu nhân sự Ban KTNB nhà trường, quyền hạn và phân công nhiệm vụ cụ thể.',
-    signAuthority: 'Hiệu trưởng ký tên và đóng dấu',
-    issuedWith: 'Danh sách 22 thành viên Ban Kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều',
+    title: 'Quyết định Về việc thành lập Ban kiểm tra nội bộ năm học',
+    purpose: 'Quyết định hành chính xác lập cơ cấu 22 thành viên Ban KTNB nhà trường, nhiệm vụ, hiệu lực và trách nhiệm thi hành (4 Điều đúng Mẫu 02 CV 1134).',
+    signAuthority: 'HIỆU TRƯỞNG',
+    issuedWith: 'Quyết định số 49/QĐ-THCS&THPTĐBK & Phụ lục phân công nhiệm vụ 22 thành viên',
     sampleData: {
       title: 'QUYẾT ĐỊNH Về việc thành lập Ban kiểm tra nội bộ năm học 2026 - 2027',
       sections: [
         {
-          heading: 'Căn cứ pháp lý',
-          content: 'Căn cứ Thông tư số 32/2020/TT-BGDĐT; Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp về thực hiện công tác kiểm tra nội bộ năm học 2026 - 2027; Hướng dẫn số 1134/SGDĐT-TCCB và Kế hoạch số 48/KH-THCS&THPTĐBK ngày 15/10/2026.',
+          heading: 'Căn cứ pháp lý (chữ đứng thường)',
+          content: 'Căn cứ Thông tư 32/2020/TT-BGDĐT; Nghị định 217/2025/NĐ-CP; Quyết định 2606/QĐ-UBND; Công văn 1134/SGDĐT-TCCB; Công văn 3953/SGDĐT-TCCB (08/10/2026); Quyết định 48/QĐ-THCS&THPTĐBK ban hành Kế hoạch KTNB.',
         },
         {
-          heading: 'Điều 1. Thành lập Ban',
-          content: 'Thành lập Ban kiểm tra nội bộ Trường THCS và THPT Đốc Binh Kiều năm học 2026 - 2027 gồm 22 ông (bà) có tên trong danh sách đính kèm, do ông Lê Thanh Cường - Hiệu trưởng làm Trưởng ban.',
+          heading: 'Điều 1. Thành lập Ban kiểm tra nội bộ năm học 2026 - 2027',
+          content: 'Gồm 22 ông (bà) có tên trong Điều 1: 1. Ông Lê Thanh Cường (Hiệu trưởng) - Trưởng ban; 2. Ông Nguyễn Minh Trí (Phó Hiệu trưởng) - Phó Trưởng ban; 3. Ông Phan Thanh Thảo (Phó Hiệu trưởng) - Phó Trưởng ban; 4. Ông Nguyễn Thanh Tòng (Phó Hiệu trưởng) - Phó Trưởng ban; 5–22. Các Tổ trưởng, Tổ phó, giáo viên cốt cán và nhân viên Văn phòng.',
         },
         {
-          heading: 'Điều 2. Nhiệm vụ và quyền hạn',
-          content: 'Ban Kiểm tra nội bộ có nhiệm vụ xây dựng kế hoạch tiến hành, tổ chức kiểm tra theo kế hoạch được phê duyệt hoặc đột xuất; lập biên bản, báo cáo kết quả và tham mưu xử lý sau kiểm tra.',
-        },
-        {
-          heading: 'Điều 3. Hiệu lực thi hành',
-          content: 'Quyết định này có hiệu lực kể từ ngày ký đến khi kết thúc năm học 2026 - 2027.',
+          heading: 'Điều 2, Điều 3 & Điều 4 (đúng 4 Điều Mẫu 02 CV 1134)',
+          content: 'Điều 2. Nhiệm vụ của Ban KTNB (kèm Phụ lục phân công). Điều 3. Hiệu lực kể từ ngày ký đến hết năm học 2026 - 2027. Điều 4. Các ông (bà) tại Điều 1 và các bộ phận, tổ chức, cá nhân là đối tượng kiểm tra chịu trách nhiệm thi hành.',
         },
       ],
     },
@@ -814,24 +806,24 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
   {
     formId: 'mau-03',
     formNumber: 'MẪU SỐ 03',
-    title: 'Kế hoạch tiến hành kiểm tra của Tổ (Đoàn) kiểm tra',
-    purpose: 'Do Trưởng đoàn/Tổ trưởng kiểm tra lập cho từng cuộc kiểm tra cụ thể và trình Hiệu trưởng phê duyệt trước khi tiến hành.',
-    signAuthority: 'T/M Tổ kiểm tra ký; Hiệu trưởng phê duyệt',
-    issuedWith: 'Theo từng Quyết định kiểm tra chuyên đề hoặc định kỳ',
+    title: 'Kế hoạch tiến hành kiểm tra (của Đoàn/Tổ kiểm tra)',
+    purpose: 'Do Tổ trưởng/Trưởng đoàn kiểm tra lập cho từng đợt kiểm tra cụ thể (góc trái: TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU / Đoàn kiểm tra theo Quyết định số ...) và trình Hiệu trưởng phê duyệt.',
+    signAuthority: 'T/M TỔ (NGƯỜI) KIỂM TRA (và Hiệu trưởng phê duyệt)',
+    issuedWith: 'Góc trái chuẩn Đoàn kiểm tra CV 1134 — không ghi tên Sở GDĐT và không ghi Số văn bản',
     sampleData: {
-      title: 'KẾ HOẠCH TIẾN HÀNH KIỂM TRA (Mẫu số 03/HD1134)',
+      title: 'KẾ HOẠCH TIẾN HÀNH KIỂM TRA',
       sections: [
         {
-          heading: 'I. Mục đích, yêu cầu',
-          content: 'Xem xét thực tế việc thực hiện quy chế chuyên môn, hồ sơ sổ sách và các quy định ngành; tư vấn, hỗ trợ kịp thời để nâng cao chất lượng dạy học.',
+          heading: 'I. MỤC ĐÍCH, YÊU CẦU',
+          content: '1. Mục đích: Đánh giá thực chất việc thực hiện nhiệm vụ, ghi nhận ưu điểm, tư vấn tháo gỡ vướng mắc. 2. Yêu cầu: Chính xác, khách quan, công khai, đúng quy trình CV 1134, không cản trở hoạt động dạy học.',
         },
         {
-          heading: 'II. Nội dung kiểm tra',
-          content: '1. Nội dung kiểm tra: Hồ sơ bài dạy theo CV 5512, việc kiểm tra đánh giá thường xuyên, nền nếp lên lớp; 2. Đối tượng: 06 giáo viên thuộc 4 tổ bộ môn; 3. Thời kỳ: Từ đầu năm học đến thời điểm kiểm tra; 4. Thời hạn: 10 ngày làm việc.',
+          heading: 'II. NỘI DUNG KIỂM TRA',
+          content: '1. Nội dung kiểm tra; 2. Đối tượng kiểm tra; 3. Thời kỳ kiểm tra; 4. Thời hạn kiểm tra (từ 03 đến 10 ngày làm việc theo NĐ 217/2025/NĐ-CP).',
         },
         {
-          heading: 'III. Tổ chức thực hiện',
-          content: 'Phân công cụ thể thành viên dự giờ, thành viên kiểm tra hồ sơ bài dạy, thời gian thông báo trước cho đối tượng và lịch làm việc trực tiếp.',
+          heading: 'III. TỔ CHỨC THỰC HIỆN',
+          content: '1. Tiến độ thực hiện; 2. Chế độ thông tin báo cáo; 3. Thành viên tiến hành kiểm tra; 4. Điều kiện vật chất đảm bảo thực hiện cuộc kiểm tra; 5. Những vấn đề khác (nếu có). Cuối văn bản có mục PHÊ DUYỆT CỦA NGƯỜI RA QUYẾT ĐỊNH KIỂM TRA.',
         },
       ],
     },
@@ -839,28 +831,28 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
   {
     formId: 'mau-04',
     formNumber: 'MẪU SỐ 04',
-    title: 'Biên bản kiểm tra',
-    purpose: 'Ghi nhận trung thực toàn bộ diễn biến, kết quả xác minh minh chứng, ưu điểm, tồn tại, nguyên nhân và kiến nghị ngay tại hiện trường làm việc.',
-    signAuthority: 'Người được kiểm tra, Tổ kiểm tra và Người ghi biên bản cùng ký xác nhận',
-    issuedWith: 'Lập thành 02 bản có giá trị pháp lý như nhau (mỗi bên giữ 01 bản)',
+    title: 'Biên bản kiểm tra (của Đoàn/Tổ kiểm tra)',
+    purpose: 'Ghi nhận trung thực diễn biến, hồ sơ minh chứng, đánh giá chung (ưu điểm, tồn tại nhẹ nhàng, nguyên nhân), kiến nghị và ý kiến của đối tượng kiểm tra.',
+    signAuthority: 'Người được kiểm tra | Tổ kiểm tra | Người ghi biên bản (3 cột ký)',
+    issuedWith: 'Góc trái chuẩn Đoàn kiểm tra CV 1134 — lập thành 02 bản có giá trị như nhau',
     sampleData: {
-      title: 'BIÊN BẢN KIỂM TRA (Mẫu số 04/HD1134)',
+      title: 'BIÊN BẢN KIỂM TRA',
       sections: [
         {
           heading: 'I. Thành phần làm việc',
-          content: '1. Tổ kiểm tra: Ghi rõ họ tên, chức danh; 2. Đối tượng được kiểm tra: Ghi rõ họ tên, bộ môn/lớp phụ trách; 3. Người chứng kiến (nếu có).',
+          content: '1. Tổ (người) kiểm tra (ghi rõ họ tên, chức danh); 2. Đã tiến hành kiểm tra đối với (bộ phận/cá nhân); 3. Người chứng kiến (nếu có).',
         },
         {
-          heading: 'II. Kết quả kiểm tra cụ thể',
-          content: 'Ghi nhận chi tiết từng nội dung: Thực hiện chương trình dạy học, hồ sơ giáo án, dự giờ thực tế, việc sử dụng thiết bị dạy học.',
+          heading: 'II. Nội dung kiểm tra',
+          content: 'Liệt kê cụ thể từng nội dung đã tiến hành kiểm tra và danh mục hồ sơ, sổ sách, minh chứng thu thập trực tiếp.',
         },
         {
-          heading: 'III. Đánh giá chung',
-          content: '1. Ưu điểm: Nắm vững chuẩn kiến thức, ứng dụng công nghệ thông tin; 2. Tồn tại: Một số bài dạy chưa phân hóa đối tượng HS; 3. Nguyên nhân: Sĩ số đông tại các lớp THCS.',
+          heading: 'III. Đánh giá chung của tổ (người) kiểm tra',
+          content: '1. Ưu điểm; 2. Tồn tại (ghi nhận nhẹ nhàng, mang tính xây dựng); 3. Nguyên nhân.',
         },
         {
-          heading: 'IV. Kiến nghị của tổ kiểm tra & Ý kiến người được kiểm tra',
-          content: 'Tổ kiểm tra đề nghị tiếp tục phát huy ưu điểm, khắc phục tồn tại trước ngày 15 tháng sau. Người được kiểm tra thống nhất với toàn bộ biên bản.',
+          heading: 'IV. Kiến nghị của tổ kiểm tra & V. Ý kiến của bộ phận (người) được kiểm tra',
+          content: 'Kiến nghị đối với cá nhân, tổ chuyên môn, nhà trường, cấp trên; ghi nhận ý kiến thống nhất/tiếp thu của người được kiểm tra và 03 chữ ký xác nhận.',
         },
       ],
     },
@@ -868,24 +860,24 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
   {
     formId: 'mau-05',
     formNumber: 'MẪU SỐ 05',
-    title: 'Báo cáo Kết quả kiểm tra',
-    purpose: 'Tổ kiểm tra tổng hợp toàn bộ số liệu, kết quả xác minh, đánh giá mức độ hoàn thành nhiệm vụ và đề xuất hình thức xử lý/khen thưởng trình Hiệu trưởng.',
-    signAuthority: 'T/M Tổ kiểm tra báo cáo ký',
-    issuedWith: 'Gửi Hiệu trưởng nhà trường để ra Thông báo kết luận',
+    title: 'Báo cáo Kết quả kiểm tra (của Đoàn/Tổ kiểm tra)',
+    purpose: 'Tổ kiểm tra tổng hợp kết quả kiểm tra, xác minh, kết luận và đề xuất biện pháp xử lý/khen thưởng trình Hiệu trưởng xem xét ban hành Thông báo.',
+    signAuthority: 'T/M TỔ (NGƯỜI) KIỂM TRA BÁO CÁO',
+    issuedWith: 'Góc trái chuẩn Đoàn kiểm tra CV 1134 — đủ 06 mục theo trang 17–18 CV 1134',
     sampleData: {
-      title: 'BÁO CÁO Kết quả kiểm tra (Mẫu số 05/HD1134)',
+      title: 'BÁO CÁO Kết quả kiểm tra',
       sections: [
         {
-          heading: '1. Khái quát chung',
-          content: 'Tình hình tổ chức, đội ngũ, số lượng giáo viên và điều kiện cơ sở vật chất của bộ phận được kiểm tra.',
+          heading: '1. Khái quát chung & 2. Kết quả kiểm tra, xác minh',
+          content: 'Khái quát đặc điểm bộ phận/cá nhân được kiểm tra; mô tả chi tiết kết quả xác minh từng nội dung kiểm tra.',
         },
         {
-          heading: '2. Kết quả kiểm tra, xác minh',
-          content: 'Mô tả cụ thể việc chấp hành các quy định, số lượng tiết dạy đạt loại Giỏi/Khá, hồ sơ sổ sách đạt yêu cầu, các sai sót nếu có và mức độ ảnh hưởng.',
+          heading: '3. Kết luận & 4. Các biện pháp xử lý theo thẩm quyền đã áp dụng (nếu có)',
+          content: 'Kết luận kết quả đạt được, hạn chế/tồn tại (nếu có); ghi rõ có hay không áp dụng biện pháp xử lý trong quá trình kiểm tra.',
         },
         {
-          heading: '3. Kết luận và biện pháp xử lý',
-          content: 'Kết luận rõ ràng về kết quả đạt được, trách nhiệm của tập thể và cá nhân. Đề xuất Hiệu trưởng khen thưởng cá nhân tiêu biểu và nhắc nhở uốn nắn các hạn chế.',
+          heading: '5. Ý kiến khác nhau giữa các thành viên (nếu có) & 6. Kiến nghị và biện pháp xử lý',
+          content: 'Ghi nhận sự thống nhất của Tổ kiểm tra; kiến nghị nhân rộng ưu điểm, khắc phục hạn chế nhỏ kèm thời hạn thực hiện để xin ý kiến chỉ đạo của Hiệu trưởng.',
         },
       ],
     },
@@ -893,24 +885,24 @@ export const OFFICIAL_INSPECTION_TEMPLATES: InspectionFormTemplate[] = [
   {
     formId: 'mau-06',
     formNumber: 'MẪU SỐ 06',
-    title: 'Thông báo Kết quả kiểm tra',
-    purpose: 'Văn bản kết luận chính thức của Hiệu trưởng, gửi đến đối tượng kiểm tra để thực hiện, gửi Sở GDĐT để báo cáo và công khai trong toàn đơn vị.',
-    signAuthority: 'Hiệu trưởng ký tên và đóng dấu',
-    issuedWith: 'Lưu trữ hồ sơ văn thư và gửi đối tượng kiểm tra thực hiện',
+    title: 'Thông báo Kết quả kiểm tra (của Hiệu trưởng)',
+    purpose: 'Văn bản hành chính chính thức do Hiệu trưởng ký tên, đóng dấu công khai kết quả kiểm tra, gửi đối tượng kiểm tra thực hiện và báo cáo Phòng TCCB Sở GDĐT.',
+    signAuthority: 'HIỆU TRƯỞNG',
+    issuedWith: 'Góc trái đơn vị (SỞ GDĐT TỈNH ĐỒNG THÁP / TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU / Số: .../TB-THCS&THPTĐBK)',
     sampleData: {
-      title: 'THÔNG BÁO Kết quả kiểm tra (Mẫu số 06/HD1134)',
+      title: 'THÔNG BÁO Kết quả kiểm tra',
       sections: [
         {
-          heading: '1. Khái quát và kết quả kiểm tra',
-          content: 'Thông báo toàn diện kết quả xác minh, khẳng định các ưu điểm đạt được và chỉ rõ những thiếu sót cần chấn chỉnh.',
+          heading: '1. Khái quát chung & 2. Kết quả kiểm tra, xác minh',
+          content: 'Thông báo kết quả kiểm tra, xác minh thực tế theo mục đích, yêu cầu của kế hoạch; xác định rõ ưu điểm và tồn tại cần hoàn thiện.',
         },
         {
-          heading: '2. Kết luận của Hiệu trưởng',
-          content: 'Kết luận rõ ràng trách nhiệm của bộ phận, tổ chuyên môn và cá nhân liên quan; chỉ đạo biện pháp xử lý theo thẩm quyền.',
+          heading: '3. Kết luận & 4. Các biện pháp xử lý theo thẩm quyền đã áp dụng (nếu có)',
+          content: 'Hiệu trưởng kết luận những việc làm tốt, chỉ rõ nội dung cần rút kinh nghiệm và xác nhận việc áp dụng biện pháp xử lý (nếu có).',
         },
         {
-          heading: '3. Kiến nghị và thời hạn khắc phục',
-          content: 'Yêu cầu các cá nhân, bộ phận khắc phục dứt điểm các tồn tại trước ngày quy định; báo cáo kết quả khắc phục bằng văn bản về Ban Giám hiệu.',
+          heading: '5. Kiến nghị và biện pháp xử lý',
+          content: 'Kiến nghị nhân rộng ưu điểm, giao thời hạn hoàn thiện các hạn chế nhỏ và giao Ban KTNB theo dõi thực hiện; gửi Phòng TCCB Sở GDĐT báo cáo.',
         },
       ],
     },

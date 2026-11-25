@@ -806,6 +806,154 @@ export function createAdminDocHeaderTable(
 }
 
 /**
+ * Tạo Header Table chuẩn Đoàn/Tổ kiểm tra theo Mẫu số 03, 04, 05 (Công văn 1134/SGDĐT-TCCB):
+ * - Góc trên bên trái: TÊN ĐƠN VỊ (TRƯỜNG THCS VÀ THPT / ĐỐC BINH KIỀU) + Đoàn kiểm tra theo / Quyết định số ...
+ *   (KHÔNG ghi tên cơ quan chủ quản cấp trên, KHÔNG ghi Số văn bản ở hàng 2 theo đúng mẫu Sở GDĐT Đồng Tháp).
+ * - Góc trên bên phải: Quốc hiệu, Tiêu ngữ, Địa danh và ngày tháng năm.
+ */
+export function createInspectionTeamHeaderTable(
+  issuingOrg: string,
+  decisionNumber: string,
+  dateStr: string
+): Table {
+  const issuingLines = splitAgencyLines(issuingOrg, 'issuing');
+  const colLeft = 4055; // ~7.15cm: đủ rộng để "Quyết định số 49/QĐ-THCS&THPTĐBK" gọn trên 1 dòng
+  const colRight = DOCX_PAGE_SETUP.contentWidth - colLeft; // 5300 dxa (~9.35cm): Quốc hiệu gọn 1 dòng
+  const leftMargins = { top: 0, bottom: 0, left: 20, right: 100 };
+  const rightMargins = { top: 0, bottom: 0, left: 80, right: 20 };
+
+  const decisionLine = decisionNumber.toLowerCase().startsWith('quyết định')
+    ? decisionNumber
+    : `Quyết định số ${decisionNumber}`;
+
+  return new Table({
+    layout: TableLayoutType.FIXED,
+    columnWidths: [colLeft, colRight],
+    width: { size: DOCX_PAGE_SETUP.contentWidth, type: WidthType.DXA },
+    borders: TABLE_BORDER_NONE,
+    rows: [
+      new TableRow({
+        children: [
+          new TableCell({
+            width: { size: colLeft, type: WidthType.DXA },
+            borders: TABLE_CELL_BORDER_NONE,
+            margins: leftMargins,
+            verticalAlign: VerticalAlign.TOP,
+            children: [
+              ...issuingLines.map(
+                (line) =>
+                  new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { before: 0, after: 10, line: 240, lineRule: LineRuleType.AUTO },
+                    children: [
+                      new TextRun({
+                        text: line,
+                        bold: true,
+                        size: FONT_SIZES.HEADER_ORG,
+                        font: 'Times New Roman',
+                      }),
+                    ],
+                  })
+              ),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 10, after: 10, line: 240, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: 'Đoàn kiểm tra theo',
+                    bold: true,
+                    size: FONT_SIZES.HEADER_ORG,
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 0, after: 10, line: 240, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: decisionLine,
+                    bold: true,
+                    size: 23, // 11.5pt để số QĐ dài gọn đẹp trên 1 dòng
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 0, after: 20, line: 180, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: '────────',
+                    size: FONT_SIZES.LINE_DECOR,
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+            ],
+          }),
+          new TableCell({
+            width: { size: colRight, type: WidthType.DXA },
+            borders: TABLE_CELL_BORDER_NONE,
+            margins: rightMargins,
+            verticalAlign: VerticalAlign.TOP,
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 0, after: 20, line: 240, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: 'CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',
+                    bold: true,
+                    size: FONT_SIZES.HEADER_NATION,
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 0, after: 10, line: 240, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: 'Độc lập - Tự do - Hạnh phúc',
+                    bold: true,
+                    size: FONT_SIZES.HEADER_MOTTO,
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 0, after: 40, line: 180, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: '───────────────────',
+                    size: FONT_SIZES.LINE_DECOR,
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 40, after: 20, line: 240, lineRule: LineRuleType.AUTO },
+                children: [
+                  new TextRun({
+                    text: dateStr,
+                    italics: true,
+                    size: FONT_SIZES.HEADER_DATE,
+                    font: 'Times New Roman',
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+
+/**
  * Tạo khối Nơi nhận & Chữ ký chuẩn Nghị định 30 và Văn bản Đảng
  */
 export function createSignatureBlockTable(

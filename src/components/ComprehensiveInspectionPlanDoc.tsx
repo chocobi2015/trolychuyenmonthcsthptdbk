@@ -96,26 +96,20 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               <BookOpen className="w-4 h-4 text-blue-600" />
               Mục lục nhanh:
             </span>
-            <a href="#sec-header" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
-              Căn cứ pháp lý
+            <a href="#sec-decision" className="px-2.5 py-1 rounded bg-indigo-50 hover:bg-indigo-100 text-[11px] font-bold text-indigo-700 transition">
+              QĐ Ban hành (48/QĐ)
+            </a>
+            <a href="#sec-header" className="px-2.5 py-1 rounded bg-blue-50 hover:bg-blue-100 text-[11px] font-bold text-blue-700 transition">
+              KH Mẫu 01 (4 mục I–IV)
             </a>
             <a href="#sec-part-a" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
-              A. Đặc điểm tình hình (3 điểm trường)
+              Phụ lục 1: Tình hình & Kinh phí
             </a>
-            <a href="#sec-part-b" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
-              B. Mục đích & Yêu cầu
+            <a href="#sec-part-c" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
+              Phụ lục 2: 11 Lĩnh vực chi tiết
             </a>
-            <a href="#sec-part-c" className="px-2.5 py-1 rounded bg-blue-50 hover:bg-blue-100 text-[11px] font-bold text-blue-700 transition">
-              C. 11 Lĩnh vực kiểm tra
-            </a>
-            <a href="#sec-part-d" className="px-2.5 py-1 rounded bg-indigo-50 hover:bg-indigo-100 text-[11px] font-bold text-indigo-700 transition">
-              D. Lịch trình 29 đợt (12 tháng)
-            </a>
-            <a href="#sec-part-e" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
-              E. Kinh phí
-            </a>
-            <a href="#sec-part-f" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
-              F. Tổ chức thực hiện
+            <a href="#sec-part-d" className="px-2.5 py-1 rounded bg-slate-100 hover:bg-blue-100 text-[11px] font-medium text-slate-700 hover:text-blue-700 transition">
+              Phụ lục 3: 29 đợt (12 tháng)
             </a>
           </div>
 
@@ -149,12 +143,20 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
               <span>{copyFeedback ? 'Đã sao chép!' : 'Sao chép'}</span>
             </button>
             <a
+              href="/downloads/QUYET_DINH_BAN_HANH_KE_HOACH_KTNB_2026_2027.docx"
+              download
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>QĐ Ban hành (48/QĐ)</span>
+            </a>
+            <a
               href="/downloads/KE_HOACH_KIEM_TRA_NOI_BO_2026_2027_THCS_THPT_DOC_BINH_KIEU.docx"
               download
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Tải file Word hoàn chỉnh (.docx)</span>
+              <span>Tải Trọn bộ Mẫu 01 (.docx)</span>
             </a>
           </div>
         </div>
@@ -162,8 +164,47 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
 
       {/* Main Official Administrative Document Container */}
       <div className="bg-white rounded-2xl shadow-md border border-slate-300 p-8 sm:p-12 space-y-10 font-serif text-slate-900 leading-relaxed text-sm">
-        
-        {/* Quốc hiệu, Tiêu ngữ & Tiêu đề cơ quan */}
+
+        {/* PHẦN 1: QUYẾT ĐỊNH BAN HÀNH KẾ HOẠCH (MẪU SỐ 01 - TRANG 11 CV 1134) */}
+        <section id="sec-decision" className="bg-indigo-50/40 rounded-xl border border-indigo-200 p-6 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 pb-4 border-b border-indigo-200">
+            <div className="sm:col-span-5 text-center space-y-0.5">
+              <div className="text-[11.5pt] uppercase font-normal text-slate-800 whitespace-nowrap">
+                SỞ GDĐT TỈNH ĐỒNG THÁP
+              </div>
+              <div className="text-[11.5pt] uppercase font-bold text-slate-900 leading-snug">
+                TRƯỜNG THCS VÀ THPT<br />ĐỐC BINH KIỀU
+              </div>
+              <div className="w-20 h-0.5 bg-slate-800 mx-auto my-1" />
+              <div className="text-[12pt] text-slate-800">Số: 48/QĐ-THCS&THPTĐBK</div>
+            </div>
+            <div className="sm:col-span-7 text-center space-y-0.5">
+              <div className="text-[11.5pt] uppercase font-bold text-slate-900 whitespace-nowrap">
+                CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+              </div>
+              <div className="text-[12.5pt] font-bold text-slate-900">Độc lập - Tự do - Hạnh phúc</div>
+              <div className="w-36 h-0.5 bg-slate-800 mx-auto my-1" />
+              <div className="text-[12pt] italic text-slate-700">Đốc Binh Kiều, ngày 15 tháng 10 năm 2026</div>
+            </div>
+          </div>
+
+          <div className="text-center space-y-1">
+            <div className="text-lg font-bold uppercase text-slate-900">QUYẾT ĐỊNH</div>
+            <div className="text-sm font-bold text-slate-900">Ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027</div>
+            <div className="text-sm font-bold uppercase text-slate-900 pt-1">HIỆU TRƯỞNG TRƯỜNG THCS VÀ THPT ĐỐC BINH KIỀU</div>
+          </div>
+
+          <div className="text-xs sm:text-sm not-italic text-slate-800 space-y-1 text-justify">
+            <p className="indent-8">Căn cứ Thông tư số 32/2020/TT-BGDĐT; Nghị định số 217/2025/NĐ-CP; Quyết định số 2606/QĐ-UBND ngày 13/8/2026 của UBND tỉnh Đồng Tháp;</p>
+            <p className="indent-8">Căn cứ Công văn số 1134/SGDĐT-TCCB ngày 17/10/2025 và Công văn số 3953/SGDĐT-TCCB ngày 08/10/2026 của Sở GDĐT Đồng Tháp về việc thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027;</p>
+            <p className="indent-8">Xét đề nghị của Phó Hiệu trưởng phụ trách chuyên môn và Tổ trưởng Tổ Văn phòng,</p>
+            <p className="text-center font-bold uppercase py-1">QUYẾT ĐỊNH:</p>
+            <p className="indent-8"><strong>Điều 1.</strong> Ban hành Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 của Trường THCS và THPT Đốc Binh Kiều <em>(đính kèm Kế hoạch số 48/KH-THCS&THPTĐBK và các Phụ lục)</em>.</p>
+            <p className="indent-8"><strong>Điều 2.</strong> Các Phó Hiệu trưởng, Ban Kiểm tra nội bộ, các Tổ chuyên môn, Tổ Văn phòng và các cá nhân, tổ chức có liên quan chịu trách nhiệm thi hành Quyết định này./.</p>
+          </div>
+        </section>
+
+        {/* Quốc hiệu, Tiêu ngữ & Tiêu đề Kế hoạch (Mẫu 01 - Trang 12 CV 1134) */}
         <div id="sec-header" className="grid grid-cols-1 sm:grid-cols-12 gap-4 pb-6 border-b-2 border-slate-300">
           <div className="sm:col-span-5 text-center space-y-0.5">
             <div className="text-[12pt] uppercase font-normal tracking-tight text-slate-800 leading-snug whitespace-nowrap">
@@ -193,29 +234,29 @@ Hiệu trưởng: Lê Thanh Cường đã ký ban hành.`;
         </div>
 
         {/* Tiêu đề Kế hoạch */}
-        <div className="text-center space-y-1.5 py-4">
+        <div className="text-center space-y-1.5 py-2">
           <div className="text-xl sm:text-2xl font-bold uppercase text-slate-900 tracking-wide">
             KẾ HOẠCH
           </div>
           <div className="text-base sm:text-lg font-bold text-slate-900">
-            Công tác kiểm tra nội bộ năm học 2026 - 2027
+            Kiểm tra nội bộ năm học 2026 - 2027
+          </div>
+          <div className="text-xs sm:text-sm italic text-slate-600">
+            (Ban hành kèm theo Quyết định số 48/QĐ-THCS&THPTĐBK ngày 15 tháng 10 năm 2026 của Hiệu trưởng Trường THCS và THPT Đốc Binh Kiều)
           </div>
           <div className="w-36 h-0.5 bg-slate-900 mx-auto mt-2" />
         </div>
 
-        {/* Căn cứ pháp lý (Chữ đứng thường chuẩn Nghị định 30/2020/NĐ-CP) */}
-        <div className="bg-slate-50/80 rounded-xl p-5 border border-slate-200 text-sm not-italic text-slate-800 space-y-1.5 leading-relaxed text-justify">
-          <p className="indent-8">Căn cứ Luật Giáo dục ngày 14 tháng 6 năm 2019;</p>
-          <p className="indent-8">Căn cứ Luật Thanh tra ngày 14 tháng 11 năm 2022; Luật Thực hiện dân chủ ở cơ sở ngày 10 tháng 11 năm 2022;</p>
-          <p className="indent-8">Căn cứ Nghị định số 217/2025/NĐ-CP ngày 05 tháng 8 năm 2025 của Chính phủ về hoạt động kiểm tra chuyên ngành;</p>
-          <p className="indent-8">Căn cứ Thông tư số 32/2020/TT-BGDĐT ngày 15 tháng 9 năm 2020 của Bộ GDĐT ban hành Điều lệ trường THCS, trường THPT và trường phổ thông có nhiều cấp học;</p>
-          <p className="indent-8">Căn cứ Thông tư số 22/2021/TT-BGDĐT ngày 20 tháng 7 năm 2021 của Bộ GDĐT quy định về đánh giá học sinh trung học cơ sở và học sinh trung học phổ thông;</p>
-          <p className="indent-8">Căn cứ Quyết định số 2606/QĐ-UBND ngày 13 tháng 8 năm 2026 của UBND tỉnh Đồng Tháp về việc sáp nhập thành lập Trường THCS và THPT Đốc Binh Kiều;</p>
-          <p className="indent-8">Căn cứ Công văn số 3953/SGDĐT-TCCB ngày 08 tháng 10 năm 2026 của Sở GDĐT Đồng Tháp V/v thực hiện công tác kiểm tra nội bộ tại đơn vị năm học 2026 - 2027;</p>
-          <p className="indent-8">Căn cứ Hướng dẫn số 1134/SGDĐT-TCCB ngày 17 tháng 10 năm 2025 của Sở GDĐT Đồng Tháp về hướng dẫn thực hiện công tác kiểm tra nội bộ tại các cơ sở giáo dục trực thuộc;</p>
-          <p className="indent-8">Căn cứ Kế hoạch giáo dục nhà trường số 34/KH-THCS&THPTĐBK ngày 25 tháng 9 năm 2026 của Trường THCS và THPT Đốc Binh Kiều.</p>
-          <p className="indent-8 font-normal text-slate-900 pt-1">
-            Trường THCS và THPT Đốc Binh Kiều xây dựng Kế hoạch kiểm tra nội bộ năm học 2026 - 2027 cụ thể như sau:
+        {/* Tóm tắt Mục II. Nội dung kiểm tra chuẩn Mẫu 01 CV 1134 (file Word xuất gọn đúng 4 mục I-IV, chi tiết chuyển vào 03 Phụ lục) */}
+        <div className="bg-blue-50/60 rounded-xl p-5 border border-blue-200 text-xs sm:text-sm font-sans text-slate-800 space-y-2 leading-relaxed">
+          <div className="font-bold text-blue-950 uppercase text-xs tracking-wide">
+            Cấu trúc file Word Kế hoạch KTNB chuẩn Mẫu số 01 (Công văn 1134/SGDĐT-TCCB):
+          </div>
+          <p>
+            • <strong>Phần chính ngắn gọn đúng 4 mục:</strong> <strong>I. Mục đích, yêu cầu</strong> (1. Mục đích; 2. Yêu cầu) → <strong>II. Nội dung kiểm tra</strong> (Khái quát & thống kê tổng số <strong>29 đợt</strong>: 13 đợt HK1, 16 đợt HK2 & Hè; đối tượng 53 lớp/2.111 HS/120 nhân sự tại 03 điểm trường; thời kỳ T9/2026–T8/2027; thời hạn 03–10 ngày/đợt; 04 trọng tâm CV 1134) → <strong>III. Tổ chức thực hiện</strong> → <strong>IV. Danh mục các cuộc kiểm tra</strong> (Bảng 7 cột chuẩn Mẫu 01).
+          </p>
+          <p>
+            • <strong>03 Phụ lục chi tiết đính kèm</strong> (hiển thị đầy đủ bên dưới để tra cứu): <em>Phụ lục 1</em> (Đặc điểm tình hình 03 điểm trường & Kinh phí), <em>Phụ lục 2</em> (Chi tiết 11 lĩnh vực & tiêu chuẩn kiểm tra), <em>Phụ lục 3</em> (Chi tiết nhiệm vụ 29 đợt & Danh mục lưu trữ hồ sơ).
           </p>
         </div>
 
